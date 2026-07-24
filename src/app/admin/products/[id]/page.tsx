@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { HiOutlineArrowUpTray, HiOutlineXMark } from "react-icons/hi2";
 
 export default function EditProductPage() {
   const params = useParams();
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     name: "", tagline: "", description: "", price: "", comparePrice: "",
     category: "apparel", collection: "The Apparel Collection",
@@ -14,8 +16,11 @@ export default function EditProductPage() {
     isBestSeller: false, isNew: false, isCustomizable: false, isGiftReady: false, isPremiumPackaging: false,
     occasions: "", inStock: true,
   });
+  const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -31,7 +36,7 @@ export default function EditProductPage() {
           category: data.category || "apparel",
           collection: data.collection || "The Apparel Collection",
           sizes: Array.isArray(data.sizes) ? data.sizes.join(", ") : "",
-          colors: "",
+          colors: Array.isArray(data.colors) ? data.colors.map((c: { name: string }) => c.name).join(", ") : "",
           materials: Array.isArray(data.materials) ? data.materials.join(", ") : "",
           deliveryEstimate: data.deliveryEstimate || "5-7",
           isBestSeller: data.isBestSeller || false,
@@ -42,11 +47,42 @@ export default function EditProductPage() {
           occasions: Array.isArray(data.occasions) ? data.occasions.join(", ") : "",
           inStock: data.inStock !== false,
         });
+        setImages(Array.isArray(data.images) ? data.images : []);
       }
       setLoading(false);
     };
     if (params.id) fetchProduct();
   }, [params.id]);
+
+  const uploadFiles = useCallback(async (files: FileList | File[]) => {
+    setUploading(true);
+    const token = localStorage.getItem("hbp-token");
+    for (const file of Array.from(files)) {
+      if (!file.type.startsWith("image/")) continue;
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: fd,
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setImages((prev) => [...prev, data.url]);
+      }
+    }
+    setUploading(false);
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(false);
+    if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files);
+  }, [uploadFiles]);
+
+  const removeImage = (index: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,9 +92,11 @@ export default function EditProductPage() {
       ...form,
       price: parseInt(form.price),
       comparePrice: form.comparePrice ? parseInt(form.comparePrice) : null,
-      sizes: form.sizes ? form.sizes.split(",").map((s: string) => s.trim()) : [],
-      materials: form.materials ? form.materials.split(",").map((m: string) => m.trim()) : [],
-      occasions: form.occasions ? form.occasions.split(",").map((o: string) => o.trim()) : [],
+      images,
+      sizes: form.sizes ? form.sizes.split(",").map((s) => s.trim()) : [],
+      colors: form.colors ? form.colors.split(",").map((c) => ({ name: c.trim(), hex: "#ccc" })) : [],
+      materials: form.materials ? form.materials.split(",").map((m) => m.trim()) : [],
+      occasions: form.occasions ? form.occasions.split(",").map((o) => o.trim()) : [],
     };
 
     await fetch(`/api/products/${params.id}`, {
@@ -90,10 +128,52 @@ export default function EditProductPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-2xl space-y-4 bg-white rounded-2xl border border-zinc-200 p-6">
+        <div>
+          <label className={labelClass}>Product Images</label>
+          <div
+            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={handleDrop}
+            onClick={() => fileInputRef.current?.click()}
+            className={`relative flex flex-col items-center justify-center gap-2 py-8 rounded-xl border-2 border-dashed cursor-pointer transition-colors ${
+              dragOver ? "border-zinc-800 bg-zinc-50" : "border-zinc-200 hover:border-zinc-400"
+            }`}
+          >
+            <HiOutlineArrowUpTray className="w-6 h-6 text-zinc-400" />
+            <p className="text-xs text-zinc-500">Drop images here or click to upload</p>
+            <p className="text-[10px] text-zinc-400">PNG, JPG up to 10MB</p>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              hidden
+              onChange={(e) => { if (e.target.files?.length) uploadFiles(e.target.files); }}
+            />
+          </div>
+          {images.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-3">
+              {images.map((url, i) => (
+                <div key={i} className="relative w-16 h-20 rounded-lg overflow-hidden bg-zinc-100 group">
+                  <img src={url} alt="" className="w-full h-full object-cover" />
+                  <button type="button" onClick={() => removeImage(i)}
+                    className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  ><HiOutlineXMark className="w-3 h-3" /></button>
+                </div>
+              ))}
+            </div>
+          )}
+          {uploading && <p className="text-xs text-zinc-400 mt-2">Uploading...</p>}
+        </div>
+
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
             <label className={labelClass}>Product Name</label>
             <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
+          </div>
+          <div className="sm:col-span-2">
+            <label className={labelClass}>Tagline</label>
+            <input value={form.tagline} onChange={(e) => setForm({ ...form, tagline: e.target.value })} className={inputClass} />
           </div>
           <div className="sm:col-span-2">
             <label className={labelClass}>Description</label>
@@ -122,12 +202,24 @@ export default function EditProductPage() {
             </select>
           </div>
           <div>
-            <label className={labelClass}>Sizes</label>
-            <input value={form.sizes} onChange={(e) => setForm({ ...form, sizes: e.target.value })} className={inputClass} />
+            <label className={labelClass}>Sizes (comma separated)</label>
+            <input value={form.sizes} onChange={(e) => setForm({ ...form, sizes: e.target.value })} className={inputClass} placeholder="XS, S, M, L, XL" />
+          </div>
+          <div>
+            <label className={labelClass}>Colors (comma separated)</label>
+            <input value={form.colors} onChange={(e) => setForm({ ...form, colors: e.target.value })} className={inputClass} placeholder="Red, Blue, Black" />
+          </div>
+          <div className="sm:col-span-2">
+            <label className={labelClass}>Materials (comma separated)</label>
+            <input value={form.materials} onChange={(e) => setForm({ ...form, materials: e.target.value })} className={inputClass} />
           </div>
           <div>
             <label className={labelClass}>Delivery Estimate</label>
             <input value={form.deliveryEstimate} onChange={(e) => setForm({ ...form, deliveryEstimate: e.target.value })} className={inputClass} />
+          </div>
+          <div>
+            <label className={labelClass}>Occasions (comma separated)</label>
+            <input value={form.occasions} onChange={(e) => setForm({ ...form, occasions: e.target.value })} className={inputClass} />
           </div>
         </div>
 
@@ -145,14 +237,15 @@ export default function EditProductPage() {
           ))}
         </div>
 
-        <div className="pt-2">
+        <div className="flex items-center gap-3 pt-2">
           <button
             type="submit"
-            disabled={saving}
+            disabled={saving || uploading}
             className="px-6 h-10 rounded-xl bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 transition-colors disabled:opacity-50"
           >
             {saving ? "Saving..." : "Update Product"}
           </button>
+          {uploading && <span className="text-xs text-zinc-400">Uploading images...</span>}
         </div>
       </form>
     </div>

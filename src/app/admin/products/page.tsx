@@ -9,9 +9,11 @@ interface Product {
   name: string;
   price: number;
   category: string;
+  collection: string;
   rating: number;
   inStock: boolean;
   images: string[];
+  createdAt: string;
 }
 
 export default function AdminProductsPage() {
@@ -67,7 +69,7 @@ export default function AdminProductsPage() {
             <tr className="border-b border-zinc-100">
               <th className="text-left p-4 text-xs text-zinc-500 font-medium">Product</th>
               <th className="text-left p-4 text-xs text-zinc-500 font-medium">Price</th>
-              <th className="text-left p-4 text-xs text-zinc-500 font-medium">Category</th>
+              <th className="text-left p-4 text-xs text-zinc-500 font-medium">Collection</th>
               <th className="text-left p-4 text-xs text-zinc-500 font-medium">Rating</th>
               <th className="text-left p-4 text-xs text-zinc-500 font-medium">Status</th>
               <th className="text-right p-4 text-xs text-zinc-500 font-medium">Actions</th>
@@ -83,11 +85,14 @@ export default function AdminProductsPage() {
                         <img src={product.images[0]} alt="" className="w-full h-full object-cover" />
                       )}
                     </div>
-                    <span className="text-xs font-medium">{product.name}</span>
+                    <div>
+                      <span className="text-xs font-medium block">{product.name}</span>
+                      <span className="text-[10px] text-zinc-400">{product.images?.length || 0} image{(product.images?.length || 0) !== 1 ? "s" : ""}</span>
+                    </div>
                   </div>
                 </td>
                 <td className="p-4 text-xs">₹{product.price.toLocaleString("en-IN")}</td>
-                <td className="p-4 text-xs capitalize">{product.category}</td>
+                <td className="p-4 text-xs capitalize">{product.collection || product.category}</td>
                 <td className="p-4">
                   <div className="flex items-center gap-1 text-xs">
                     <HiOutlineStar className="w-3 h-3 text-amber-400" />
