@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineEnvelope, HiOutlineDevicePhoneMobile } from "react-icons/hi2";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -29,29 +30,21 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-20 lg:pt-[88px]">
-      <div className="container-site section-padding">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="label-premium block">Get in Touch</span>
-          <h1 className="mt-3 heading-lg text-[var(--color-text-primary)] text-balance">
-            We&apos;d Love to Hear From You
-          </h1>
-          <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed max-w-md">
-            Have a question, a custom order request, or just want to say hello? Reach out to us.
-          </p>
-        </motion.div>
+    <div className="page-top">
+      <div className="container-luxury section">
+        <SectionHeading
+          label="Get in Touch"
+          title="We&apos;d Love to Hear From You"
+          description="Have a question, a custom order request, or just want to say hello? Reach out to us."
+        />
 
-        <div className="mt-12 grid lg:grid-cols-2 gap-12 lg:gap-20">
+        <div className="mt-14 grid lg:grid-cols-2 gap-12 lg:gap-20">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="space-y-4">
+            <div className="space-y-5">
               {[
                 {
                   icon: HiOutlineEnvelope,
@@ -81,37 +74,41 @@ export default function ContactPage() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] hover:bg-[var(--color-overlay)] transition-all duration-300 group"
+                  className="flex items-center gap-4 p-5 rounded-[var(--radius-xl)] border border-[var(--color-border)] hover:bg-[var(--color-overlay)] transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center group-hover:bg-[var(--color-accent)]/25 transition-colors">
+                  <div className="w-11 h-11 rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center group-hover:bg-[var(--color-accent)]/25 transition-colors">
                     <item.icon className="w-5 h-5 text-[var(--color-accent)]" />
                   </div>
                   <div>
-                    <p className="text-xs text-[var(--color-text-secondary)]">{item.label}</p>
+                    <p className="text-xs text-[var(--color-text-tertiary)]">{item.label}</p>
                     <p className="text-sm font-medium text-[var(--color-text-primary)]">{item.value}</p>
                   </div>
                 </a>
               ))}
             </div>
+
+            <div className="mt-8 rounded-[var(--radius-xl)] overflow-hidden border border-[var(--color-border)] h-48 bg-[var(--color-bg-secondary)] flex items-center justify-center">
+              <p className="text-xs text-[var(--color-text-tertiary)]">India</p>
+            </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             {submitted ? (
               <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="rounded-[var(--radius-xl)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-10 text-center"
+                className="rounded-[var(--radius-2xl)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-10 lg:p-12 text-center"
               >
                 <div className="w-16 h-16 mx-auto rounded-full bg-[var(--color-success)]/10 flex items-center justify-center">
                   <svg className="w-8 h-8 text-[var(--color-success)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="mt-4 text-lg font-serif text-[var(--color-text-primary)]">
+                <h3 className="mt-5 text-lg font-serif text-[var(--color-text-primary)]">
                   Thank You!
                 </h3>
                 <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
@@ -119,60 +116,61 @@ export default function ContactPage() {
                 </p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-[0.1em]">
+                    <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">
                       Name
                     </label>
                     <input
                       type="text"
                       name="name"
                       required
-                      className="w-full h-12 px-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-accent)] transition-colors"
+                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-[0.1em]">
+                    <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">
                       Email
                     </label>
                     <input
                       type="email"
                       name="email"
                       required
-                      className="w-full h-12 px-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-accent)] transition-colors"
+                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-[0.1em]">
+                  <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">
                     Subject
                   </label>
-                  <input
-                    type="text"
-                    name="subject"
-                    required
-                    className="w-full h-12 px-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-accent)] transition-colors"
-                    placeholder="How can we help?"
-                  />
+                    <input
+                      type="text"
+                      name="subject"
+                      required
+                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                      placeholder="How can we help?"
+                    />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5 uppercase tracking-[0.1em]">
+                  <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">
                     Message
                   </label>
                   <textarea
                     name="message"
                     required
                     rows={4}
-                    className="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-accent)] transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors resize-none"
                     placeholder="Tell us more..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full h-12 rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97]"
+                  disabled={sending}
+                  className="w-full h-12 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-500 active:scale-[0.97] disabled:opacity-50"
                 >
                   {sending ? "Sending..." : "Send Message"}
                 </button>

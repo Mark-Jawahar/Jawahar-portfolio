@@ -17,14 +17,16 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className={`max-w-xl ${align === "center" ? "mx-auto text-center" : ""}`}
     >
-      <span className="label-premium block">{label}</span>
-      <h2 className="mt-4 heading-lg text-[var(--color-text-primary)] text-balance">
+      <span className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
+        {label}
+      </span>
+      <h2 className="mt-5 text-[clamp(1.75rem,3.5vw,2.75rem)] font-serif text-[var(--color-text-primary)] leading-[1.1] text-balance">
         {title}
       </h2>
       {description && (

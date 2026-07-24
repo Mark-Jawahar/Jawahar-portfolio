@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { HiOutlineHeart, HiOutlineSparkles, HiOutlineGlobeAlt, HiOutlineSwatch } from "react-icons/hi2";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const values = [
   {
@@ -28,20 +29,22 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-20 lg:pt-[88px]">
-      <section className="section-padding">
-        <div className="container-site">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <div className="page-top">
+      <section className="section">
+        <div className="container-luxury">
+          <div className="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="label-premium block">About Us</span>
-              <h1 className="mt-4 heading-lg text-[var(--color-text-primary)] text-balance">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
+                About Us
+              </span>
+              <h1 className="mt-5 text-[clamp(2rem,4vw,3.5rem)] font-serif text-[var(--color-text-primary)] leading-tight">
                 Our Story
               </h1>
-              <div className="mt-8 space-y-5 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed text-pretty max-w-md">
+              <div className="mt-8 space-y-5 text-sm lg:text-[15px] text-[var(--color-text-secondary)] leading-relaxed text-pretty">
                 <p>
                   Welcome to HookedByPree, where the timeless art of crochet meets contemporary design.
                 </p>
@@ -61,22 +64,18 @@ export default function AboutPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="relative"
             >
-              <div className="aspect-[4/5] rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-accent)]/20 via-[var(--color-bg-secondary)] to-[var(--color-bg-secondary)] overflow-hidden flex items-center justify-center">
+              <div className="aspect-[4/5] rounded-[var(--radius-2xl)] bg-[var(--color-bg-secondary)] overflow-hidden flex items-center justify-center shadow-[var(--shadow-md)]">
                 <div className="text-center p-8">
-                  <div className="w-40 h-40 mx-auto rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center">
-                    <span className="text-xs text-[var(--color-accent)] tracking-[0.2em] uppercase font-medium">
-                      Since 2024
-                    </span>
-                  </div>
-                  <p className="mt-8 font-serif text-2xl text-[var(--color-text-primary)]">
+                  <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-[var(--color-accent)]/30 via-transparent to-transparent" />
+                  <p className="mt-6 font-serif text-2xl text-[var(--color-text-primary)]">
                     HookedByPree
                   </p>
-                  <p className="mt-2 text-xs text-[var(--color-text-secondary)] tracking-[0.15em] uppercase">
+                  <p className="mt-2 text-xs text-[var(--color-text-tertiary)] tracking-[0.15em] uppercase">
                     Elegance in Every Stitch
                   </p>
                 </div>
@@ -86,34 +85,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-[var(--color-bg-secondary)]">
-        <div className="container-site">
-          <div className="max-w-xl">
-            <span className="label-premium block">Our Values</span>
-            <h2 className="mt-3 heading-lg text-[var(--color-text-primary)] text-balance">
-              What We Stand For
-            </h2>
-            <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed">
-              Every creation reflects our commitment to craftsmanship, sustainability, and love.
-            </p>
-          </div>
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <section className="section bg-[var(--color-bg-secondary)]">
+        <div className="container-luxury">
+          <SectionHeading
+            label="Our Values"
+            title="What We Stand For"
+            description="Every creation reflects our commitment to craftsmanship, sustainability, and love."
+          />
+          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7">
             {values.map((value, i) => (
               <motion.div
                 key={value.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-[var(--radius-lg)] p-6 lg:p-8 bg-[var(--color-card-bg)] border border-[var(--color-border)]"
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-[var(--radius-xl)] p-7 lg:p-8 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-500"
               >
                 <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center">
                   <value.icon className="w-5 h-5 text-[var(--color-accent)]" />
                 </div>
-                <h3 className="mt-5 text-base font-medium text-[var(--color-text-primary)]">
+                <h3 className="mt-5 text-sm font-medium text-[var(--color-text-primary)]">
                   {value.title}
                 </h3>
-                <p className="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                <p className="mt-2.5 text-sm text-[var(--color-text-secondary)] leading-relaxed text-pretty">
                   {value.description}
                 </p>
               </motion.div>

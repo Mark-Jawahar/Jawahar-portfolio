@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineChevronDown } from "react-icons/hi2";
 import { faqItems } from "@/lib/products";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const categories = [...new Set(faqItems.map((item) => item.category))];
 
@@ -15,28 +16,20 @@ export default function FAQPage() {
     activeCategory === "All" ? faqItems : faqItems.filter((item) => item.category === activeCategory);
 
   return (
-    <div className="pt-20 lg:pt-[88px]">
-      <div className="container-site section-padding">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="label-premium block">FAQ</span>
-          <h1 className="mt-3 heading-lg text-[var(--color-text-primary)] text-balance">
-            Questions & Answers
-          </h1>
-          <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed max-w-md">
-            Find answers to common questions about our products, shipping, and more.
-          </p>
-        </motion.div>
+    <div className="page-top">
+      <div className="container-luxury section">
+        <SectionHeading
+          label="FAQ"
+          title="Questions & Answers"
+          description="Find answers to common questions about our products, shipping, and more."
+        />
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
           {["All", ...categories].map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`h-10 px-5 rounded-full text-xs font-medium tracking-wide transition-all duration-300 ${
+              className={`h-10 px-5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 ${
                 activeCategory === cat
                   ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]"
                   : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:text-[var(--color-text-primary)]"
@@ -54,12 +47,12 @@ export default function FAQPage() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: i * 0.03 }}
-              className="rounded-[var(--radius-lg)] border border-[var(--color-border)] overflow-hidden"
+              transition={{ duration: 0.4, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-[var(--radius-xl)] border border-[var(--color-border)] overflow-hidden"
             >
               <button
                 onClick={() => setOpenId(openId === i ? null : i)}
-                className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[var(--color-overlay)] transition-colors"
+                className="w-full flex items-center justify-between px-6 lg:px-8 py-5 text-left hover:bg-[var(--color-overlay)] transition-colors"
               >
                 <span className="text-sm font-medium text-[var(--color-text-primary)] pr-4">
                   {item.question}
@@ -79,7 +72,7 @@ export default function FAQPage() {
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-5 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                    <div className="px-6 lg:px-8 pb-6 text-sm text-[var(--color-text-secondary)] leading-relaxed text-pretty">
                       {item.answer}
                     </div>
                   </motion.div>

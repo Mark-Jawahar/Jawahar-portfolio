@@ -12,20 +12,20 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="pt-20 lg:pt-[88px]">
-        <div className="container-site py-32 text-center">
-          <div className="w-20 h-20 mx-auto rounded-full bg-[var(--color-bg-secondary)] flex items-center justify-center mb-6">
+      <div className="page-top">
+        <div className="container-luxury py-32 text-center">
+          <div className="w-20 h-20 mx-auto rounded-full bg-[var(--color-bg-secondary)] flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-[var(--color-text-tertiary)]">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-serif text-[var(--color-text-primary)]">Your cart is empty</h1>
+          <h1 className="mt-6 text-2xl font-serif text-[var(--color-text-primary)]">Your cart is empty</h1>
           <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
             Looks like you haven&apos;t added anything yet.
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 mt-8 h-12 px-8 rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-90 transition-all"
+            className="inline-flex items-center gap-2 mt-8 h-12 px-8 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
           >
             <HiOutlineArrowLeft className="w-4 h-4" />
             Browse Collection
@@ -36,26 +36,26 @@ export default function CartPage() {
   }
 
   return (
-    <div className="pt-20 lg:pt-[88px]">
-      <div className="container-site section-padding">
-        <h1 className="heading-md text-[var(--color-text-primary)]">Shopping Cart</h1>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-          {items.length} {items.length === 1 ? "item" : "items"} in your cart
+    <div className="page-top">
+      <div className="container-luxury section">
+        <h1 className="text-[clamp(1.75rem,3vw,2.5rem)] font-serif text-[var(--color-text-primary)]">Shopping Cart</h1>
+        <p className="mt-1.5 text-sm text-[var(--color-text-secondary)]">
+          {items.length} {items.length === 1 ? "item" : "items"}
         </p>
 
-        <div className="mt-10 grid lg:grid-cols-3 gap-8 lg:gap-12">
-          <div className="lg:col-span-2 space-y-4">
+        <div className="mt-12 grid lg:grid-cols-3 gap-10 lg:gap-16">
+          <div className="lg:col-span-2 space-y-5">
             {items.map((item) => (
               <motion.div
                 key={`${item.product.id}-${item.size}-${item.color}`}
                 layout
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex gap-4 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)]"
+                className="flex gap-5 p-6 rounded-[var(--radius-xl)] border border-[var(--color-border)]"
               >
                 <Link
                   href={`/product/${item.product.id}`}
-                  className="relative w-24 h-28 rounded-[var(--radius-md)] overflow-hidden bg-[var(--color-bg-secondary)] flex-shrink-0"
+                  className="relative w-24 h-28 rounded-[var(--radius-lg)] overflow-hidden bg-[var(--color-bg-secondary)] flex-shrink-0"
                 >
                   <Image
                     src={item.product.images[0] || "/placeholder.svg"}
@@ -70,15 +70,15 @@ export default function CartPage() {
                     <div>
                       <Link
                         href={`/product/${item.product.id}`}
-                        className="text-sm font-medium text-[var(--color-text-primary)] hover:opacity-70 transition-opacity"
+                        className="text-sm font-medium text-[var(--color-text-primary)] hover:opacity-60 transition-opacity"
                       >
                         {item.product.name}
                       </Link>
                       {item.size && (
-                        <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">Size: {item.size}</p>
+                        <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">Size: {item.size}</p>
                       )}
                       {item.color && (
-                        <p className="text-xs text-[var(--color-text-secondary)]">Color: {item.color}</p>
+                        <p className="text-xs text-[var(--color-text-tertiary)]">Color: {item.color}</p>
                       )}
                     </div>
                     <p className="text-sm font-medium text-[var(--color-text-primary)] flex-shrink-0">
@@ -103,7 +103,7 @@ export default function CartPage() {
                           <HiOutlineMinus className="w-3.5 h-3.5" />
                         )}
                       </button>
-                      <span className="w-10 text-center text-sm font-medium">{item.quantity}</span>
+                      <span className="w-10 text-center text-sm font-medium select-none">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.product.id, item.quantity + 1, item.size, item.color)}
                         className="w-8 h-8 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-full transition-colors"
@@ -124,25 +124,25 @@ export default function CartPage() {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] p-6 lg:p-8 sticky top-28 bg-[var(--color-card-bg)]">
+            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] p-6 lg:p-8 sticky top-28 shadow-[var(--shadow-sm)]">
               <h3 className="text-base font-medium text-[var(--color-text-primary)]">Order Summary</h3>
-              <div className="mt-5 space-y-3">
+              <div className="mt-6 space-y-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-[var(--color-text-secondary)]">Subtotal</span>
-                  <span className="text-[var(--color-text-primary)]">{formatPrice(subtotal)}</span>
+                  <span className="text-[var(--color-text-primary)] font-medium">{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-[var(--color-text-secondary)]">Shipping</span>
                   <span className="text-[var(--color-text-secondary)]">Calculated at checkout</span>
                 </div>
               </div>
-              <div className="mt-5 pt-5 border-t border-[var(--color-border)] flex justify-between">
+              <div className="mt-6 pt-6 border-t border-[var(--color-border)] flex justify-between">
                 <span className="text-sm font-medium text-[var(--color-text-primary)]">Total</span>
                 <span className="text-sm font-medium text-[var(--color-text-primary)]">{formatPrice(subtotal)}</span>
               </div>
               <Link
                 href="/checkout"
-                className="block w-full text-center mt-6 h-12 flex items-center justify-center rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97]"
+                className="block w-full text-center mt-6 h-12 flex items-center justify-center rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-500 active:scale-[0.97]"
               >
                 Proceed to Checkout
               </Link>

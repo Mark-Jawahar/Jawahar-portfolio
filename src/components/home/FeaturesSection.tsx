@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { HiOutlineSparkles, HiOutlineHeart, HiOutlineGlobeAlt, HiOutlineTruck, HiOutlineSwatch, HiOutlineGift } from "react-icons/hi2";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const features = [
   {
@@ -22,7 +23,7 @@ const features = [
   {
     icon: HiOutlineGlobeAlt,
     title: "Slow Fashion",
-    description: "We believe in mindful making. Quality over quantity, timeless over trendy, sustainable over disposable.",
+    description: "Quality over quantity, timeless over trendy, sustainable over disposable.",
   },
   {
     icon: HiOutlineGift,
@@ -32,40 +33,36 @@ const features = [
   {
     icon: HiOutlineTruck,
     title: "Custom Orders",
-    description: "Dream it, we'll craft it. We love bringing your unique vision to life through custom commissions.",
+    description: "Dream it, we&apos;ll craft it. We love bringing your unique vision to life through custom commissions.",
   },
 ];
 
 export default function FeaturesSection() {
   return (
-    <section className="section-padding bg-[var(--color-bg-secondary)]">
-      <div className="container-site">
-        <div className="max-w-xl">
-          <span className="label-premium block">Why HookedByPree</span>
-          <h2 className="mt-3 heading-lg text-[var(--color-text-primary)] text-balance">
-            The Art of Handmade
-          </h2>
-          <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed text-pretty">
-            Every creation is a celebration of slow fashion, premium materials, and timeless design.
-          </p>
-        </div>
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+    <section className="section bg-[var(--color-bg-secondary)]">
+      <div className="container-luxury">
+        <SectionHeading
+          label="Why HookedByPree"
+          title="The Art of Handmade"
+          description="Every creation is a celebration of slow fashion, premium materials, and timeless design."
+        />
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-[var(--radius-lg)] p-6 lg:p-8 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-500"
+              transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-[var(--radius-xl)] p-7 lg:p-8 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-500"
             >
               <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center">
                 <feature.icon className="w-5 h-5 text-[var(--color-accent)]" />
               </div>
-              <h3 className="mt-5 text-base font-medium text-[var(--color-text-primary)]">
+              <h3 className="mt-5 text-sm font-medium text-[var(--color-text-primary)]">
                 {feature.title}
               </h3>
-              <p className="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+              <p className="mt-2.5 text-sm text-[var(--color-text-secondary)] leading-relaxed text-pretty">
                 {feature.description}
               </p>
             </motion.div>
