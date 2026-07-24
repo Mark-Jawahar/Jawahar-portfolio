@@ -24,8 +24,8 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="py-24 lg:py-32">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <section className="section-padding">
+      <div className="container-site">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

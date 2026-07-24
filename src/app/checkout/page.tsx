@@ -77,8 +77,8 @@ export default function CheckoutPage() {
 
   if (items.length === 0 && step === "details") {
     return (
-      <div className="pt-24 lg:pt-28">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-32 text-center">
+      <div className="pt-20 lg:pt-[88px]">
+        <div className="container-site py-32 text-center">
           <h1 className="text-2xl font-serif">Your cart is empty</h1>
           <Link
             href="/shop"
@@ -93,16 +93,16 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="pt-24 lg:pt-28">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site section-padding">
         <div className="flex items-center gap-4 mb-8">
           <Link href="/cart" className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
             <HiOutlineChevronLeft className="w-5 h-5" />
           </Link>
-          <h1 className="text-2xl lg:text-3xl font-serif">Checkout</h1>
+          <h1 className="text-[clamp(1.5rem,3vw,2rem)] font-serif">Checkout</h1>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-10 lg:gap-16">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           <div className="lg:col-span-3">
             {step === "details" ? (
               <motion.div
@@ -195,7 +195,7 @@ export default function CheckoutPage() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full h-13 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97]"
+                    className="w-full h-12 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97]"
                   >
                     Continue to Payment
                   </button>
@@ -286,7 +286,7 @@ export default function CheckoutPage() {
 
                 <button
                   onClick={handlePaymentComplete}
-                  className="w-full h-13 rounded-[var(--radius-button)] bg-[var(--color-success)] text-white text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97] flex items-center justify-center gap-2"
+                  className="w-full h-12 rounded-[var(--radius-button)] bg-[var(--color-success)] text-white text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97] flex items-center justify-center gap-2"
                 >
                   <HiOutlineCheckCircle className="w-5 h-5" />
                   I&apos;ve Completed the Payment

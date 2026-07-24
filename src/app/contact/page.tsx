@@ -30,15 +30,15 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-24 lg:pt-28">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site section-padding">
         <SectionHeading
           label="Get in Touch"
           title="We&apos;d Love to Hear From You"
           description="Have a question, a custom order request, or just want to say hello? Reach out to us."
         />
 
-        <div className="mt-14 grid lg:grid-cols-2 gap-12 lg:gap-20">
+        <div className="mt-12 grid lg:grid-cols-2 gap-10 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}

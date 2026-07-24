@@ -28,7 +28,7 @@ export default function ProductImage({ src, alt, priority }: ProductImageProps) 
           sizes="(max-width: 768px) 100vw, 50vw"
           priority={priority}
         />
-        <div className="absolute top-3 right-3 w-9 h-9 rounded-full bg-[var(--color-glass)] backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-[var(--color-glass)] backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <HiOutlineMagnifyingGlassPlus className="w-4 h-4 text-[var(--color-text-secondary)]" />
         </div>
       </div>

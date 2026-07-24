@@ -39,14 +39,14 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="py-24 lg:py-32 bg-[var(--color-bg-secondary)]">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <section className="section-padding bg-[var(--color-bg-secondary)]">
+      <div className="container-site">
         <SectionHeading
           label="Why HookedByPree"
           title="The Art of Handmade"
           description="Every creation is a celebration of slow fashion, premium materials, and timeless design."
         />
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}

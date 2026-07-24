@@ -28,8 +28,8 @@ const values = [
 
 export default function CraftsmanshipSection() {
   return (
-    <section className="py-24 lg:py-32">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <section className="section-padding">
+      <div className="container-site">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}

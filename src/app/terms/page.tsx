@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function TermsPage() {
   return (
-    <div className="pt-24 lg:pt-28">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site section-padding">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -19,7 +19,7 @@ export default function TermsPage() {
           >
             &larr; Back to Home
           </Link>
-          <h1 className="text-3xl lg:text-4xl font-serif text-[var(--color-text-primary)]">Terms of Service</h1>
+          <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-serif text-[var(--color-text-primary)]">Terms of Service</h1>
           <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Last updated: January 2024</p>
 
           <div className="mt-8 space-y-6 text-sm text-[var(--color-text-secondary)] leading-relaxed">

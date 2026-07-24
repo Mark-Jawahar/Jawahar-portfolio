@@ -16,7 +16,7 @@ export default function NotFound() {
         <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-accent)] font-medium">
           Error 404
         </p>
-        <h1 className="mt-4 text-5xl lg:text-7xl font-serif text-[var(--color-text-primary)]">
+        <h1 className="mt-4 text-[clamp(2.5rem,6vw,4.5rem)] font-serif text-[var(--color-text-primary)]">
           Page Not Found
         </h1>
         <p className="mt-4 text-sm text-[var(--color-text-secondary)] max-w-sm mx-auto">
@@ -25,14 +25,14 @@ export default function NotFound() {
         <div className="mt-10 flex items-center justify-center gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
+            className="inline-flex items-center gap-2 h-12 px-8 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
           >
             <HiOutlineArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[var(--radius-button)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all"
+            className="inline-flex items-center gap-2 h-12 px-8 rounded-[var(--radius-button)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all"
           >
             Browse Shop
           </Link>

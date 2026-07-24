@@ -36,21 +36,21 @@ export default function ShopPage() {
   }, [filter, search, sort]);
 
   return (
-    <div className="pt-24 lg:pt-28">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site section-padding">
         <SectionHeading
           label="Our Collection"
           title="Every Piece, a Masterpiece"
           description="Browse our complete collection of handcrafted crochet creations."
         />
 
-        <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
-          <div className="flex items-center gap-3">
+        <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex items-center gap-2">
             {(["all", "apparel", "gifts"] as const).map((f) => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`h-10 px-5 rounded-full text-sm font-medium transition-all duration-300 ${
                   filter === f
                     ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]"
                     : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)]"
@@ -61,7 +61,7 @@ export default function ShopPage() {
             ))}
           </div>
 
-          <div className="flex-1 flex items-center gap-3 sm:ml-auto">
+          <div className="flex-1 flex items-center gap-3 sm:ml-auto w-full sm:w-auto">
             <div className="relative flex-1 max-w-xs">
               <HiOutlineMagnifyingGlass className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-secondary)]" />
               <input
@@ -69,13 +69,13 @@ export default function ShopPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
-                className="w-full h-10 pl-10 pr-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                className="w-full h-11 pl-10 pr-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
               />
             </div>
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="h-10 px-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+              className="h-11 px-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] outline-none focus:border-[var(--color-text-primary)] transition-colors appearance-none"
             >
               <option value="createdAt">Newest</option>
               <option value="price">Price: Low to High</option>
@@ -85,7 +85,7 @@ export default function ShopPage() {
         </div>
 
         {loading ? (
-          <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="animate-pulse">
                 <div className="aspect-[3/4] rounded-[var(--radius-card)] bg-[var(--color-bg-secondary)]" />
@@ -98,7 +98,7 @@ export default function ShopPage() {
             ))}
           </div>
         ) : (
-          <motion.div layout className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+          <motion.div layout className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {products.map((product, i) => (
               <ProductCard key={product.id} product={product} index={i} />
             ))}

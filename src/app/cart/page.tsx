@@ -12,8 +12,8 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="pt-24 lg:pt-28">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-32 text-center">
+      <div className="pt-20 lg:pt-[88px]">
+        <div className="container-site py-32 text-center">
           <div className="w-20 h-20 mx-auto rounded-full bg-[var(--color-bg-secondary)] flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-[var(--color-text-secondary)]">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
@@ -25,7 +25,7 @@ export default function CartPage() {
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 mt-8 px-8 py-3 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
+            className="inline-flex items-center gap-2 mt-8 h-12 px-8 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
           >
             <HiOutlineArrowLeft className="w-4 h-4" />
             Browse Collection
@@ -36,22 +36,22 @@ export default function CartPage() {
   }
 
   return (
-    <div className="pt-24 lg:pt-28">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
-        <h1 className="text-3xl lg:text-4xl font-serif text-[var(--color-text-primary)]">Shopping Cart</h1>
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site section-padding">
+        <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-serif text-[var(--color-text-primary)]">Shopping Cart</h1>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
           {items.length} {items.length === 1 ? "item" : "items"} in your cart
         </p>
 
-        <div className="mt-10 grid lg:grid-cols-3 gap-10 lg:gap-16">
-          <div className="lg:col-span-2 space-y-5">
+        <div className="mt-10 grid lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="lg:col-span-2 space-y-4">
             {items.map((item) => (
               <motion.div
                 key={`${item.product.id}-${item.size}-${item.color}`}
                 layout
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex gap-5 p-5 rounded-[var(--radius-card-sm)] border border-[var(--color-border)]"
+                className="flex gap-4 p-5 rounded-[var(--radius-card-sm)] border border-[var(--color-border)]"
               >
                 <Link
                   href={`/product/${item.product.id}`}
@@ -65,8 +65,8 @@ export default function CartPage() {
                     sizes="96px"
                   />
                 </Link>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between">
+                <div className="flex-1 min-w-0 flex flex-col justify-between">
+                  <div className="flex items-start justify-between gap-4">
                     <div>
                       <Link
                         href={`/product/${item.product.id}`}
@@ -81,11 +81,11 @@ export default function CartPage() {
                         <p className="text-xs text-[var(--color-text-secondary)]">Color: {item.color}</p>
                       )}
                     </div>
-                    <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                    <p className="text-sm font-medium text-[var(--color-text-primary)] flex-shrink-0">
                       {formatPrice(item.product.price * item.quantity)}
                     </p>
                   </div>
-                  <div className="flex items-center justify-between mt-4">
+                  <div className="flex items-center justify-between">
                     <div className="flex items-center border border-[var(--color-border)] rounded-full">
                       <button
                         onClick={() => {
@@ -142,13 +142,13 @@ export default function CartPage() {
               </div>
               <Link
                 href="/checkout"
-                className="block w-full text-center mt-6 py-3.5 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97]"
+                className="block w-full text-center mt-6 h-12 flex items-center justify-center rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97]"
               >
                 Proceed to Checkout
               </Link>
               <Link
                 href="/shop"
-                className="block w-full text-center mt-3 py-3 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+                className="block w-full text-center mt-3 h-10 flex items-center justify-center text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
               >
                 Continue Shopping
               </Link>

@@ -25,8 +25,8 @@ const collections = [
 
 export default function CollectionsShowcase() {
   return (
-    <section className="py-24 lg:py-32 bg-[var(--color-bg-secondary)]">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <section className="section-padding bg-[var(--color-bg-secondary)]">
+      <div className="container-site">
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {collections.map((collection, i) => (
             <motion.div

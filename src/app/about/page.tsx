@@ -29,9 +29,9 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-24 lg:pt-28">
-      <section className="py-16 lg:py-20">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <div className="pt-20 lg:pt-[88px]">
+      <section className="section-padding">
+        <div className="container-site">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -41,7 +41,7 @@ export default function AboutPage() {
               <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
                 About Us
               </span>
-              <h1 className="mt-3 text-4xl lg:text-5xl xl:text-6xl font-serif text-[var(--color-text-primary)] leading-tight">
+              <h1 className="mt-3 text-[clamp(2rem,4.5vw,4rem)] font-serif text-[var(--color-text-primary)] leading-tight">
                 Our Story
               </h1>
               <div className="mt-8 space-y-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed">
@@ -85,14 +85,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 lg:py-24 bg-[var(--color-bg-secondary)]">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+      <section className="section-padding bg-[var(--color-bg-secondary)]">
+        <div className="container-site">
           <SectionHeading
             label="Our Values"
             title="What We Stand For"
             description="Every creation reflects our commitment to craftsmanship, sustainability, and love."
           />
-          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {values.map((value, i) => (
               <motion.div
                 key={value.title}

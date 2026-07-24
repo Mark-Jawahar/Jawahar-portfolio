@@ -31,8 +31,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const sizes = {
       sm: "h-9 px-4 text-sm rounded-[var(--radius-button)] gap-1.5",
       md: "h-11 px-6 text-sm rounded-[var(--radius-button)] gap-2",
-      lg: "h-13 px-8 text-base rounded-[var(--radius-button)] gap-2.5",
-      xl: "h-15 px-10 text-lg rounded-[var(--radius-button)] gap-3",
+      lg: "h-12 px-8 text-base rounded-[var(--radius-button)] gap-2.5",
+      xl: "h-14 px-10 text-lg rounded-[var(--radius-button)] gap-3",
     };
 
     return (

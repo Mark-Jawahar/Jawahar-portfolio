@@ -9,14 +9,14 @@ export default function FeaturedProducts() {
   const featured = products.filter((p) => p.isBestSeller).slice(0, 4);
 
   return (
-    <section className="py-24 lg:py-32">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <section className="section-padding">
+      <div className="container-site">
         <SectionHeading
           label="Best Sellers"
           title="Our Most Treasured Pieces"
           description="Discover the designs that have captured hearts — each piece a testament to exceptional craftsmanship."
         />
-        <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {featured.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}

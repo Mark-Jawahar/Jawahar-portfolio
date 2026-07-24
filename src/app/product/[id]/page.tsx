@@ -34,8 +34,8 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="pt-24 lg:pt-28">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-32 text-center">
+      <div className="pt-20 lg:pt-[88px]">
+        <div className="container-site py-32 text-center">
           <h1 className="text-2xl font-serif">Product Not Found</h1>
           <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
             The piece you&apos;re looking for doesn&apos;t exist or has been removed.
@@ -66,8 +66,8 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="pt-20 lg:pt-24">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-8 lg:py-12">
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site py-8 lg:py-12">
         <Link
           href="/shop"
           className="inline-flex items-center gap-1.5 text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors mb-6"
@@ -116,7 +116,7 @@ export default function ProductDetailPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col"
           >
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center gap-3 mb-3">
               {product.isBestSeller && (
                 <span className="px-2.5 py-0.5 rounded-full bg-[var(--color-accent)] text-[10px] font-medium">
                   Best Seller
@@ -132,7 +132,7 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            <h1 className="text-3xl lg:text-4xl font-serif text-[var(--color-text-primary)] leading-tight">
+            <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-serif text-[var(--color-text-primary)] leading-tight">
               {product.name}
             </h1>
             <p className="mt-2 text-sm text-[var(--color-text-secondary)]">{product.tagline}</p>
@@ -160,7 +160,7 @@ export default function ProductDetailPage() {
               {product.description}
             </p>
 
-            {product.colors && (
+            {product.colors && product.colors.length > 0 && (
               <div className="mt-6">
                 <p className="text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-[0.1em] mb-3">
                   Color: <span className="text-[var(--color-text-primary)]">{selectedColor || "Select"}</span>
@@ -183,7 +183,7 @@ export default function ProductDetailPage() {
               </div>
             )}
 
-            {product.sizes && (
+            {product.sizes && product.sizes.length > 0 && (
               <div className="mt-6">
                 <p className="text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-[0.1em] mb-3">
                   Size: <span className="text-[var(--color-text-primary)]">{selectedSize || "Select"}</span>
@@ -193,7 +193,7 @@ export default function ProductDetailPage() {
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 rounded-[var(--radius-button)] text-xs font-medium border transition-all duration-200 ${
+                      className={`h-10 px-4 rounded-[var(--radius-button)] text-xs font-medium border transition-all duration-200 ${
                         selectedSize === size
                           ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] border-[var(--color-text-primary)]"
                           : "bg-transparent text-[var(--color-text-secondary)] border-[var(--color-border)] hover:border-[var(--color-text-primary)]"
@@ -213,14 +213,14 @@ export default function ProductDetailPage() {
               <div className="flex items-center border border-[var(--color-border)] rounded-[var(--radius-button)] w-fit">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-[var(--radius-button)] transition-colors"
+                  className="w-11 h-11 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-[var(--radius-button)] transition-colors"
                 >
                   <HiOutlineMinus className="w-3.5 h-3.5" />
                 </button>
                 <span className="w-12 text-center text-sm font-medium">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-[var(--radius-button)] transition-colors"
+                  className="w-11 h-11 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-[var(--radius-button)] transition-colors"
                 >
                   <HiOutlinePlus className="w-3.5 h-3.5" />
                 </button>
@@ -230,18 +230,18 @@ export default function ProductDetailPage() {
             <div className="flex gap-3 mt-8">
               <button
                 onClick={handleBuyNow}
-                className="flex-1 h-13 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97]"
+                className="flex-1 h-12 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97]"
               >
                 Buy Now
               </button>
               <button
                 onClick={handleAddToCart}
-                className="flex-1 h-13 rounded-[var(--radius-button)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all duration-300 active:scale-[0.97]"
+                className="flex-1 h-12 rounded-[var(--radius-button)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all duration-300 active:scale-[0.97]"
               >
                 {addedToCart ? "Added!" : "Add to Cart"}
               </button>
               <button
-                className="w-13 h-13 rounded-[var(--radius-button)] border border-[var(--color-border)] flex items-center justify-center hover:bg-[var(--color-overlay)] transition-all duration-300"
+                className="w-12 h-12 rounded-[var(--radius-button)] border border-[var(--color-border)] flex items-center justify-center hover:bg-[var(--color-overlay)] transition-all duration-300 flex-shrink-0"
                 aria-label="Add to wishlist"
               >
                 <HiOutlineHeart className="w-5 h-5" />
@@ -281,7 +281,7 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {product.materials && (
+            {product.materials && product.materials.length > 0 && (
               <div className="mt-6">
                 <p className="text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-[0.1em] mb-2">
                   Materials
@@ -299,7 +299,7 @@ export default function ProductDetailPage() {
               </div>
             )}
 
-            {product.occasions && (
+            {product.occasions && product.occasions.length > 0 && (
               <div className="mt-6">
                 <p className="text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-[0.1em] mb-2">
                   Perfect For
@@ -320,14 +320,14 @@ export default function ProductDetailPage() {
         </div>
 
         {relatedProducts.length > 0 && (
-          <section className="mt-20 lg:mt-28 pt-12 lg:pt-16 border-t border-[var(--color-border)]">
-            <h2 className="text-2xl lg:text-3xl font-serif text-[var(--color-text-primary)]">
+          <section className="mt-16 lg:mt-24 pt-10 lg:pt-14 border-t border-[var(--color-border)]">
+            <h2 className="text-xl lg:text-2xl font-serif text-[var(--color-text-primary)]">
               Complete the Look
             </h2>
             <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
               Explore more pieces from our {product.collection}
             </p>
-            <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               {relatedProducts.map((related, i) => (
                 <ProductCard key={related.id} product={related} index={i} />
               ))}

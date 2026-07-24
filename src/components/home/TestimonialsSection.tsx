@@ -8,14 +8,14 @@ import GlassCard from "@/components/ui/GlassCard";
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 lg:py-32">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
+    <section className="section-padding">
+      <div className="container-site">
         <SectionHeading
           label="Testimonials"
           title="What Our Community Says"
           description="Hear from those who have experienced the HookedByPree difference."
         />
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {testimonials.map((testimonial, i) => (
             <motion.div
               key={testimonial.id}

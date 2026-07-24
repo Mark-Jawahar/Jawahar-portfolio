@@ -22,7 +22,7 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
       transition={{ duration: 0.2 }}
       className="fixed inset-0 z-40 bg-[var(--color-bg-primary)] pt-16 lg:hidden"
     >
-      <nav className="flex flex-col px-6 pt-8 gap-2">
+      <nav className="flex flex-col container-site pt-8 gap-1">
         {links.map((link, i) => (
           <motion.div
             key={link.href}
@@ -33,7 +33,7 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
             <Link
               href={link.href}
               onClick={onClose}
-              className="block py-4 text-2xl font-serif text-[var(--color-text-primary)] border-b border-[var(--color-border)]"
+              className="block py-4 text-2xl font-serif text-[var(--color-text-primary)] border-b border-[var(--color-border)] active:opacity-60 transition-opacity"
             >
               {link.label}
             </Link>

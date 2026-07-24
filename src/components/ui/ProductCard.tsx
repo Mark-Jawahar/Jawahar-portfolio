@@ -19,7 +19,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="group"
+      className="group flex flex-col"
     >
       <div className="relative rounded-[var(--radius-card)] overflow-hidden bg-[var(--color-bg-secondary)] aspect-[3/4]">
         <Link href={`/product/${product.id}`}>
@@ -71,7 +71,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
           <Link
             href={`/product/${product.id}`}
-            className="block w-full text-center py-2.5 rounded-[var(--radius-button)] bg-[var(--color-glass)] backdrop-blur-md text-xs font-medium text-[var(--color-text-primary)] border border-[var(--color-border)] hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)] transition-all duration-300"
+            className="block w-full text-center h-10 flex items-center justify-center rounded-[var(--radius-button)] bg-[var(--color-glass)] backdrop-blur-md text-xs font-medium text-[var(--color-text-primary)] border border-[var(--color-border)] hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)] transition-all duration-300"
           >
             Quick Add
           </Link>
@@ -84,7 +84,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         </div>
       </div>
 
-      <div className="mt-4 px-1">
+      <div className="mt-4 flex-1 flex flex-col">
         <div className="flex items-center gap-1.5 mb-1">
           <HiStar className="w-3 h-3 text-[var(--color-star)]" />
           <span className="text-xs text-[var(--color-text-secondary)]">
@@ -107,7 +107,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </span>
           )}
         </div>
-        {product.colors && (
+        {product.colors && product.colors.length > 0 && (
           <div className="flex items-center gap-1.5 mt-2">
             {product.colors.slice(0, 4).map((color) => (
               <span

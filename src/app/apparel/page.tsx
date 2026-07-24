@@ -19,15 +19,15 @@ export default function ApparelPage() {
   }, []);
 
   return (
-    <div className="pt-24 lg:pt-28">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site section-padding">
         <SectionHeading
           label="Collection 01"
           title="The Apparel Collection"
           description="Bespoke Crochet Tops · Statement Jackets · Artisan Caps — Step into sustainable handcrafted fashion that makes a statement."
         />
         {loading ? (
-          <div className="mt-14 grid grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="animate-pulse">
                 <div className="aspect-[3/4] rounded-[var(--radius-card)] bg-[var(--color-bg-secondary)]" />
@@ -35,7 +35,7 @@ export default function ApparelPage() {
             ))}
           </div>
         ) : (
-          <motion.div layout className="mt-14 grid grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+          <motion.div layout className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {products.map((product, i) => (
               <ProductCard key={product.id} product={product} index={i} />
             ))}

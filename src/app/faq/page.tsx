@@ -16,8 +16,8 @@ export default function FAQPage() {
     activeCategory === "All" ? faqItems : faqItems.filter((item) => item.category === activeCategory);
 
   return (
-    <div className="pt-24 lg:pt-28">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site section-padding">
         <SectionHeading
           label="FAQ"
           title="Questions & Answers"

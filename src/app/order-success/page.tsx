@@ -11,8 +11,8 @@ function OrderSuccessContent() {
   const orderId = searchParams.get("id") || "HBP-XXXX-XXXX";
 
   return (
-    <div className="pt-24 lg:pt-28">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-16 lg:py-24">
+    <div className="pt-20 lg:pt-[88px]">
+      <div className="container-site section-padding">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -22,7 +22,7 @@ function OrderSuccessContent() {
           <div className="w-20 h-20 mx-auto rounded-full bg-[var(--color-success)]/10 flex items-center justify-center">
             <HiOutlineCheckCircle className="w-10 h-10 text-[var(--color-success)]" />
           </div>
-          <h1 className="mt-6 text-3xl lg:text-4xl font-serif text-[var(--color-text-primary)]">
+          <h1 className="mt-6 text-[clamp(1.75rem,3.5vw,2.5rem)] font-serif text-[var(--color-text-primary)]">
             Order Placed!
           </h1>
           <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
@@ -69,13 +69,13 @@ function OrderSuccessContent() {
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/shop"
-              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
             >
               Continue Shopping
             </Link>
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-[var(--radius-button)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-[var(--radius-button)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all"
             >
               <HiOutlineArrowLeft className="w-4 h-4" />
               Back to Home

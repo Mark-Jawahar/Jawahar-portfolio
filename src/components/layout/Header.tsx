@@ -41,8 +41,8 @@ export default function Header() {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="container-site">
+          <div className="flex items-center justify-between h-16 lg:h-[72px]">
             <button
               onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
               className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-[var(--color-overlay)] transition-colors"
@@ -78,7 +78,7 @@ export default function Header() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <Link
                 href="/contact"
                 className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full hover:bg-[var(--color-overlay)] transition-colors"
@@ -93,7 +93,7 @@ export default function Header() {
               >
                 <HiOutlineShoppingBag className="w-5 h-5 text-[var(--color-text-secondary)]" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4.5 h-4.5 rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-[10px] font-medium flex items-center justify-center">
+                  <span className="absolute -top-0.5 -right-0.5 w-[18px] h-[18px] rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-[10px] font-medium flex items-center justify-center leading-none">
                     {itemCount > 9 ? "9+" : itemCount}
                   </span>
                 )}

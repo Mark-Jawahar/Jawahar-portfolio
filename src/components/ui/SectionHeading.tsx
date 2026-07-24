@@ -26,11 +26,11 @@ export default function SectionHeading({
       <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
         {label}
       </span>
-      <h2 className="mt-3 text-3xl lg:text-4xl xl:text-5xl font-serif text-[var(--color-text-primary)] leading-tight">
+      <h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-serif text-[var(--color-text-primary)] leading-tight text-balance">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed">
+        <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed text-pretty">
           {description}
         </p>
       )}
