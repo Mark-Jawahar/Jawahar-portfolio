@@ -1,78 +1,43 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Award, Users, TrendingUp, MessageCircle } from "lucide-react";
 
 const stats = [
-  {
-    label: "Years Experience",
-    value: 3,
-    suffix: "+",
-    icon: Award,
-    description: "Professional experience",
-  },
-  {
-    label: "Team Members Led",
-    value: 10,
-    suffix: "+",
-    icon: Users,
-    description: "Direct reports managed",
-  },
-  {
-    label: "CSAT Improvement",
-    value: 25,
-    suffix: "%",
-    icon: TrendingUp,
-    description: "Customer satisfaction increase",
-  },
-  {
-    label: "Reduction in Repeat Queries",
-    value: 30,
-    suffix: "%",
-    icon: MessageCircle,
-    description: "Query resolution efficiency",
-  },
+  { value: 3, suffix: "+", label: "Years Experience", desc: "Professional experience", icon: Award },
+  { value: 10, suffix: "+", label: "Team Members Led", desc: "Direct reports managed", icon: Users },
+  { value: 25, suffix: "%", label: "CSAT Improvement", desc: "Customer satisfaction", icon: TrendingUp },
+  { value: 30, suffix: "%", label: "Queries Reduced", desc: "Repeat customer queries", icon: MessageCircle },
 ];
 
-function AnimatedCounter({ target, suffix }: { target: number; suffix: string }) {
+function Counter({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
+  const done = useRef(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          const duration = 2000;
-          const steps = 60;
-          const increment = target / steps;
-          let current = 0;
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              setCount(target);
-              clearInterval(timer);
-            } else {
-              setCount(Math.floor(current));
-            }
-          }, duration / steps);
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting && !done.current) {
+          done.current = true;
+          const steps = 50;
+          const inc = target / steps;
+          let cur = 0;
+          const t = setInterval(() => {
+            cur += inc;
+            if (cur >= target) { setCount(target); clearInterval(t); }
+            else setCount(Math.floor(cur));
+          }, 30);
         }
       },
       { threshold: 0.3 }
     );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
   }, [target]);
 
-  return (
-    <div ref={ref}>
-      {count}
-      {suffix}
-    </div>
-  );
+  return <div ref={ref} className="text-3xl md:text-4xl font-semibold text-gradient-ice">{count}{suffix}</div>;
 }
 
 export function Achievements() {
@@ -80,48 +45,34 @@ export function Achievements() {
     <section className="section-padding relative">
       <div className="container-premium px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 32, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl mx-auto mb-16 text-center"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-14 text-center"
         >
-          <span className="section-label">
-            <Award className="h-3 w-3" />
-            Achievements
-          </span>
-          <h2 className="section-title">By the Numbers</h2>
-          <p className="section-description mx-auto">
-            Results that speak for themselves.
-          </p>
+          <span className="section-label"><Award className="h-3 w-3" />Impact</span>
+          <h2 className="section-title">Results that<span className="text-gradient-ice"> speak.</span></h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-          {stats.map((stat, i) => {
-            const Icon = stat.icon;
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
+          {stats.map((s, i) => {
+            const Icon = s.icon;
             return (
               <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="gradient-border p-6 text-center group hover-lift"
+                key={s.label}
+                initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-2xl p-6 border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.015)] text-center hover:bg-[rgba(255,255,255,0.025)] transition-all duration-500 group"
               >
-                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#2563eb]/10 to-[#7c3aed]/10 flex items-center justify-center mx-auto mb-4 group-hover:from-[#2563eb]/20 group-hover:to-[#7c3aed]/20 transition-all duration-300">
-                  <Icon className="h-6 w-6 text-[#2563eb]" />
+                <div className="h-10 w-10 rounded-2xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center mx-auto mb-3 group-hover:bg-[rgba(168,216,234,0.12)] transition-colors">
+                  <Icon className="h-5 w-5 text-[#a8d8ea]" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-gradient mb-1">
-                  <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-                </div>
-                <div className="text-sm font-medium text-foreground mb-1">
-                  {stat.label}
-                </div>
-                <div className="text-xs text-muted">{stat.description}</div>
+                <Counter target={s.value} suffix={s.suffix} />
+                <div className="text-sm font-medium text-white/60 mt-1">{s.label}</div>
+                <div className="text-xs text-white/20 mt-0.5">{s.desc}</div>
               </motion.div>
             );
           })}

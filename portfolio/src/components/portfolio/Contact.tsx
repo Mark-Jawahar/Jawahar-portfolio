@@ -2,172 +2,119 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Mail,
-  MapPin,
-  ArrowRight,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
-
-function LinkedInIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-  );
-}
+import { Mail, MapPin, ArrowRight } from "lucide-react";
 
 export function Contact() {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    toast.success("Message sent successfully! I'll get back to you soon.");
-    setFormState({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
+    setSubmitting(true);
+    await new Promise((r) => setTimeout(r, 1200));
+    setSent(true);
+    setForm({ name: "", email: "", message: "" });
+    setSubmitting(false);
+    setTimeout(() => setSent(false), 3000);
   };
 
   return (
     <section id="contact" className="section-padding relative">
       <div className="container-premium px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 32, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl mx-auto mb-16 text-center"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-14"
         >
-          <span className="section-label">
-            <Mail className="h-3 w-3" />
-            Get in Touch
-          </span>
-          <h2 className="section-title">Let&apos;s Connect</h2>
-          <p className="section-description mx-auto">
-            Have a question, opportunity, or just want to say hello? I&apos;d
-            love to hear from you.
-          </p>
+          <span className="section-label"><Mail className="h-3 w-3" />Contact</span>
+          <h2 className="section-title">Let&apos;s<br /><span className="text-gradient-ice">connect.</span></h2>
+          <p className="section-description">Have a question or opportunity? I&apos;d love to hear from you.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-5 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-5 gap-5 max-w-5xl">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="md:col-span-2 space-y-6"
+            initial={{ opacity: 0, x: -24, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="md:col-span-2 space-y-3"
           >
-            {[
-              {
-                icon: Mail,
-                label: "Email",
-                value: "jawahar.a@email.com",
-                href: "mailto:jawahar.a@email.com",
-              },
-              {
-                icon: MapPin,
-                label: "Location",
-                value: "Bengaluru, Karnataka, India",
-              },
-              {
-                icon: LinkedInIcon,
-                label: "LinkedIn",
-                value: "linkedin.com/in/jawahar-a",
-                href: "https://linkedin.com/in/jawahar-a",
-              },
-            ].map((item) => (
-              <div key={item.label} className="glass rounded-2xl p-5">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="h-9 w-9 rounded-xl bg-[#2563eb]/10 flex items-center justify-center">
-                    <item.icon className="h-4 w-4 text-[#2563eb]" />
-                  </div>
-                  <span className="text-sm font-medium">{item.label}</span>
+            <div className="rounded-2xl p-5 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)]">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="h-8 w-8 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center">
+                  <Mail className="h-4 w-4 text-[#a8d8ea]" />
                 </div>
-                {item.href ? (
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted hover:text-[#2563eb] transition-colors"
-                  >
-                    {item.value}
-                  </a>
-                ) : (
-                  <p className="text-sm text-muted">{item.value}</p>
-                )}
+                <span className="text-sm font-medium">Email</span>
               </div>
-            ))}
+              <a href="mailto:markjawahar17@gmail.com" className="text-sm text-white/35 hover:text-white/60 transition-colors">
+                markjawahar17@gmail.com
+              </a>
+            </div>
+            <div className="rounded-2xl p-5 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)]">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="h-8 w-8 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center">
+                  <MapPin className="h-4 w-4 text-[#a8d8ea]" />
+                </div>
+                <span className="text-sm font-medium">Location</span>
+              </div>
+              <p className="text-sm text-white/35">Bengaluru, India</p>
+            </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            initial={{ opacity: 0, x: 24, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="md:col-span-3"
           >
-            <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 md:p-8 space-y-5">
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Name</label>
-                  <Input
-                    placeholder="Your name"
-                    value={formState.name}
-                    onChange={(e) =>
-                      setFormState({ ...formState, name: e.target.value })
-                    }
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Email</label>
-                  <Input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={formState.email}
-                    onChange={(e) =>
-                      setFormState({ ...formState, email: e.target.value })
-                    }
-                    required
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Message</label>
-                <Textarea
-                  placeholder="Tell me about your project or question..."
-                  value={formState.message}
-                  onChange={(e) =>
-                    setFormState({ ...formState, message: e.target.value })
-                  }
+            <form onSubmit={handleSubmit} className="rounded-2xl p-6 md:p-7 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <input
+                  placeholder="Name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
+                  className="w-full h-11 px-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/12 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  required
+                  className="w-full h-11 px-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/12 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all"
                 />
               </div>
-              <Button
+              <textarea
+                placeholder="Your message..."
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                required
+                rows={4}
+                className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/12 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all resize-none"
+              />
+              <motion.button
                 type="submit"
-                variant="primary"
-                size="lg"
-                className="w-full"
-                disabled={isSubmitting}
+                disabled={submitting}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative overflow-hidden w-full h-11 rounded-xl bg-gradient-to-r from-[#a8d8ea] to-[#c4b5fd] text-sm font-medium text-[#050505] flex items-center justify-center gap-2 disabled:opacity-40 transition-shadow hover:shadow-[0_0_24px_rgba(168,216,234,0.2)]"
               >
-                {isSubmitting ? (
-                  "Sending..."
+                {submitting ? (
+                  <motion.div className="h-4 w-4 border-2 border-[#050505]/30 border-t-[#050505] rounded-full" animate={{ rotate: 360 }} transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }} />
+                ) : sent ? (
+                  "Message sent!"
                 ) : (
                   <>
                     Send Message
                     <ArrowRight className="h-4 w-4" />
                   </>
                 )}
-              </Button>
+              </motion.button>
             </form>
           </motion.div>
         </div>

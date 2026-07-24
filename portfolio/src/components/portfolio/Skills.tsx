@@ -1,27 +1,54 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Users, BarChart3, Brain, Palette, Wrench } from "lucide-react";
+import { Users, BarChart3, Brain, Wrench, Globe, GraduationCap } from "lucide-react";
 
-const skillCategories = [
+const categories = [
   {
-    title: "Core Expertise",
+    title: "Customer Success & Operations",
     icon: Users,
     skills: [
-      "Customer Success",
-      "Customer Experience",
-      "Operations",
-      "Leadership",
+      "Customer Lifecycle Management",
+      "Onboarding Strategy",
+      "Churn Reduction",
+      "Escalation Management",
+      "KPI Tracking",
+      "NPS/CSAT Analysis",
+      "Data Analysis",
     ],
   },
   {
-    title: "Management",
+    title: "Leadership & Management",
     icon: BarChart3,
     skills: [
-      "People Management",
-      "Customer Retention",
-      "CRM",
-      "Escalation Handling",
+      "Team Leadership & Coaching",
+      "Process Optimization",
+      "Stakeholder Management",
+      "Renewal Management",
+    ],
+  },
+  {
+    title: "Tools & Platforms",
+    icon: Wrench,
+    skills: [
+      "Zoho CRM",
+      "Zoho Desk",
+      "Zoho SalesIQ",
+      "Zoho Sheets",
+      "Zoho Backstage",
+      "Zoho Meeting",
+      "MS Excel",
+      "Google Sheets",
+    ],
+  },
+  {
+    title: "Languages",
+    icon: Globe,
+    skills: [
+      "English (Professional)",
+      "Tamil (Native)",
+      "Kannada (Professional)",
+      "Telugu (Conversational)",
     ],
   },
   {
@@ -35,60 +62,22 @@ const skillCategories = [
     ],
   },
   {
-    title: "Tools & Tech",
-    icon: Wrench,
+    title: "Education",
+    icon: GraduationCap,
     skills: [
-      "AI Tools",
-      "ChatGPT",
-      "Claude",
-      "Figma",
-    ],
-  },
-  {
-    title: "Design",
-    icon: Palette,
-    skills: [
-      "UI/UX",
-      "Microsoft Office",
-      "Google Workspace",
-    ],
-  },
-  {
-    title: "AI & Innovation",
-    icon: Code2,
-    skills: [
-      "ChatGPT",
-      "Claude",
-      "AI Tools",
-      "Process Automation",
+      "B.Com, SSMRV College (Apr 2021)",
     ],
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
-  },
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07 } },
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const skillItemVariants = {
-  hidden: { opacity: 0, x: -10 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.3 },
-  },
+const itemAnim = {
+  hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 export function Skills() {
@@ -96,56 +85,52 @@ export function Skills() {
     <section id="skills" className="section-padding relative">
       <div className="container-premium px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 32, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl mx-auto mb-16 text-center"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-14"
         >
           <span className="section-label">
-            <Code2 className="h-3 w-3" />
-            Skills & Expertise
+            <Wrench className="h-3 w-3" />
+            Skills
           </span>
-          <h2 className="section-title">What I Bring</h2>
-          <p className="section-description mx-auto">
-            A comprehensive skill set built over 3+ years of delivering
-            results across customer success, operations, and leadership.
+          <h2 className="section-title">
+            Tools &amp; expertise<br />
+            <span className="text-gradient-ice">I bring.</span>
+          </h2>
+          <p className="section-description">
+            A growing toolkit built over 3+ years of delivering results.
           </p>
         </motion.div>
 
         <motion.div
-          variants={containerVariants}
+          variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl"
         >
-          {skillCategories.map((category) => {
-            const Icon = category.icon;
+          {categories.map((cat) => {
+            const Icon = cat.icon;
             return (
               <motion.div
-                key={category.title}
-                variants={cardVariants}
-                className="gradient-border p-6 hover-lift group"
+                key={cat.title}
+                variants={itemAnim}
+                className="group relative rounded-2xl p-5 border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.015)] hover:bg-[rgba(255,255,255,0.03)] transition-all duration-500"
               >
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="h-10 w-10 rounded-xl bg-[#2563eb]/10 flex items-center justify-center group-hover:bg-[#2563eb]/20 transition-colors">
-                    <Icon className="h-5 w-5 text-[#2563eb]" />
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-8 w-8 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center group-hover:bg-[rgba(168,216,234,0.12)] transition-colors">
+                    <Icon className="h-4 w-4 text-[#a8d8ea]" />
                   </div>
-                  <h3 className="font-semibold text-sm">{category.title}</h3>
+                  <h3 className="text-sm font-medium">{cat.title}</h3>
                 </div>
                 <div className="space-y-2">
-                  {category.skills.map((skill) => (
-                    <motion.div
-                      key={skill}
-                      variants={skillItemVariants}
-                      className="flex items-center gap-2"
-                    >
-                      <div className="h-1.5 w-1.5 rounded-full bg-[#2563eb]/40 group-hover:bg-[#2563eb] transition-colors" />
-                      <span className="text-sm text-muted group-hover:text-foreground transition-colors">
-                        {skill}
-                      </span>
-                    </motion.div>
+                  {cat.skills.map((s) => (
+                    <div key={s} className="flex items-center gap-2.5">
+                      <div className="h-1 w-1 rounded-full bg-white/15 group-hover:bg-[#a8d8ea]/50 transition-colors" />
+                      <span className="text-sm text-white/30 group-hover:text-white/50 transition-colors">{s}</span>
+                    </div>
                   ))}
                 </div>
               </motion.div>
