@@ -14,18 +14,18 @@ export default function CartPage() {
     return (
       <div className="pt-20 lg:pt-[88px]">
         <div className="container-site py-32 text-center">
-          <div className="w-20 h-20 mx-auto rounded-full bg-[var(--color-bg-secondary)] flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-[var(--color-text-secondary)]">
+          <div className="w-20 h-20 mx-auto rounded-full bg-[var(--color-bg-secondary)] flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-[var(--color-text-tertiary)]">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
           </div>
-          <h1 className="mt-6 text-2xl font-serif text-[var(--color-text-primary)]">Your cart is empty</h1>
+          <h1 className="text-2xl font-serif text-[var(--color-text-primary)]">Your cart is empty</h1>
           <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
             Looks like you haven&apos;t added anything yet.
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 mt-8 h-12 px-8 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
+            className="inline-flex items-center gap-2 mt-8 h-12 px-8 rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-90 transition-all"
           >
             <HiOutlineArrowLeft className="w-4 h-4" />
             Browse Collection
@@ -38,7 +38,7 @@ export default function CartPage() {
   return (
     <div className="pt-20 lg:pt-[88px]">
       <div className="container-site section-padding">
-        <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-serif text-[var(--color-text-primary)]">Shopping Cart</h1>
+        <h1 className="heading-md text-[var(--color-text-primary)]">Shopping Cart</h1>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
           {items.length} {items.length === 1 ? "item" : "items"} in your cart
         </p>
@@ -51,11 +51,11 @@ export default function CartPage() {
                 layout
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex gap-4 p-5 rounded-[var(--radius-card-sm)] border border-[var(--color-border)]"
+                className="flex gap-4 p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)]"
               >
                 <Link
                   href={`/product/${item.product.id}`}
-                  className="relative w-24 h-28 rounded-[var(--radius-image)] overflow-hidden bg-[var(--color-bg-secondary)] flex-shrink-0"
+                  className="relative w-24 h-28 rounded-[var(--radius-md)] overflow-hidden bg-[var(--color-bg-secondary)] flex-shrink-0"
                 >
                   <Image
                     src={item.product.images[0] || "/placeholder.svg"}
@@ -124,7 +124,7 @@ export default function CartPage() {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="rounded-[var(--radius-card)] border border-[var(--color-border)] p-6 lg:p-8 sticky top-28">
+            <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] p-6 lg:p-8 sticky top-28 bg-[var(--color-card-bg)]">
               <h3 className="text-base font-medium text-[var(--color-text-primary)]">Order Summary</h3>
               <div className="mt-5 space-y-3">
                 <div className="flex justify-between text-sm">
@@ -142,7 +142,7 @@ export default function CartPage() {
               </div>
               <Link
                 href="/checkout"
-                className="block w-full text-center mt-6 h-12 flex items-center justify-center rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97]"
+                className="block w-full text-center mt-6 h-12 flex items-center justify-center rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97]"
               >
                 Proceed to Checkout
               </Link>

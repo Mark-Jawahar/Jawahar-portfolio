@@ -20,17 +20,15 @@ export default function SectionHeading({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5 }}
-      className={`max-w-2xl ${align === "center" ? "mx-auto text-center" : ""}`}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className={`max-w-xl ${align === "center" ? "mx-auto text-center" : ""}`}
     >
-      <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
-        {label}
-      </span>
-      <h2 className="mt-4 text-[clamp(1.75rem,4vw,3rem)] font-serif text-[var(--color-text-primary)] leading-tight text-balance">
+      <span className="label-premium block">{label}</span>
+      <h2 className="mt-4 heading-lg text-[var(--color-text-primary)] text-balance">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed text-pretty">
+        <p className="mt-5 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed text-pretty">
           {description}
         </p>
       )}

@@ -7,43 +7,40 @@ export default function BrandStory() {
   return (
     <section className="section-padding">
       <div className="container-site">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="aspect-[4/5] rounded-[var(--radius-container)] bg-[var(--color-bg-secondary)] overflow-hidden">
+            <div className="aspect-[4/5] rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-accent)]/20 via-[var(--color-bg-secondary)] to-[var(--color-bg-secondary)] overflow-hidden">
               <div className="w-full h-full flex items-center justify-center">
                 <div className="text-center p-8">
-                  <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-[var(--color-accent)]/30 to-transparent" />
-                  <p className="mt-4 text-xs text-[var(--color-text-secondary)] tracking-[0.15em] uppercase">
-                    Since 2024
-                    <br />
-                    Crafted in India
-                  </p>
+                  <div className="w-40 h-40 mx-auto rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center">
+                    <span className="text-xs text-[var(--color-accent)] tracking-[0.2em] uppercase font-medium">
+                      Since 2024
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
-              Our Story
-            </span>
-            <h2 className="mt-3 text-3xl lg:text-4xl xl:text-5xl font-serif text-[var(--color-text-primary)] leading-tight">
+            <span className="label-premium block">Our Story</span>
+            <h2 className="mt-4 heading-lg text-[var(--color-text-primary)] text-balance">
               Where Craftsmanship
               <br />
               <span className="italic">Meets Design</span>
             </h2>
-            <div className="mt-6 space-y-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed">
+            <div className="mt-8 space-y-5 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed text-pretty max-w-md">
               <p>
                 Welcome to HookedByPree, where the timeless art of crochet meets contemporary design.
               </p>

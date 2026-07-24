@@ -10,7 +10,7 @@ export default function TermsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mx-auto"
         >
           <Link
@@ -19,10 +19,10 @@ export default function TermsPage() {
           >
             &larr; Back to Home
           </Link>
-          <h1 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-serif text-[var(--color-text-primary)]">Terms of Service</h1>
+          <h1 className="heading-md text-[var(--color-text-primary)]">Terms of Service</h1>
           <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Last updated: January 2024</p>
 
-          <div className="mt-8 space-y-6 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+          <div className="mt-8 space-y-8 text-sm text-[var(--color-text-secondary)] leading-relaxed">
             <section>
               <h2 className="text-base font-medium text-[var(--color-text-primary)] mb-2">Orders & Payment</h2>
               <p>

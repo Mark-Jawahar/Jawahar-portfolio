@@ -16,20 +16,20 @@ function OrderSuccessContent() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-lg mx-auto text-center"
         >
           <div className="w-20 h-20 mx-auto rounded-full bg-[var(--color-success)]/10 flex items-center justify-center">
             <HiOutlineCheckCircle className="w-10 h-10 text-[var(--color-success)]" />
           </div>
-          <h1 className="mt-6 text-[clamp(1.75rem,3.5vw,2.5rem)] font-serif text-[var(--color-text-primary)]">
+          <h1 className="mt-6 heading-md text-[var(--color-text-primary)]">
             Order Placed!
           </h1>
           <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
             Thank you for your order. We&apos;re already preparing your handcrafted pieces with care.
           </p>
 
-          <div className="mt-8 p-6 rounded-[var(--radius-card)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+          <div className="mt-8 p-6 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
             <p className="text-xs text-[var(--color-text-secondary)] uppercase tracking-[0.1em]">
               Order Number
             </p>
@@ -38,7 +38,7 @@ function OrderSuccessContent() {
             </p>
           </div>
 
-          <div className="mt-6 p-6 rounded-[var(--radius-card)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-left">
+          <div className="mt-6 p-6 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-left">
             <h3 className="text-sm font-medium text-[var(--color-text-primary)] mb-2">
               What happens next?
             </h3>
@@ -62,20 +62,20 @@ function OrderSuccessContent() {
             </ol>
           </div>
 
-          <p className="mt-6 text-xs text-[var(--color-text-secondary)]">
+          <p className="mt-6 text-xs text-[var(--color-text-tertiary)]">
             Your order status is currently: <span className="font-medium text-[var(--color-accent)]">Pending Verification</span>
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/shop"
-              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-90 transition-all"
             >
               Continue Shopping
             </Link>
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-[var(--radius-button)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all"
             >
               <HiOutlineArrowLeft className="w-4 h-4" />
               Back to Home
@@ -91,8 +91,8 @@ export default function OrderSuccessPage() {
   return (
     <Suspense
       fallback={
-        <div className="pt-24 lg:pt-28">
-          <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-32 text-center">
+        <div className="pt-20 lg:pt-[88px]">
+          <div className="container-site py-32 text-center">
             <div className="w-10 h-10 mx-auto rounded-full border-2 border-[var(--color-border)] border-t-[var(--color-text-primary)] animate-spin" />
           </div>
         </div>

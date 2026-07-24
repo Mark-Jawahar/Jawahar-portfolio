@@ -5,34 +5,32 @@ import { cn } from "@/lib/utils";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "outline" | "accent";
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "sm" | "md" | "lg";
   isLoading?: boolean;
-  isMagnetic?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", isLoading, isMagnetic, children, disabled, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", isLoading, children, disabled, ...props }, ref) => {
     const baseStyles =
-      "relative inline-flex items-center justify-center font-medium transition-all duration-300 cursor-pointer select-none";
+      "relative inline-flex items-center justify-center font-medium transition-all duration-500 cursor-pointer select-none active:scale-[0.97] overflow-hidden";
 
     const variants = {
       primary:
-        "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] hover:opacity-85 active:scale-[0.97]",
+        "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] hover:opacity-90",
       secondary:
-        "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] border border-[var(--color-border)] hover:bg-[var(--color-overlay)] active:scale-[0.97]",
+        "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] border border-[var(--color-border)] hover:bg-[var(--color-overlay)]",
       ghost:
-        "bg-transparent text-[var(--color-text-primary)] hover:bg-[var(--color-overlay)] active:scale-[0.97]",
+        "bg-transparent text-[var(--color-text-primary)] hover:bg-[var(--color-overlay)]",
       outline:
-        "bg-transparent text-[var(--color-text-primary)] border border-[var(--color-text-primary)] hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)] active:scale-[0.97]",
+        "bg-transparent text-[var(--color-text-primary)] border border-[var(--color-text-primary)] hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)]",
       accent:
-        "bg-[var(--color-accent)] text-[var(--color-text-primary)] hover:bg-[var(--color-accent-hover)] active:scale-[0.97]",
+        "bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]",
     };
 
     const sizes = {
-      sm: "h-9 px-4 text-sm rounded-[var(--radius-button)] gap-1.5",
-      md: "h-11 px-6 text-sm rounded-[var(--radius-button)] gap-2",
-      lg: "h-12 px-8 text-base rounded-[var(--radius-button)] gap-2.5",
-      xl: "h-14 px-10 text-lg rounded-[var(--radius-button)] gap-3",
+      sm: "h-9 px-5 text-xs rounded-full gap-1.5",
+      md: "h-11 px-7 text-sm rounded-full gap-2",
+      lg: "h-12 px-9 text-sm rounded-full gap-2.5",
     };
 
     return (
@@ -43,7 +41,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {isLoading && (
-          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+          <svg className="animate-spin h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path
               className="opacity-75"
@@ -52,7 +50,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             />
           </svg>
         )}
-        {children}
+        <span className="relative z-10">{children}</span>
       </button>
     );
   }

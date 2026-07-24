@@ -24,19 +24,17 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="section-padding">
+    <section className="section-padding bg-[var(--color-bg-secondary)]">
       <div className="container-site">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="rounded-[var(--radius-container)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-8 lg:p-16 text-center"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="rounded-[var(--radius-xl)] bg-[var(--color-bg-primary)] border border-[var(--color-border)] p-10 lg:p-16 text-center max-w-3xl mx-auto"
         >
-          <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
-            Stay Connected
-          </span>
-          <h2 className="mt-3 text-3xl lg:text-4xl font-serif text-[var(--color-text-primary)]">
+          <span className="label-premium block">Stay Connected</span>
+          <h2 className="mt-4 heading-lg text-[var(--color-text-primary)] text-balance">
             Join the HookedByPree Circle
           </h2>
           <p className="mt-4 text-sm text-[var(--color-text-secondary)] max-w-md mx-auto">
@@ -59,11 +57,11 @@ export default function NewsletterSection() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 h-12 px-5 rounded-[var(--radius-input)] bg-[var(--color-bg-primary)] border border-[var(--color-border)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                className="flex-1 h-12 px-5 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-accent)] transition-colors"
               />
               <button
                 type="submit"
-                className="h-12 px-8 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-300 active:scale-[0.97]"
+                className="h-12 px-8 rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97]"
               >
                 Subscribe
               </button>

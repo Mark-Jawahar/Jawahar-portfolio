@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ui/ProductCard";
-import SectionHeading from "@/components/ui/SectionHeading";
 import type { Product } from "@/lib/types";
 
 export default function ApparelPage() {
@@ -21,16 +20,25 @@ export default function ApparelPage() {
   return (
     <div className="pt-20 lg:pt-[88px]">
       <div className="container-site section-padding">
-        <SectionHeading
-          label="Collection 01"
-          title="The Apparel Collection"
-          description="Bespoke Crochet Tops · Statement Jackets · Artisan Caps — Step into sustainable handcrafted fashion that makes a statement."
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className="label-premium block">Collection 01</span>
+          <h1 className="mt-3 heading-lg text-[var(--color-text-primary)] text-balance">
+            The Apparel Collection
+          </h1>
+          <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed max-w-lg">
+            Bespoke Crochet Tops · Statement Jackets · Artisan Caps — Step into sustainable handcrafted fashion that makes a statement.
+          </p>
+        </motion.div>
+
         {loading ? (
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="aspect-[3/4] rounded-[var(--radius-card)] bg-[var(--color-bg-secondary)]" />
+                <div className="aspect-[3/4] rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)]" />
               </div>
             ))}
           </div>

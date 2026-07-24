@@ -10,7 +10,7 @@ export default function NotFound() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="text-center px-6"
       >
         <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-accent)] font-medium">
@@ -25,14 +25,14 @@ export default function NotFound() {
         <div className="mt-10 flex items-center justify-center gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 h-12 px-8 rounded-[var(--radius-button)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
+            className="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-90 transition-all"
           >
             <HiOutlineArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 h-12 px-8 rounded-[var(--radius-button)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all"
+            className="inline-flex items-center gap-2 h-12 px-8 rounded-full border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all"
           >
             Browse Shop
           </Link>

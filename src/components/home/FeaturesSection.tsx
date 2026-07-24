@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { HiOutlineSparkles, HiOutlineHeart, HiOutlineGlobeAlt, HiOutlineTruck, HiOutlineSwatch, HiOutlineGift } from "react-icons/hi2";
-import SectionHeading from "@/components/ui/SectionHeading";
 
 const features = [
   {
@@ -41,11 +40,15 @@ export default function FeaturesSection() {
   return (
     <section className="section-padding bg-[var(--color-bg-secondary)]">
       <div className="container-site">
-        <SectionHeading
-          label="Why HookedByPree"
-          title="The Art of Handmade"
-          description="Every creation is a celebration of slow fashion, premium materials, and timeless design."
-        />
+        <div className="max-w-xl">
+          <span className="label-premium block">Why HookedByPree</span>
+          <h2 className="mt-3 heading-lg text-[var(--color-text-primary)] text-balance">
+            The Art of Handmade
+          </h2>
+          <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed text-pretty">
+            Every creation is a celebration of slow fashion, premium materials, and timeless design.
+          </p>
+        </div>
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {features.map((feature, i) => (
             <motion.div
@@ -53,13 +56,13 @@ export default function FeaturesSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="rounded-[var(--radius-card)] p-6 lg:p-8 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-medium)] transition-all duration-300"
+              transition={{ duration: 0.5, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-[var(--radius-lg)] p-6 lg:p-8 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-500"
             >
-              <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center">
                 <feature.icon className="w-5 h-5 text-[var(--color-accent)]" />
               </div>
-              <h3 className="mt-4 text-base font-medium text-[var(--color-text-primary)]">
+              <h3 className="mt-5 text-base font-medium text-[var(--color-text-primary)]">
                 {feature.title}
               </h3>
               <p className="mt-2 text-sm text-[var(--color-text-secondary)] leading-relaxed">

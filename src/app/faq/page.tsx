@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiOutlineChevronDown, HiOutlineMagnifyingGlass } from "react-icons/hi2";
+import { HiOutlineChevronDown } from "react-icons/hi2";
 import { faqItems } from "@/lib/products";
-import SectionHeading from "@/components/ui/SectionHeading";
 
 const categories = [...new Set(faqItems.map((item) => item.category))];
 
@@ -18,18 +17,26 @@ export default function FAQPage() {
   return (
     <div className="pt-20 lg:pt-[88px]">
       <div className="container-site section-padding">
-        <SectionHeading
-          label="FAQ"
-          title="Questions & Answers"
-          description="Find answers to common questions about our products, shipping, and more."
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className="label-premium block">FAQ</span>
+          <h1 className="mt-3 heading-lg text-[var(--color-text-primary)] text-balance">
+            Questions & Answers
+          </h1>
+          <p className="mt-4 text-sm lg:text-base text-[var(--color-text-secondary)] leading-relaxed max-w-md">
+            Find answers to common questions about our products, shipping, and more.
+          </p>
+        </motion.div>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
           {["All", ...categories].map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 ${
+              className={`h-10 px-5 rounded-full text-xs font-medium tracking-wide transition-all duration-300 ${
                 activeCategory === cat
                   ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]"
                   : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:text-[var(--color-text-primary)]"
@@ -48,7 +55,7 @@ export default function FAQPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.03 }}
-              className="rounded-[var(--radius-card-sm)] border border-[var(--color-border)] overflow-hidden"
+              className="rounded-[var(--radius-lg)] border border-[var(--color-border)] overflow-hidden"
             >
               <button
                 onClick={() => setOpenId(openId === i ? null : i)}
@@ -58,7 +65,7 @@ export default function FAQPage() {
                   {item.question}
                 </span>
                 <HiOutlineChevronDown
-                  className={`w-4 h-4 text-[var(--color-text-secondary)] flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-4 h-4 text-[var(--color-text-tertiary)] flex-shrink-0 transition-transform duration-300 ${
                     openId === i ? "rotate-180" : ""
                   }`}
                 />
