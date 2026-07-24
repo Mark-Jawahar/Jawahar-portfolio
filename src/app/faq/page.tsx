@@ -47,7 +47,7 @@ export default function FAQPage() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="rounded-[var(--radius-xl)] border border-[var(--color-border)] overflow-hidden"
             >
               <button

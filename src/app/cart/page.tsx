@@ -55,7 +55,7 @@ export default function CartPage() {
               >
                 <Link
                   href={`/product/${item.product.id}`}
-                  className="relative w-24 h-28 rounded-[var(--radius-lg)] overflow-hidden bg-[var(--color-bg-secondary)] flex-shrink-0"
+                  className="relative w-24 h-32 rounded-[var(--radius-lg)] overflow-hidden bg-[var(--color-bg-secondary)] flex-shrink-0"
                 >
                   <Image
                     src={item.product.images[0] || "/placeholder.svg"}
@@ -124,7 +124,7 @@ export default function CartPage() {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] p-6 lg:p-8 sticky top-28 shadow-[var(--shadow-sm)]">
+            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] p-6 lg:p-8 sticky top-24 shadow-[var(--shadow-sm)]">
               <h3 className="text-base font-medium text-[var(--color-text-primary)]">Order Summary</h3>
               <div className="mt-6 space-y-4">
                 <div className="flex justify-between text-sm">

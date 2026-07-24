@@ -318,12 +318,12 @@ export default function CheckoutPage() {
           </div>
 
           <div className="lg:col-span-2">
-            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] p-6 lg:p-8 sticky top-28 shadow-[var(--shadow-sm)]">
+            <div className="rounded-[var(--radius-xl)] border border-[var(--color-border)] p-6 lg:p-8 sticky top-24 shadow-[var(--shadow-sm)]">
               <h3 className="text-base font-medium text-[var(--color-text-primary)] mb-6">Order Summary</h3>
               <div className="space-y-4">
                 {items.map((item) => (
                   <div key={`${item.product.id}-${item.size}-${item.color}`} className="flex gap-3">
-                    <div className="relative w-14 h-16 rounded-lg overflow-hidden bg-[var(--color-bg-secondary)] flex-shrink-0">
+                    <div className="relative w-16 h-20 rounded-lg overflow-hidden bg-[var(--color-bg-secondary)] flex-shrink-0">
                       <img
                         src={item.product.images[0] || "/placeholder.svg"}
                         alt={item.product.name}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   HiOutlineHeart,
   HiOutlineStar,
@@ -99,10 +100,12 @@ export default function ProductDetailPage() {
                         : "border-transparent opacity-50 hover:opacity-80"
                     }`}
                   >
-                    <img
+                    <Image
                       src={img || "/placeholder.svg"}
                       alt=""
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="80px"
                     />
                   </button>
                 ))}
@@ -193,7 +196,7 @@ export default function ProductDetailPage() {
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`h-11 px-5 rounded-[var(--radius-lg)] text-xs font-medium border transition-all duration-200 ${
+                      className={`h-12 px-5 rounded-[var(--radius-lg)] text-xs font-medium border transition-all duration-200 ${
                         selectedSize === size
                           ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] border-[var(--color-text-primary)]"
                           : "bg-transparent text-[var(--color-text-secondary)] border-[var(--color-border)] hover:border-[var(--color-text-primary)]"
@@ -213,14 +216,14 @@ export default function ProductDetailPage() {
               <div className="flex items-center border border-[var(--color-border)] rounded-[var(--radius-lg)] w-fit">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-11 h-11 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-[var(--radius-lg)] transition-colors"
+                  className="w-12 h-12 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-[var(--radius-lg)] transition-colors"
                 >
                   <HiOutlineMinus className="w-3.5 h-3.5" />
                 </button>
                 <span className="w-12 text-center text-sm font-medium select-none">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-11 h-11 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-[var(--radius-lg)] transition-colors"
+                  className="w-12 h-12 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-[var(--radius-lg)] transition-colors"
                 >
                   <HiOutlinePlus className="w-3.5 h-3.5" />
                 </button>

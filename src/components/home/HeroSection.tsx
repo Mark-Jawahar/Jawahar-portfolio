@@ -58,7 +58,7 @@ export default function HeroSection() {
                 Explore Gifts
               </Link>
             </div>
-            <div className="flex items-center gap-10 mt-14 pt-8 border-t border-[var(--color-border-light)]">
+            <div className="flex items-center gap-12 mt-14 pt-8 border-t border-[var(--color-border-light)]">
               <div>
                 <p className="text-2xl font-serif text-[var(--color-text-primary)]">100%</p>
                 <p className="text-[11px] text-[var(--color-text-tertiary)] mt-1 tracking-wider uppercase">Handmade</p>

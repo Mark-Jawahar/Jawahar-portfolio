@@ -88,9 +88,17 @@ export default function Footer() {
           <p className="text-[11px] text-[var(--color-text-tertiary)] tracking-wider uppercase">
             &copy; {new Date().getFullYear()} HookedByPree
           </p>
-          <p className="text-[11px] text-[var(--color-text-tertiary)] tracking-wider uppercase">
-            Crafted in India
-          </p>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="text-[11px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] tracking-wider uppercase transition-colors duration-300">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-[11px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] tracking-wider uppercase transition-colors duration-300">
+              Terms
+            </Link>
+            <span className="text-[11px] text-[var(--color-text-tertiary)] tracking-wider uppercase">
+              Crafted in India
+            </span>
+          </div>
         </div>
       </div>
     </footer>

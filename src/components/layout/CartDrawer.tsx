@@ -38,7 +38,7 @@ export default function CartDrawer() {
               </div>
               <button
                 onClick={closeCart}
-                className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[var(--color-overlay)] transition-colors"
+                className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[var(--color-overlay)] transition-colors"
                 aria-label="Close cart"
               >
                 <HiOutlineXMark className="w-5 h-5" />

@@ -33,7 +33,7 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
             <Link
               href={link.href}
               onClick={onClose}
-              className="block py-4 text-[28px] font-serif text-[var(--color-text-primary)] border-b border-[var(--color-border-light)] hover:opacity-60 transition-opacity"
+              className="block py-5 text-[clamp(1.5rem,5vw,2rem)] font-serif text-[var(--color-text-primary)] border-b border-[var(--color-border-light)] hover:opacity-60 transition-opacity"
             >
               {link.label}
             </Link>
