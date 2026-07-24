@@ -17,7 +17,7 @@ export default function FAQPage() {
 
   return (
     <div className="page-top">
-      <div className="container-luxury section">
+      <div className="container-luxury section-lg">
         <SectionHeading
           label="FAQ"
           title="Questions & Answers"
@@ -29,9 +29,9 @@ export default function FAQPage() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`h-10 px-5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 ${
+              className={`h-10 px-5 rounded-full text-[11px] font-medium tracking-[0.1em] uppercase transition-all duration-300 ${
                 activeCategory === cat
-                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]"
+                  ? "bg-[var(--color-text-primary)] text-white"
                   : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:text-[var(--color-text-primary)]"
               }`}
             >
@@ -40,7 +40,7 @@ export default function FAQPage() {
           ))}
         </div>
 
-        <div className="mt-10 max-w-3xl mx-auto space-y-3">
+        <div className="mt-10 max-w-3xl mx-auto space-y-3.5">
           {filtered.map((item, i) => (
             <motion.div
               key={i}

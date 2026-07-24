@@ -37,13 +37,13 @@ export default function ProductDetailPage() {
     return (
       <div className="page-top">
         <div className="container-luxury py-32 text-center">
-          <h1 className="text-2xl font-serif">Product Not Found</h1>
+          <h1 className="text-3xl font-serif">Product Not Found</h1>
           <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
             The piece you&apos;re looking for doesn&apos;t exist or has been removed.
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 mt-6 text-sm font-medium border-b border-[var(--color-text-primary)] pb-0.5 hover:opacity-60 transition-opacity"
+            className="inline-flex items-center gap-2 mt-8 text-sm font-medium border-b border-[var(--color-text-primary)] pb-0.5 hover:opacity-60 transition-opacity"
           >
             <HiOutlineChevronLeft className="w-3 h-3" />
             Back to Shop
@@ -68,20 +68,20 @@ export default function ProductDetailPage() {
 
   return (
     <div className="page-top">
-      <div className="container-luxury py-8 lg:py-12">
+      <div className="container-luxury py-8 lg:py-16">
         <Link
           href="/shop"
-          className="inline-flex items-center gap-1.5 text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors mb-10"
         >
           <HiOutlineChevronLeft className="w-3 h-3" />
           Back to Shop
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <ProductImage
               src={product.images[selectedImage] || "/placeholder.svg"}
@@ -89,7 +89,7 @@ export default function ProductDetailPage() {
               priority
             />
             {product.images.length > 1 && (
-              <div className="flex gap-3 mt-4">
+              <div className="flex gap-3 mt-5">
                 {product.images.map((img, i) => (
                   <button
                     key={i}
@@ -97,7 +97,7 @@ export default function ProductDetailPage() {
                     className={`relative w-20 h-24 rounded-[var(--radius-lg)] overflow-hidden border-2 transition-all duration-300 ${
                       selectedImage === i
                         ? "border-[var(--color-text-primary)] opacity-100"
-                        : "border-transparent opacity-50 hover:opacity-80"
+                        : "border-transparent opacity-40 hover:opacity-70"
                     }`}
                   >
                     <Image
@@ -116,17 +116,17 @@ export default function ProductDetailPage() {
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col"
           >
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-5">
               {product.isBestSeller && (
-                <span className="px-3 py-1 rounded-full bg-[var(--color-accent)]/90 text-[10px] font-medium text-white tracking-wider uppercase">
+                <span className="px-3 py-1 rounded-full bg-[var(--color-accent)]/90 text-[10px] font-medium text-white tracking-[0.08em] uppercase">
                   Best Seller
                 </span>
               )}
               {product.isNew && (
-                <span className="px-3 py-1 rounded-full bg-[var(--color-text-primary)]/90 text-[10px] font-medium text-[var(--color-bg-primary)] tracking-wider uppercase">
+                <span className="px-3 py-1 rounded-full bg-[var(--color-text-primary)]/80 text-[10px] font-medium text-white tracking-[0.08em] uppercase">
                   New
                 </span>
               )}
@@ -135,12 +135,12 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            <h1 className="text-[clamp(1.75rem,3vw,2.5rem)] font-serif text-[var(--color-text-primary)] leading-tight">
+            <h1 className="text-[clamp(2rem,3.5vw,3rem)] font-serif text-[var(--color-text-primary)] leading-tight tracking-[-0.02em]">
               {product.name}
             </h1>
             <p className="mt-3 text-sm text-[var(--color-text-secondary)]">{product.tagline}</p>
 
-            <div className="flex items-center gap-2 mt-5">
+            <div className="flex items-center gap-2 mt-6">
               <HiOutlineStar className="w-4 h-4 text-[var(--color-accent)]" />
               <span className="text-sm font-medium">{product.rating}</span>
               <span className="text-xs text-[var(--color-text-tertiary)]">
@@ -148,8 +148,8 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            <div className="flex items-baseline gap-3 mt-8">
-              <span className="text-3xl font-serif text-[var(--color-text-primary)]">
+            <div className="flex items-baseline gap-3 mt-10">
+              <span className="text-3xl font-serif text-[var(--color-text-primary)] tracking-tight">
                 {formatPrice(product.price)}
               </span>
               {product.comparePrice && (
@@ -163,6 +163,39 @@ export default function ProductDetailPage() {
               {product.description}
             </p>
 
+            <div className="mt-10 p-6 rounded-[var(--radius-xl)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 text-sm">
+                  <HiOutlineTruck className="w-[18px] h-[18px] text-[var(--color-accent)]" />
+                  <span className="text-[var(--color-text-secondary)]">
+                    Estimated delivery: <span className="text-[var(--color-text-primary)] font-medium">{getDeliveryDate(product.deliveryEstimate)}</span>
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <HiOutlineShieldCheck className="w-[18px] h-[18px] text-[var(--color-accent)]" />
+                  <span className="text-[var(--color-text-secondary)]">
+                    100% Handmade Guarantee
+                  </span>
+                </div>
+                {product.isPremiumPackaging && (
+                  <div className="flex items-center gap-3 text-sm">
+                    <HiOutlineGift className="w-[18px] h-[18px] text-[var(--color-accent)]" />
+                    <span className="text-[var(--color-text-secondary)]">
+                      Premium Packaging
+                    </span>
+                  </div>
+                )}
+                {product.isCustomizable && (
+                  <div className="flex items-center gap-3 text-sm">
+                    <HiOutlineSwatch className="w-[18px] h-[18px] text-[var(--color-accent)]" />
+                    <span className="text-[var(--color-text-secondary)]">
+                      Customization Available
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+
             {product.colors && product.colors.length > 0 && (
               <div className="mt-8">
                 <p className="text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-[0.1em] mb-3">
@@ -173,7 +206,7 @@ export default function ProductDetailPage() {
                     <button
                       key={color.name}
                       onClick={() => setSelectedColor(color.name)}
-                      className={`w-9 h-9 rounded-full border-2 transition-all duration-200 ${
+                      className={`w-10 h-10 rounded-full border-2 transition-all duration-200 ${
                         selectedColor === color.name
                           ? "border-[var(--color-text-primary)] scale-110 shadow-[var(--shadow-sm)]"
                           : "border-[var(--color-border)] hover:scale-105"
@@ -191,14 +224,14 @@ export default function ProductDetailPage() {
                 <p className="text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-[0.1em] mb-3">
                   Size: <span className="text-[var(--color-text-primary)]">{selectedSize || "Select"}</span>
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   {product.sizes.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
                       className={`h-12 px-5 rounded-[var(--radius-lg)] text-xs font-medium border transition-all duration-200 ${
                         selectedSize === size
-                          ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] border-[var(--color-text-primary)]"
+                          ? "bg-[var(--color-text-primary)] text-white border-[var(--color-text-primary)]"
                           : "bg-transparent text-[var(--color-text-secondary)] border-[var(--color-border)] hover:border-[var(--color-text-primary)]"
                       }`}
                     >
@@ -233,55 +266,22 @@ export default function ProductDetailPage() {
             <div className="flex gap-3 mt-10">
               <button
                 onClick={handleBuyNow}
-                className="flex-1 h-12 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-500 active:scale-[0.97]"
+                className="flex-1 h-12 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-white text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97] shadow-[var(--shadow-sm)]"
               >
                 Buy Now
               </button>
               <button
                 onClick={handleAddToCart}
-                className="flex-1 h-12 rounded-[var(--radius-lg)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all duration-500 active:scale-[0.97]"
+                className="flex-1 h-12 rounded-[var(--radius-lg)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all duration-300 active:scale-[0.97]"
               >
                 {addedToCart ? "Added!" : "Add to Cart"}
               </button>
               <button
-                className="w-12 h-12 rounded-[var(--radius-lg)] border border-[var(--color-border)] flex items-center justify-center hover:bg-[var(--color-overlay)] transition-all duration-500 flex-shrink-0"
+                className="w-12 h-12 rounded-[var(--radius-lg)] border border-[var(--color-border)] flex items-center justify-center hover:bg-[var(--color-overlay)] transition-all duration-300 flex-shrink-0"
                 aria-label="Add to wishlist"
               >
                 <HiOutlineHeart className="w-5 h-5" />
               </button>
-            </div>
-
-            <div className="mt-8 p-6 rounded-[var(--radius-xl)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 text-sm">
-                  <HiOutlineTruck className="w-[18px] h-[18px] text-[var(--color-accent)]" />
-                  <span className="text-[var(--color-text-secondary)]">
-                    Estimated delivery: <span className="text-[var(--color-text-primary)] font-medium">{getDeliveryDate(product.deliveryEstimate)}</span>
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 text-sm">
-                  <HiOutlineShieldCheck className="w-[18px] h-[18px] text-[var(--color-accent)]" />
-                  <span className="text-[var(--color-text-secondary)]">
-                    100% Handmade Guarantee
-                  </span>
-                </div>
-                {product.isPremiumPackaging && (
-                  <div className="flex items-center gap-3 text-sm">
-                    <HiOutlineGift className="w-[18px] h-[18px] text-[var(--color-accent)]" />
-                    <span className="text-[var(--color-text-secondary)]">
-                      Premium Packaging
-                    </span>
-                  </div>
-                )}
-                {product.isCustomizable && (
-                  <div className="flex items-center gap-3 text-sm">
-                    <HiOutlineSwatch className="w-[18px] h-[18px] text-[var(--color-accent)]" />
-                    <span className="text-[var(--color-text-secondary)]">
-                      Customization Available
-                    </span>
-                  </div>
-                )}
-              </div>
             </div>
 
             {product.materials && product.materials.length > 0 && (
@@ -323,14 +323,14 @@ export default function ProductDetailPage() {
         </div>
 
         {relatedProducts.length > 0 && (
-          <section className="mt-20 lg:mt-28 pt-12 lg:pt-16 border-t border-[var(--color-border)]">
-            <h2 className="text-xl lg:text-2xl font-serif text-[var(--color-text-primary)]">
+          <section className="mt-24 lg:mt-32 pt-12 lg:pt-16 border-t border-[var(--color-border)]">
+            <h2 className="text-xl lg:text-2xl font-serif text-[var(--color-text-primary)] tracking-[-0.02em]">
               Complete the Look
             </h2>
             <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
               Explore more pieces from our {product.collection}
             </p>
-            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7">
+            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {relatedProducts.map((related, i) => (
                 <ProductCard key={related.id} product={related} index={i} />
               ))}

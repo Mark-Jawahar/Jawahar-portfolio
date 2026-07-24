@@ -19,13 +19,13 @@ export default function CartPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
           </div>
-          <h1 className="mt-6 text-2xl font-serif text-[var(--color-text-primary)]">Your cart is empty</h1>
+          <h1 className="mt-6 text-3xl font-serif text-[var(--color-text-primary)]">Your cart is empty</h1>
           <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
             Looks like you haven&apos;t added anything yet.
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 mt-8 h-12 px-8 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
+            className="inline-flex items-center gap-2 mt-8 h-12 px-8 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-white text-sm font-medium hover:opacity-90 transition-all shadow-[var(--shadow-sm)]"
           >
             <HiOutlineArrowLeft className="w-4 h-4" />
             Browse Collection
@@ -37,13 +37,13 @@ export default function CartPage() {
 
   return (
     <div className="page-top">
-      <div className="container-luxury section">
-        <h1 className="text-[clamp(1.75rem,3vw,2.5rem)] font-serif text-[var(--color-text-primary)]">Shopping Cart</h1>
+      <div className="container-luxury section-lg">
+        <h1 className="text-[clamp(2rem,3.5vw,3rem)] font-serif text-[var(--color-text-primary)] tracking-[-0.02em]">Shopping Cart</h1>
         <p className="mt-1.5 text-sm text-[var(--color-text-secondary)]">
           {items.length} {items.length === 1 ? "item" : "items"}
         </p>
 
-        <div className="mt-12 grid lg:grid-cols-3 gap-10 lg:gap-16">
+        <div className="mt-14 grid lg:grid-cols-3 gap-10 lg:gap-16">
           <div className="lg:col-span-2 space-y-5">
             {items.map((item) => (
               <motion.div
@@ -95,7 +95,7 @@ export default function CartPage() {
                             updateQuantity(item.product.id, item.quantity - 1, item.size, item.color);
                           }
                         }}
-                        className="w-8 h-8 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-full transition-colors"
+                        className="w-9 h-9 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-full transition-colors"
                       >
                         {item.quantity <= 1 ? (
                           <HiOutlineTrash className="w-3.5 h-3.5" />
@@ -106,7 +106,7 @@ export default function CartPage() {
                       <span className="w-10 text-center text-sm font-medium select-none">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.product.id, item.quantity + 1, item.size, item.color)}
-                        className="w-8 h-8 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-full transition-colors"
+                        className="w-9 h-9 flex items-center justify-center hover:bg-[var(--color-overlay)] rounded-full transition-colors"
                       >
                         <HiOutlinePlus className="w-3.5 h-3.5" />
                       </button>
@@ -142,7 +142,7 @@ export default function CartPage() {
               </div>
               <Link
                 href="/checkout"
-                className="block w-full text-center mt-6 h-12 flex items-center justify-center rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-500 active:scale-[0.97]"
+                className="block w-full text-center mt-6 h-12 flex items-center justify-center rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-white text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97] shadow-[var(--shadow-sm)]"
               >
                 Proceed to Checkout
               </Link>

@@ -12,33 +12,39 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", isLoading, children, disabled, ...props }, ref) => {
     const baseStyles =
-      "relative inline-flex items-center justify-center font-medium transition-all duration-500 cursor-pointer select-none active:scale-[0.97]";
+      "relative inline-flex items-center justify-center font-medium transition-all duration-300 cursor-pointer select-none active:scale-[0.97] focus-ring";
 
     const variants = {
       primary:
-        "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] hover:opacity-85",
+        "bg-[var(--color-text-primary)] text-white hover:opacity-90 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)]",
       secondary:
         "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] border border-[var(--color-border)] hover:bg-[var(--color-overlay)]",
       ghost:
         "bg-transparent text-[var(--color-text-primary)] hover:bg-[var(--color-overlay)]",
       outline:
-        "bg-transparent text-[var(--color-text-primary)] border border-[var(--color-text-primary)] hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)]",
+        "bg-transparent text-[var(--color-text-primary)] border border-[var(--color-text-primary)] hover:bg-[var(--color-text-primary)] hover:text-white",
       accent:
-        "bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)]",
+        "bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)] shadow-[var(--shadow-sm)]",
     };
 
     const sizes = {
       sm: "h-9 px-5 text-xs rounded-[var(--radius-md)] gap-1.5",
-      md: "h-12 px-7 text-sm rounded-[var(--radius-lg)] gap-2",
-      lg: "h-13 px-9 text-sm rounded-[var(--radius-lg)] gap-2.5",
-      xl: "h-14 px-11 text-base rounded-[var(--radius-xl)] gap-3",
+      md: "h-12 px-8 text-sm rounded-[var(--radius-lg)] gap-2",
+      lg: "h-14 px-10 text-sm rounded-[var(--radius-lg)] gap-2.5",
+      xl: "h-16 px-12 text-base rounded-[var(--radius-xl)] gap-3",
     };
 
     return (
       <button
         ref={ref}
         disabled={disabled || isLoading}
-        className={cn(baseStyles, variants[variant], sizes[size], className)}
+        className={cn(
+          baseStyles,
+          variants[variant],
+          sizes[size],
+          (disabled || isLoading) ? "opacity-40 cursor-not-allowed pointer-events-none" : "",
+          className
+        )}
         {...props}
       >
         {isLoading && (

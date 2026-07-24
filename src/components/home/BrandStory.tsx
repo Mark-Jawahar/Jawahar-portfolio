@@ -6,21 +6,21 @@ import { HiOutlineArrowLongRight } from "react-icons/hi2";
 
 export default function BrandStory() {
   return (
-    <section className="section">
+    <section className="section-lg">
       <div className="container-luxury">
-        <div className="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-28 items-center">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
             <div className="aspect-[4/5] rounded-[var(--radius-2xl)] bg-[var(--color-bg-secondary)] overflow-hidden shadow-[var(--shadow-md)]">
               <div className="w-full h-full flex items-center justify-center">
                 <div className="text-center p-8">
-                  <div className="w-36 h-36 mx-auto rounded-full bg-gradient-to-br from-[var(--color-accent)]/30 to-transparent" />
-                  <p className="mt-6 text-xs text-[var(--color-text-tertiary)] tracking-[0.15em] uppercase leading-loose">
+                  <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-[var(--color-accent)]/25 to-transparent" />
+                  <p className="mt-8 text-xs text-[var(--color-text-tertiary)] tracking-[0.15em] uppercase leading-loose">
                     Since 2024
                     <br />
                     Crafted in India
@@ -34,12 +34,13 @@ export default function BrandStory() {
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
+            <span className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] font-medium">
+              <span className="w-6 h-px bg-[var(--color-accent)]" />
               Our Story
             </span>
-            <h2 className="mt-5 text-[clamp(1.75rem,3.5vw,2.75rem)] font-serif text-[var(--color-text-primary)] leading-[1.1] text-balance">
+            <h2 className="mt-6 text-[clamp(2rem,4.5vw,3.75rem)] font-serif text-[var(--color-text-primary)] leading-[0.92] tracking-[-0.02em] text-balance">
               Where Craftsmanship
               <br />
               <span className="italic">Meets Design</span>

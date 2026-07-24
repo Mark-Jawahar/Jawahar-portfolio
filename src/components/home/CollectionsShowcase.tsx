@@ -14,8 +14,8 @@ const collections = [
   },
   {
     title: "The Gifting Collection",
-    tagline: "Give the gift of everlasting memories with handcrafted creations made to last forever.",
-    description: "Everlasting Crochet Bouquets, Signature Crochet Keychains",
+    tagline: "Give the gift of everlasting memories with handcrafted creations.",
+    description: "Everlasting Bouquets, Signature Keychains",
     href: "/gifts",
     imageBg: "bg-gradient-to-br from-[#e8e0d8] to-[#d4c5b5]",
   },
@@ -23,7 +23,7 @@ const collections = [
 
 export default function CollectionsShowcase() {
   return (
-    <section className="section bg-[var(--color-bg-secondary)]">
+    <section className="section-lg bg-[var(--color-bg-secondary)]">
       <div className="container-luxury">
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {collections.map((collection, i) => (
@@ -32,28 +32,28 @@ export default function CollectionsShowcase() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 href={collection.href}
-                className="group block relative rounded-[var(--radius-2xl)] overflow-hidden shadow-[var(--shadow-md)]"
+                className="group block relative rounded-[var(--radius-2xl)] overflow-hidden shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-shadow duration-500"
               >
                 <div className={`aspect-[4/5] ${collection.imageBg} relative`}>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                    <span className="inline-block text-[10px] uppercase tracking-[0.2em] text-white/60 mb-4">
+                  <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+                    <span className="inline-block text-[10px] uppercase tracking-[0.18em] text-white/60 mb-5">
                       Collection
                     </span>
-                    <h3 className="text-2xl lg:text-3xl xl:text-4xl font-serif text-white leading-tight">
+                    <h3 className="text-2xl lg:text-3xl xl:text-4xl font-serif text-white leading-tight tracking-[-0.02em]">
                       {collection.title}
                     </h3>
-                    <p className="mt-3 text-sm text-white/80 max-w-sm text-pretty">
+                    <p className="mt-4 text-sm text-white/80 max-w-sm text-pretty leading-relaxed">
                       {collection.tagline}
                     </p>
-                    <p className="mt-1 text-xs text-white/50">
+                    <p className="mt-1.5 text-xs text-white/50 tracking-[0.05em] uppercase">
                       {collection.description}
                     </p>
-                    <span className="inline-flex items-center gap-2 mt-6 text-sm font-medium text-white border-b border-white/40 pb-0.5 group-hover:gap-3 transition-all duration-300">
+                    <span className="inline-flex items-center gap-2.5 mt-6 text-sm font-medium text-white border-b border-white/40 pb-0.5 group-hover:gap-4 transition-all duration-300">
                       Explore Collection
                       <HiOutlineArrowLongRight className="w-4 h-4" />
                     </span>

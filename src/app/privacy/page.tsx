@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function PrivacyPage() {
   return (
     <div className="page-top">
-      <div className="container-luxury section">
+      <div className="container-luxury section-lg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -19,10 +19,10 @@ export default function PrivacyPage() {
           >
             &larr; Back to Home
           </Link>
-          <h1 className="text-[clamp(1.75rem,3vw,2.5rem)] font-serif text-[var(--color-text-primary)]">Privacy Policy</h1>
+          <h1 className="text-[clamp(2rem,3.5vw,3rem)] font-serif text-[var(--color-text-primary)] tracking-[-0.02em]">Privacy Policy</h1>
           <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Last updated: January 2024</p>
 
-          <div className="mt-8 space-y-8 text-sm text-[var(--color-text-secondary)] leading-relaxed">
+          <div className="mt-10 space-y-8 text-sm text-[var(--color-text-secondary)] leading-relaxed">
             <section>
               <h2 className="text-base font-medium text-[var(--color-text-primary)] mb-3">Information We Collect</h2>
               <p>

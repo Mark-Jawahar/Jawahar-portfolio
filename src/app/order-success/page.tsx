@@ -12,17 +12,17 @@ function OrderSuccessContent() {
 
   return (
     <div className="page-top">
-      <div className="container-luxury section">
+      <div className="container-luxury section-lg">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-lg mx-auto text-center"
         >
           <div className="w-20 h-20 mx-auto rounded-full bg-[var(--color-success)]/10 flex items-center justify-center">
             <HiOutlineCheckCircle className="w-10 h-10 text-[var(--color-success)]" />
           </div>
-          <h1 className="mt-6 text-[clamp(1.75rem,3vw,2.5rem)] font-serif text-[var(--color-text-primary)]">
+          <h1 className="mt-6 text-[clamp(2rem,3.5vw,3rem)] font-serif text-[var(--color-text-primary)] tracking-[-0.02em]">
             Order Placed!
           </h1>
           <p className="mt-3 text-sm text-[var(--color-text-secondary)] text-pretty">
@@ -30,7 +30,7 @@ function OrderSuccessContent() {
           </p>
 
           <div className="mt-10 p-6 rounded-[var(--radius-xl)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
-            <p className="text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-[0.15em]">
+            <p className="text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-[0.12em]">
               Order Number
             </p>
             <p className="mt-1 text-lg font-mono font-medium text-[var(--color-text-primary)]">
@@ -69,7 +69,7 @@ function OrderSuccessContent() {
           <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/shop"
-              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all"
+              className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-white text-sm font-medium hover:opacity-90 transition-all shadow-[var(--shadow-sm)]"
             >
               Continue Shopping
             </Link>

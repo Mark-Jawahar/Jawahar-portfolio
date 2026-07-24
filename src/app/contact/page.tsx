@@ -31,18 +31,18 @@ export default function ContactPage() {
 
   return (
     <div className="page-top">
-      <div className="container-luxury section">
+      <div className="container-luxury section-lg">
         <SectionHeading
           label="Get in Touch"
           title="We&apos;d Love to Hear From You"
-          description="Have a question, a custom order request, or just want to say hello? Reach out to us."
+          description="Have a question, a custom order request, or just want to say hello?"
         />
 
-        <div className="mt-14 grid lg:grid-cols-2 gap-12 lg:gap-20">
+        <div className="mt-16 grid lg:grid-cols-2 gap-12 lg:gap-20">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="space-y-5">
               {[
@@ -76,7 +76,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-5 rounded-[var(--radius-xl)] border border-[var(--color-border)] hover:bg-[var(--color-overlay)] transition-all duration-300 group"
                 >
-                  <div className="w-11 h-11 rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center group-hover:bg-[var(--color-accent)]/25 transition-colors">
+                  <div className="w-11 h-11 rounded-full bg-[var(--color-accent)]/12 flex items-center justify-center group-hover:bg-[var(--color-accent)]/25 transition-colors">
                     <item.icon className="w-5 h-5 text-[var(--color-accent)]" />
                   </div>
                   <div>
@@ -95,23 +95,23 @@ export default function ContactPage() {
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             {submitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="rounded-[var(--radius-2xl)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-10 lg:p-12 text-center"
+                className="rounded-[var(--radius-2xl)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-12 text-center"
               >
                 <div className="w-16 h-16 mx-auto rounded-full bg-[var(--color-success)]/10 flex items-center justify-center">
                   <svg className="w-8 h-8 text-[var(--color-success)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="mt-5 text-lg font-serif text-[var(--color-text-primary)]">
+                <h3 className="mt-6 text-lg font-serif text-[var(--color-text-primary)]">
                   Thank You!
                 </h3>
-                <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+                <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
                   We&apos;ve received your message and will get back to you within 24 hours.
                 </p>
               </motion.div>
@@ -126,7 +126,7 @@ export default function ContactPage() {
                       type="text"
                       name="name"
                       required
-                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors focus-ring"
                       placeholder="Your name"
                     />
                   </div>
@@ -138,7 +138,7 @@ export default function ContactPage() {
                       type="email"
                       name="email"
                       required
-                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors focus-ring"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -151,7 +151,7 @@ export default function ContactPage() {
                       type="text"
                       name="subject"
                       required
-                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors focus-ring"
                       placeholder="How can we help?"
                     />
                 </div>
@@ -163,14 +163,14 @@ export default function ContactPage() {
                     name="message"
                     required
                     rows={4}
-                    className="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors resize-none focus-ring"
                     placeholder="Tell us more..."
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={sending}
-                  className="w-full h-12 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-500 active:scale-[0.97] disabled:opacity-50"
+                  className="w-full h-12 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-white text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97] shadow-[var(--shadow-sm)] disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none"
                 >
                   {sending ? "Sending..." : "Send Message"}
                 </button>

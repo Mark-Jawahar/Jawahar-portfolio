@@ -79,7 +79,7 @@ export default function CheckoutPage() {
     return (
       <div className="page-top">
         <div className="container-luxury py-32 text-center">
-          <h1 className="text-2xl font-serif">Your cart is empty</h1>
+          <h1 className="text-3xl font-serif">Your cart is empty</h1>
           <Link
             href="/shop"
             className="inline-flex items-center gap-2 mt-6 text-sm font-medium border-b border-[var(--color-text-primary)] pb-0.5"
@@ -94,15 +94,15 @@ export default function CheckoutPage() {
 
   return (
     <div className="page-top">
-      <div className="container-luxury section">
+      <div className="container-luxury section-lg">
         <div className="flex items-center gap-4 mb-10">
           <Link href="/cart" className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
             <HiOutlineChevronLeft className="w-5 h-5" />
           </Link>
-          <h1 className="text-[clamp(1.5rem,2.5vw,2rem)] font-serif">Checkout</h1>
+          <h1 className="text-[clamp(1.75rem,3vw,2.5rem)] font-serif tracking-[-0.02em]">Checkout</h1>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-10 lg:gap-16">
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
           <div className="lg:col-span-3">
             {step === "details" ? (
               <motion.div
@@ -121,7 +121,7 @@ export default function CheckoutPage() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                        className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors focus-ring"
                         placeholder="Full name"
                       />
                     </div>
@@ -134,7 +134,7 @@ export default function CheckoutPage() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                        className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors focus-ring"
                         placeholder="your@email.com"
                       />
                     </div>
@@ -148,7 +148,7 @@ export default function CheckoutPage() {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                      className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors focus-ring"
                       placeholder="+91 98765 43210"
                     />
                   </div>
@@ -161,7 +161,7 @@ export default function CheckoutPage() {
                       rows={3}
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      className="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors resize-none focus-ring"
                       placeholder="Street address, building, area"
                     />
                   </div>
@@ -175,7 +175,7 @@ export default function CheckoutPage() {
                         required
                         value={formData.city}
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                        className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                        className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors focus-ring"
                         placeholder="City"
                       />
                     </div>
@@ -188,7 +188,7 @@ export default function CheckoutPage() {
                         required
                         value={formData.pincode}
                         onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                        className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors"
+                        className="w-full h-12 px-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] outline-none focus:border-[var(--color-text-primary)] transition-colors focus-ring"
                         placeholder="Pincode"
                       />
                     </div>
@@ -199,7 +199,7 @@ export default function CheckoutPage() {
                   <button
                     type="submit"
                     disabled={isCreating}
-                    className="w-full h-12 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-sm font-medium hover:opacity-85 transition-all duration-500 active:scale-[0.97] disabled:opacity-50"
+                    className="w-full h-12 rounded-[var(--radius-lg)] bg-[var(--color-text-primary)] text-white text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97] shadow-[var(--shadow-sm)] disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none"
                   >
                     {isCreating ? "Creating Order..." : "Continue to Payment"}
                   </button>
@@ -213,7 +213,7 @@ export default function CheckoutPage() {
                 className="space-y-6"
               >
                 <div className="rounded-[var(--radius-xl)] bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-8 text-center">
-                  <div className="w-14 h-14 mx-auto rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center">
+                  <div className="w-14 h-14 mx-auto rounded-full bg-[var(--color-accent)]/12 flex items-center justify-center">
                     <HiOutlineCreditCard className="w-7 h-7 text-[var(--color-accent)]" />
                   </div>
                   <h3 className="mt-5 text-lg font-serif text-[var(--color-text-primary)]">
@@ -290,7 +290,7 @@ export default function CheckoutPage() {
 
                 <button
                   onClick={handlePaymentComplete}
-                  className="w-full h-12 rounded-[var(--radius-lg)] bg-[var(--color-success)] text-white text-sm font-medium hover:opacity-85 transition-all duration-500 active:scale-[0.97] flex items-center justify-center gap-2"
+                  className="w-full h-12 rounded-[var(--radius-lg)] bg-[var(--color-success)] text-white text-sm font-medium hover:opacity-90 transition-all duration-300 active:scale-[0.97] shadow-[var(--shadow-sm)] flex items-center justify-center gap-2"
                 >
                   <HiOutlineCheckCircle className="w-5 h-5" />
                   I&apos;ve Completed the Payment
@@ -301,7 +301,7 @@ export default function CheckoutPage() {
                     const text = `Hi! I've placed order ${orderId} at HookedByPree.`;
                     window.open(`https://wa.me/919620151434?text=${encodeURIComponent(text)}`, "_blank");
                   }}
-                  className="w-full h-12 rounded-[var(--radius-lg)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all duration-500 flex items-center justify-center gap-2"
+                  className="w-full h-12 rounded-[var(--radius-lg)] border border-[var(--color-border)] text-[var(--color-text-primary)] text-sm font-medium hover:bg-[var(--color-overlay)] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>

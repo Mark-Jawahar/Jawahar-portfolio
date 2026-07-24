@@ -20,14 +20,14 @@ export default function ApparelPage() {
 
   return (
     <div className="page-top">
-      <div className="container-luxury section">
+      <div className="container-luxury section-lg">
         <SectionHeading
           label="Collection 01"
           title="The Apparel Collection"
           description="Bespoke Crochet Tops · Statement Jackets · Artisan Caps — Step into sustainable handcrafted fashion that makes a statement."
         />
         {loading ? (
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-7">
+          <div className="mt-14 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="animate-pulse">
                 <div className="aspect-[3/4] rounded-[var(--radius-xl)] bg-[var(--color-bg-secondary)]" />
@@ -35,7 +35,7 @@ export default function ApparelPage() {
             ))}
           </div>
         ) : (
-          <motion.div layout className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-7">
+          <motion.div layout className="mt-14 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {products.map((product, i) => (
               <ProductCard key={product.id} product={product} index={i} />
             ))}

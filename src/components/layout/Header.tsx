@@ -36,7 +36,7 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           isScrolled
-            ? "bg-[var(--color-glass)] backdrop-blur-2xl border-b border-[var(--color-border)] shadow-[var(--shadow-glass)]"
+            ? "bg-[var(--color-glass-deep)] backdrop-blur-2xl border-b border-[var(--color-border)] shadow-[var(--shadow-glass)]"
             : "bg-transparent"
         }`}
       >
@@ -49,26 +49,26 @@ export default function Header() {
                 aria-label="Toggle menu"
               >
                 {isMobileNavOpen ? (
-                  <HiOutlineXMark className="w-5 h-5" />
+                  <HiOutlineXMark className="w-5 h-5 text-[var(--color-text-primary)]" />
                 ) : (
-                  <HiOutlineBars3 className="w-5 h-5" />
+                  <HiOutlineBars3 className="w-5 h-5 text-[var(--color-text-primary)]" />
                 )}
               </button>
 
               <Link
                 href="/"
-                className="font-serif text-xl lg:text-2xl tracking-wide text-[var(--color-text-primary)] select-none"
+                className="font-serif text-xl lg:text-2xl tracking-normal text-[var(--color-text-primary)] select-none"
               >
                 HookedByPree
               </Link>
             </div>
 
-            <nav className="hidden lg:flex items-center gap-10">
+            <nav className="hidden lg:flex items-center gap-12">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-[13px] tracking-wider uppercase transition-colors duration-300 ${
+                  className={`relative text-[13px] tracking-[0.12em] uppercase transition-colors duration-300 ${
                     pathname === link.href
                       ? "text-[var(--color-text-primary)] font-medium"
                       : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
@@ -78,7 +78,7 @@ export default function Header() {
                   {pathname === link.href && (
                     <motion.span
                       layoutId="nav-underline"
-                      className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[var(--color-text-primary)]"
+                      className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-[var(--color-text-primary)] rounded-full"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -86,7 +86,7 @@ export default function Header() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0">
               <Link
                 href="/contact"
                 className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full hover:bg-[var(--color-overlay)] active:bg-[var(--color-overlay-hover)] transition-colors"
@@ -101,7 +101,7 @@ export default function Header() {
               >
                 <HiOutlineShoppingBag className="w-[18px] h-[18px] text-[var(--color-text-secondary)]" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-[2px] -right-[2px] w-[18px] h-[18px] rounded-full bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-[10px] font-medium flex items-center justify-center leading-none shadow-sm">
+                  <span className="absolute -top-[2px] -right-[2px] w-[18px] h-[18px] rounded-full bg-[var(--color-text-primary)] text-white text-[10px] font-medium flex items-center justify-center leading-none shadow-sm">
                     {itemCount > 9 ? "9+" : itemCount}
                   </span>
                 )}
@@ -117,3 +117,5 @@ export default function Header() {
     </>
   );
 }
+
+

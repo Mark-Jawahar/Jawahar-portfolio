@@ -30,18 +30,19 @@ const values = [
 export default function AboutPage() {
   return (
     <div className="page-top">
-      <section className="section">
+      <section className="section-lg">
         <div className="container-luxury">
-          <div className="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-28 items-center">
             <motion.div
               initial={{ opacity: 0, x: -24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)] font-medium">
+              <span className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] font-medium">
+                <span className="w-6 h-px bg-[var(--color-accent)]" />
                 About Us
               </span>
-              <h1 className="mt-5 text-[clamp(2rem,4vw,3.5rem)] font-serif text-[var(--color-text-primary)] leading-tight">
+              <h1 className="mt-6 text-[clamp(2.25rem,5vw,4rem)] font-serif text-[var(--color-text-primary)] leading-[0.92] tracking-[-0.02em]">
                 Our Story
               </h1>
               <div className="mt-8 space-y-5 text-sm lg:text-[15px] text-[var(--color-text-secondary)] leading-relaxed text-pretty">
@@ -57,8 +58,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   Founded with a vision to revive the beauty of handmade craftsmanship, HookedByPree
-                  celebrates the imperfect perfection that only human hands can create. Each piece tells
-                  a story — of patience, of skill, of love for the craft.
+                  celebrates the imperfect perfection that only human hands can create.
                 </p>
               </div>
             </motion.div>
@@ -66,16 +66,16 @@ export default function AboutPage() {
             <motion.div
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="relative"
             >
               <div className="aspect-[4/5] rounded-[var(--radius-2xl)] bg-[var(--color-bg-secondary)] overflow-hidden flex items-center justify-center shadow-[var(--shadow-md)]">
                 <div className="text-center p-8">
-                  <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-br from-[var(--color-accent)]/30 via-transparent to-transparent" />
-                  <p className="mt-6 font-serif text-2xl text-[var(--color-text-primary)]">
+                  <div className="w-44 h-44 mx-auto rounded-full bg-gradient-to-br from-[var(--color-accent)]/25 via-transparent to-transparent" />
+                  <p className="mt-8 font-serif text-2xl text-[var(--color-text-primary)] tracking-tight">
                     HookedByPree
                   </p>
-                  <p className="mt-2 text-xs text-[var(--color-text-tertiary)] tracking-[0.15em] uppercase">
+                  <p className="mt-2 text-xs text-[var(--color-text-tertiary)] tracking-[0.12em] uppercase">
                     Elegance in Every Stitch
                   </p>
                 </div>
@@ -85,30 +85,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section bg-[var(--color-bg-secondary)]">
+      <section className="section-lg bg-[var(--color-bg-secondary)]">
         <div className="container-luxury">
           <SectionHeading
             label="Our Values"
             title="What We Stand For"
             description="Every creation reflects our commitment to craftsmanship, sustainability, and love."
           />
-          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7">
+          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {values.map((value, i) => (
               <motion.div
                 key={value.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-[var(--radius-xl)] p-7 lg:p-8 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-500"
+                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-[var(--radius-xl)] p-8 lg:p-10 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-500"
               >
-                <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/12 flex items-center justify-center">
                   <value.icon className="w-5 h-5 text-[var(--color-accent)]" />
                 </div>
-                <h3 className="mt-5 text-sm font-medium text-[var(--color-text-primary)]">
+                <h3 className="mt-6 text-sm font-medium text-[var(--color-text-primary)]">
                   {value.title}
                 </h3>
-                <p className="mt-2.5 text-sm text-[var(--color-text-secondary)] leading-relaxed text-pretty">
+                <p className="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed text-pretty">
                   {value.description}
                 </p>
               </motion.div>

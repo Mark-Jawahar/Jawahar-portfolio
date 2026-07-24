@@ -39,30 +39,30 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="section bg-[var(--color-bg-secondary)]">
+    <section className="section-lg bg-[var(--color-bg-secondary)]">
       <div className="container-luxury">
         <SectionHeading
           label="Why HookedByPree"
           title="The Art of Handmade"
           description="Every creation is a celebration of slow fashion, premium materials, and timeless design."
         />
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7">
+        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-[var(--radius-xl)] p-7 lg:p-8 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-500"
+              transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-[var(--radius-xl)] p-8 lg:p-10 bg-[var(--color-card-bg)] border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-500"
             >
-              <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/15 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/12 flex items-center justify-center">
                 <feature.icon className="w-5 h-5 text-[var(--color-accent)]" />
               </div>
-              <h3 className="mt-5 text-sm font-medium text-[var(--color-text-primary)]">
+              <h3 className="mt-6 text-sm font-medium text-[var(--color-text-primary)]">
                 {feature.title}
               </h3>
-              <p className="mt-2.5 text-sm text-[var(--color-text-secondary)] leading-relaxed text-pretty">
+              <p className="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed text-pretty">
                 {feature.description}
               </p>
             </motion.div>
