@@ -8,12 +8,14 @@ export const profile = {
   phone: "+91 9620151434",
   experience: "5+ Years",
   linkedin: "https://linkedin.com/in/jawahar-a-47037a240",
+  linkedinDisplay: "linkedin.com/in/jawahar-a-47037a240",
   instagram: "https://instagram.com/monsieur_heart_10",
   whatsapp: "https://wa.me/919620151434",
   headline:
-    "Customer Experience Specialist with 5+ years of expertise in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services.",
+    "Customer Experience Specialist with 5+ years of Experience in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services. Proven expertise in onboarding 500+ learners, enhancing Customer satisfaction through proactive engagement, resolving Customer issues, and delivering seamless Customer experiences. Skilled in CRM tools, Cross-functional collaboration, process improvement, and building long-term Customer relationships that drive Customer retention and business growth.",
   about:
-    "Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services. Proven expertise in onboarding 500+ learners, enhancing satisfaction through proactive engagement, and building long-term relationships that drive retention and business growth.",
+    "Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services. Proven expertise in onboarding 500+ learners, enhancing Customer satisfaction through proactive engagement, resolving Customer issues, and delivering seamless Customer experiences. Skilled in CRM tools, Cross-functional collaboration, process improvement, and building long-term Customer relationships that drive Customer retention and business growth.",
+  resumeLastUpdated: "Jul 2026",
   roles: [
     "Customer Experience Specialist",
     "Customer Success Professional",
@@ -52,23 +54,21 @@ export const highlights = [
 export const experiences = [
   {
     company: "Hello Mentor",
-    role: "Customer Experience Specialist → Assistant Team Lead",
-    period: "Sep 2024 – Present",
+    role: "Customer Experience Specialist",
+    period: "Sep 2024 — Present",
     location: "Bengaluru, Karnataka",
     description:
-      "Led end-to-end customer onboarding for 500+ learners, built scalable processes, and was promoted to Assistant Team Lead within 18 months.",
+      "Led end-to-end customer onboarding for 500+ learners, built scalable processes, and enhanced learner satisfaction through proactive engagement.",
     responsibilities: [
       "Managed end-to-end customer onboarding for 500+ learners, ensuring a seamless transition from enrollment to program commencement while delivering a positive customer experience.",
       "Served as the primary point of contact for students and parents, providing timely support, resolving queries, and ensuring high customer satisfaction throughout the customer lifecycle.",
       "Created and standardized onboarding checklists, communication templates, and customer support processes, reducing onboarding confusion and improving operational efficiency.",
-      "Promoted to Assistant Team Lead within 18 months based on consistent performance, initiative, and leadership potential.",
-      "Collaborated with Admissions, Product, Operations, and Marketing teams to resolve customer concerns, streamline processes, and enhance the overall learner experience.",
+      "Collaborated with Admissions, Product, Operations, and Marketing teams to resolve customer concerns, streamline processes, and enhance the overall learner journey.",
       "Conducted regular follow-ups with customers to improve engagement, encourage program participation, and build long-term customer relationships that supported retention.",
       "Maintained accurate customer records using CRM tools, analyzed customer feedback, and identified process improvement opportunities to enhance onboarding quality and service delivery.",
     ],
     achievements: [
       "Onboarded 500+ learners end-to-end",
-      "Promoted to Assistant Team Lead in 18 months",
       "Reduced onboarding confusion with standardized processes",
       "Cross-functional collaboration across 4 teams",
     ],
@@ -76,7 +76,7 @@ export const experiences = [
   {
     company: "NoBrokers.com",
     role: "Relationship Manager",
-    period: "Sep 2023 – June 2024",
+    period: "Sep 2023 — June 2024",
     location: "Bengaluru, Karnataka",
     description:
       "Managed 80+ concurrent property transactions with a 48-hour escalation SLA, improving deal conversion rates through locality analysis and stakeholder negotiation.",
@@ -96,7 +96,7 @@ export const experiences = [
   {
     company: "Daztek Online Services Pvt Ltd",
     role: "Senior Lead Generation Executive",
-    period: "July 2021 – Aug 2023",
+    period: "July 2021 — Aug 2023",
     location: "Bengaluru, Karnataka",
     description:
       "Qualified 150+ leads per month, consistently exceeded targets, and guided customers through the loan application journey with a compliance-first approach.",
@@ -146,6 +146,8 @@ export const skills = [
       "Zoho Desk",
       "Zoho SalesIQ",
       "Zoho Sheets",
+      "Zoho Backstage",
+      "Zoho Meeting",
       "MS Excel",
       "Google Sheets",
     ],
@@ -215,6 +217,22 @@ export const projects = [
       "Exploring prompt engineering techniques to improve AI output quality and automate repetitive tasks.",
     tags: ["AI", "ChatGPT", "Claude"],
   },
+];
+
+export const education = {
+  degree: "Bachelor of Commerce (B.Com)",
+  college: "SSMRV College",
+  year: "Apr 2021",
+  location: "Bengaluru, Karnataka",
+};
+
+export const summaryHighlights = [
+  { label: "5+ Years", desc: "Customer Experience" },
+  { label: "500+", desc: "Learners Onboarded" },
+  { label: "CRM Tools", desc: "Zoho Suite, Excel" },
+  { label: "Cross-Functional", desc: "4+ Team Collaboration" },
+  { label: "Leadership", desc: "Team Mentoring & Growth" },
+  { label: "Process", desc: "Improvement & Automation" },
 ];
 
 export const chapters = [
