@@ -1,106 +1,110 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { cn, scrollToSection } from "@/lib/utils";
+import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
+import { cn, scrollToSection, scrollToTop } from "@/lib/utils";
 import { chapters } from "@/lib/resume-data";
 
+function useScrollDirection() {
+  const { scrollY } = useScroll();
+  const [direction, setDirection] = useState<"up" | "down">("up");
+  const lastY = useRef(0);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const delta = latest - lastY.current;
+    if (Math.abs(delta) > 5) {
+      setDirection(delta > 0 ? "down" : "up");
+    }
+    lastY.current = latest;
+  });
+
+  return direction;
+}
+
+function useActiveSection() {
+  const [active, setActive] = useState("introduction");
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    const sectionIds = chapters.map((c) => c.id);
+    const els = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) {
+          setActive(visible[0].target.id);
+        }
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+    );
+
+    els.forEach((el) => observerRef.current?.observe(el));
+    return () => observerRef.current?.disconnect();
+  }, []);
+
+  return active;
+}
+
 export function Navigation() {
-  const [isVisible, setIsVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const direction = useScrollDirection();
+  const activeSection = useActiveSection();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    history.scrollRestoration = "manual";
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, []);
-
-  useEffect(() => {
-    const ids = chapters.map((c) => c.id);
-    const observers: IntersectionObserver[] = [];
-
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const o = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: "-40% 0px -55% 0px" }
-      );
-      o.observe(el);
-      observers.push(o);
-    });
-
-    const onScroll = () => {
-      const sy = window.scrollY;
-      if (sy > 80 && sy > lastScrollY.current + 8) {
-        setIsVisible(false);
-      } else if (sy < lastScrollY.current - 8 || sy < 60) {
-        setIsVisible(true);
-      }
-      setScrolled(sy > 60);
-      lastScrollY.current = sy;
-    };
-
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      observers.forEach((o) => o.disconnect());
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const hidden = direction === "down" && scrolled;
 
   return (
     <motion.header
       className={cn(
         "fixed top-0 left-0 right-0 z-50",
         scrolled
-          ? "bg-[rgba(5,5,5,0.65)] backdrop-blur-2xl shadow-[0_1px_24px_rgba(0,0,0,0.3)] border-b border-[rgba(255,255,255,0.04)]"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-[rgba(5,5,5,0.72)] backdrop-blur-2xl border-b border-[rgba(255,255,255,0.04)]"
+          : "bg-transparent"
       )}
-      animate={{ y: isVisible ? 0 : -100 }}
+      animate={{ y: hidden ? -120 : 0 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
     >
-      <nav className="flex items-center justify-between max-w-[1200px] mx-auto px-5 h-14 md:h-16">
+      <nav className="flex items-center justify-between max-w-[1200px] mx-auto px-6 h-14 md:h-16">
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="text-sm font-medium tracking-tight text-[#f5f5f7] hover:text-[#a8d8ea] transition-colors"
+          onClick={() => scrollToTop(true)}
+          className="text-sm font-semibold tracking-tight text-[#f5f5f7] hover:text-[#a8d8ea] transition-colors"
         >
           JA
         </button>
 
-        {/* Desktop */}
-        <div className="hidden md:flex items-center gap-0.5 bg-[rgba(255,255,255,0.02)] rounded-2xl p-0.5">
+        <div className="hidden md:flex items-center gap-1 relative">
           {chapters.map((ch) => {
-            const active = activeSection === ch.id;
+            const isActive = activeSection === ch.id;
             return (
               <button
                 key={ch.id}
                 onClick={() => scrollToSection(ch.id)}
                 className={cn(
-                  "relative px-3 py-1.5 text-xs font-medium rounded-xl transition-all duration-300",
-                  active
+                  "relative px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-300",
+                  isActive
                     ? "text-[#f5f5f7]"
                     : "text-[#8e8e93] hover:text-[#f5f5f7]"
                 )}
               >
-                {active && (
-                  <motion.span
+                {isActive && (
+                  <motion.div
                     layoutId="nav-active"
-                    className="absolute inset-0 rounded-xl bg-[rgba(168,216,234,0.07)] border border-[rgba(168,216,234,0.1)]"
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-0 rounded-lg bg-[rgba(168,216,234,0.08)] border border-[rgba(168,216,234,0.12)] shadow-[0_0_12px_rgba(168,216,234,0.06)]"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
-                <span className="relative z-[1]">{ch.label}</span>
-                {active && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute bottom-0 left-[20%] right-[20%] h-[2px] rounded-full bg-gradient-to-r from-[#a8d8ea] via-[#c4b5fd] to-[#a8d8ea] opacity-60"
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  />
-                )}
+                <span className="relative z-10">{ch.label}</span>
               </button>
             );
           })}
@@ -138,25 +142,32 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden bg-[rgba(5,5,5,0.95)] backdrop-blur-2xl border-b border-[rgba(255,255,255,0.04)] overflow-hidden"
           >
-            <div className="flex flex-col px-5 py-3 gap-1">
-              {chapters.map((ch) => (
-                <button
-                  key={ch.id}
-                  onClick={() => {
-                    scrollToSection(ch.id);
-                    setMobileOpen(false);
-                  }}
-                  className="px-3 py-2.5 text-sm font-medium text-[#8e8e93] hover:text-[#f5f5f7] transition-colors text-left rounded-lg hover:bg-[rgba(255,255,255,0.03)]"
-                >
-                  <span className="text-[0.65rem] text-[#a8d8ea] opacity-60 mr-2 font-mono">
-                    {ch.number}
-                  </span>
-                  {ch.label}
-                </button>
-              ))}
+            <div className="flex flex-col px-6 py-3 gap-1">
+              {chapters.map((ch) => {
+                const isActive = activeSection === ch.id;
+                return (
+                  <button
+                    key={ch.id}
+                    onClick={() => {
+                      scrollToSection(ch.id);
+                      setMobileOpen(false);
+                    }}
+                    className={cn(
+                      "px-3 py-2.5 text-sm font-medium text-left rounded-lg transition-colors",
+                      isActive
+                        ? "text-[#f5f5f7] bg-[rgba(168,216,234,0.08)]"
+                        : "text-[#8e8e93] hover:text-[#f5f5f7]"
+                    )}
+                  >
+                    <span className="text-[0.65rem] text-[#a8d8ea] opacity-60 mr-2 font-mono">
+                      {ch.number}
+                    </span>
+                    {ch.label}
+                  </button>
+                );
+              })}
             </div>
           </motion.div>
         )}

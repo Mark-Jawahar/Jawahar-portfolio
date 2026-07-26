@@ -98,6 +98,10 @@
   to { transform: scale(4); opacity: 0; }
 }
 
+html {
+  scroll-behavior: auto;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);

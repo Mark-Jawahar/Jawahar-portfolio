@@ -9,10 +9,12 @@ import { ResumeChapter } from "@/components/chapters/ResumeChapter";
 import { ConnectChapter } from "@/components/chapters/ConnectChapter";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/layout/FloatingWhatsApp";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 export default function Home() {
   return (
     <>
+      <ScrollToTop />
       <div className="noise-overlay" />
       <AuroraBackground />
 

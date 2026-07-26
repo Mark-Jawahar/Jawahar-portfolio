@@ -126,9 +126,9 @@ export function HeroChapter() {
         <TypewriterRoles roles={profile.roles} />
       </motion.p>
 
-      {/* Badges */}
+      {/* Open to opportunities */}
       <motion.div
-        className="flex flex-wrap items-center justify-center gap-2 mt-5"
+        className="flex items-center justify-center gap-2 mt-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -141,7 +141,7 @@ export function HeroChapter() {
 
       {/* Headline */}
       <motion.p
-        className="text-[clamp(0.85rem,1.1vw,0.95rem)] text-[#8e8e93] leading-relaxed max-w-[600px] text-center mt-6"
+        className="text-[clamp(0.9rem,1.15vw,1rem)] text-[#8e8e93] leading-relaxed max-w-[600px] text-center mt-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}

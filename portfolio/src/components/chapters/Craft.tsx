@@ -43,7 +43,7 @@ export function Craft() {
         </ScrollReveal>
 
         {/* Skills */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
           {skills.map((skill, i) => {
             const Icon = iconMap[skill.icon] || Users;
             return (
@@ -75,7 +75,7 @@ export function Craft() {
 
         {/* Projects */}
         <ScrollReveal delay={0.3}>
-          <h3 className="text-lg font-semibold text-[#f5f5f7] mt-14 mb-1">
+          <h3 className="text-lg font-semibold text-[#f5f5f7] mt-16 mb-2">
             Personal Projects
           </h3>
           <p className="text-sm text-[#8e8e93] mb-8">

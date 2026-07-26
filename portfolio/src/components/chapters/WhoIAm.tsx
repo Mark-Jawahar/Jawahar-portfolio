@@ -59,9 +59,6 @@ export function WhoIAm() {
               <h3 className="text-lg font-semibold text-[#f5f5f7]">
                 {profile.name}
               </h3>
-              <p className="text-sm text-gradient-accent mt-1">
-                {profile.role}
-              </p>
               <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.06)]">
                 <p className="text-[0.7rem] text-[#8e8e93] italic leading-relaxed">
                   Design, AI, and website building efforts are personal learning
@@ -78,7 +75,7 @@ export function WhoIAm() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <p className="chapter-subtitle mt-5">{profile.about}</p>
+              <p className="chapter-subtitle mt-6">{profile.about}</p>
             </ScrollReveal>
 
             {/* Highlights grid */}
@@ -89,7 +86,7 @@ export function WhoIAm() {
                     <div className="w-9 h-9 rounded-lg bg-[rgba(168,216,234,0.06)] flex items-center justify-center mb-3">
                       <h.icon className="w-4 h-4 text-[#a8d8ea]" />
                     </div>
-                    <h4 className="text-sm font-medium text-[#f5f5f7] mb-1">
+                    <h4 className="text-sm font-medium text-[#f5f5f7] mb-2">
                       {h.title}
                     </h4>
                     <p className="text-xs text-[#8e8e93] leading-relaxed">

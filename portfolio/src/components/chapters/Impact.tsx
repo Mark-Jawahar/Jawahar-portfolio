@@ -37,7 +37,7 @@ export function Impact() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12">
           {stats.map((stat, i) => (
             <FadeIn key={stat.label} delay={0.2 + i * 0.08}>
               <div className="glass-card p-6 md:p-8 text-center">
