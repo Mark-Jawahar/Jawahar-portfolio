@@ -108,7 +108,7 @@ export function Hero() {
               <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden glass-apple animate-float-slow shadow-[0_0_60px_rgba(168,216,234,0.06)]">
                 {!imageError ? (
                   <img
-                    src="/hero-portrait.jpg"
+                    src="/profile-pic.png"
                     alt="Jawahar A"
                     className="w-full h-full object-cover img-apple-profile"
                     onError={() => setImageError(true)}
