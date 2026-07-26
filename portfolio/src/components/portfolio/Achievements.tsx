@@ -65,7 +65,7 @@ export function Achievements() {
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-2xl p-6 border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.015)] text-center hover:bg-[rgba(255,255,255,0.025)] transition-all duration-500 group"
+                className="rounded-2xl p-6 glass-premium text-center group"
               >
                 <div className="h-10 w-10 rounded-2xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center mx-auto mb-3 group-hover:bg-[rgba(168,216,234,0.12)] transition-colors">
                   <Icon className="h-5 w-5 text-[#a8d8ea]" />

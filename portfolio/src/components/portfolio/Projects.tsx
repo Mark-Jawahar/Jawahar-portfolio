@@ -99,7 +99,7 @@ export function Projects() {
               transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
             >
               <TiltCard>
-                <div className="group relative rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.015)] h-full">
+                <div className="group relative rounded-2xl overflow-hidden glass-premium h-full">
                   <div className={`h-36 bg-gradient-to-br ${p.gradient} relative overflow-hidden`}>
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-[0.06]">

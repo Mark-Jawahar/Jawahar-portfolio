@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
 
 export function Contact() {
@@ -55,7 +55,7 @@ export function Contact() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="md:col-span-2 space-y-3"
           >
-            <div className="rounded-2xl p-5 glass-apple-card">
+            <div className="rounded-2xl p-5 glass-premium hover-lift">
               <div className="flex items-center gap-3 mb-2">
                 <div className="h-8 w-8 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center">
                   <Mail className="h-4 w-4 text-[#a8d8ea]" />
@@ -66,7 +66,7 @@ export function Contact() {
                 markjawahar17@gmail.com
               </a>
             </div>
-            <div className="rounded-2xl p-5 glass-apple-card">
+            <div className="rounded-2xl p-5 glass-premium hover-lift">
               <div className="flex items-center gap-3 mb-2">
                 <div className="h-8 w-8 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center">
                   <MapPin className="h-4 w-4 text-[#a8d8ea]" />
@@ -75,7 +75,7 @@ export function Contact() {
               </div>
               <p className="text-sm text-white/35">Bengaluru, Karnataka</p>
             </div>
-            <div className="rounded-2xl p-5 glass-apple-card">
+            <div className="rounded-2xl p-5 glass-premium hover-lift">
               <div className="flex items-center gap-3 mb-2">
                 <div className="h-8 w-8 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center">
                   <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#a8d8ea]" fill="currentColor">
@@ -102,75 +102,117 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="md:col-span-3"
           >
-            <form onSubmit={handleSubmit} className="rounded-2xl p-6 md:p-7 glass-apple-card space-y-4">
+            <form onSubmit={handleSubmit} className="relative rounded-2xl p-6 md:p-7 glass-premium border-shine space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
-                <input
-                  placeholder="Name"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  required
-                  className="w-full h-11 px-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/12 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  required
-                  className="w-full h-11 px-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/12 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all"
-                />
+                <div className="relative group/field">
+                  <input
+                    placeholder="Name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    required
+                    className="w-full h-12 px-4 rounded-xl bg-[rgba(255,255,255,0.015)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all duration-400 peer"
+                  />
+                  <div className="absolute inset-0 rounded-xl opacity-0 peer-focus:opacity-100 pointer-events-none transition-opacity duration-500 border border-[rgba(168,216,234,0.06)] shadow-[inset_0_0_20px_rgba(168,216,234,0.02)]" />
+                </div>
+                <div className="relative group/field">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    required
+                    className="w-full h-12 px-4 rounded-xl bg-[rgba(255,255,255,0.015)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all duration-400 peer"
+                  />
+                  <div className="absolute inset-0 rounded-xl opacity-0 peer-focus:opacity-100 pointer-events-none transition-opacity duration-500 border border-[rgba(168,216,234,0.06)] shadow-[inset_0_0_20px_rgba(168,216,234,0.02)]" />
+                </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="w-full h-11 px-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/12 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all"
+                <div className="relative group/field">
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="w-full h-12 px-4 rounded-xl bg-[rgba(255,255,255,0.015)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all duration-400 peer"
+                  />
+                  <div className="absolute inset-0 rounded-xl opacity-0 peer-focus:opacity-100 pointer-events-none transition-opacity duration-500 border border-[rgba(168,216,234,0.06)] shadow-[inset_0_0_20px_rgba(168,216,234,0.02)]" />
+                </div>
+                <div className="relative group/field">
+                  <select
+                    value={form.reason}
+                    onChange={(e) => setForm({ ...form, reason: e.target.value })}
+                    className="w-full h-12 px-4 rounded-xl bg-[rgba(255,255,255,0.015)] border border-[rgba(255,255,255,0.06)] text-sm text-white/30 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all duration-400 appearance-none cursor-pointer"
+                  >
+                    <option value="" className="bg-[#050505]">Select Reason</option>
+                    <option value="Job Opportunity" className="bg-[#050505]">Job Opportunity</option>
+                    <option value="Collaboration" className="bg-[#050505]">Collaboration</option>
+                    <option value="Feedback" className="bg-[#050505]">Feedback</option>
+                    <option value="Other" className="bg-[#050505]">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div className="relative group/field">
+                <textarea
+                  placeholder="Your message..."
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  required
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.015)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all duration-400 resize-none peer"
                 />
-                <select
-                  value={form.reason}
-                  onChange={(e) => setForm({ ...form, reason: e.target.value })}
-                  className="w-full h-11 px-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-sm text-white/40 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all appearance-none"
+                <div className="absolute inset-0 rounded-xl opacity-0 peer-focus:opacity-100 pointer-events-none transition-opacity duration-500 border border-[rgba(168,216,234,0.06)] shadow-[inset_0_0_20px_rgba(168,216,234,0.02)]" />
+              </div>
+
+              <AnimatePresence mode="wait">
+                <motion.button
+                  key={sent ? "sent" : sending ? "sending" : "idle"}
+                  type="submit"
+                  disabled={sending || sent}
+                  whileHover={{ scale: sending || sent ? 1 : 1.01 }}
+                  whileTap={{ scale: sending || sent ? 1 : 0.97 }}
+                  className="relative overflow-hidden w-full h-12 rounded-xl bg-gradient-to-r from-[#a8d8ea] to-[#c4b5fd] text-sm font-medium text-[#050505] flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-40"
                 >
-                  <option value="" className="bg-[#050505]">Select Reason</option>
-                  <option value="Job Opportunity" className="bg-[#050505]">Job Opportunity</option>
-                  <option value="Collaboration" className="bg-[#050505]">Collaboration</option>
-                  <option value="Feedback" className="bg-[#050505]">Feedback</option>
-                  <option value="Other" className="bg-[#050505]">Other</option>
-                </select>
-              </div>
-              <textarea
-                placeholder="Your message..."
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                required
-                rows={4}
-                className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-sm text-white placeholder:text-white/12 focus:outline-none focus:border-[rgba(168,216,234,0.2)] focus:bg-[rgba(168,216,234,0.02)] transition-all resize-none"
-              />
-              <motion.button
-                type="submit"
-                disabled={sending || sent}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                className={`relative overflow-hidden w-full h-11 rounded-xl bg-gradient-to-r from-[#a8d8ea] to-[#c4b5fd] text-sm font-medium text-[#050505] flex items-center justify-center gap-2 transition-all duration-300 ${
-                  sent ? "shadow-[0_0_24px_rgba(167,243,208,0.3)]" : "hover:shadow-[0_0_24px_rgba(168,216,234,0.2)]"
-                } disabled:opacity-40`}
-              >
-                {sending ? (
-                  <motion.div className="h-4 w-4 border-2 border-[#050505]/30 border-t-[#050505] rounded-full" animate={{ rotate: 360 }} transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }} />
-                ) : sent ? (
-                  <>
-                    <CheckCircle className="h-4 w-4" />
-                    Message sent! Opening WhatsApp...
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-4 w-4" />
-                    Send Message
-                  </>
-                )}
-              </motion.button>
+                  {sending ? (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="flex items-center gap-2"
+                    >
+                      <motion.div
+                        className="h-4 w-4 border-2 border-[#050505]/30 border-t-[#050505] rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                      />
+                      Sending...
+                    </motion.span>
+                  ) : sent ? (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.5, y: 8 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                      className="flex items-center gap-2"
+                    >
+                      <motion.span
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.4, delay: 0.1 }}
+                      >
+                        <CheckCircle className="h-4 w-4" />
+                      </motion.span>
+                      Message sent! Opening WhatsApp...
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="flex items-center gap-2"
+                    >
+                      <Send className="h-4 w-4" />
+                      Send Message
+                    </motion.span>
+                  )}
+                </motion.button>
+              </AnimatePresence>
             </form>
           </motion.div>
         </div>

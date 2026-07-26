@@ -102,7 +102,7 @@ export function Experience() {
                 </div>
 
                 <div
-                  className="rounded-2xl border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.015)] overflow-hidden transition-all duration-500 cursor-pointer hover:bg-[rgba(255,255,255,0.025)] hover:border-[rgba(255,255,255,0.07)]"
+                  className="rounded-2xl glass-premium overflow-hidden cursor-pointer"
                   onClick={() => setExpanded(expanded === idx ? null : idx)}
                 >
                   <div className="p-5 md:p-6">

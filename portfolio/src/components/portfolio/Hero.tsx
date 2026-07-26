@@ -12,6 +12,12 @@ const roles = [
   "Service Experience Designer",
 ];
 
+const floatingOrbs = [
+  { size: 300, x: "15%", y: "20%", delay: 0, gradient: "from-[rgba(168,216,234,0.04)] to-[rgba(168,216,234,0.01)]", duration: 12 },
+  { size: 200, x: "75%", y: "30%", delay: 2, gradient: "from-[rgba(196,181,253,0.04)] to-[rgba(196,181,253,0.01)]", duration: 15 },
+  { size: 250, x: "50%", y: "70%", delay: 4, gradient: "from-[rgba(167,243,208,0.03)] to-[rgba(167,243,208,0.01)]", duration: 10 },
+];
+
 function Typewriter({ texts }: { texts: string[] }) {
   const [index, setIndex] = useState(0);
   const [char, setChar] = useState(0);
@@ -49,6 +55,32 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16">
+      {/* Floating orbs */}
+      {floatingOrbs.map((orb, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: orb.size,
+            height: orb.size,
+            left: orb.x,
+            top: orb.y,
+            background: `radial-gradient(circle, ${orb.gradient.includes('168') ? 'rgba(168,216,234,0.06)' : orb.gradient.includes('196') ? 'rgba(196,181,253,0.06)' : 'rgba(167,243,208,0.04)'} 0%, transparent 70%)`,
+            filter: "blur(60px)",
+          }}
+          animate={{
+            x: [0, 30, -20, 0],
+            y: [0, -30, 20, 0],
+            scale: [1, 1.1, 0.95, 1],
+          }}
+          transition={{
+            duration: orb.duration,
+            delay: orb.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
       <div className="container-premium px-4 sm:px-6 relative z-10">
         <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
           <motion.div
@@ -76,9 +108,9 @@ export function Hero() {
               <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden glass-apple animate-float-slow shadow-[0_0_60px_rgba(168,216,234,0.06)]">
                 {!imageError ? (
                   <img
-                    src="/profile.jpg"
+                    src="/hero-portrait.jpg"
                     alt="Jawahar A"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover img-apple-profile"
                     onError={() => setImageError(true)}
                   />
                 ) : (

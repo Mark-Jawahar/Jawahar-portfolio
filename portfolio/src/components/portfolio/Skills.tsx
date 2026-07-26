@@ -156,10 +156,10 @@ export function Skills() {
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.45, delay: ci * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative rounded-2xl p-5 border transition-all duration-500 ${
+                className={`group relative rounded-2xl p-5 transition-all duration-500 ${
                   show
-                    ? "bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.035)] hover:border-[rgba(255,255,255,0.08)]"
-                    : "bg-[rgba(255,255,255,0.005)] border-[rgba(255,255,255,0.015)] opacity-40"
+                    ? "glass-premium"
+                    : "bg-[rgba(255,255,255,0.005)] border border-[rgba(255,255,255,0.015)] opacity-40"
                 }`}
               >
                 <div className="flex items-center gap-3 mb-4">

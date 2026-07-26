@@ -59,7 +59,7 @@ export function FloatingDock() {
       transition={{ delay: 1.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40"
     >
-      <div className="flex items-center gap-1.5 rounded-2xl bg-[rgba(5,5,5,0.75)] backdrop-blur-2xl saturate-[1.8] border border-[rgba(255,255,255,0.06)] px-3 py-2 shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
+      <div className="flex items-center gap-1.5 rounded-2xl px-3 py-2 border-shine glass-premium shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
         {items.map((item) => (
           <motion.a
             key={item.label}

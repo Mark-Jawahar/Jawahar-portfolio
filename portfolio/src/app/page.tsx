@@ -12,6 +12,7 @@ const WhyHireMe = dynamic(() => import("@/components/portfolio/WhyHireMe").then(
 const Skills = dynamic(() => import("@/components/portfolio/Skills").then((m) => m.Skills), { ssr: false });
 const Projects = dynamic(() => import("@/components/portfolio/Projects").then((m) => m.Projects), { ssr: false });
 const ResumeSection = dynamic(() => import("@/components/portfolio/ResumeSection").then((m) => m.ResumeSection), { ssr: false });
+const PhotoStory = dynamic(() => import("@/components/portfolio/PhotoStory").then((m) => m.PhotoStory), { ssr: false });
 const Contact = dynamic(() => import("@/components/portfolio/Contact").then((m) => m.Contact), { ssr: false });
 const Footer = dynamic(() => import("@/components/portfolio/Footer").then((m) => m.Footer));
 const MeshGradient = dynamic(() => import("@/components/portfolio/MeshGradient").then((m) => m.MeshGradient), { ssr: false });
@@ -44,6 +45,7 @@ export default function Home() {
         <WhyHireMe />
         <Skills />
         <Projects />
+        <PhotoStory />
         <ResumeSection />
         <Contact />
       </main>

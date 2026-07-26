@@ -2,11 +2,13 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Eye, FileText, Check } from "lucide-react";
+import { Download, Eye, FileText, Check, MapPin, Briefcase, Calendar } from "lucide-react";
 
 export function ResumeSection() {
   const [downloadState, setDownloadState] = useState<"idle" | "preparing" | "progress" | "complete">("idle");
   const [progress, setProgress] = useState(0);
+  const [spotlight, setSpotlight] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
   const aRef = useRef<HTMLAnchorElement>(null);
 
   const handleDownload = async () => {
@@ -25,6 +27,12 @@ export function ResumeSection() {
     await new Promise((r) => setTimeout(r, 1200));
     setDownloadState("idle");
     setProgress(0);
+  };
+
+  const mouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
   return (
@@ -57,52 +65,80 @@ export function ResumeSection() {
           className="max-w-lg mx-auto"
         >
           <motion.div
-            className="group relative rounded-2xl overflow-hidden glass-apple-card p-6 md:p-8 text-center"
-            whileHover={{ y: -4 }}
+            ref={cardRef}
+            onMouseMove={mouseMove}
+            className="group relative rounded-2xl overflow-hidden glass-premium p-6 md:p-8 text-center"
+            whileHover={{ y: -6 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
+            {/* Border glow */}
+            <div className="absolute inset-0 rounded-2xl border border-[rgba(168,216,234,0.06)] animate-border-glow pointer-events-none" />
+
+            {/* Spotlight */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={{
+                background: `radial-gradient(400px circle at ${spotlight.x}px ${spotlight.y}px, rgba(168,216,234,0.06), transparent 60%)`,
+              }}
+            />
+
+            {/* Floating reflection */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(168,216,234,0.03)] to-transparent" />
-              <div
-                className="absolute -inset-32 bg-[radial-gradient(circle_at_50%_0%,rgba(168,216,234,0.06),transparent_70%)]"
-                style={{ maskImage: "linear-gradient(to bottom, black, transparent)" }}
-              />
+              <div className="absolute inset-0 reflection-shine" />
             </div>
 
-            <div className="absolute top-3 right-3">
+            {/* Badge */}
+            <div className="absolute top-3 right-3 z-10">
               <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[rgba(168,216,234,0.06)] text-[#a8d8ea]/60 border border-[rgba(168,216,234,0.08)]">
                 Updated Apr 2026
               </span>
             </div>
 
-            <motion.div
-              className="relative w-20 h-20 rounded-2xl mx-auto mb-5 overflow-hidden bg-gradient-to-br from-[rgba(168,216,234,0.08)] to-[rgba(196,181,253,0.08)] border border-[rgba(255,255,255,0.04)] flex items-center justify-center"
-              animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <FileText className="h-8 w-8 text-[#a8d8ea]" />
-            </motion.div>
+            {/* Resume thumbnail */}
+            <div className="relative mb-5">
+              <motion.div
+                className="w-24 h-24 rounded-2xl mx-auto overflow-hidden border border-[rgba(255,255,255,0.06)] relative group-hover:shadow-[0_0_40px_rgba(168,216,234,0.08)] transition-shadow duration-500"
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <div className="w-full h-full bg-gradient-to-br from-[rgba(168,216,234,0.08)] via-[rgba(196,181,253,0.06)] to-[rgba(167,243,208,0.04)] flex items-center justify-center">
+                  <FileText className="h-10 w-10 text-[#a8d8ea]/60" />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(5,5,5,0.3)] to-transparent" />
+              </motion.div>
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[9px] font-mono bg-[rgba(168,216,234,0.06)] text-[#a8d8ea]/40 border border-[rgba(168,216,234,0.06)]">
+                PDF &middot; 2 pages
+              </div>
+            </div>
 
             <h3 className="text-base font-semibold mb-1 relative">Jawahar A</h3>
-            <p className="text-xs text-white/25 mb-2 relative">
+            <p className="text-xs text-white/25 mb-3 relative">
               Customer Experience Specialist &middot; 5+ Years
             </p>
-            <div className="flex items-center justify-center gap-2 mb-5 relative">
+
+            {/* Info badges */}
+            <div className="flex items-center justify-center gap-2 mb-5 relative flex-wrap">
               <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] bg-[rgba(167,243,208,0.04)] text-[#a7f3d0]/50 border border-[rgba(167,243,208,0.06)]">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 Open to Opportunities
               </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] bg-[rgba(255,255,255,0.02)] text-white/20 border border-[rgba(255,255,255,0.04)]">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] bg-[rgba(255,255,255,0.02)] text-white/20 border border-[rgba(255,255,255,0.04)]">
+                <MapPin className="h-2.5 w-2.5" />
                 Bengaluru, KA
+              </span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] bg-[rgba(255,255,255,0.02)] text-white/20 border border-[rgba(255,255,255,0.04)]">
+                <Briefcase className="h-2.5 w-2.5" />
+                5+ Years
               </span>
             </div>
 
+            {/* Action buttons */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center relative">
               <motion.button
                 onClick={handleDownload}
                 disabled={downloadState !== "idle"}
-                whileHover={downloadState === "idle" ? { scale: 1.015 } : {}}
-                whileTap={downloadState === "idle" ? { scale: 0.98 } : {}}
+                whileHover={downloadState === "idle" ? { scale: 1.02 } : {}}
+                whileTap={downloadState === "idle" ? { scale: 0.96 } : {}}
                 className="relative overflow-hidden rounded-full h-11 px-6 text-sm font-medium text-[#050505] inline-flex items-center justify-center gap-2 cursor-pointer select-none min-w-[180px]"
               >
                 <div
@@ -161,7 +197,7 @@ export function ResumeSection() {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative overflow-hidden rounded-full h-11 px-6 text-sm font-medium text-white/70 border border-white/10 inline-flex items-center justify-center gap-2 hover:border-white/20 hover:text-white transition-all"
+                className="relative overflow-hidden rounded-full h-11 px-6 text-sm font-medium text-white/70 border border-white/10 inline-flex items-center justify-center gap-2 hover:border-white/20 hover:text-white hover:bg-white/[0.02] transition-all"
               >
                 <Eye className="h-4 w-4" />
                 Preview

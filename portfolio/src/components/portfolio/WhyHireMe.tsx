@@ -83,7 +83,7 @@ export function WhyHireMe() {
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="group rounded-2xl p-6 bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.03)] transition-all duration-500"
+                className="group rounded-2xl p-6 glass-premium"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="h-9 w-9 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center group-hover:bg-[rgba(168,216,234,0.1)] transition-colors">

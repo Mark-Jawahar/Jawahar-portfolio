@@ -48,11 +48,11 @@ export function Navigation() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
           "fixed top-5 left-1/2 -translate-x-1/2 z-50",
-          "h-11 px-1 rounded-full flex items-center gap-1",
-          "backdrop-blur-2xl saturate-[1.8] will-change-transform",
-          scrolled
-            ? "bg-[rgba(5,5,5,0.6)] border border-[rgba(255,255,255,0.06)] shadow-[0_8px_40px_rgba(0,0,0,0.4)]"
-            : "bg-transparent border border-transparent"
+            "h-11 px-1 rounded-full flex items-center gap-1",
+            "will-change-transform",
+            scrolled
+              ? "glass-premium shadow-[0_8px_40px_rgba(0,0,0,0.4)]"
+              : "bg-transparent border border-transparent"
         )}
       >
         <a href="#" className="px-3.5 text-sm font-semibold tracking-tight">
