@@ -39,42 +39,41 @@ export function GrowthSection() {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section id="growth" ref={ref} className="relative py-32 overflow-hidden">
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent-lavender/5 rounded-full blur-[120px]" />
+    <section id="growth" ref={ref} className="aurora-bg relative py-24 sm:py-32 overflow-hidden">
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent-soft-lavender/20 rounded-full blur-[140px]" />
+      <div className="absolute top-1/3 left-1/4 w-[350px] h-[350px] bg-accent-soft-cyan/15 rounded-full blur-[100px]" />
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="section-container">
         <FadeReveal>
-          <span className="text-xs tracking-[0.3em] uppercase text-white-muted mb-4 block">
-            Chapter 05
-          </span>
+          <span className="chapter-label mb-5 block">Chapter 05</span>
         </FadeReveal>
 
-        <FadeReveal delay={0.2}>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-4">
+        <FadeReveal delay={0.15}>
+          <h2 className="section-heading mb-4">
             <span className="text-gradient">Professional</span>{" "}
             <span className="text-gradient-accent">Growth</span>
           </h2>
         </FadeReveal>
 
-        <FadeReveal delay={0.3}>
-          <p className="text-white-muted max-w-xl mb-16">
+        <FadeReveal delay={0.25}>
+          <p className="section-description mb-14">
             Key milestones throughout a 5+ year journey of growth and impact.
           </p>
         </FadeReveal>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-5">
           {milestones.map((item, i) => {
             const Icon = item.icon;
             return (
-              <GlassCard key={i} delay={0.2 + i * 0.12}>
+              <GlassCard key={i} delay={0.15 + i * 0.08} padding="md">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 rounded-full glass flex items-center justify-center shrink-0">
-                    <Icon size={20} className="text-accent-cyan" />
+                    <Icon size={18} className="text-accent-pearl/80" />
                   </div>
-                  <div>
-                    <p className="text-xs text-accent-ice mb-1">{item.subtitle}</p>
-                    <h3 className="text-xl font-bold text-white-soft mb-2">{item.title}</h3>
-                    <p className="text-sm text-white-muted leading-relaxed">{item.description}</p>
+                  <div className="min-w-0">
+                    <p className="text-[0.6875rem] text-white-muted/70 mb-1 tracking-wide uppercase">{item.subtitle}</p>
+                    <h3 className="text-lg font-semibold text-white-soft mb-2 tracking-tight">{item.title}</h3>
+                    <p className="text-sm text-white-muted/70 leading-relaxed">{item.description}</p>
                   </div>
                 </div>
               </GlassCard>
@@ -83,15 +82,15 @@ export function GrowthSection() {
         </div>
 
         <FadeReveal delay={0.5}>
-          <div className="mt-16 glass rounded-2xl p-8 text-center">
-            <p className="text-sm text-white-muted mb-2">Career Span</p>
-            <p className="text-5xl sm:text-7xl font-bold text-gradient-accent">5+</p>
-            <p className="text-sm text-white-muted mt-2">Years of Continuous Growth</p>
-            <div className="flex justify-center gap-8 mt-6 text-xs text-white-subtle">
-              <span>2021 — Daztek</span>
-              <span>2023 — NoBrokers</span>
-              <span>2024 — Hello Mentor</span>
-              <span>2026 — Present</span>
+          <div className="mt-14 glass-card rounded-2xl p-8 sm:p-10 text-center">
+            <p className="text-sm text-white-muted/60 mb-2 tracking-wide">Career Span</p>
+            <p className="text-5xl sm:text-6xl font-semibold text-gradient-aurora leading-none">5+</p>
+            <p className="text-sm text-white-muted/60 mt-2 mb-6">Years of Continuous Growth</p>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-xs text-white-subtle/70">
+              <span className="tracking-wide">2021 — Daztek</span>
+              <span className="tracking-wide">2023 — NoBrokers</span>
+              <span className="tracking-wide">2024 — Hello Mentor</span>
+              <span className="tracking-wide">2026 — Present</span>
             </div>
           </div>
         </FadeReveal>

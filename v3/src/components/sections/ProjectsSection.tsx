@@ -1,61 +1,71 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
-import { GlassCard } from "@/components/effects/GlassCard";
 import { FadeReveal } from "@/components/effects/FadeReveal";
-import { ExternalLink, TrendingUp } from "lucide-react";
+import { TrendingUp, ArrowUpRight } from "lucide-react";
 
 export function ProjectsSection() {
-  const ref = useRef(null);
+  const sectionRef = useRef(null);
 
   return (
-    <section id="projects" ref={ref} className="relative py-32 overflow-hidden">
-      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-accent-cyan/5 rounded-full blur-[100px]" />
+    <section id="projects" ref={sectionRef} className="aurora-bg relative py-24 sm:py-32 overflow-hidden">
+      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-accent-soft-cyan/15 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 left-0 w-[350px] h-[350px] bg-accent-soft-lavender/15 rounded-full blur-[100px]" />
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="section-container">
         <FadeReveal>
-          <span className="text-xs tracking-[0.3em] uppercase text-white-muted mb-4 block">
-            Chapter 06
-          </span>
+          <span className="chapter-label mb-5 block">Chapter 06</span>
         </FadeReveal>
 
-        <FadeReveal delay={0.2}>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-4">
+        <FadeReveal delay={0.15}>
+          <h2 className="section-heading mb-4">
             <span className="text-gradient">Key</span>{" "}
             <span className="text-gradient-accent">Projects</span>
           </h2>
         </FadeReveal>
 
-        <FadeReveal delay={0.3}>
-          <p className="text-white-muted max-w-xl mb-16">
+        <FadeReveal delay={0.25}>
+          <p className="section-description mb-14">
             Impact-driven initiatives that shaped processes, improved experiences, and delivered results.
           </p>
         </FadeReveal>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-5">
           {projects.map((project, i) => (
-            <GlassCard key={i} delay={0.2 + i * 0.15}>
-              <div className="flex flex-col h-full">
-                <div className="mb-4">
-                  <p className="text-xs text-accent-ice mb-2">{project.company}</p>
-                  <h3 className="text-xl font-bold text-white-soft mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-white-muted leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+              className="glass-card rounded-2xl p-6 flex flex-col h-full group"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <span className="glass rounded-full px-2.5 py-1 text-[0.625rem] tracking-wider uppercase text-white-muted/70">
+                  {project.company}
+                </span>
+                <ArrowUpRight size={14} className="text-white-subtle/40 group-hover:text-accent-pearl/60 transition-colors duration-400" />
+              </div>
 
-                <div className="mt-auto pt-4 border-t border-glass-border">
-                  <div className="flex items-start gap-2">
-                    <TrendingUp size={14} className="text-accent-cyan mt-0.5 shrink-0" />
-                    <p className="text-xs text-accent-cyan">{project.impact}</p>
+              <h3 className="text-lg font-semibold text-white-soft mb-3 tracking-tight leading-snug">
+                {project.title}
+              </h3>
+
+              <p className="text-sm text-white-muted/70 leading-relaxed flex-1">
+                {project.description}
+              </p>
+
+              <div className="mt-5 pt-4 border-t border-glass-border">
+                <div className="flex items-start gap-2.5">
+                  <div className="w-7 h-7 rounded-full glass flex items-center justify-center shrink-0 mt-0.5">
+                    <TrendingUp size={12} className="text-accent-pearl/70" />
                   </div>
+                  <p className="text-sm text-white-muted/70 leading-relaxed">{project.impact}</p>
                 </div>
               </div>
-            </GlassCard>
+            </motion.div>
           ))}
         </div>
       </div>

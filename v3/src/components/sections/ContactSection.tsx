@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
 import { Send, Check, Loader2, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { FadeReveal } from "@/components/effects/FadeReveal";
 import { GlassCard } from "@/components/effects/GlassCard";
@@ -45,7 +44,7 @@ export function ContactSection() {
     setState("sending");
     await new Promise((r) => setTimeout(r, 1500));
     setState("success");
-    await new Promise((r) => setTimeout(r, 1000));
+    await new Promise((r) => setTimeout(r, 1200));
 
     const whatsappMsg = encodeURIComponent(
       `Hi Jawahar,\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nReason: ${form.reason}\nMessage: ${form.message}`
@@ -62,52 +61,55 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-ice/5 rounded-full blur-[150px]" />
+    <section id="contact" className="aurora-bg relative py-24 sm:py-32 overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-soft-cyan/15 rounded-full blur-[180px]" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent-soft-lavender/15 rounded-full blur-[120px]" />
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="section-container">
         <FadeReveal>
-          <span className="text-xs tracking-[0.3em] uppercase text-white-muted mb-4 block">
-            Chapter 08
-          </span>
+          <span className="chapter-label mb-5 block">Chapter 08</span>
         </FadeReveal>
 
-        <FadeReveal delay={0.2}>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-4">
-            <span className="text-gradient">Let's Build</span>{" "}
+        <FadeReveal delay={0.15}>
+          <h2 className="section-heading mb-4">
+            <span className="text-gradient">Let&apos;s Build</span>{" "}
             <span className="text-gradient-accent">Together</span>
           </h2>
         </FadeReveal>
 
-        <FadeReveal delay={0.3}>
-          <p className="text-white-muted max-w-xl mb-12">
-            Have a project, opportunity, or just want to connect? Reach out and let's create something meaningful.
+        <FadeReveal delay={0.25}>
+          <p className="section-description mb-10">
+            Have a project, opportunity, or just want to connect? Reach out and let&apos;s create something meaningful.
           </p>
         </FadeReveal>
 
-        <div className="grid md:grid-cols-5 gap-8">
-          <div className="md:col-span-2 space-y-4">
+        <div className="grid md:grid-cols-5 gap-5 lg:gap-6 max-w-5xl mx-auto">
+          <div className="md:col-span-2 space-y-3">
             {[
               { icon: Mail, label: "Email", value: personalInfo.email, href: `mailto:${personalInfo.email}` },
               { icon: Phone, label: "Phone", value: personalInfo.phone, href: `tel:${personalInfo.phone.replace(/\s/g, "")}` },
               { icon: MapPin, label: "Location", value: personalInfo.location },
               { icon: MessageCircle, label: "WhatsApp", value: personalInfo.whatsapp, href: `https://wa.me/${personalInfo.whatsapp.replace(/[+\s]/g, "")}` },
             ].map((item, i) => (
-              <GlassCard key={i} delay={0.3 + i * 0.1} hover={false}>
+              <GlassCard key={i} delay={0.2 + i * 0.08} hover={false} padding="md">
                 {item.href ? (
-                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
-                    <item.icon size={16} className="text-accent-ice" />
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3.5 group">
+                    <div className="w-9 h-9 rounded-full glass flex items-center justify-center shrink-0 group-hover:glass-hover transition-all duration-400">
+                      <item.icon size={14} className="text-accent-pearl/70" />
+                    </div>
                     <div>
-                      <p className="text-xs text-white-subtle">{item.label}</p>
-                      <p className="text-sm text-white-soft">{item.value}</p>
+                      <p className="text-[0.625rem] uppercase tracking-wider text-white-subtle/60">{item.label}</p>
+                      <p className="text-sm text-white-soft/80 mt-0.5">{item.value}</p>
                     </div>
                   </a>
                 ) : (
-                  <div className="flex items-center gap-3">
-                    <item.icon size={16} className="text-accent-ice" />
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-9 h-9 rounded-full glass flex items-center justify-center shrink-0">
+                      <item.icon size={14} className="text-accent-pearl/70" />
+                    </div>
                     <div>
-                      <p className="text-xs text-white-subtle">{item.label}</p>
-                      <p className="text-sm text-white-soft">{item.value}</p>
+                      <p className="text-[0.625rem] uppercase tracking-wider text-white-subtle/60">{item.label}</p>
+                      <p className="text-sm text-white-soft/80 mt-0.5">{item.value}</p>
                     </div>
                   </div>
                 )}
@@ -116,7 +118,7 @@ export function ContactSection() {
           </div>
 
           <div className="md:col-span-3">
-            <GlassCard hover={false}>
+            <GlassCard hover={false} padding="lg">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
@@ -125,9 +127,9 @@ export function ContactSection() {
                       placeholder="Name *"
                       value={form.name}
                       onChange={(e) => updateField("name", e.target.value)}
-                      className="w-full bg-transparent border border-glass-border rounded-xl px-4 py-3 text-sm text-white-soft placeholder-white-subtle focus:outline-none focus:border-accent-ice/50 transition-colors"
+                      className="input-base"
                     />
-                    {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
+                    {errors.name && <p className="text-xs text-error mt-1.5 ml-1">{errors.name}</p>}
                   </div>
                   <div>
                     <input
@@ -135,9 +137,9 @@ export function ContactSection() {
                       placeholder="Email *"
                       value={form.email}
                       onChange={(e) => updateField("email", e.target.value)}
-                      className="w-full bg-transparent border border-glass-border rounded-xl px-4 py-3 text-sm text-white-soft placeholder-white-subtle focus:outline-none focus:border-accent-ice/50 transition-colors"
+                      className="input-base"
                     />
-                    {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
+                    {errors.email && <p className="text-xs text-error mt-1.5 ml-1">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -147,14 +149,14 @@ export function ContactSection() {
                     placeholder="Phone"
                     value={form.phone}
                     onChange={(e) => updateField("phone", e.target.value)}
-                    className="w-full bg-transparent border border-glass-border rounded-xl px-4 py-3 text-sm text-white-soft placeholder-white-subtle focus:outline-none focus:border-accent-ice/50 transition-colors"
+                    className="input-base"
                   />
                   <input
                     type="text"
                     placeholder="Reason"
                     value={form.reason}
                     onChange={(e) => updateField("reason", e.target.value)}
-                    className="w-full bg-transparent border border-glass-border rounded-xl px-4 py-3 text-sm text-white-soft placeholder-white-subtle focus:outline-none focus:border-accent-ice/50 transition-colors"
+                    className="input-base"
                   />
                 </div>
 
@@ -164,33 +166,33 @@ export function ContactSection() {
                     placeholder="Message *"
                     value={form.message}
                     onChange={(e) => updateField("message", e.target.value)}
-                    className="w-full bg-transparent border border-glass-border rounded-xl px-4 py-3 text-sm text-white-soft placeholder-white-subtle focus:outline-none focus:border-accent-ice/50 transition-colors resize-none"
+                    className="input-base resize-none min-h-[100px]"
                   />
-                  {errors.message && <p className="text-xs text-red-400 mt-1">{errors.message}</p>}
+                  {errors.message && <p className="text-xs text-error mt-1.5 ml-1">{errors.message}</p>}
                 </div>
 
                 <button
                   type="submit"
                   disabled={state !== "idle"}
-                  className="glass rounded-xl px-6 py-3 text-sm text-white-soft hover:glass-hover transition-all duration-300 flex items-center gap-2 disabled:opacity-80 w-full justify-center"
+                  className="btn-primary rounded-xl px-8 py-3 text-sm flex items-center gap-2.5 w-full justify-center disabled:cursor-not-allowed"
                 >
                   {state === "idle" && (
-                    <>
-                      <Send size={16} />
+                    <span className="flex items-center gap-2.5">
+                      <Send size={14} />
                       Send Message
-                    </>
+                    </span>
                   )}
                   {state === "sending" && (
-                    <>
-                      <Loader2 size={16} className="animate-spin" />
+                    <span className="flex items-center gap-2.5">
+                      <Loader2 size={14} className="animate-spin" />
                       Sending...
-                    </>
+                    </span>
                   )}
                   {state === "success" && (
-                    <>
-                      <Check size={16} className="text-accent-cyan" />
+                    <span className="flex items-center gap-2.5">
+                      <Check size={14} className="text-accent-pearl" />
                       Message Sent!
-                    </>
+                    </span>
                   )}
                 </button>
               </form>

@@ -9,21 +9,29 @@ interface GlassCardProps {
   className?: string;
   delay?: number;
   hover?: boolean;
+  padding?: "sm" | "md" | "lg";
 }
 
-export function GlassCard({ children, className, delay = 0, hover = true }: GlassCardProps) {
+const paddings = {
+  sm: "p-6",
+  md: "p-8",
+  lg: "p-10",
+};
+
+export function GlassCard({ children, className, delay = 0, hover = true, padding = "md" }: GlassCardProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once: true, margin: "-8%" });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      initial={{ opacity: 0, y: 32, scale: 0.97 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] }}
       className={cn(
-        "glass rounded-2xl p-6 transition-all duration-500",
-        hover && "hover:glass-hover hover:scale-[1.02]",
+        "glass-card rounded-2xl",
+        paddings[padding],
+        hover && "cursor-default",
         className
       )}
     >

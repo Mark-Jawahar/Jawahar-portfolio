@@ -70,7 +70,7 @@ export function About() {
               <div className="relative rounded-3xl overflow-hidden glass-apple-strong">
                 <div className="aspect-[3/4] relative">
                   <img
-                    src="/about-portrait.jpg"
+                    src="/profile-pic.png"
                     alt="Jawahar A — Customer Experience Specialist"
                     className="w-full h-full object-cover img-apple-portrait"
                   />

@@ -6,39 +6,39 @@ import { Sparkles } from "lucide-react";
 
 const galleryItems = [
   {
-    src: "/hero-portrait.jpg",
-    alt: "Jawahar A — Professional Portrait",
+    src: "/profile-pic.png",
+    alt: "Jawahar A — Signature Portrait",
     label: "Executive Presence",
-    desc: "Professional portfolio headshot",
+    desc: "Primary professional portrait",
     filter: "img-apple-portrait",
   },
   {
-    src: "/about-portrait.jpg",
-    alt: "Jawahar A — Alternative Portrait",
+    src: "/hero-portrait.jpg",
+    alt: "Jawahar A — Alternate Look",
     label: "Monochrome",
     desc: "Timeless black & white aesthetic",
     filter: "img-apple-mono",
   },
   {
-    src: "/hero-portrait.jpg",
+    src: "/profile-pic.png",
     alt: "Jawahar A — Cool Tone",
     label: "Ice Blue",
     desc: "Cool-toned signature palette",
     filter: "img-apple-cool",
   },
   {
-    src: "/profile.jpg",
-    alt: "Jawahar A — Signature Look",
-    label: "Signature",
-    desc: "Brand-defining professional image",
-    filter: "img-apple-portrait",
-  },
-  {
-    src: "/about-portrait.jpg",
+    src: "/hero-portrait.jpg",
     alt: "Jawahar A — Warm Tone",
     label: "Warmth",
     desc: "Approachable amber undertones",
     filter: "img-apple-warm",
+  },
+  {
+    src: "/profile-pic.png",
+    alt: "Jawahar A — Premium Look",
+    label: "Signature",
+    desc: "Brand-defining professional image",
+    filter: "img-apple-portrait",
   },
 ];
 
@@ -66,7 +66,7 @@ export function PhotoStory() {
           >
             <div className="relative w-full h-full">
               <img
-                src="/hero-portrait.jpg"
+                src="/profile-pic.png"
                 alt="Jawahar A"
                 className="w-full h-full object-cover img-apple-portrait"
               />

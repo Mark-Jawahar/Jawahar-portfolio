@@ -12,6 +12,7 @@ interface FadeRevealProps {
   duration?: number;
   blur?: boolean;
   once?: boolean;
+  distance?: number;
 }
 
 export function FadeReveal({
@@ -22,15 +23,16 @@ export function FadeReveal({
   duration = 0.7,
   blur = false,
   once = true,
+  distance = 40,
 }: FadeRevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: "-10%" });
 
-  const directionOffset = {
-    up: { y: 60 },
-    down: { y: -60 },
-    left: { x: -60 },
-    right: { x: 60 },
+  const offsets: Record<string, Record<string, number>> = {
+    up: { y: distance },
+    down: { y: -distance },
+    left: { x: -distance },
+    right: { x: distance },
     none: {},
   };
 
@@ -39,17 +41,12 @@ export function FadeReveal({
       ref={ref}
       initial={{
         opacity: 0,
-        ...directionOffset[direction],
-        filter: blur ? "blur(8px)" : "blur(0px)",
+        ...offsets[direction],
+        filter: blur ? "blur(6px)" : "blur(0px)",
       }}
       animate={
         isInView
-          ? {
-              opacity: 1,
-              x: 0,
-              y: 0,
-              filter: "blur(0px)",
-            }
+          ? { opacity: 1, x: 0, y: 0, filter: "blur(0px)" }
           : {}
       }
       transition={{ duration, delay, ease: [0.25, 0.1, 0.25, 1] }}
