@@ -21,6 +21,7 @@ const WebGLBackground = dynamic(() => import("@/components/portfolio/WebGLBackgr
 const ScrollProgress = dynamic(() => import("@/components/portfolio/ScrollProgress").then((m) => m.ScrollProgress), { ssr: false });
 const CommandPalette = dynamic(() => import("@/components/CommandPalette").then((m) => m.CommandPalette), { ssr: false });
 const FloatingDock = dynamic(() => import("@/components/portfolio/FloatingDock").then((m) => m.FloatingDock), { ssr: false });
+const FloatingWhatsApp = dynamic(() => import("@/components/portfolio/FloatingWhatsApp").then((m) => m.FloatingWhatsApp), { ssr: false });
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
       <CommandPalette />
       <Navigation />
       <FloatingDock />
+      <FloatingWhatsApp />
       <main className="relative z-10">
         <Hero />
         <About />
