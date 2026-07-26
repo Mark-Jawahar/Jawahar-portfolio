@@ -58,7 +58,7 @@ export default function AdminLayout({
               animate={{ opacity: 1 }}
               className="text-lg font-semibold"
             >
-              <span className="text-gradient-ice">Admin</span>
+              <span className="text-gradient-accent">Admin</span>
             </motion.span>
           )}
           <button

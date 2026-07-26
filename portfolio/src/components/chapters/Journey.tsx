@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import {
   MapPin,
   Award,
-  Check,
+  ChevronDown,
 } from "lucide-react";
 import { ScrollReveal, FadeIn } from "@/components/effects/ScrollReveal";
 import { experiences } from "@/lib/resume-data";
@@ -44,27 +44,27 @@ function TimelineItem({
         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
         transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="glass-card p-6 md:p-7">
+        <div className="glass-card p-5 sm:p-6 md:p-7">
           <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
             <div>
-              <h3 className="text-base md:text-lg font-semibold text-[#f5f5f7]">
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-[#f5f5f7]">
                 {exp.company}
               </h3>
-              <p className="text-sm text-[#a8d8ea] mt-0.5">{exp.role}</p>
+              <p className="text-xs sm:text-sm text-[#a8d8ea] mt-0.5">{exp.role}</p>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-[#8e8e93] shrink-0">
-              <MapPin className="w-3 h-3" />
+            <div className="flex items-center gap-1 text-xs text-[#8e8e93] shrink-0">
+              <MapPin className="w-3 h-3" aria-hidden="true" />
               {exp.location}
             </div>
           </div>
 
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3 sm:mb-4">
             <span className="text-xs font-medium text-[#8e8e93] bg-[rgba(255,255,255,0.03)] px-2.5 py-1 rounded-full border border-[rgba(255,255,255,0.05)]">
               {exp.period}
             </span>
           </div>
 
-          <p className="text-sm text-[#8e8e93] leading-relaxed mb-4">
+          <p className="text-xs sm:text-sm text-[#8e8e93] leading-relaxed mb-4">
             {exp.description}
           </p>
 
@@ -72,12 +72,7 @@ function TimelineItem({
             <summary className="text-xs font-medium text-[#a8d8ea] cursor-pointer hover:text-[#f5f5f7] transition-colors list-none flex items-center gap-1.5">
               <span className="group-open:hidden">View details</span>
               <span className="hidden group-open:inline">Hide details</span>
-              <motion.span
-                className="inline-block"
-                animate={{ rotate: 0 }}
-              >
-                <Check className="w-3 h-3" />
-              </motion.span>
+              <ChevronDown className="w-3 h-3 transition-transform duration-300 group-open:rotate-180" aria-hidden="true" />
             </summary>
 
             <div className="mt-4 space-y-3">
@@ -91,7 +86,7 @@ function TimelineItem({
                       key={a}
                       className="inline-flex items-center gap-1 text-xs text-[#a8d8ea] bg-[rgba(168,216,234,0.06)] px-2.5 py-1 rounded-full border border-[rgba(168,216,234,0.08)]"
                     >
-                      <Award className="w-3 h-3" />
+                      <Award className="w-3 h-3" aria-hidden="true" />
                       {a}
                     </span>
                   ))}

@@ -4,6 +4,7 @@
   --color-background: #050505;
   --color-background-secondary: #090909;
   --color-foreground: #f5f5f7;
+  --color-card: var(--color-background-secondary);
   --color-surface: rgba(255, 255, 255, 0.04);
   --color-surface-hover: rgba(255, 255, 255, 0.07);
   --color-border: rgba(255, 255, 255, 0.08);
@@ -174,13 +175,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
 .glass-card:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(168, 216, 234, 0.06);
+  transform: perspective(800px) translateY(-3px) rotateX(0.5deg);
+  box-shadow: 0 12px 48px rgba(168, 216, 234, 0.08);
 }
 
 .text-gradient {
@@ -277,8 +279,8 @@ body {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(245, 245, 247, 0.12);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(245, 245, 247, 0.15);
 }
 
 .btn-primary:active {
@@ -305,7 +307,8 @@ body {
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(168, 216, 234, 0.06);
 }
 
 .btn-secondary:active {
@@ -405,6 +408,12 @@ body {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+*:focus-visible {
+  outline: 2px solid rgba(168, 216, 234, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {

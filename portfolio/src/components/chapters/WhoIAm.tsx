@@ -38,10 +38,10 @@ export function WhoIAm() {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-5 gap-10 md:gap-16 mt-8">
+        <div className="grid md:grid-cols-5 gap-8 md:gap-16 mt-8">
           {/* Portrait card */}
           <ScrollReveal className="md:col-span-2" delay={0.15}>
-            <div className="glass-panel-strong p-6 md:p-8 text-center">
+            <div className="glass-panel-strong p-5 sm:p-6 md:p-8 text-center">
               <div className="relative w-[120px] h-[120px] mx-auto mb-5">
                 <div className="portrait-frame w-full h-full">
                   <div className="portrait-glow" />
@@ -59,12 +59,7 @@ export function WhoIAm() {
               <h3 className="text-lg font-semibold text-[#f5f5f7]">
                 {profile.name}
               </h3>
-              <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.06)]">
-                <p className="text-[0.7rem] text-[#8e8e93] italic leading-relaxed">
-                  Design, AI, and website building efforts are personal learning
-                  projects and explorations.
-                </p>
-              </div>
+              <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.06)]" />
             </div>
           </ScrollReveal>
 
@@ -79,12 +74,12 @@ export function WhoIAm() {
             </ScrollReveal>
 
             {/* Highlights grid */}
-            <div className="grid sm:grid-cols-2 gap-3 mt-8">
+            <div className="grid sm:grid-cols-2 gap-2 sm:gap-3 mt-8">
               {highlights.map((h, i) => (
                 <FadeIn key={h.title} delay={0.3 + i * 0.1}>
                   <div className="glass-card p-5">
                     <div className="w-9 h-9 rounded-lg bg-[rgba(168,216,234,0.06)] flex items-center justify-center mb-3">
-                      <h.icon className="w-4 h-4 text-[#a8d8ea]" />
+                      <h.icon className="w-4 h-4 text-[#a8d8ea]" aria-hidden="true" />
                     </div>
                     <h4 className="text-sm font-medium text-[#f5f5f7] mb-2">
                       {h.title}

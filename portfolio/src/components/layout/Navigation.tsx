@@ -62,6 +62,15 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
   const hidden = direction === "down" && scrolled;
 
   return (
@@ -112,7 +121,7 @@ export function Navigation() {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1 p-2"
+          className="md:hidden flex flex-col items-center justify-center gap-1 w-11 h-11 -mr-2 rounded-xl hover:bg-[rgba(255,255,255,0.03)] transition-colors"
           aria-label="Menu"
         >
           <span
@@ -139,12 +148,13 @@ export function Navigation() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[rgba(5,5,5,0.95)] backdrop-blur-2xl border-b border-[rgba(255,255,255,0.04)] overflow-hidden"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden bg-[rgba(5,5,5,0.92)] backdrop-blur-2xl border-b border-[rgba(255,255,255,0.04)]"
           >
-            <div className="flex flex-col px-6 py-3 gap-1">
+            <div className="flex flex-col px-5 py-3 gap-0.5">
               {chapters.map((ch) => {
                 const isActive = activeSection === ch.id;
                 return (
@@ -155,7 +165,7 @@ export function Navigation() {
                       setMobileOpen(false);
                     }}
                     className={cn(
-                      "px-3 py-2.5 text-sm font-medium text-left rounded-lg transition-colors",
+                      "px-4 py-3 text-sm font-medium text-left rounded-xl transition-colors",
                       isActive
                         ? "text-[#f5f5f7] bg-[rgba(168,216,234,0.08)]"
                         : "text-[#8e8e93] hover:text-[#f5f5f7]"

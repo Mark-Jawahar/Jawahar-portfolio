@@ -43,7 +43,7 @@ export function Craft() {
         </ScrollReveal>
 
         {/* Skills */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-12">
           {skills.map((skill, i) => {
             const Icon = iconMap[skill.icon] || Users;
             return (
@@ -51,7 +51,7 @@ export function Craft() {
                 <div className="glass-card p-5 h-full">
                   <div className="flex items-center gap-2.5 mb-3">
                     <div className="w-8 h-8 rounded-lg bg-[rgba(168,216,234,0.06)] flex items-center justify-center shrink-0">
-                      <Icon className="w-4 h-4 text-[#a8d8ea]" />
+                      <Icon className="w-4 h-4 text-[#a8d8ea]" aria-hidden="true" />
                     </div>
                     <h3 className="text-sm font-medium text-[#f5f5f7]">
                       {skill.category}
@@ -84,7 +84,7 @@ export function Craft() {
           </p>
         </ScrollReveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {projects.map((project, i) => (
             <FadeIn key={project.title} delay={0.2 + i * 0.08}>
               <div className="glass-card p-5 h-full flex flex-col">

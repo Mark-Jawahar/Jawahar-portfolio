@@ -32,22 +32,22 @@ type DState = "idle" | "compressing" | "preparing" | "downloading" | "success";
 
 const iconMap: Record<string, React.ElementType> = {
   Users: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
   ),
   BarChart3: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
   ),
   Wrench: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
   ),
   Globe: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
   ),
   Brain: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a6 6 0 0 0-6 6c0 2.4 1.5 4.5 3.7 5.4l.3.1v3.5a1 1 0 0 0 2 0v-3.5l.3-.1A6 6 0 0 0 18 8a6 6 0 0 0-6-6z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M6 6H4"/><path d="M18 6h2"/><path d="M4 12h2"/><path d="M18 12h2"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2a6 6 0 0 0-6 6c0 2.4 1.5 4.5 3.7 5.4l.3.1v3.5a1 1 0 0 0 2 0v-3.5l.3-.1A6 6 0 0 0 18 8a6 6 0 0 0-6-6z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M6 6H4"/><path d="M18 6h2"/><path d="M4 12h2"/><path d="M18 12h2"/></svg>
   ),
   GraduationCap: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
   ),
 };
 
@@ -119,7 +119,7 @@ function ExpCard({ exp, index }: { exp: typeof experiences[0]; index: number }) 
         >
           <span>{open ? "Hide details" : "View details"}</span>
           <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-            <ChevronDown className="w-3 h-3" />
+            <ChevronDown className="w-3 h-3" aria-hidden="true" />
           </motion.span>
         </button>
 
@@ -171,7 +171,7 @@ function SkillCategory({ skill, index }: { skill: typeof skills[0]; index: numbe
           <span className="text-xs font-medium text-[#f5f5f7]">{skill.category}</span>
         </div>
         <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronDown className="w-3.5 h-3.5 text-[#8e8e93]" />
+          <ChevronDown className="w-3.5 h-3.5 text-[#8e8e93]" aria-hidden="true" />
         </motion.div>
       </button>
 
@@ -286,7 +286,7 @@ export function ResumeChapter() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative"
             >
-              <div className="glass-panel-strong p-6 md:p-8 lg:p-10 relative overflow-hidden rounded-[20px]">
+              <div className="glass-panel-strong p-5 sm:p-6 md:p-8 lg:p-10 relative overflow-hidden rounded-[20px]">
                 <ContainerSpotlight />
 
                 {/* glass reflection sweep */}
@@ -296,7 +296,7 @@ export function ResumeChapter() {
 
                 <div className="relative z-[2]">
                   {/* ── Header ── */}
-                  <div className="flex flex-col md:flex-row items-start gap-5 md:gap-6">
+                  <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
                     {/* portrait */}
                     <div className="relative w-[72px] h-[72px] shrink-0">
                       <div className="portrait-frame w-full h-full">
@@ -313,7 +313,7 @@ export function ResumeChapter() {
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-start justify-between gap-4">
                         <div>
-                          <h2 className="text-xl md:text-2xl font-semibold text-[#f5f5f7] tracking-tight">
+                          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#f5f5f7] tracking-tight">
                             {profile.name}
                           </h2>
                           <p className="text-sm text-gradient-accent mt-0.5">
@@ -321,11 +321,11 @@ export function ResumeChapter() {
                           </p>
                           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-[0.7rem] text-[#8e8e93]">
                             <span className="flex items-center gap-1">
-                              <MapPin className="w-3 h-3" />
+                              <MapPin className="w-3 h-3" aria-hidden="true" />
                               {profile.location}
                             </span>
                             <span className="flex items-center gap-1">
-                              <Briefcase className="w-3 h-3" />
+                              <Briefcase className="w-3 h-3" aria-hidden="true" />
                               {profile.experience}
                             </span>
                             <span className="flex items-center gap-1.5">
@@ -340,16 +340,17 @@ export function ResumeChapter() {
                           <button
                             onClick={handleDownload}
                             disabled={dState === "downloading" || dState === "preparing" || dState === "compressing"}
+                            aria-label="Download Resume"
                             className="btn-primary relative overflow-hidden justify-center min-w-[48px] min-h-[48px] w-[48px] h-[48px] rounded-full p-0 flex items-center justify-center"
                           >
                             <AnimatePresence mode="wait">
                               {dState === "idle" && (
                                 <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center justify-center">
-                                  <Download className="w-4 h-4" />
+                                  <Download className="w-4 h-4" aria-hidden="true" />
                                 </motion.span>
                               )}
                               {dState === "compressing" && (
-                                <motion.svg key="compressing" className="w-5 h-5 -rotate-90" viewBox="0 0 36 36" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                                <motion.svg key="compressing" className="w-5 h-5 -rotate-90" viewBox="0 0 36 36" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} aria-hidden="true">
                                   <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="2" />
                                   <motion.circle cx="18" cy="18" r="15.5" fill="none" stroke="#050505" strokeWidth="2" strokeLinecap="round"
                                     initial={{ pathLength: 0 }}
@@ -360,17 +361,17 @@ export function ResumeChapter() {
                               )}
                               {dState === "preparing" && (
                                 <motion.span key="preparing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                  <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                                 </motion.span>
                               )}
                               {dState === "downloading" && (
                                 <motion.span key="downloading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                                  <Loader2 className="w-4 h-4 animate-spin text-green-400" />
+                                  <Loader2 className="w-4 h-4 animate-spin text-green-400" aria-hidden="true" />
                                 </motion.span>
                               )}
                               {dState === "success" && (
                                 <motion.span key="success" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-green-400">
-                                  <Check className="w-4 h-4" />
+                                  <Check className="w-4 h-4" aria-hidden="true" />
                                 </motion.span>
                               )}
                             </AnimatePresence>
@@ -386,12 +387,12 @@ export function ResumeChapter() {
 
                       {/* Contact row */}
                       <div className="flex flex-wrap items-center gap-3 mt-3 text-[0.65rem] text-[#8e8e93]">
-                        <a href={`mailto:${profile.email}`} className="flex items-center gap-1 hover:text-[#f5f5f7] transition-colors">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <a href={`mailto:${profile.email}`} className="flex items-center gap-1 hover:text-[#f5f5f7] transition-colors" aria-label={`Email ${profile.email}`}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                           {profile.email}
                         </a>
-                        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#f5f5f7] transition-colors">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[#f5f5f7] transition-colors" aria-label="LinkedIn Profile">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                           {profile.linkedinDisplay}
                         </a>
                       </div>
@@ -434,7 +435,7 @@ export function ResumeChapter() {
                       >
                         <span className="flex items-center justify-center gap-1.5">
                           View Complete Resume
-                          <ChevronDown className="w-3.5 h-3.5" />
+                          <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />
                         </span>
                       </motion.button>
                     )}
@@ -446,7 +447,7 @@ export function ResumeChapter() {
                         animate={{ opacity: 1 }}
                       >
                         Show less
-                        <ChevronDown className="w-3 h-3 rotate-180" />
+                        <ChevronDown className="w-3 h-3 rotate-180" aria-hidden="true" />
                       </motion.button>
                     )}
                   </div>
@@ -466,7 +467,7 @@ export function ResumeChapter() {
                     <h3 className="text-[0.6rem] font-semibold text-[#8e8e93] uppercase tracking-widest mb-3">Education</h3>
                     <div className="glass-card p-4 flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center shrink-0">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a8d8ea" strokeWidth="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a8d8ea" strokeWidth="2" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                       </div>
                       <div>
                         <p className="text-sm font-medium text-[#f5f5f7]">{education.degree}</p>
@@ -483,7 +484,7 @@ export function ResumeChapter() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs text-[#a8d8ea] hover:text-[#f5f5f7] transition-colors"
                     >
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                       Open PDF version
                     </a>
                     <span className="text-[0.55rem] text-[#8e8e93]">

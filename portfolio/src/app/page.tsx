@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <ScrollToTop />
-      <div className="noise-overlay" />
+      <div className="noise-overlay" aria-hidden="true" />
       <AuroraBackground />
 
       <Navigation />

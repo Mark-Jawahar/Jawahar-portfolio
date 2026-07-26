@@ -9,7 +9,7 @@ export function FloatingWhatsApp() {
     <div className="fixed bottom-6 right-5 z-40 flex flex-col items-center gap-3">
       <button
         onClick={() => scrollToTop(true)}
-        className="w-9 h-9 rounded-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.15)] transition-all duration-300 backdrop-blur-xl text-[#8e8e93] hover:text-[#f5f5f7]"
+        className="w-11 h-11 rounded-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.15)] transition-all duration-300 backdrop-blur-xl text-[#8e8e93] hover:text-[#f5f5f7]"
         aria-label="Back to top"
       >
         <ArrowUp className="w-4 h-4" />

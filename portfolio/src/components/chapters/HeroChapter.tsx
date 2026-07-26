@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, Download, Sparkles } from "lucide-react";
 import { profile, highlights } from "@/lib/resume-data";
 import { scrollToSection } from "@/lib/utils";
@@ -64,6 +64,9 @@ function TypewriterRoles({ roles }: { roles: string[] }) {
 }
 
 export function HeroChapter() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const portraitRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
   const [ripples, setRipples] = useState<{ x: number; y: number; id: number }[]>([]);
   const rippleId = useRef(0);
 
@@ -76,21 +79,72 @@ export function HeroChapter() {
     setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 600);
   }, []);
 
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
+
+    const section = sectionRef.current;
+    const portrait = portraitRef.current;
+    if (!section || !portrait) return;
+
+    let raf: number;
+    const spring = { tension: 120, friction: 14 };
+    let velX = 0, velY = 0;
+    let curX = 0, curY = 0;
+
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const rect = portrait.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const targetX = ((e.clientX - centerX) / (rect.width / 2)) * 5;
+        const targetY = ((e.clientY - centerY) / (rect.height / 2)) * -5;
+        velX += (targetX - curX) * 0.08;
+        velY += (targetY - curY) * 0.08;
+        velX *= 0.9;
+        velY *= 0.9;
+        curX += velX;
+        curY += velY;
+        portrait.style.transform = `perspective(800px) rotateY(${curX}deg) rotateX(${curY}deg)`;
+      });
+    };
+
+    const onLeave = () => {
+      cancelAnimationFrame(raf);
+      curX = 0; velX = 0;
+      curY = 0; velY = 0;
+      portrait.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
+      portrait.style.transform = "perspective(800px) rotateY(0deg) rotateX(0deg)";
+      setTimeout(() => { portrait.style.transition = ""; }, 600);
+    };
+
+    section.addEventListener("mousemove", onMove, { passive: true });
+    section.addEventListener("mouseleave", onLeave, { passive: true });
+
+    return () => {
+      section.removeEventListener("mousemove", onMove);
+      section.removeEventListener("mouseleave", onLeave);
+      cancelAnimationFrame(raf);
+    };
+  }, [prefersReducedMotion]);
+
   return (
     <section
+      ref={sectionRef}
       id="introduction"
-      className="relative min-h-screen flex flex-col items-center justify-center px-5 pt-20 md:pt-24 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-5 pt-16 sm:pt-20 md:pt-24 overflow-hidden"
     >
       <MouseGlow />
 
       {/* Portrait */}
       <motion.div
-        className="relative mb-8 md:mb-10"
+        className="relative mb-6 sm:mb-8 md:mb-10"
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="relative w-[160px] h-[160px] md:w-[200px] md:h-[200px]">
+        <div ref={portraitRef} className="relative w-[130px] h-[130px] sm:w-[160px] sm:h-[160px] md:w-[200px] md:h-[200px]">
           <div className="portrait-frame w-full h-full">
             <div className="portrait-glow" />
             <img
@@ -128,7 +182,7 @@ export function HeroChapter() {
 
       {/* Open to opportunities */}
       <motion.div
-        className="flex items-center justify-center gap-2 mt-6"
+        className="flex items-center justify-center gap-2 mt-5 sm:mt-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -141,7 +195,7 @@ export function HeroChapter() {
 
       {/* Headline */}
       <motion.p
-        className="text-[clamp(0.9rem,1.15vw,1rem)] text-[#8e8e93] leading-relaxed max-w-[600px] text-center mt-6"
+        className="text-[clamp(0.9rem,1.15vw,1rem)] text-[#8e8e93] leading-relaxed max-w-[600px] text-center mt-5 sm:mt-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
@@ -151,7 +205,7 @@ export function HeroChapter() {
 
       {/* CTA Buttons */}
       <motion.div
-        className="flex flex-wrap items-center justify-center gap-3 mt-8"
+        className="flex flex-wrap items-center justify-center gap-3 mt-6 sm:mt-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -163,7 +217,7 @@ export function HeroChapter() {
           }}
           className="btn-primary relative overflow-hidden"
         >
-          <Sparkles className="w-4 h-4" />
+          <Sparkles className="w-4 h-4" aria-hidden="true" />
           Let&apos;s Connect
           {ripples.map((r) => (
             <span
@@ -178,14 +232,14 @@ export function HeroChapter() {
           download
           className="btn-secondary"
         >
-          <Download className="w-4 h-4" />
+          <Download className="w-4 h-4" aria-hidden="true" />
           Resume
         </a>
       </motion.div>
 
       {/* Stats row */}
       <motion.div
-        className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-12 md:mt-14"
+        className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 md:gap-10 mt-10 sm:mt-12 md:mt-14"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.1 }}
@@ -210,7 +264,7 @@ export function HeroChapter() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown className="w-5 h-5" />
+          <ArrowDown className="w-5 h-5" aria-hidden="true" />
         </motion.div>
       </motion.button>
     </section>

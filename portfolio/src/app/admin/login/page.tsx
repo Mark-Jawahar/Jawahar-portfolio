@@ -44,7 +44,7 @@ export default function AdminLogin() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="relative w-full max-w-md"
       >
-        <div className="glass-strong rounded-3xl p-8 md:p-10 shadow-2xl">
+        <div className="glass-panel-strong rounded-3xl p-8 md:p-10">
           <div className="text-center mb-8">
             <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-[#2563eb] to-[#7c3aed] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#2563eb]/20">
               <Lock className="h-8 w-8 text-white" />

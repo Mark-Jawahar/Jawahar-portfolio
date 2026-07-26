@@ -38,7 +38,7 @@ function StatCard({ stat, delay }: { stat: (typeof stats)[0]; delay: number }) {
   }, [inView, num, delay]);
 
   return (
-    <div ref={ref} className="glass-card p-6 md:p-8 text-center group relative overflow-hidden">
+    <div ref={ref} className="glass-card p-5 sm:p-6 md:p-8 text-center group relative overflow-hidden">
       <div className="relative z-10">
         <div className="stat-value tracking-tight">
           {count}
@@ -81,7 +81,7 @@ export function Impact() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-12">
           {stats.map((stat, i) => (
             <StatCard key={stat.label} stat={stat} delay={0.2 + i * 0.08} />
           ))}

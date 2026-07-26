@@ -118,7 +118,7 @@ export function ConnectChapter() {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-5 gap-10 md:gap-16 mt-8">
+        <div className="grid md:grid-cols-5 gap-8 md:gap-16 mt-8">
           {/* Info */}
           <ScrollReveal className="md:col-span-2" delay={0.1}>
             <h2 className="chapter-title">Let&apos;s build together</h2>
@@ -133,14 +133,14 @@ export function ConnectChapter() {
                 className="flex items-center gap-3 text-sm text-[#8e8e93] hover:text-[#f5f5f7] transition-colors"
               >
                 <div className="w-9 h-9 rounded-lg bg-[rgba(168,216,234,0.06)] flex items-center justify-center shrink-0">
-                  <Mail className="w-4 h-4 text-[#a8d8ea]" />
+                  <Mail className="w-4 h-4 text-[#a8d8ea]" aria-hidden="true" />
                 </div>
                 <span>{profile.email}</span>
               </a>
 
               <div className="flex items-center gap-3 text-sm text-[#8e8e93]">
                 <div className="w-9 h-9 rounded-lg bg-[rgba(168,216,234,0.06)] flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4 text-[#a8d8ea]" />
+                  <MapPin className="w-4 h-4 text-[#a8d8ea]" aria-hidden="true" />
                 </div>
                 <span>{profile.location}</span>
               </div>
@@ -150,7 +150,7 @@ export function ConnectChapter() {
                 className="flex items-center gap-3 text-sm text-[#8e8e93] hover:text-[#f5f5f7] transition-colors"
               >
                 <div className="w-9 h-9 rounded-lg bg-[rgba(168,216,234,0.06)] flex items-center justify-center shrink-0">
-                  <Phone className="w-4 h-4 text-[#a8d8ea]" />
+                  <Phone className="w-4 h-4 text-[#a8d8ea]" aria-hidden="true" />
                 </div>
                 <span>{profile.phone}</span>
               </a>
@@ -169,7 +169,7 @@ export function ConnectChapter() {
                   exit={{ opacity: 0 }}
                 >
                   <div className="w-16 h-16 rounded-full bg-[rgba(168,216,234,0.1)] flex items-center justify-center mx-auto mb-4">
-                    <Check className="w-7 h-7 text-[#a8d8ea]" />
+                    <Check className="w-7 h-7 text-[#a8d8ea]" aria-hidden="true" />
                   </div>
                   <h3 className="text-lg font-semibold text-[#f5f5f7] mb-2">
                     Message sent!
@@ -182,7 +182,7 @@ export function ConnectChapter() {
                 <motion.form
                   key="form"
                   onSubmit={handleSubmit}
-                  className="glass-panel-strong p-6 md:p-8 space-y-4"
+                  className="glass-panel-strong p-5 sm:p-6 md:p-8 space-y-4"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -192,6 +192,7 @@ export function ConnectChapter() {
                       <input
                         type="text"
                         placeholder="Your Name *"
+                        aria-label="Your Name"
                         value={form.name}
                         onChange={(e) => updateField("name", e.target.value)}
                         className={`${inputClass} ${errors.name ? "border-red-400/30" : ""}`}
@@ -206,6 +207,7 @@ export function ConnectChapter() {
                       <input
                         type="email"
                         placeholder="Your Email *"
+                        aria-label="Your Email"
                         value={form.email}
                         onChange={(e) => updateField("email", e.target.value)}
                         className={`${inputClass} ${errors.email ? "border-red-400/30" : ""}`}
@@ -222,6 +224,7 @@ export function ConnectChapter() {
                     <input
                       type="tel"
                       placeholder="Phone Number"
+                      aria-label="Phone Number"
                       value={form.phone}
                       onChange={(e) => updateField("phone", e.target.value)}
                       className={inputClass}
@@ -229,6 +232,7 @@ export function ConnectChapter() {
                     <select
                       value={form.reason}
                       onChange={(e) => updateField("reason", e.target.value)}
+                      aria-label="Select Reason"
                       className={`${inputClass} appearance-none cursor-pointer`}
                     >
                       <option value="" disabled>
@@ -246,6 +250,7 @@ export function ConnectChapter() {
                     <textarea
                       rows={4}
                       placeholder="Your Message *"
+                      aria-label="Your Message"
                       value={form.message}
                       onChange={(e) => updateField("message", e.target.value)}
                       className={`${inputClass} resize-none ${errors.message ? "border-red-400/30" : ""}`}
@@ -265,12 +270,12 @@ export function ConnectChapter() {
                   >
                     {state === "sending" ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                         Sending...
                       </>
                     ) : (
                       <>
-                        <Send className="w-4 h-4" />
+                        <Send className="w-4 h-4" aria-hidden="true" />
                         Send via WhatsApp
                       </>
                     )}
