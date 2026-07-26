@@ -1,30 +1,38 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/smooth-scroll";
+import { Header } from "@/components/header";
 
 const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
-  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Jawahar A | Assistant Team Lead – Customer Experience",
+  title: "Jawahar A | Customer Experience Specialist",
   description:
-    "Customer experience leader with 5+ years of expertise in customer success, operations, team leadership, and process excellence. Based in Bengaluru, India.",
+    "Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, and Client Relationship Management across EdTech, Real Estate, and Financial Services.",
   keywords: [
-    "Jawahar A",
-    "Customer Success",
     "Customer Experience",
-    "Team Leadership",
-    "Operations",
-    "Hello Mentor",
+    "Customer Success",
+    "Customer Onboarding",
+    "Client Relationship Management",
+    "Jawahar A",
     "Bengaluru",
   ],
   authors: [{ name: "Jawahar A" }],
   openGraph: {
-    title: "Jawahar A | Assistant Team Lead – Customer Experience",
+    title: "Jawahar A | Customer Experience Specialist",
     description:
-      "Customer experience leader with 5+ years of expertise in customer success, operations, team leadership, and process excellence.",
+      "Customer Experience Specialist with 5+ years of experience delivering seamless customer experiences across EdTech, Real Estate, and Financial Services.",
     type: "website",
     locale: "en_US",
   },
@@ -36,8 +44,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased">{children}</body>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} dark`}>
+      <body className="min-h-screen flex flex-col">
+        <SmoothScroll>
+          <Header />
+          <main className="flex-1">{children}</main>
+        </SmoothScroll>
+      </body>
     </html>
   );
 }
