@@ -121,25 +121,26 @@ export function Navigation() {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col items-center justify-center gap-1 w-11 h-11 -mr-2 rounded-xl hover:bg-[rgba(255,255,255,0.03)] transition-colors"
-          aria-label="Menu"
+          className="md:hidden flex flex-col items-center justify-center gap-[5px] w-11 h-11 min-w-[44px] min-h-[44px] -mr-2 rounded-xl hover:bg-[rgba(255,255,255,0.03)] active:bg-[rgba(255,255,255,0.06)] transition-colors"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
         >
           <span
             className={cn(
-              "block w-5 h-[1.5px] bg-[#8e8e93] transition-all duration-300",
-              mobileOpen && "rotate-45 translate-y-[5.5px]"
+              "block w-[18px] h-[1.5px] bg-[#8e8e93] transition-all duration-300 origin-center",
+              mobileOpen && "rotate-45 translate-y-[6.5px]"
             )}
           />
           <span
             className={cn(
-              "block w-5 h-[1.5px] bg-[#8e8e93] transition-all duration-300",
-              mobileOpen && "opacity-0"
+              "block w-[18px] h-[1.5px] bg-[#8e8e93] transition-all duration-300",
+              mobileOpen && "opacity-0 scale-0"
             )}
           />
           <span
             className={cn(
-              "block w-5 h-[1.5px] bg-[#8e8e93] transition-all duration-300",
-              mobileOpen && "-rotate-45 -translate-y-[5.5px]"
+              "block w-[18px] h-[1.5px] bg-[#8e8e93] transition-all duration-300 origin-center",
+              mobileOpen && "-rotate-45 -translate-y-[6.5px]"
             )}
           />
         </button>
@@ -147,39 +148,49 @@ export function Navigation() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-[rgba(5,5,5,0.92)] backdrop-blur-2xl border-b border-[rgba(255,255,255,0.04)]"
-          >
-            <div className="flex flex-col px-5 py-3 gap-0.5">
-              {chapters.map((ch) => {
-                const isActive = activeSection === ch.id;
-                return (
-                  <button
-                    key={ch.id}
-                    onClick={() => {
-                      scrollToSection(ch.id);
-                      setMobileOpen(false);
-                    }}
-                    className={cn(
-                      "px-4 py-3 text-sm font-medium text-left rounded-xl transition-colors",
-                      isActive
-                        ? "text-[#f5f5f7] bg-[rgba(168,216,234,0.08)]"
-                        : "text-[#8e8e93] hover:text-[#f5f5f7]"
-                    )}
-                  >
-                    <span className="text-[0.65rem] text-[#a8d8ea] opacity-60 mr-2 font-mono">
-                      {ch.number}
-                    </span>
-                    {ch.label}
-                  </button>
-                );
-              })}
-            </div>
-          </motion.div>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden fixed inset-0 top-14 bg-[rgba(0,0,0,0.4)] backdrop-blur-sm z-40"
+              onClick={() => setMobileOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -8, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.96 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden relative z-50 bg-[rgba(5,5,5,0.88)] backdrop-blur-2xl border-b border-[rgba(255,255,255,0.04)] shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+            >
+              <div className="flex flex-col px-4 py-2 gap-0.5">
+                {chapters.map((ch) => {
+                  const isActive = activeSection === ch.id;
+                  return (
+                    <button
+                      key={ch.id}
+                      onClick={() => {
+                        scrollToSection(ch.id);
+                        setMobileOpen(false);
+                      }}
+                      className={cn(
+                        "flex items-center min-h-[44px] px-4 text-sm font-medium text-left rounded-xl transition-all duration-200",
+                        isActive
+                          ? "text-[#f5f5f7] bg-[rgba(168,216,234,0.08)] border border-[rgba(168,216,234,0.1)]"
+                          : "text-[#8e8e93] hover:text-[#f5f5f7] hover:bg-[rgba(255,255,255,0.02)]"
+                      )}
+                    >
+                      <span className="text-[0.65rem] text-[#a8d8ea] opacity-60 mr-2 font-mono shrink-0">
+                        {ch.number}
+                      </span>
+                      <span>{ch.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.header>

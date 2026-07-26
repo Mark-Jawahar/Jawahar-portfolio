@@ -9,7 +9,6 @@ import {
   Phone,
   Check,
   Loader2,
-  MessageCircle,
 } from "lucide-react";
 import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { profile } from "@/lib/resume-data";

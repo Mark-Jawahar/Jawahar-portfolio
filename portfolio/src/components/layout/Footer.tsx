@@ -39,10 +39,10 @@ export function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[rgba(255,255,255,0.07)] hover:border-[rgba(255,255,255,0.12)] transition-all duration-300 text-[#8e8e93] hover:text-[#f5f5f7]"
+                className="w-11 h-11 md:w-10 md:h-10 rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] flex items-center justify-center hover:bg-[rgba(255,255,255,0.07)] hover:border-[rgba(255,255,255,0.12)] transition-all duration-300 text-[#8e8e93] hover:text-[#f5f5f7]"
                 aria-label={s.label}
               >
-                <s.icon className="w-4 h-4" />
+                <s.icon className="w-[18px] h-[18px] md:w-4 md:h-4" />
               </a>
             ))}
           </div>

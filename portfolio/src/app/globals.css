@@ -139,15 +139,21 @@ body {
 }
 
 .chapter-title {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
   font-weight: 600;
   letter-spacing: -0.025em;
   line-height: 1.1;
   color: var(--color-pearl);
 }
 
+@media (min-width: 420px) {
+  .chapter-title {
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+  }
+}
+
 .chapter-subtitle {
-  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-size: clamp(0.85rem, 1.5vw, 1.15rem);
   line-height: 1.6;
   color: var(--color-muted);
   max-width: 65ch;
@@ -184,6 +190,15 @@ body {
   border-color: rgba(255, 255, 255, 0.1);
   transform: perspective(800px) translateY(-3px) rotateX(0.5deg);
   box-shadow: 0 12px 48px rgba(168, 216, 234, 0.08);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 .text-gradient {
@@ -288,6 +303,13 @@ body {
   transform: translateY(0px) scale(0.98);
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -314,6 +336,15 @@ body {
 
 .btn-secondary:active {
   transform: translateY(0px) scale(0.98);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 .btn-ripple {
@@ -378,7 +409,14 @@ body {
 }
 
 .chapter-section {
-  padding: clamp(4rem, 8vw, 8rem) 1.5rem;
+  padding: clamp(3rem, 8vw, 8rem) 1rem;
+}
+
+@media (min-width: 420px) {
+  .chapter-section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
 }
 
 .chapter-container {

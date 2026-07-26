@@ -43,8 +43,10 @@ function TypewriterRoles({ roles }: { roles: string[] }) {
     if (!deleting && text === current) {
       timeout = setTimeout(() => setDeleting(true), 2500);
     } else if (deleting && text === "") {
-      setDeleting(false);
-      setIndex((i) => (i + 1) % roles.length);
+      timeout = setTimeout(() => {
+        setDeleting(false);
+        setIndex((i) => (i + 1) % roles.length);
+      }, 100);
     } else {
       const next = deleting
         ? current.substring(0, text.length - 1)
@@ -88,7 +90,6 @@ export function HeroChapter() {
     if (!section || !portrait) return;
 
     let raf: number;
-    const spring = { tension: 120, friction: 14 };
     let velX = 0, velY = 0;
     let curX = 0, curY = 0;
 

@@ -18,7 +18,7 @@ import {
   ExternalLink,
   ChevronDown,
 } from "lucide-react";
-import { ScrollReveal, FadeIn } from "@/components/effects/ScrollReveal";
+import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import {
   profile,
   experiences,
@@ -29,6 +29,8 @@ import {
 
 /* ─── Download button states ─── */
 type DState = "idle" | "compressing" | "preparing" | "downloading" | "success";
+
+const NullIcon = () => null;
 
 const iconMap: Record<string, React.ElementType> = {
   Users: () => (
@@ -67,7 +69,7 @@ function ContainerSpotlight() {
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
-  return <div ref={ref} className="pointer-events-none absolute inset-0 z-0 rounded-[20px]" style={{ background: "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(168,216,234,0.04) 0%, transparent 70%)" }} />;
+  return <div ref={ref} className="pointer-events-none absolute inset-0 z-0 rounded-[16px] md:rounded-[20px]" style={{ background: "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(168,216,234,0.04) 0%, transparent 70%)" }} />;
 }
 
 /* ─── Single experience timeline card ─── */
@@ -87,9 +89,9 @@ function ExpCard({ exp, index }: { exp: typeof experiences[0]; index: number }) 
       {/* timeline stalk */}
       {index < 2 && <div className="absolute left-[11px] top-10 bottom-0 w-px bg-gradient-to-b from-[rgba(168,216,234,0.2)] to-transparent" />}
 
-      <div className="glass-card p-5 md:p-6 ml-8 relative overflow-hidden transition-all duration-500 group-hover:border-[rgba(168,216,234,0.15)] group-hover:shadow-[0_0_30px_rgba(168,216,234,0.04)]">
+      <div className="glass-card p-4 md:p-6 ml-7 md:ml-8 relative overflow-hidden transition-all duration-500 group-hover:border-[rgba(168,216,234,0.15)] group-hover:shadow-[0_0_30px_rgba(168,216,234,0.04)]">
         {/* timeline dot */}
-        <div className="absolute -left-8 top-6 w-[10px] h-[10px] rounded-full bg-[#a8d8ea] ring-[3px] ring-[rgba(168,216,234,0.12)]" />
+        <div className="absolute -left-7 md:-left-8 top-5 md:top-6 w-[10px] h-[10px] rounded-full bg-[#a8d8ea] ring-[3px] ring-[rgba(168,216,234,0.12)]" />
 
         <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
           <div>
@@ -150,7 +152,7 @@ function ExpCard({ exp, index }: { exp: typeof experiences[0]; index: number }) 
 /* ─── Skill category with expand ─── */
 function SkillCategory({ skill, index }: { skill: typeof skills[0]; index: number }) {
   const [open, setOpen] = useState(index === 0 || index === 1);
-  const Icon = iconMap[skill.icon] || (() => null);
+  const Icon = iconMap[skill.icon] || NullIcon;
 
   return (
     <motion.div
@@ -286,11 +288,11 @@ export function ResumeChapter() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative"
             >
-              <div className="glass-panel-strong p-5 sm:p-6 md:p-8 lg:p-10 relative overflow-hidden rounded-[20px]">
+              <div className="glass-panel-strong p-4 sm:p-5 md:p-6 lg:p-10 relative overflow-hidden rounded-[16px] md:rounded-[20px]">
                 <ContainerSpotlight />
 
                 {/* glass reflection sweep */}
-                <div className="pointer-events-none absolute inset-0 z-[1] rounded-[20px] overflow-hidden">
+                <div className="pointer-events-none absolute inset-0 z-[1] rounded-[16px] md:rounded-[20px] overflow-hidden">
                   <div className="absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.02)_25%,rgba(255,255,255,0.04)_35%,rgba(255,255,255,0.02)_45%,transparent_60%)] bg-[length:200%_100%] animate-[shimmer_6s_ease-in-out_infinite]" />
                 </div>
 
@@ -298,7 +300,7 @@ export function ResumeChapter() {
                   {/* ── Header ── */}
                   <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
                     {/* portrait */}
-                    <div className="relative w-[72px] h-[72px] shrink-0">
+                    <div className="relative w-[60px] h-[60px] sm:w-[72px] sm:h-[72px] shrink-0">
                       <div className="portrait-frame w-full h-full">
                         <div className="portrait-glow" />
                         <img
@@ -311,7 +313,7 @@ export function ResumeChapter() {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div className="flex flex-wrap items-start justify-between gap-3 md:gap-4">
                         <div>
                           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#f5f5f7] tracking-tight">
                             {profile.name}
@@ -399,9 +401,9 @@ export function ResumeChapter() {
                   </div>
 
                   {/* ── Summary ── */}
-                  <div className="mt-6 pt-6 border-t border-[rgba(255,255,255,0.04)]">
+                  <div className="mt-5 md:mt-6 pt-5 md:pt-6 border-t border-[rgba(255,255,255,0.04)]">
                     <h3 className="text-[0.6rem] font-semibold text-[#8e8e93] uppercase tracking-widest mb-3">Summary</h3>
-                    <p className="text-xs md:text-sm text-[#8e8e93] leading-[1.8]">
+                    <p className="text-[0.7rem] sm:text-xs md:text-sm text-[#8e8e93] leading-[1.7] md:leading-[1.8]">
                       {profile.about}
                     </p>
                     <div className="flex flex-wrap gap-2 mt-4">
@@ -415,11 +417,11 @@ export function ResumeChapter() {
                   </div>
 
                   {/* ── Experience ── */}
-                  <div className="mt-6 pt-6 border-t border-[rgba(255,255,255,0.04)]">
-                    <h3 className="text-[0.6rem] font-semibold text-[#8e8e93] uppercase tracking-widest mb-4">
+                  <div className="mt-5 md:mt-6 pt-5 md:pt-6 border-t border-[rgba(255,255,255,0.04)]">
+                    <h3 className="text-[0.6rem] font-semibold text-[#8e8e93] uppercase tracking-widest mb-3 md:mb-4">
                       Technical Experience
                     </h3>
-                    <div className="space-y-5">
+                    <div className="space-y-4 md:space-y-5">
                       {(expanded ? experiences : experiences.slice(0, 1)).map((exp, i) => (
                         <ExpCard key={exp.company} exp={exp} index={i} />
                       ))}
@@ -452,7 +454,7 @@ export function ResumeChapter() {
                   </div>
 
                   {/* ── Skills ── */}
-                  <div className="mt-6 pt-6 border-t border-[rgba(255,255,255,0.04)]">
+                  <div className="mt-5 md:mt-6 pt-5 md:pt-6 border-t border-[rgba(255,255,255,0.04)]">
                     <h3 className="text-[0.6rem] font-semibold text-[#8e8e93] uppercase tracking-widest mb-3">Skills</h3>
                     <div className="grid sm:grid-cols-2 gap-2">
                       {skills.slice(0, 5).map((skill, i) => (
@@ -462,7 +464,7 @@ export function ResumeChapter() {
                   </div>
 
                   {/* ── Education ── */}
-                  <div className="mt-6 pt-6 border-t border-[rgba(255,255,255,0.04)]">
+                  <div className="mt-5 md:mt-6 pt-5 md:pt-6 border-t border-[rgba(255,255,255,0.04)]">
                     <h3 className="text-[0.6rem] font-semibold text-[#8e8e93] uppercase tracking-widest mb-3">Education</h3>
                     <div className="glass-card p-4 flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center shrink-0">
@@ -476,7 +478,7 @@ export function ResumeChapter() {
                   </div>
 
                   {/* ── Bottom actions ── */}
-                  <div className="mt-6 pt-6 border-t border-[rgba(255,255,255,0.04)] flex flex-wrap items-center justify-between gap-4">
+                  <div className="mt-5 md:mt-6 pt-5 md:pt-6 border-t border-[rgba(255,255,255,0.04)] flex flex-wrap items-center justify-between gap-3 md:gap-4">
                     <a
                       href="/resume.pdf"
                       target="_blank"

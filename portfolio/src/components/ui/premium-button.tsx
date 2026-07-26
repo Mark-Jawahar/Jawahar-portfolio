@@ -68,6 +68,7 @@ export function PremiumButton({
       className={`inline-block ${disabled || loading ? "opacity-40 pointer-events-none" : ""}`}
     >
       <Tag
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ref={ref as any}
         href={disabled ? undefined : href}
         download={download}

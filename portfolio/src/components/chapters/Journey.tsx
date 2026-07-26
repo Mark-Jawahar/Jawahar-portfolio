@@ -7,7 +7,7 @@ import {
   Award,
   Check,
 } from "lucide-react";
-import { ScrollReveal, FadeIn } from "@/components/effects/ScrollReveal";
+import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { experiences } from "@/lib/resume-data";
 
 function TimelineItem({
