@@ -59,11 +59,8 @@ export function WhoIAm() {
               <h3 className="text-lg font-semibold text-[#f5f5f7]">
                 {profile.name}
               </h3>
-              <p className="text-sm text-[#8e8e93] mt-1">
-                {profile.currentPosition} @ {profile.company}
-              </p>
-              <p className="text-xs text-[#8e8e93] mt-0.5">
-                {profile.location}
+              <p className="text-sm text-gradient-accent mt-1">
+                {profile.role}
               </p>
               <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.06)]">
                 <p className="text-[0.7rem] text-[#8e8e93] italic leading-relaxed">

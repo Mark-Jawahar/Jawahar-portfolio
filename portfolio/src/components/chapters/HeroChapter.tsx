@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, Download, Briefcase, Sparkles } from "lucide-react";
+import { ArrowDown, Download, Sparkles } from "lucide-react";
 import { profile, highlights } from "@/lib/resume-data";
 import { scrollToSection } from "@/lib/utils";
 
@@ -137,11 +137,6 @@ export function HeroChapter() {
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
           Open to Opportunities
         </span>
-        <span className="tag-pill">
-          <Briefcase className="w-3 h-3" />
-          Assistant Team Lead
-        </span>
-        <span className="tag-pill">{profile.company}</span>
       </motion.div>
 
       {/* Headline */}
