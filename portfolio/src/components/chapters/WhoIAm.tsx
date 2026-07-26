@@ -59,7 +59,12 @@ export function WhoIAm() {
               <h3 className="text-lg font-semibold text-[#f5f5f7]">
                 {profile.name}
               </h3>
-              <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.06)]" />
+              <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.06)]">
+                <p className="text-[0.7rem] text-[#8e8e93] italic leading-relaxed">
+                  Design, AI, and website building efforts are personal learning
+                  projects and explorations.
+                </p>
+              </div>
             </div>
           </ScrollReveal>
 
@@ -79,7 +84,7 @@ export function WhoIAm() {
                 <FadeIn key={h.title} delay={0.3 + i * 0.1}>
                   <div className="glass-card p-5">
                     <div className="w-9 h-9 rounded-lg bg-[rgba(168,216,234,0.06)] flex items-center justify-center mb-3">
-                      <h.icon className="w-4 h-4 text-[#a8d8ea]" aria-hidden="true" />
+                      <h.icon className="w-4 h-4 text-[#a8d8ea]" />
                     </div>
                     <h4 className="text-sm font-medium text-[#f5f5f7] mb-2">
                       {h.title}

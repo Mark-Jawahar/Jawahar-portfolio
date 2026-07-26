@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import {
   MapPin,
   Award,
-  ChevronDown,
+  Check,
 } from "lucide-react";
 import { ScrollReveal, FadeIn } from "@/components/effects/ScrollReveal";
 import { experiences } from "@/lib/resume-data";
@@ -53,7 +53,7 @@ function TimelineItem({
               <p className="text-xs sm:text-sm text-[#a8d8ea] mt-0.5">{exp.role}</p>
             </div>
             <div className="flex items-center gap-1 text-xs text-[#8e8e93] shrink-0">
-              <MapPin className="w-3 h-3" aria-hidden="true" />
+              <MapPin className="w-3 h-3" />
               {exp.location}
             </div>
           </div>
@@ -72,7 +72,12 @@ function TimelineItem({
             <summary className="text-xs font-medium text-[#a8d8ea] cursor-pointer hover:text-[#f5f5f7] transition-colors list-none flex items-center gap-1.5">
               <span className="group-open:hidden">View details</span>
               <span className="hidden group-open:inline">Hide details</span>
-              <ChevronDown className="w-3 h-3 transition-transform duration-300 group-open:rotate-180" aria-hidden="true" />
+              <motion.span
+                className="inline-block"
+                animate={{ rotate: 0 }}
+              >
+                <Check className="w-3 h-3" />
+              </motion.span>
             </summary>
 
             <div className="mt-4 space-y-3">
@@ -86,7 +91,7 @@ function TimelineItem({
                       key={a}
                       className="inline-flex items-center gap-1 text-xs text-[#a8d8ea] bg-[rgba(168,216,234,0.06)] px-2.5 py-1 rounded-full border border-[rgba(168,216,234,0.08)]"
                     >
-                      <Award className="w-3 h-3" aria-hidden="true" />
+                      <Award className="w-3 h-3" />
                       {a}
                     </span>
                   ))}
