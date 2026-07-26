@@ -1,30 +1,31 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Users, BarChart3, Brain, Wrench, Globe, GraduationCap } from "lucide-react";
+import { Users, BarChart3, Wrench, Globe, Brain, GraduationCap, Search, Filter } from "lucide-react";
 
 const categories = [
   {
     title: "Customer Success & Operations",
     icon: Users,
     skills: [
+      "Customer Onboarding & Implementation",
       "Customer Lifecycle Management",
-      "Onboarding Strategy",
-      "Churn Reduction",
+      "Customer Onboarding",
+      "Account Management",
       "Escalation Management",
-      "KPI Tracking",
-      "NPS/CSAT Analysis",
-      "Data Analysis",
+      "Technical Support",
     ],
   },
   {
-    title: "Leadership & Management",
+    title: "Operations & Analytics",
     icon: BarChart3,
     skills: [
-      "Team Leadership & Coaching",
-      "Process Optimization",
-      "Stakeholder Management",
-      "Renewal Management",
+      "Process Improvement",
+      "Customer Satisfaction (CSAT)",
+      "CRM Management",
+      "Data Analysis",
+      "Cross-functional Collaboration",
     ],
   },
   {
@@ -52,13 +53,14 @@ const categories = [
     ],
   },
   {
-    title: "Soft Skills",
+    title: "Core Strengths",
     icon: Brain,
     skills: [
       "Communication",
       "Problem Solving",
       "Process Improvement",
-      "Team Leadership",
+      "Proactive Engagement",
+      "Relationship Building",
     ],
   },
   {
@@ -66,13 +68,14 @@ const categories = [
     icon: GraduationCap,
     skills: [
       "B.Com, SSMRV College (Apr 2021)",
+      "Bengaluru, Karnataka",
     ],
   },
 ];
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.07 } },
+  visible: { transition: { staggerChildren: 0.05 } },
 };
 
 const itemAnim = {
@@ -81,6 +84,13 @@ const itemAnim = {
 };
 
 export function Skills() {
+  const [activeCat, setActiveCat] = useState<string | null>(null);
+
+  const allSkills = categories.flatMap((c) => c.skills);
+  const displayedSkills = activeCat
+    ? categories.find((c) => c.title === activeCat)?.skills || allSkills
+    : allSkills;
+
   return (
     <section id="skills" className="section-padding relative">
       <div className="container-premium px-4 sm:px-6">
@@ -91,33 +101,66 @@ export function Skills() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mb-14"
         >
-          <span className="section-label">
-            <Wrench className="h-3 w-3" />
-            Skills
-          </span>
+          <span className="section-label"><Search className="h-3 w-3" />Skills</span>
           <h2 className="section-title">
-            Tools &amp; expertise<br />
-            <span className="text-gradient-ice">I bring.</span>
+            Expertise &amp; tools<br />
+            <span className="text-gradient-ice">I work with.</span>
           </h2>
           <p className="section-description">
-            A growing toolkit built over 3+ years of delivering results.
+            A comprehensive toolkit built over 5+ years of delivering customer success.
           </p>
         </motion.div>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl"
-        >
-          {categories.map((cat) => {
+        {/* Category filter */}
+        <div className="flex flex-wrap gap-2 mb-8 max-w-5xl">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setActiveCat(null)}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
+              activeCat === null
+                ? "bg-[rgba(168,216,234,0.1)] text-[#a8d8ea] border border-[rgba(168,216,234,0.15)]"
+                : "bg-[rgba(255,255,255,0.02)] text-white/30 border border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.04)]"
+            }`}
+          >
+            <Filter className="h-3 w-3 inline mr-1.5" />
+            All
+          </motion.button>
+          {categories.map((cat) => (
+            <motion.button
+              key={cat.title}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setActiveCat(activeCat === cat.title ? null : cat.title)}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
+                activeCat === cat.title
+                  ? "bg-[rgba(168,216,234,0.1)] text-[#a8d8ea] border border-[rgba(168,216,234,0.15)]"
+                  : "bg-[rgba(255,255,255,0.02)] text-white/30 border border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.04)]"
+              }`}
+            >
+              <cat.icon className="h-3 w-3 inline mr-1.5" />
+              {cat.title}
+            </motion.button>
+          ))}
+        </div>
+
+        {/* Glass cards for each category */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl">
+          {categories.map((cat, ci) => {
             const Icon = cat.icon;
+            const show = activeCat === null || activeCat === cat.title;
             return (
               <motion.div
                 key={cat.title}
-                variants={itemAnim}
-                className="group relative rounded-2xl p-5 border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.015)] hover:bg-[rgba(255,255,255,0.03)] transition-all duration-500"
+                initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.45, delay: ci * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                className={`group relative rounded-2xl p-5 border transition-all duration-500 ${
+                  show
+                    ? "bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.04)] hover:bg-[rgba(255,255,255,0.035)] hover:border-[rgba(255,255,255,0.08)]"
+                    : "bg-[rgba(255,255,255,0.005)] border-[rgba(255,255,255,0.015)] opacity-40"
+                }`}
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="h-8 w-8 rounded-xl bg-[rgba(168,216,234,0.06)] flex items-center justify-center group-hover:bg-[rgba(168,216,234,0.12)] transition-colors">
@@ -125,18 +168,20 @@ export function Skills() {
                   </div>
                   <h3 className="text-sm font-medium">{cat.title}</h3>
                 </div>
-                <div className="space-y-2">
+                <div className="flex flex-wrap gap-1.5">
                   {cat.skills.map((s) => (
-                    <div key={s} className="flex items-center gap-2.5">
-                      <div className="h-1 w-1 rounded-full bg-white/15 group-hover:bg-[#a8d8ea]/50 transition-colors" />
-                      <span className="text-sm text-white/30 group-hover:text-white/50 transition-colors">{s}</span>
-                    </div>
+                    <span
+                      key={s}
+                      className="px-2.5 py-1 rounded-full text-xs bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.04)] text-white/30 group-hover:text-white/50 group-hover:bg-[rgba(255,255,255,0.05)] transition-all duration-300"
+                    >
+                      {s}
+                    </span>
                   ))}
                 </div>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

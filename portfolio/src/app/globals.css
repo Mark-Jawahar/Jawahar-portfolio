@@ -43,6 +43,11 @@ body {
   66% { transform: translateY(5px) rotate(-0.3deg); }
 }
 
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-16px) scale(1.02); }
+}
+
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
@@ -70,35 +75,66 @@ body {
   50% { transform: translateY(-4px); }
 }
 
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(168,216,234,0.08); }
+  50% { box-shadow: 0 0 40px rgba(168,216,234,0.18); }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes mask-reveal {
+  from { mask-position: 100% 0; }
+  to { mask-position: 0% 0; }
+}
+
 /* ─── Utility Classes ─── */
 
 .animate-float { animation: float 7s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
 .animate-aurora { animation: aurora 10s ease-in-out infinite; }
 .animate-shimmer { background-size: 200% 100%; animation: shimmer 3s linear infinite; }
 .animate-glass { background-size: 200% 200%; animation: glass-shine 6s ease infinite; }
 .animate-dock { animation: dock-float 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+.animate-scale-in { animation: scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-up { animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-/* ─── Liquid Glass ─── */
+/* ─── Apple Glass System ─── */
 
-.liquid-glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(28px) saturate(1.5);
-  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+.glass-apple {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(32px) saturate(1.4);
+  -webkit-backdrop-filter: blur(32px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-apple-strong {
+  background: rgba(5, 5, 5, 0.65);
+  backdrop-filter: blur(48px) saturate(1.6);
+  -webkit-backdrop-filter: blur(48px) saturate(1.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.liquid-glass-strong {
-  background: rgba(5, 5, 5, 0.7);
-  backdrop-filter: blur(36px) saturate(1.6);
-  -webkit-backdrop-filter: blur(36px) saturate(1.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.liquid-glass-light {
+.glass-apple-card {
   background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
   border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-apple-card:hover {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── Gradient Text ─── */
@@ -115,6 +151,13 @@ body {
 .text-gradient-white {
   background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.65) 50%, #ffffff 100%);
   background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-muted {
+  background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -187,6 +230,28 @@ body {
   line-height: 1.7;
   color: var(--color-muted);
   max-width: 540px;
+}
+
+/* ─── Pill Tag ─── */
+
+.pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  background: rgba(168, 216, 234, 0.05);
+  color: rgba(168, 216, 234, 0.7);
+  border: 1px solid rgba(168, 216, 234, 0.08);
+  transition: all 0.3s ease;
+}
+
+.pill-tag:hover {
+  background: rgba(168, 216, 234, 0.1);
+  color: rgba(168, 216, 234, 0.9);
+  border-color: rgba(168, 216, 234, 0.15);
 }
 
 /* ─── Noise Overlay ─── */

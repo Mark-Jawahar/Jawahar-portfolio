@@ -10,7 +10,6 @@ const links = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
-  { label: "Why Me", href: "#why-me" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
@@ -45,14 +44,14 @@ export function Navigation() {
     <>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: direction === "down" && scrolled ? -80 : 0, opacity: 1 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        animate={{ y: direction === "down" && scrolled ? -96 : 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
           "fixed top-5 left-1/2 -translate-x-1/2 z-50",
           "h-11 px-1 rounded-full flex items-center gap-1",
           "backdrop-blur-2xl saturate-[1.8] will-change-transform",
           scrolled
-            ? "bg-[rgba(5,5,5,0.65)] border border-[rgba(255,255,255,0.06)] shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+            ? "bg-[rgba(5,5,5,0.6)] border border-[rgba(255,255,255,0.06)] shadow-[0_8px_40px_rgba(0,0,0,0.4)]"
             : "bg-transparent border border-transparent"
         )}
       >
