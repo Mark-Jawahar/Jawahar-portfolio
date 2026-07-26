@@ -44,16 +44,15 @@ const skillIconMap: Record<string, React.ReactNode> = {
   GraduationCap: <GraduationCap size={12} />,
 };
 
-const executiveBadges = [
-  "5+ Years Experience",
-  "500+ Learners Onboarded",
-  "Customer Success",
-  "Customer Experience",
-  "Leadership",
-  "CRM",
-  "Cross-Functional Collaboration",
-  "Process Improvement",
-];
+  const executiveBadges = [
+    "5+ Years Experience",
+    "500+ Learners Onboarded",
+    "Customer Success",
+    "Customer Experience",
+    "CRM",
+    "Cross-Functional Collaboration",
+    "Process Improvement",
+  ];
 
 function DownloadButton() {
   const [phase, setPhase] = useState<"idle" | "preparing" | "downloading" | "done">("idle");
@@ -176,7 +175,7 @@ function ProfileCard({ onViewComplete }: { onViewComplete: () => void }) {
       <div className="mb-5 md:mb-6">
         <h4 className="text-[0.5rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Executive Summary</h4>
         <p className="text-[0.75rem] md:text-[0.8rem] text-muted leading-relaxed max-w-[60ch] mb-3">
-          Customer experience leader with 5+ years of expertise in customer onboarding, lifecycle management, team leadership, and process excellence. Currently leading onboarding initiatives for 500+ learners at Hello Mentor.
+          Customer experience leader with 5+ years of expertise in customer onboarding, lifecycle management, process excellence, and cross-functional collaboration. Currently leading onboarding initiatives for 500+ learners and driving measurable improvements in customer satisfaction and operational efficiency.
         </p>
         <div className="flex flex-wrap gap-1.5">
           {executiveBadges.slice(0, 5).map((b) => (
@@ -189,7 +188,7 @@ function ProfileCard({ onViewComplete }: { onViewComplete: () => void }) {
         <div className="glass-panel p-4">
           <div className="flex items-center gap-2 mb-2">
             <Briefcase size={11} className="text-cyan/60" />
-            <span className="text-[0.5rem] font-semibold uppercase tracking-wider text-muted/50">Latest Position</span>
+            <span className="text-[0.5rem] font-semibold uppercase tracking-wider text-muted/50">Customer Experience</span>
           </div>
           <p className="text-[0.75rem] font-medium text-ice/80 mb-0.5">{experiences[0].company}</p>
           <p className="text-[0.65rem] text-muted">{experiences[0].role} &middot; {experiences[0].period}</p>

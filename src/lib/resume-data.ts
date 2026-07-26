@@ -8,7 +8,7 @@ export const profile = {
     "Customer Success Advocate",
     "Process Optimisation Enthusiast",
   ],
-  about: "Customer experience leader with 5+ years of expertise in customer onboarding, lifecycle management, team leadership, and process excellence. Currently serving as Assistant Team Lead at Hello Mentor, where I lead onboarding initiatives for 500+ learners and drive measurable improvements in customer satisfaction and operational efficiency. My career spans EdTech, Real Estate, and Financial Services, giving me a versatile perspective on customer success across industries.",
+  about: "Customer experience leader with 5+ years of expertise in customer onboarding, lifecycle management, and process excellence. Currently leading onboarding initiatives for 500+ learners at Hello Mentor, where I standardize processes, collaborate with cross-functional teams, and drive measurable improvements in customer satisfaction and operational efficiency. My career spans EdTech, Real Estate, and Financial Services, giving me a versatile perspective on customer success across industries.",
   location: "Bengaluru, Karnataka",
   email: "markjawahar17@gmail.com",
   phone: "+91 9620151434",
@@ -33,7 +33,6 @@ export const highlights = [
 
 export const summaryHighlights = [
   { label: "Customer Onboarding", desc: "500+ learners" },
-  { label: "Team Leadership", desc: "Assistant Team Lead" },
   { label: "Process Excellence", desc: "30% query reduction" },
   { label: "CRM Expertise", desc: "Zoho Suite" },
   { label: "Cross-functional", desc: "Admissions, Product, Ops" },

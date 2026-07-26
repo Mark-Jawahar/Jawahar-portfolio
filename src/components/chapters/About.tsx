@@ -16,20 +16,18 @@ export default function About() {
 
         <div className="grid md:grid-cols-5 gap-8 md:gap-12">
           <div className="md:col-span-3">
-            <ScrollReveal delay={0.1}>
-              <h2 className="chapter-title mb-6">
-                Customer Experience,<br />
-                <span className="text-gradient-accent">Reimagined.</span>
-              </h2>
-              <p className="chapter-subtitle mb-6">
-                {profile.about}
-              </p>
-              <p className="chapter-subtitle">
-                From EdTech to Real Estate to Financial Services — the common thread has always been people.
-                Understanding their needs, anticipating their challenges, and crafting experiences that
-                turn customers into advocates.
-              </p>
-            </ScrollReveal>
+              <ScrollReveal delay={0.1}>
+                <h2 className="chapter-title mb-6">
+                  Customer Experience,<br />
+                  <span className="text-gradient-accent">Reimagined.</span>
+                </h2>
+                <p className="chapter-subtitle mb-6">
+                  Customer experience leader with 5+ years of expertise in customer onboarding, lifecycle management, process excellence, and cross-functional collaboration. Currently leading onboarding initiatives for 500+ learners at Hello Mentor, driving measurable improvements in customer satisfaction and operational efficiency.
+                </p>
+                <p className="chapter-subtitle">
+                  End-to-end onboarding, standardized processes, cross-functional collaboration, and strategic customer engagement that builds lasting relationships and turns customers into advocates.
+                </p>
+              </ScrollReveal>
           </div>
 
           <div className="md:col-span-2">

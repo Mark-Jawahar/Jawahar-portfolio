@@ -71,9 +71,9 @@ export default function Hero() {
           {profile.role}
         </p>
 
-        <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[50ch] mx-auto mb-8">
-          {profile.headline}
-        </p>
+         <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[50ch] mx-auto mb-8">
+           Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services. Passionate about delivering seamless customer experiences, improving operational processes, and building long-term customer relationships.
+         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">
           <button
