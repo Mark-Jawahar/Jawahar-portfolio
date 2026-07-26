@@ -79,7 +79,7 @@ export function HeroChapter() {
   return (
     <section
       id="introduction"
-      className="relative min-h-screen flex flex-col items-center justify-center px-5 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-5 pt-20 md:pt-24 overflow-hidden"
     >
       <MouseGlow />
 
