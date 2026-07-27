@@ -32,13 +32,13 @@ export default function About() {
 
           <div className="md:col-span-2">
             <ScrollReveal delay={0.2} direction="right">
-              <div className="glass-panel-strong p-6">
-                <h3 className="text-xs font-semibold tracking-widest uppercase text-muted/60 mb-4">At a Glance</h3>
+              <div className="glass-panel-strong p-6 md:p-8">
+                <h3 className="text-sm font-semibold tracking-widest uppercase text-muted/60 mb-4">At a Glance</h3>
                 <div className="space-y-3">
                   {summaryHighlights.map((item) => (
-                    <div key={item.label} className="flex items-center justify-between py-1.5 border-b border-white/[0.04] last:border-0">
-                      <span className="text-xs text-muted">{item.label}</span>
-                      <span className="text-xs font-medium text-ice/90">{item.desc}</span>
+                    <div key={item.label} className="flex items-center justify-between py-2 border-b border-white/[0.04] last:border-0">
+                      <span className="text-sm text-muted">{item.label}</span>
+                      <span className="text-sm font-medium text-ice/90">{item.desc}</span>
                     </div>
                   ))}
                 </div>

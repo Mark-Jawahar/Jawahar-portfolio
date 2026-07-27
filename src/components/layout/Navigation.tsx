@@ -84,7 +84,7 @@ export default function Navigation() {
             window.scrollTo({ top: 0, behavior: "smooth" });
             setActive("");
           }}
-          className="text-xs font-medium tracking-tight text-ice hover:text-pearl transition-colors"
+          className="text-sm md:text-base font-medium tracking-tight text-ice hover:text-pearl transition-colors"
         >
           JA
         </button>
@@ -94,7 +94,7 @@ export default function Navigation() {
             <button
               key={ch.id}
               onClick={() => handleClick(ch.id)}
-              className={`px-2.5 py-1.5 rounded-lg text-[0.68rem] font-medium transition-all duration-300 ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ${
                 active === ch.id
                   ? "bg-white/[0.08] backdrop-blur-sm text-pearl"
                   : "text-muted hover:text-ice hover:bg-white/[0.03]"
@@ -107,7 +107,7 @@ export default function Navigation() {
 
         <button
           onClick={() => handleClick("connect")}
-          className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/[0.10] backdrop-blur-sm border border-white/[0.08] text-pearl text-[0.68rem] font-medium hover:bg-white/[0.15] hover:border-white/[0.12] transition-all duration-300"
+          className="hidden md:flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-white/[0.10] backdrop-blur-sm border border-white/[0.08] text-pearl text-sm font-medium hover:bg-white/[0.15] hover:border-white/[0.12] transition-all duration-300"
         >
           Let&apos;s Talk
         </button>

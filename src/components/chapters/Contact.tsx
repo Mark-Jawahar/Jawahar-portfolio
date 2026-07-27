@@ -143,10 +143,10 @@ export default function Contact() {
     <section id="contact" className="relative z-10 py-[clamp(3rem,5vw,5rem)] px-4 md:px-6">
       <div className="max-w-[800px] mx-auto">
         <div className="text-center mb-8 md:mb-10">
-          <h2 className="text-[clamp(1.4rem,2.3vw,2rem)] font-semibold tracking-tight text-white/90 leading-[1.15]">
+          <h2 className="text-[clamp(1.6rem,2.8vw,2.4rem)] font-semibold tracking-tight text-white/90 leading-[1.12]">
             Let's Build Together
           </h2>
-          <p className="mt-2 text-[clamp(0.7rem,0.9vw,0.8rem)] text-white/30 max-w-[42ch] mx-auto leading-relaxed">
+          <p className="mt-2 text-[clamp(0.85rem,1vw,0.95rem)] text-white/30 max-w-[48ch] mx-auto leading-relaxed">
             Ready to collaborate? Let&apos;s discuss how we can create something remarkable together.
           </p>
         </div>
@@ -172,12 +172,12 @@ export default function Contact() {
                   onChange={handleChange}
                   onFocus={() => setFieldFocus("name")}
                   onBlur={() => setFieldFocus(null)}
-                  className={`w-full bg-white/[0.04] border ${errors.name ? "border-red-400/50" : fieldFocus === "name" ? "border-cyan/50" : "border-white/6" } rounded-xl px-4 py-3.5 text-sm text-pearl placeholder:text-muted/40 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-cyan/30 focus:bg-white/[0.06] ${errors.name ? "animate-shake" : ""}`}
+                  className={`w-full bg-white/[0.04] border ${errors.name ? "border-red-400/50" : fieldFocus === "name" ? "border-cyan/50" : "border-white/6" } rounded-xl px-4 py-4 text-sm text-pearl placeholder:text-muted/40 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-cyan/30 focus:bg-white/[0.06] ${errors.name ? "animate-shake" : ""}`}
                   placeholder="Full Name *"
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? "contact-name-error" : undefined}
                 />
-                <MapPin size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted/40" />
+                <MapPin size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted/40" />
               </div>
               {errors.name && (
                 <p id="contact-name-error" className="text-[0.65rem] text-red-400 mt-1.5 ml-1">
@@ -197,7 +197,7 @@ export default function Contact() {
                   onChange={handleChange}
                   onFocus={() => setFieldFocus("email")}
                   onBlur={() => setFieldFocus(null)}
-                  className={`w-full bg-white/[0.04] border ${errors.email ? "border-red-400/50" : fieldFocus === "email" ? "border-cyan/50" : "border-white/6" } rounded-xl px-4 py-3.5 text-sm text-pearl placeholder:text-muted/40 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-cyan/30 focus:bg-white/[0.06] ${errors.email ? "animate-shake" : ""}`}
+                  className={`w-full bg-white/[0.04] border ${errors.email ? "border-red-400/50" : fieldFocus === "email" ? "border-cyan/50" : "border-white/6" } rounded-xl px-4 py-4 text-sm text-pearl placeholder:text-muted/40 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-cyan/30 focus:bg-white/[0.06] ${errors.email ? "animate-shake" : ""}`}
                   placeholder="Email Address *"
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? "contact-email-error" : undefined}
@@ -222,7 +222,7 @@ export default function Contact() {
                   onChange={handleChange}
                   onFocus={() => setFieldFocus("phone")}
                   onBlur={() => setFieldFocus(null)}
-                  className={`w-full bg-white/[0.04] border ${errors.phone ? "border-red-400/50" : fieldFocus === "phone" ? "border-cyan/50" : "border-white/6" } rounded-xl px-4 py-3.5 text-sm text-pearl placeholder:text-muted/40 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-cyan/30 focus:bg-white/[0.06] ${errors.phone ? "animate-shake" : ""}`}
+                  className={`w-full bg-white/[0.04] border ${errors.phone ? "border-red-400/50" : fieldFocus === "phone" ? "border-cyan/50" : "border-white/6" } rounded-xl px-4 py-4 text-sm text-pearl placeholder:text-muted/40 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-cyan/30 focus:bg-white/[0.06] ${errors.phone ? "animate-shake" : ""}`}
                   placeholder="Phone Number *"
                   aria-invalid={!!errors.phone}
                   aria-describedby={errors.phone ? "contact-phone-error" : undefined}
@@ -278,7 +278,7 @@ export default function Contact() {
                 onFocus={() => setFieldFocus("message")}
                 onBlur={() => setFieldFocus(null)}
                 rows={4}
-                className={`w-full bg-white/[0.04] border ${errors.message ? "border-red-400/50" : fieldFocus === "message" ? "border-cyan/50" : "border-white/6" } rounded-xl px-4 py-3.5 text-sm text-pearl placeholder:text-muted/40 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-cyan/30 focus:bg-white/[0.06] resize-none ${errors.message ? "animate-shake" : ""}`}
+                className={`w-full bg-white/[0.04] border ${errors.message ? "border-red-400/50" : fieldFocus === "message" ? "border-cyan/50" : "border-white/6" } rounded-xl px-4 py-4 text-sm text-pearl placeholder:text-muted/40 transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-cyan/30 focus:bg-white/[0.06] resize-none ${errors.message ? "animate-shake" : ""}`}
                 placeholder="Message *"
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? "contact-message-error" : undefined}
@@ -323,7 +323,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={isSubmitting || isSubmitted || Object.keys(errors).length > 0}
-              className={`relative overflow-hidden w-full rounded-xl px-5 py-4 text-sm font-medium transition-all duration-500 disabled:cursor-not-allowed ${isSubmitting ? "scale-[0.98]" : "hover:scale-[1.02]"} ${isSubmitted ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-pearl text-background hover:bg-white"}`}
+              className={`relative overflow-hidden w-full rounded-xl px-5 py-4 text-base font-medium transition-all duration-500 disabled:cursor-not-allowed ${isSubmitting ? "scale-[0.98]" : "hover:scale-[1.02]"} ${isSubmitted ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-pearl text-background hover:bg-white"}`}
             >
               {isSubmitted ? (
                 <span className="flex items-center justify-center gap-2">

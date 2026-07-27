@@ -117,7 +117,7 @@ function DownloadButton() {
 
 function GlassBadge({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[0.55rem] font-medium bg-white/[0.04] border border-white/6 text-muted hover:bg-white/[0.07] hover:border-white/12 hover:text-ice transition-all duration-300 cursor-default whitespace-nowrap">
+    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/[0.04] border border-white/6 text-muted hover:bg-white/[0.07] hover:border-white/12 hover:text-ice transition-all duration-300 cursor-default whitespace-nowrap">
       {label}
     </span>
   );
@@ -125,7 +125,7 @@ function GlassBadge({ label }: { label: string }) {
 
 function SkillChip({ label }: { label: string }) {
   return (
-    <span className="text-[0.55rem] text-muted bg-white/[0.03] border border-white/5 px-2 py-0.5 rounded-md hover:bg-white/[0.06] hover:text-ice transition-all duration-200">
+    <span className="text-xs text-muted bg-white/[0.03] border border-white/5 px-2.5 py-0.5 rounded-md hover:bg-white/[0.06] hover:text-ice transition-all duration-200">
       {label}
     </span>
   );
@@ -152,16 +152,16 @@ function ProfileCard({ onViewComplete }: { onViewComplete: () => void }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-1">
-            <h3 className="text-lg md:text-xl font-semibold tracking-tight text-pearl">{profile.name}</h3>
+            <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-pearl">{profile.name}</h3>
             <span className="inline-flex items-center gap-1.5 text-[0.5rem] font-medium px-2 py-0.5 rounded-full bg-emerald-500/8 text-emerald-400 border border-emerald-500/15 whitespace-nowrap">
               <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
               Open to Opportunities
             </span>
           </div>
-          <p className="text-sm font-medium text-ice/70 mb-1.5">{profile.role}</p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.65rem] text-muted">
-            <span className="flex items-center gap-1"><MapPin size={9} /> {profile.location}</span>
-            <span className="flex items-center gap-1"><Calendar size={9} /> {profile.experience}</span>
+          <p className="text-base font-medium text-ice/70 mb-1.5">{profile.role}</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs md:text-sm text-muted">
+            <span className="flex items-center gap-1"><MapPin size={10} /> {profile.location}</span>
+            <span className="flex items-center gap-1"><Calendar size={10} /> {profile.experience}</span>
             <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-cyan/60 hover:text-cyan transition-colors">
               <LinkedinIcon /> LinkedIn
             </a>
@@ -173,8 +173,8 @@ function ProfileCard({ onViewComplete }: { onViewComplete: () => void }) {
       </div>
 
       <div className="mb-5 md:mb-6">
-        <h4 className="text-[0.5rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Executive Summary</h4>
-        <p className="text-[0.75rem] md:text-[0.8rem] text-muted leading-relaxed max-w-[60ch] mb-3">
+        <h4 className="text-[0.6rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Executive Summary</h4>
+        <p className="text-sm md:text-base text-muted leading-relaxed max-w-[60ch] mb-3">
           Customer experience leader with 5+ years of expertise in customer onboarding, lifecycle management, process excellence, and cross-functional collaboration. Currently leading onboarding initiatives for 500+ learners and driving measurable improvements in customer satisfaction and operational efficiency.
         </p>
         <div className="flex flex-wrap gap-1.5">
@@ -292,6 +292,9 @@ function ResumeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
       {open && (
         <motion.div
           className="fixed inset-0 z-[100] flex items-start justify-center overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Complete Professional Profile"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -418,10 +421,10 @@ export default function ResumeChapter() {
               transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1)",
             }}
           >
-            <h2 className="text-[clamp(1.4rem,2.3vw,2rem)] font-semibold tracking-tight text-white/90 leading-[1.15]">
+            <h2 className="text-[clamp(1.6rem,2.8vw,2.4rem)] font-semibold tracking-tight text-white/90 leading-[1.12]">
               Professional Profile
             </h2>
-            <p className="mt-2 text-[clamp(0.7rem,0.9vw,0.8rem)] text-white/30 max-w-[42ch] mx-auto leading-relaxed">
+            <p className="mt-2 text-[clamp(0.85rem,1vw,0.95rem)] text-white/30 max-w-[48ch] mx-auto leading-relaxed">
               An executive overview of experience, expertise, and professional impact.
             </p>
           </div>

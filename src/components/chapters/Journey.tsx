@@ -16,7 +16,7 @@ export default function Journey() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className="chapter-title mb-3">
+          <h2 className="chapter-title mb-4">
             Professional{" "}
             <span className="text-gradient-accent">Journey.</span>
           </h2>
@@ -36,27 +36,27 @@ export default function Journey() {
 
                   <div className="glass-card p-5 md:p-6">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-2">
-                      <h3 className="text-base font-semibold text-pearl">{exp.company}</h3>
-                      <div className="flex items-center gap-2 text-[0.65rem] text-muted">
-                        <Calendar size={10} />
+                      <h3 className="text-lg md:text-xl font-semibold text-pearl">{exp.company}</h3>
+                      <div className="flex items-center gap-2 text-xs md:text-sm text-muted">
+                        <Calendar size={12} />
                         <span>{exp.period}</span>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2 mb-3">
-                      <Briefcase size={10} className="text-cyan/60" />
-                      <span className="text-xs font-medium text-ice/80">{exp.role}</span>
-                      <MapPin size={10} className="text-muted ml-1" />
-                      <span className="text-[0.65rem] text-muted">{exp.location}</span>
+                      <Briefcase size={12} className="text-cyan/60" />
+                      <span className="text-sm font-medium text-ice/80">{exp.role}</span>
+                      <MapPin size={12} className="text-muted ml-1" />
+                      <span className="text-xs text-muted">{exp.location}</span>
                     </div>
 
-                    <p className="text-xs text-muted leading-relaxed mb-3">{exp.description}</p>
+                    <p className="text-sm text-muted leading-relaxed mb-3">{exp.description}</p>
 
-                    <div className="grid sm:grid-cols-2 gap-1.5">
+                    <div className="grid sm:grid-cols-2 gap-2">
                       {exp.achievements.map((ach, j) => (
                         <div key={j} className="flex items-start gap-2">
-                          <span className="mt-[3px] w-1 h-1 rounded-full bg-cyan/40 flex-shrink-0" />
-                          <span className="text-[0.68rem] text-muted leading-relaxed">{ach}</span>
+                          <span className="mt-[5px] w-1.5 h-1.5 rounded-full bg-cyan/40 flex-shrink-0" />
+                          <span className="text-xs md:text-sm text-muted leading-relaxed">{ach}</span>
                         </div>
                       ))}
                     </div>

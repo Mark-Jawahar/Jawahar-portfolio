@@ -59,19 +59,19 @@ export default function Hero() {
 
         <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06]">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 animate-pulse" />
-          <span className="text-[0.6rem] font-medium text-muted tracking-wider uppercase">{profile.location}</span>
+          <span className="text-xs sm:text-sm font-medium text-muted tracking-wider uppercase">{profile.location}</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.08] mb-4 text-pearl">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-[1.06] mb-4 text-pearl">
           {profile.name.split(" ")[0]}{" "}
           <span className="text-gradient">{profile.name.split(" ").slice(1).join(" ")}</span>
         </h1>
 
-        <p className="text-sm sm:text-base font-medium text-ice/80 mb-2">
+        <p className="text-base sm:text-lg font-medium text-ice/80 mb-2">
           {profile.role}
         </p>
 
-         <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[50ch] mx-auto mb-10">
+         <p className="text-sm sm:text-base text-muted leading-relaxed max-w-[55ch] mx-auto mb-10">
            Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services. Passionate about delivering seamless customer experiences, improving operational processes, and building long-term customer relationships.
          </p>
 
@@ -81,7 +81,7 @@ export default function Hero() {
             className="btn-primary group"
           >
             Explore
-            <ChevronDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
+            <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
           </button>
           <a
             href={profile.whatsapp}
