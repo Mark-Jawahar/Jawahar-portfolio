@@ -39,10 +39,6 @@
   75% { transform: translateX(4px); }
 }
 
-html {
-  scroll-behavior: auto;
-}
-
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);

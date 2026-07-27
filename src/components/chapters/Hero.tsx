@@ -29,7 +29,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="introduction"
-      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-16 overflow-hidden"
+      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-16 overflow-hidden"
     >
       <div
         className="flex flex-col items-center text-center max-w-2xl mx-auto"
