@@ -1,19 +1,47 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { chapters, profile } from "@/lib/resume-data";
 import { scrollToSection } from "@/lib/utils";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [active, setActive] = useState("");
   const [open, setOpen] = useState(false);
+  const prevScrollRef = useRef(0);
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const pastThreshold = currentY > 40;
+
+      setScrolled(pastThreshold);
+
+      if (!pastThreshold) {
+        setVisible(true);
+        prevScrollRef.current = currentY;
+        return;
+      }
+
+      const delta = currentY - prevScrollRef.current;
+      prevScrollRef.current = currentY;
+
+      if (delta > 8) {
+        if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+        hideTimerRef.current = setTimeout(() => setVisible(false), 100);
+      } else if (delta < -4) {
+        setVisible(true);
+      }
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -34,11 +62,23 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-black/[0.18] backdrop-blur-[24px] border border-white/[0.07] shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
-            : "bg-transparent"
-        } rounded-2xl px-4 py-2 flex items-center justify-between w-[calc(100%-2rem)] max-w-[700px]`}
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-2xl px-4 py-2 flex items-center justify-between w-[calc(100%-2rem)] max-w-[700px] transition-all duration-500"
+        style={{
+          background: scrolled
+            ? "rgba(255, 255, 255, 0.04)"
+            : "transparent",
+          backdropFilter: scrolled ? "blur(28px) saturate(1.3)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(28px) saturate(1.3)" : "none",
+          border: scrolled ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(255, 255, 255, 0)",
+          boxShadow: scrolled
+            ? "0 4px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04)"
+            : "none",
+          opacity: visible ? 1 : 0,
+          transform: visible
+            ? "translate(-50%, 0)"
+            : "translate(-50%, -20px)",
+          transition: "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s ease, backdrop-filter 0.6s ease, border 0.6s ease, box-shadow 0.6s ease",
+        }}
       >
         <button
           onClick={() => {
@@ -70,7 +110,7 @@ export default function Navigation() {
           onClick={() => handleClick("connect")}
           className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pearl text-background text-[0.68rem] font-medium hover:bg-white transition-all duration-300"
         >
-          Let's Talk
+          Let&apos;s Talk
         </button>
 
         <button

@@ -41,7 +41,7 @@ export default function Hero() {
         }}
       >
         <div
-          className="portrait-frame w-36 h-36 md:w-44 md:h-44 mb-10 animate-float-slow"
+          className="portrait-frame w-[10.5rem] h-[10.5rem] md:w-[13rem] md:h-[13rem] mb-10 animate-float-slow"
           style={{
             transform: `perspective(1000px) rotateY(${offsetX * 0.5}deg) rotateX(${-offsetY * 0.5}deg)`,
           }}
@@ -50,14 +50,14 @@ export default function Hero() {
           <Image
             src={profile.portraitUrl}
             alt={profile.name}
-            width={200}
-            height={200}
+            width={260}
+            height={260}
             className="object-cover w-full h-full"
             priority
           />
         </div>
 
-        <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06]">
+        <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06]">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 animate-pulse" />
           <span className="text-[0.6rem] font-medium text-muted tracking-wider uppercase">{profile.location}</span>
         </div>
@@ -71,11 +71,11 @@ export default function Hero() {
           {profile.role}
         </p>
 
-         <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[50ch] mx-auto mb-8">
+         <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[50ch] mx-auto mb-10">
            Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services. Passionate about delivering seamless customer experiences, improving operational processes, and building long-term customer relationships.
          </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <button
             onClick={() => scrollToSection("profile")}
             className="btn-primary group"
