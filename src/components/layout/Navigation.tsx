@@ -36,7 +36,7 @@ export default function Navigation() {
       <nav
         className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-glass-strong backdrop-blur-3xl border border-white/[0.06] shadow-2xl shadow-black/20"
+            ? "bg-black/[0.18] backdrop-blur-[24px] border border-white/[0.07] shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
             : "bg-transparent"
         } rounded-2xl px-4 py-2 flex items-center justify-between w-[calc(100%-2rem)] max-w-[700px]`}
       >

@@ -41,7 +41,7 @@ export default function Hero() {
         }}
       >
         <div
-          className="portrait-frame w-32 h-32 md:w-40 md:h-40 mb-8 animate-float-slow"
+          className="portrait-frame w-36 h-36 md:w-44 md:h-44 mb-10 animate-float-slow"
           style={{
             transform: `perspective(1000px) rotateY(${offsetX * 0.5}deg) rotateX(${-offsetY * 0.5}deg)`,
           }}
