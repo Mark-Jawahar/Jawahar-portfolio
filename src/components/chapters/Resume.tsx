@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
@@ -79,7 +79,7 @@ function DownloadButton() {
     <button
       onClick={handleClick}
       disabled={phase !== "idle"}
-      className="relative overflow-hidden rounded-xl bg-white/5 border border-white/8 px-5 py-3 w-full text-[0.7rem] font-medium text-ice/70 hover:text-pearl hover:bg-white/8 hover:border-white/12 transition-all duration-300 cursor-pointer disabled:cursor-not-allowed group"
+      className="relative overflow-hidden rounded-xl bg-white/5 border border-white/8 px-5 py-3 w-full text-sm font-medium text-ice/70 hover:text-pearl hover:bg-white/8 hover:border-white/12 transition-all duration-300 cursor-pointer disabled:cursor-not-allowed group"
     >
       <span className="relative flex items-center justify-center gap-2">
         {phase === "idle" && (
@@ -153,7 +153,7 @@ function ProfileCard({ onViewComplete }: { onViewComplete: () => void }) {
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-1">
             <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-pearl">{profile.name}</h3>
-            <span className="inline-flex items-center gap-1.5 text-[0.5rem] font-medium px-2 py-0.5 rounded-full bg-emerald-500/8 text-emerald-400 border border-emerald-500/15 whitespace-nowrap">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-500/8 text-emerald-400 border border-emerald-500/15 whitespace-nowrap">
               <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
               Open to Opportunities
             </span>
@@ -188,35 +188,35 @@ function ProfileCard({ onViewComplete }: { onViewComplete: () => void }) {
         <div className="glass-panel p-4">
           <div className="flex items-center gap-2 mb-2">
             <Briefcase size={11} className="text-cyan/60" />
-            <span className="text-[0.5rem] font-semibold uppercase tracking-wider text-muted/50">Customer Experience</span>
+            <span className="text-[0.6rem] font-semibold uppercase tracking-wider text-muted/50">Customer Experience</span>
           </div>
-          <p className="text-[0.75rem] font-medium text-ice/80 mb-0.5">{experiences[0].company}</p>
-          <p className="text-[0.65rem] text-muted">{experiences[0].role} &middot; {experiences[0].period}</p>
+          <p className="text-sm font-medium text-ice/80 mb-0.5">{experiences[0].company}</p>
+          <p className="text-xs text-muted">{experiences[0].role} &middot; {experiences[0].period}</p>
         </div>
         <div className="glass-panel p-4">
           <div className="flex items-center gap-2 mb-2">
             <GraduationCap size={11} className="text-cyan/60" />
-            <span className="text-[0.5rem] font-semibold uppercase tracking-wider text-muted/50">Education</span>
+            <span className="text-[0.6rem] font-semibold uppercase tracking-wider text-muted/50">Education</span>
           </div>
-          <p className="text-[0.75rem] font-medium text-ice/80 mb-0.5">{education.degree}</p>
-          <p className="text-[0.65rem] text-muted">{education.college} &middot; {education.year}</p>
+          <p className="text-sm font-medium text-ice/80 mb-0.5">{education.degree}</p>
+          <p className="text-xs text-muted">{education.college} &middot; {education.year}</p>
         </div>
       </div>
 
       <div className="mb-5 md:mb-6">
-        <h4 className="text-[0.5rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Core Skills</h4>
+        <h4 className="text-[0.6rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Core Skills</h4>
         <div className="flex flex-wrap gap-1.5">
           {skills.slice(0, 3).flatMap((s) => s.items.slice(0, 3)).map((item) => (
             <SkillChip key={item} label={item} />
           ))}
-          <span className="text-[0.55rem] text-muted/40 px-2 py-0.5">+ more</span>
+          <span className="text-xs text-muted/40 px-2 py-0.5">+ more</span>
         </div>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-2.5">
         <button
           onClick={onViewComplete}
-          className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-pearl text-background px-5 py-3 text-[0.7rem] font-medium hover:bg-white transition-all duration-300 group"
+          className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-pearl text-background px-5 py-3 text-sm font-medium hover:bg-white transition-all duration-300 group"
         >
           <span>View Complete Profile</span>
           <ExternalLink size={12} className="group-hover:translate-x-0.5 transition-transform" />
@@ -237,29 +237,29 @@ function ModalExperienceCard({ exp, index }: { exp: (typeof experiences)[0]; ind
       transition={{ duration: 0.4, delay: 0.08 * index, ease: [0.16, 1, 0.3, 1] }}
       className="glass-panel-strong p-5 md:p-6"
     >
-      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
         <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold text-pearl">{exp.company}</h3>
+          <h3 className="text-base md:text-lg font-semibold text-pearl">{exp.company}</h3>
           {index === 0 && (
-            <span className="text-[0.45rem] font-semibold px-1.5 py-0.5 rounded-full bg-emerald-500/8 text-emerald-400 border border-emerald-500/15 uppercase tracking-wider">
+            <span className="text-[0.55rem] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/8 text-emerald-400 border border-emerald-500/15 uppercase tracking-wider">
               Current
             </span>
           )}
         </div>
-        <span className="text-[0.6rem] text-muted">{exp.period}</span>
+        <span className="text-xs text-muted">{exp.period}</span>
       </div>
-      <p className="text-[0.65rem] font-medium text-ice/70 mb-1.5">
+      <p className="text-sm font-medium text-ice/70 mb-2">
         {exp.role} &middot; {exp.location}
       </p>
-      <p className="text-[0.65rem] text-muted leading-relaxed mb-3">{exp.description}</p>
+      <p className="text-sm text-muted leading-relaxed mb-3">{exp.description}</p>
 
       {exp.responsibilities.length > 0 && (
         <div className="mb-3">
-          <p className="text-[0.5rem] font-semibold uppercase tracking-wider text-muted/50 mb-1.5">Responsibilities</p>
-          <ul className="space-y-1">
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted/50 mb-1.5">Responsibilities</p>
+          <ul className="space-y-1.5">
             {exp.responsibilities.map((r, j) => (
-              <li key={j} className="flex items-start gap-2 text-[0.6rem] text-muted leading-relaxed">
-                <span className="mt-[4px] w-[2px] h-[2px] rounded-full bg-cyan/40 flex-shrink-0" />
+              <li key={j} className="flex items-start gap-2 text-sm text-muted leading-relaxed">
+                <span className="mt-[5px] w-1 h-1 rounded-full bg-cyan/40 flex-shrink-0" />
                 {r}
               </li>
             ))}
@@ -269,11 +269,11 @@ function ModalExperienceCard({ exp, index }: { exp: (typeof experiences)[0]; ind
 
       {exp.achievements.length > 0 && (
         <div className="pl-3 border-l border-cyan/15">
-          <p className="text-[0.45rem] font-semibold uppercase tracking-wider text-cyan/50 mb-1">Key Achievements</p>
-          <ul className="space-y-0.5">
+          <p className="text-[0.6rem] font-semibold uppercase tracking-wider text-cyan/50 mb-1">Key Achievements</p>
+          <ul className="space-y-1">
             {exp.achievements.map((ach, j) => (
-              <li key={j} className="flex items-start gap-2 text-[0.6rem] text-muted leading-relaxed">
-                <span className="mt-[4px] w-1 h-1 rounded-full bg-emerald-400/40 flex-shrink-0" />
+              <li key={j} className="flex items-start gap-2 text-sm text-muted leading-relaxed">
+                <span className="mt-[5px] w-1 h-1 rounded-full bg-emerald-400/40 flex-shrink-0" />
                 {ach}
               </li>
             ))}
@@ -286,22 +286,62 @@ function ModalExperienceCard({ exp, index }: { exp: (typeof experiences)[0]; ind
 
 function ResumeModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (open) {
+      lastFocusedRef.current = document.activeElement as HTMLElement;
+      setTimeout(() => closeButtonRef.current?.focus(), 100);
+    } else if (lastFocusedRef.current) {
+      lastFocusedRef.current.focus();
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key === "Tab" && contentRef.current) {
+        const focusable = contentRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, onClose]);
 
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-start justify-center overflow-hidden"
+          className="fixed inset-0 z-[100] flex items-start md:items-center justify-center overflow-hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Complete Professional Profile"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
+          transition={{ duration: 0.2 }}
         >
           <motion.div
-            className="absolute inset-0 bg-black/60 backdrop-blur-2xl"
+            className="absolute inset-0 bg-black/60 backdrop-blur-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -309,82 +349,89 @@ function ResumeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
           />
 
           <motion.div
-            className="relative w-full max-w-2xl mx-4 my-6 md:my-10 max-h-[calc(100vh-3rem)] flex flex-col"
-            initial={{ opacity: 0, y: 30, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.97 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            ref={contentRef}
+            className="relative w-full h-full md:h-auto md:max-h-[calc(100vh-3rem)] md:max-w-2xl md:mx-4 md:my-10 flex flex-col md:rounded-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              background: "rgba(5, 5, 5, 0.85)",
+              backdropFilter: "blur(48px) saturate(1.6)",
+              WebkitBackdropFilter: "blur(48px) saturate(1.6)",
+              borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+              boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.04)",
+            }}
           >
-            <div className="glass-panel-strong p-5 md:p-6 flex flex-col max-h-full overflow-hidden">
-              <div className="flex items-center justify-between mb-4 flex-shrink-0">
-                <div>
-                  <h3 className="text-sm font-semibold text-pearl">Complete Professional Profile</h3>
-                  <p className="text-[0.6rem] text-muted mt-0.5">{profile.name} &middot; Updated {profile.resumeLastUpdated}</p>
+            <div className="flex items-center justify-between px-5 md:px-6 pt-5 md:pt-6 pb-3 flex-shrink-0">
+              <div>
+                <h3 className="text-base md:text-lg font-semibold text-pearl">Complete Professional Profile</h3>
+                <p className="text-xs md:text-sm text-muted mt-0.5">{profile.name} &middot; Updated {profile.resumeLastUpdated}</p>
+              </div>
+              <button
+                ref={closeButtonRef}
+                onClick={onClose}
+                className="w-9 h-9 rounded-xl bg-white/[0.04] flex items-center justify-center hover:bg-white/[0.08] transition-colors text-muted hover:text-pearl flex-shrink-0"
+                aria-label="Close"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <div ref={scrollRef} className="overflow-y-auto px-5 md:px-6 pb-6 space-y-4 scroll-smooth">
+              <div className="glass-panel p-5 md:p-6">
+                <h4 className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted/60 mb-3">Executive Summary</h4>
+                <p className="text-sm md:text-base text-muted leading-relaxed mb-3">{profile.about}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {executiveBadges.map((b) => (
+                    <GlassBadge key={b} label={b} />
+                  ))}
                 </div>
-                <button
-                  onClick={onClose}
-                  className="w-8 h-8 rounded-xl bg-white/[0.04] flex items-center justify-center hover:bg-white/[0.08] transition-colors text-muted hover:text-pearl flex-shrink-0"
-                  aria-label="Close"
-                >
-                  <X size={14} />
-                </button>
               </div>
 
-              <div ref={scrollRef} className="overflow-y-auto pr-1 space-y-3 scroll-smooth">
-                <div className="glass-panel p-5">
-                  <h4 className="text-[0.5rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Executive Summary</h4>
-                  <p className="text-[0.7rem] text-muted leading-relaxed mb-3">{profile.about}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {executiveBadges.map((b) => (
-                      <GlassBadge key={b} label={b} />
-                    ))}
+              <div>
+                <h4 className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted/60 mb-3">Professional Experience</h4>
+                <div className="space-y-3">
+                  {experiences.map((exp, i) => (
+                    <ModalExperienceCard key={exp.company} exp={exp} index={i} />
+                  ))}
+                </div>
+              </div>
+
+              <div className="glass-panel p-5 md:p-6">
+                <h4 className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted/60 mb-3">Education</h4>
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-white/[0.04] flex items-center justify-center flex-shrink-0"><GraduationCap size={14} className="text-cyan/60" /></div>
+                  <div>
+                    <p className="text-sm md:text-base font-medium text-ice/80">{education.degree}</p>
+                    <p className="text-xs text-muted mt-0.5">{education.college} &middot; {education.year} &middot; {education.location}</p>
                   </div>
                 </div>
+              </div>
 
-                <div>
-                  <h4 className="text-[0.5rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5 px-1">Professional Experience</h4>
-                  <div className="space-y-3">
-                    {experiences.map((exp, i) => (
-                      <ModalExperienceCard key={exp.company} exp={exp} index={i} />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="glass-panel p-5">
-                  <h4 className="text-[0.5rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Education</h4>
-                  <div className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center flex-shrink-0"><GraduationCap size={12} className="text-cyan/60" /></div>
-                    <div>
-                      <p className="text-[0.75rem] font-medium text-ice/80">{education.degree}</p>
-                      <p className="text-[0.6rem] text-muted mt-0.5">{education.college} &middot; {education.year} &middot; {education.location}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="glass-panel p-5">
-                  <h4 className="text-[0.5rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Skills &amp; Expertise</h4>
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    {skills.map((skill) => (
-                      <div key={skill.category}>
-                        <div className="flex items-center gap-1.5 mb-1.5">
-                          <span className="text-cyan/60">{skillIconMap[skill.icon]}</span>
-                          <span className="text-[0.55rem] font-semibold uppercase tracking-wider text-ice/60">{skill.category}</span>
-                        </div>
-                        <div className="flex flex-wrap gap-1">
-                          {skill.items.map((item) => (
-                            <SkillChip key={item} label={item} />
-                          ))}
-                        </div>
+              <div className="glass-panel p-5 md:p-6">
+                <h4 className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted/60 mb-3">Skills &amp; Expertise</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  {skills.map((skill) => (
+                    <div key={skill.category}>
+                      <div className="flex items-center gap-1.5 mb-1.5">
+                        <span className="text-cyan/60">{skillIconMap[skill.icon]}</span>
+                        <span className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-wider text-ice/60">{skill.category}</span>
                       </div>
-                    ))}
-                  </div>
+                      <div className="flex flex-wrap gap-1">
+                        {skill.items.map((item) => (
+                          <SkillChip key={item} label={item} />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
+              </div>
 
-                <div className="flex justify-center pt-2 pb-1">
-                  <button onClick={onClose} className="text-[0.6rem] text-muted/50 hover:text-muted transition-colors px-4 py-2">
-                    Close Profile
-                  </button>
-                </div>
+              <div className="flex justify-center pt-2 pb-1">
+                <button onClick={onClose} className="text-sm text-muted/50 hover:text-muted transition-colors px-4 py-2">
+                  Close Profile
+                </button>
               </div>
             </div>
           </motion.div>
@@ -439,7 +486,7 @@ export default function ResumeChapter() {
               transitionDelay: "0.5s",
             }}
           >
-            <p className="text-[0.55rem] text-muted/30">
+            <p className="text-xs text-muted/30">
               {profile.name} &middot; {profile.role} &middot; Updated {profile.resumeLastUpdated}
             </p>
           </div>

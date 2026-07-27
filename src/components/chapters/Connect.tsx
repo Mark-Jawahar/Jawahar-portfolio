@@ -170,7 +170,7 @@ export default function Connect() {
                         </>
                       )}
                     </button>
-                    <p className="text-[0.55rem] text-muted/40 text-center">
+                    <p className="text-xs text-muted/40 text-center">
                       Your message will be sent through WhatsApp. No data is stored.
                     </p>
                   </form>
