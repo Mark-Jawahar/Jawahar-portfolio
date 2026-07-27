@@ -61,8 +61,9 @@ export default function Navigation() {
 
   return (
     <>
+      <div className="fixed top-4 left-0 right-0 z-50 flex justify-center pointer-events-none">
       <nav
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-2xl flex items-center gap-6 px-5 py-2 w-fit max-w-[90vw]"
+        className="pointer-events-auto rounded-2xl flex items-center gap-6 px-5 py-2 w-fit max-w-[90vw]"
         style={{
           background: scrolled
             ? "rgba(255, 255, 255, 0.10)"
@@ -73,8 +74,8 @@ export default function Navigation() {
           boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.04)",
           opacity: visible ? 1 : 0,
           transform: visible
-            ? "translate(-50%, 0)"
-            : "translate(-50%, -20px)",
+            ? "translateY(0)"
+            : "translateY(-20px)",
           transition: "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s ease",
         }}
       >
@@ -119,6 +120,7 @@ export default function Navigation() {
           {open ? <X size={16} /> : <Menu size={16} />}
         </button>
       </nav>
+      </div>
 
       {open && (
         <div className="fixed inset-0 z-40 flex md:hidden">
