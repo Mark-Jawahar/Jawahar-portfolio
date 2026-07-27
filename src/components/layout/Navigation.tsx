@@ -62,22 +62,20 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-2xl px-4 py-2 flex items-center justify-between w-[calc(100%-2rem)] max-w-[700px] transition-all duration-500"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-2xl flex items-center gap-6 px-5 py-2 w-fit max-w-[90vw]"
         style={{
           background: scrolled
-            ? "rgba(255, 255, 255, 0.04)"
-            : "transparent",
-          backdropFilter: scrolled ? "blur(28px) saturate(1.3)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(28px) saturate(1.3)" : "none",
-          border: scrolled ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(255, 255, 255, 0)",
-          boxShadow: scrolled
-            ? "0 4px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04)"
-            : "none",
+            ? "rgba(255, 255, 255, 0.10)"
+            : "rgba(255, 255, 255, 0.03)",
+          backdropFilter: "blur(24px) saturate(1.3)",
+          WebkitBackdropFilter: "blur(24px) saturate(1.3)",
+          border: "1px solid rgba(255, 255, 255, 0.06)",
+          boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.04)",
           opacity: visible ? 1 : 0,
           transform: visible
             ? "translate(-50%, 0)"
             : "translate(-50%, -20px)",
-          transition: "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s ease, backdrop-filter 0.6s ease, border 0.6s ease, box-shadow 0.6s ease",
+          transition: "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s ease",
         }}
       >
         <button
@@ -95,9 +93,9 @@ export default function Navigation() {
             <button
               key={ch.id}
               onClick={() => handleClick(ch.id)}
-              className={`px-2.5 py-1 rounded-lg text-[0.68rem] font-medium transition-all duration-300 ${
+              className={`px-2.5 py-1.5 rounded-lg text-[0.68rem] font-medium transition-all duration-300 ${
                 active === ch.id
-                  ? "bg-white/10 text-pearl"
+                  ? "bg-white/[0.08] backdrop-blur-sm text-pearl"
                   : "text-muted hover:text-ice hover:bg-white/[0.03]"
               }`}
             >
@@ -108,7 +106,7 @@ export default function Navigation() {
 
         <button
           onClick={() => handleClick("connect")}
-          className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pearl text-background text-[0.68rem] font-medium hover:bg-white transition-all duration-300"
+          className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/[0.10] backdrop-blur-sm border border-white/[0.08] text-pearl text-[0.68rem] font-medium hover:bg-white/[0.15] hover:border-white/[0.12] transition-all duration-300"
         >
           Let&apos;s Talk
         </button>
