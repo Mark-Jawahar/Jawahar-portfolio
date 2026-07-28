@@ -1,60 +1,137 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
+import ScrollParallax from "@/components/effects/ScrollParallax";
 import {
   Download,
   Check,
   MapPin,
-  Calendar,
   Briefcase,
-  ExternalLink,
-  X,
   GraduationCap,
   Users,
   BarChart3,
   Wrench,
   Globe,
   Brain,
+  Mail,
+  Award,
+  TrendingUp,
+  Clock,
 } from "lucide-react";
-import { profile, experiences, skills, education } from "@/lib/resume-data";
 
 const LinkedinIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
     <circle cx="4" cy="4" r="2" />
     <path d="M2 9h4v12H2z" />
   </svg>
 );
-
-const MailIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2" />
-    <path d="M22 4l-10 7L2 4" />
-  </svg>
-);
+import { profile, experiences, skills, education, highlights, summaryHighlights } from "@/lib/resume-data";
 
 const skillIconMap: Record<string, React.ReactNode> = {
-  Users: <Users size={12} />,
-  BarChart3: <BarChart3 size={12} />,
-  Wrench: <Wrench size={12} />,
-  Globe: <Globe size={12} />,
-  Brain: <Brain size={12} />,
-  GraduationCap: <GraduationCap size={12} />,
+  Users: <Users size={11} />,
+  BarChart3: <BarChart3 size={11} />,
+  Wrench: <Wrench size={11} />,
+  Globe: <Globe size={11} />,
+  Brain: <Brain size={11} />,
+  GraduationCap: <GraduationCap size={11} />,
 };
 
-  const executiveBadges = [
-    "5+ Years Experience",
-    "500+ Learners Onboarded",
-    "Customer Success",
-    "Customer Experience",
-    "CRM",
-    "Cross-Functional Collaboration",
-    "Process Improvement",
-  ];
+const statIcons = [
+  <Users key="u" size={14} />,
+  <Clock key="c" size={14} />,
+  <TrendingUp key="t" size={14} />,
+  <Award key="a" size={14} />,
+];
 
-function DownloadButton() {
+function useProgressiveInView(delay: number) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return {
+    ref,
+    style: {
+      opacity: inView ? 1 : 0,
+      transform: inView ? "translateY(0)" : "translateY(16px)",
+      transition: `opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1)`,
+      transitionDelay: `${delay}s`,
+    },
+  };
+}
+
+function Section({ delay = 0, children }: { delay?: number; children: React.ReactNode }) {
+  const { ref, style } = useProgressiveInView(delay);
+  return (
+    <div ref={ref} style={style}>
+      {children}
+    </div>
+  );
+}
+
+function GlassBadge({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap"
+      style={{
+        background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
+        border: "1px solid rgba(255,255,255,0.06)",
+        color: "#8e8e93",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 4px rgba(0,0,0,0.03)",
+        transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.04) 100%)";
+        e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+        e.currentTarget.style.color = "#e8e8ed";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)";
+        e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+        e.currentTarget.style.color = "#8e8e93";
+      }}
+    >
+      {label}
+    </span>
+  );
+}
+
+function SkillChip({ label }: { label: string }) {
+  return (
+    <span className="text-xs whitespace-nowrap"
+      style={{
+        color: "#8e8e93",
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.05)",
+        padding: "0.2rem 0.65rem",
+        borderRadius: "6px",
+        transition: "all 0.2s ease",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+        e.currentTarget.style.color = "#e8e8ed";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+        e.currentTarget.style.color = "#8e8e93";
+      }}
+    >
+      {label}
+    </span>
+  );
+}
+
+function SectionHeader({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <h3 className="flex items-center gap-2 text-[0.6rem] font-semibold uppercase tracking-[0.15em] mb-3"
+      style={{ color: "rgba(142, 142, 147, 0.6)" }}
+    >
+      <span style={{ color: "rgba(111, 128, 149, 0.6)" }}>{icon}</span>
+      {label}
+    </h3>
+  );
+}
+
+function DownloadButton({ compact = false }: { compact?: boolean }) {
   const [phase, setPhase] = useState<"idle" | "preparing" | "downloading" | "done">("idle");
 
   const handleClick = useCallback(() => {
@@ -79,35 +156,59 @@ function DownloadButton() {
     <button
       onClick={handleClick}
       disabled={phase !== "idle"}
-      className="relative overflow-hidden rounded-xl bg-white/5 border border-white/8 px-5 py-3 w-full text-sm font-medium text-ice/70 hover:text-pearl hover:bg-white/8 hover:border-white/12 transition-all duration-300 cursor-pointer disabled:cursor-not-allowed group"
+      className="relative overflow-hidden rounded-xl w-full text-sm font-medium cursor-pointer disabled:cursor-not-allowed group"
+      style={{
+        padding: compact ? "0.6rem 1rem" : "0.7rem 1.4rem",
+        background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        color: phase === "done" ? "rgba(201,195,184,0.8)" : "rgba(232,232,237,0.7)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 4px rgba(0,0,0,0.04)",
+        transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
+      }}
+      onMouseEnter={(e) => {
+        if (phase === "idle") {
+          e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)";
+          e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+          e.currentTarget.style.color = "#e8e8ed";
+          e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.10), 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04)";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (phase === "idle") {
+          e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)";
+          e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+          e.currentTarget.style.color = "rgba(232,232,237,0.7)";
+          e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 4px rgba(0,0,0,0.04)";
+        }
+      }}
     >
       <span className="relative flex items-center justify-center gap-2">
         {phase === "idle" && (
           <>
-            <Download size={13} className="group-hover:translate-y-0.5 transition-transform" />
+            <Download size={12} />
             <span>Download Resume</span>
           </>
         )}
         {phase === "preparing" && (
           <>
-            <span className="w-3.5 h-3.5 rounded-full border-2 border-cyan/30 border-t-cyan/80 animate-spin" />
-            <span className="text-muted">Preparing Resume</span>
+            <span className="w-3 h-3 rounded-full" style={{ border: "2px solid rgba(111,128,149,0.3)", borderTopColor: "rgba(111,128,149,0.8)" }}>
+              <span className="animate-spin block w-full h-full rounded-full border-2 border-transparent border-t-current" />
+            </span>
+            <span style={{ color: "#8e8e93" }}>Preparing</span>
           </>
         )}
         {phase === "downloading" && (
           <>
-            <span className="w-20 h-1 bg-white/10 rounded-full overflow-hidden">
-              <span className="block h-full bg-cyan/60 rounded-full animate-[download-progress_0.5s_ease-out_forwards]" />
+            <span className="w-16 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.10)" }}>
+              <span className="block h-full rounded-full" style={{ background: "rgba(111,128,149,0.6)", width: "100%", animation: "download-progress 0.5s ease-out forwards" }} />
             </span>
-            <span className="text-muted">Downloading</span>
+            <span style={{ color: "#8e8e93" }}>Downloading</span>
           </>
         )}
         {phase === "done" && (
           <>
-            <span className="w-4 h-4 rounded-full bg-emerald-500/20 flex items-center justify-center">
-              <Check size={10} strokeWidth={3} className="text-emerald-400" />
-            </span>
-            <span className="text-emerald-400">Downloaded</span>
+            <Check size={12} />
+            <span>Downloaded</span>
           </>
         )}
       </span>
@@ -115,308 +216,225 @@ function DownloadButton() {
   );
 }
 
-function GlassBadge({ label }: { label: string }) {
+function TimelineDot() {
   return (
-    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/[0.04] border border-white/6 text-muted hover:bg-white/[0.07] hover:border-white/12 hover:text-ice transition-all duration-300 cursor-default whitespace-nowrap">
-      {label}
-    </span>
-  );
-}
-
-function SkillChip({ label }: { label: string }) {
-  return (
-    <span className="text-xs text-muted bg-white/[0.03] border border-white/5 px-2.5 py-0.5 rounded-md hover:bg-white/[0.06] hover:text-ice transition-all duration-200">
-      {label}
-    </span>
-  );
-}
-
-function ProfileCard({ onViewComplete }: { onViewComplete: () => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <div
-      ref={ref}
-      className="glass-panel-strong p-6 md:p-8"
+    <div className="relative flex-shrink-0"
       style={{
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(24px)",
-        transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1)",
-        transitionDelay: "0.15s",
+        width: "10px",
+        height: "10px",
+        borderRadius: "50%",
+        background: "rgba(111, 128, 149, 0.6)",
+        boxShadow: "0 0 0 3px rgba(111, 128, 149, 0.15)",
       }}
-    >
-      <div className="flex flex-col md:flex-row items-start gap-5 md:gap-6 mb-5 md:mb-6 pb-5 md:pb-6 border-b border-white/6">
-        <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden flex-shrink-0 ring-1 ring-white/8">
-          <Image src={profile.portraitUrl} alt={profile.name} width={80} height={80} className="object-cover w-full h-full" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-1">
-            <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-pearl">{profile.name}</h3>
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-500/8 text-emerald-400 border border-emerald-500/15 whitespace-nowrap">
-              <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
-              Open to Opportunities
-            </span>
+    />
+  );
+}
+
+function TimelineLine() {
+  return (
+    <div style={{
+      width: "1px",
+      flexShrink: 0,
+      background: "linear-gradient(to bottom, rgba(111,128,149,0.15), transparent)",
+      marginLeft: "4.5px",
+    }} />
+  );
+}
+
+function ExperienceTimeline() {
+  return (
+    <div className="flex gap-4">
+      <div className="flex flex-col items-center gap-0 pt-1">
+        {experiences.map((_, i) => (
+          <div key={i} className="flex flex-col items-center">
+            <TimelineDot />
+            {i < experiences.length - 1 && (
+              <div className="flex-1 min-h-[24px] w-px" style={{ background: "linear-gradient(to bottom, rgba(111,128,149,0.15), transparent)" }} />
+            )}
           </div>
-          <p className="text-base font-medium text-ice/70 mb-1.5">{profile.role}</p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs md:text-sm text-muted">
-            <span className="flex items-center gap-1"><MapPin size={10} /> {profile.location}</span>
-            <span className="flex items-center gap-1"><Calendar size={10} /> {profile.experience}</span>
-            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-cyan/60 hover:text-cyan transition-colors">
-              <LinkedinIcon /> LinkedIn
-            </a>
-            <a href={`mailto:${profile.email}`} className="flex items-center gap-1 text-cyan/60 hover:text-cyan transition-colors">
-              <MailIcon /> Email
-            </a>
-          </div>
-        </div>
+        ))}
       </div>
 
-      <div className="mb-5 md:mb-6">
-        <h4 className="text-[0.6rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Executive Summary</h4>
-        <p className="text-sm md:text-base text-muted leading-relaxed max-w-[60ch] mb-3">
-          Customer experience leader with 5+ years of expertise in customer onboarding, lifecycle management, process excellence, and cross-functional collaboration. Currently leading onboarding initiatives for 500+ learners and driving measurable improvements in customer satisfaction and operational efficiency.
-        </p>
-        <div className="flex flex-wrap gap-1.5">
-          {executiveBadges.slice(0, 5).map((b) => (
-            <GlassBadge key={b} label={b} />
-          ))}
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-3 mb-5 md:mb-6">
-        <div className="glass-panel p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Briefcase size={11} className="text-cyan/60" />
-            <span className="text-[0.6rem] font-semibold uppercase tracking-wider text-muted/50">Customer Experience</span>
+      <div className="flex-1 space-y-6">
+        {experiences.map((exp, i) => (
+          <div key={exp.company}>
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-0.5">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold" style={{ color: "#e8e8ed" }}>{exp.company}</span>
+                {i === 0 && (
+                  <span className="text-[0.5rem] font-semibold px-1.5 py-0.5 rounded-full uppercase tracking-wider"
+                    style={{
+                      background: "rgba(111, 128, 149, 0.10)",
+                      color: "rgba(111, 128, 149, 0.7)",
+                      border: "1px solid rgba(111, 128, 149, 0.15)",
+                    }}
+                  >
+                    Current
+                  </span>
+                )}
+              </div>
+              <span className="text-xs" style={{ color: "rgba(142, 142, 147, 0.6)" }}>{exp.period}</span>
+            </div>
+            <p className="text-xs font-medium mb-1" style={{ color: "rgba(232, 232, 237, 0.5)" }}>{exp.role} &middot; {exp.location}</p>
+            <p className="text-xs leading-relaxed mb-1.5" style={{ color: "rgba(142, 142, 147, 0.7)" }}>{exp.description}</p>
+            <div className="flex flex-wrap gap-x-3 gap-y-0.5">
+              {exp.achievements.slice(0, 2).map((a, j) => (
+                <span key={j} className="text-xs flex items-center gap-1" style={{ color: "rgba(142, 142, 147, 0.5)" }}>
+                  <span style={{ color: "rgba(111, 128, 149, 0.4)" }}>◆</span>
+                  {a}
+                </span>
+              ))}
+            </div>
           </div>
-          <p className="text-sm font-medium text-ice/80 mb-0.5">{experiences[0].company}</p>
-          <p className="text-xs text-muted">{experiences[0].role} &middot; {experiences[0].period}</p>
-        </div>
-        <div className="glass-panel p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <GraduationCap size={11} className="text-cyan/60" />
-            <span className="text-[0.6rem] font-semibold uppercase tracking-wider text-muted/50">Education</span>
-          </div>
-          <p className="text-sm font-medium text-ice/80 mb-0.5">{education.degree}</p>
-          <p className="text-xs text-muted">{education.college} &middot; {education.year}</p>
-        </div>
-      </div>
-
-      <div className="mb-5 md:mb-6">
-        <h4 className="text-[0.6rem] font-semibold uppercase tracking-[0.15em] text-muted/60 mb-2.5">Core Skills</h4>
-        <div className="flex flex-wrap gap-1.5">
-          {skills.slice(0, 3).flatMap((s) => s.items.slice(0, 3)).map((item) => (
-            <SkillChip key={item} label={item} />
-          ))}
-          <span className="text-xs text-muted/40 px-2 py-0.5">+ more</span>
-        </div>
-      </div>
-
-      <div className="flex flex-col sm:flex-row gap-2.5">
-        <button
-          onClick={onViewComplete}
-          className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-pearl text-background px-5 py-3 text-sm font-medium hover:bg-white transition-all duration-300 group"
-        >
-          <span>View Complete Profile</span>
-          <ExternalLink size={12} className="group-hover:translate-x-0.5 transition-transform" />
-        </button>
-        <div className="sm:w-48">
-          <DownloadButton />
-        </div>
+        ))}
       </div>
     </div>
   );
 }
 
-function ModalExperienceCard({ exp, index }: { exp: (typeof experiences)[0]; index: number }) {
+export default function ResumeChapter() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: "-100px" });
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.08 * index, ease: [0.16, 1, 0.3, 1] }}
-      className="glass-panel-strong p-5 md:p-6"
+    <section
+      ref={sectionRef}
+      id="resume"
+      className="relative z-10 py-[clamp(3rem,5vw,5rem)] px-4 md:px-6 overflow-hidden transition-colors duration-700"
+      style={{ backgroundColor: inView ? "rgba(0,0,0,0.3)" : "transparent" }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
-        <div className="flex items-center gap-2">
-          <h3 className="text-base md:text-lg font-semibold text-pearl">{exp.company}</h3>
-          {index === 0 && (
-            <span className="text-[0.55rem] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/8 text-emerald-400 border border-emerald-500/15 uppercase tracking-wider">
-              Current
-            </span>
-          )}
-        </div>
-        <span className="text-xs text-muted">{exp.period}</span>
-      </div>
-      <p className="text-sm font-medium text-ice/70 mb-2">
-        {exp.role} &middot; {exp.location}
-      </p>
-      <p className="text-sm text-muted leading-relaxed mb-3">{exp.description}</p>
+      <ScrollParallax speed={0.12} offset={80} className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          background: inView ? "radial-gradient(ellipse 60% 35% at 50% 15%, rgba(111,128,149,0.04) 0%, transparent 60%)" : "none",
+          transition: "opacity 1s ease",
+        }} />
+      </ScrollParallax>
 
-      {exp.responsibilities.length > 0 && (
-        <div className="mb-3">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted/50 mb-1.5">Responsibilities</p>
-          <ul className="space-y-1.5">
-            {exp.responsibilities.map((r, j) => (
-              <li key={j} className="flex items-start gap-2 text-sm text-muted leading-relaxed">
-                <span className="mt-[5px] w-1 h-1 rounded-full bg-cyan/40 flex-shrink-0" />
-                {r}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className="max-w-[1000px] mx-auto">
+        <Section delay={0}>
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="chapter-title">
+              Professional Profile
+            </h2>
+            <p className="chapter-subtitle mx-auto text-center">
+              An executive overview of experience, expertise, and professional impact.
+            </p>
+          </div>
+        </Section>
 
-      {exp.achievements.length > 0 && (
-        <div className="pl-3 border-l border-cyan/15">
-          <p className="text-[0.6rem] font-semibold uppercase tracking-wider text-cyan/50 mb-1">Key Achievements</p>
-          <ul className="space-y-1">
-            {exp.achievements.map((ach, j) => (
-              <li key={j} className="flex items-start gap-2 text-sm text-muted leading-relaxed">
-                <span className="mt-[5px] w-1 h-1 rounded-full bg-emerald-400/40 flex-shrink-0" />
-                {ach}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </motion.div>
-  );
-}
+        <div className="grid md:grid-cols-[300px_1fr] gap-6 md:gap-8 items-start">
 
-function ResumeModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const lastFocusedRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (open) {
-      lastFocusedRef.current = document.activeElement as HTMLElement;
-      setTimeout(() => closeButtonRef.current?.focus(), 100);
-    } else if (lastFocusedRef.current) {
-      lastFocusedRef.current.focus();
-    }
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-        return;
-      }
-      if (e.key === "Tab" && contentRef.current) {
-        const focusable = contentRef.current.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last?.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first?.focus();
-        }
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [open, onClose]);
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-start md:items-center justify-center overflow-hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Complete Professional Profile"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <motion.div
-            className="absolute inset-0 bg-black/60 backdrop-blur-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-          />
-
-          <motion.div
-            ref={contentRef}
-            className="relative w-full h-full md:h-auto md:max-h-[calc(100vh-3rem)] md:max-w-2xl md:mx-4 md:my-10 flex flex-col md:rounded-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              background: "rgba(5, 5, 5, 0.85)",
-              backdropFilter: "blur(48px) saturate(1.6)",
-              WebkitBackdropFilter: "blur(48px) saturate(1.6)",
-              borderTop: "1px solid rgba(255, 255, 255, 0.06)",
-              boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.04)",
-            }}
-          >
-            <div className="flex items-center justify-between px-5 md:px-6 pt-5 md:pt-6 pb-3 flex-shrink-0">
-              <div>
-                <h3 className="text-base md:text-lg font-semibold text-pearl">Complete Professional Profile</h3>
-                <p className="text-xs md:text-sm text-muted mt-0.5">{profile.name} &middot; Updated {profile.resumeLastUpdated}</p>
+          <div className="space-y-5">
+            <Section delay={0.1}>
+              <div className="glass-panel p-5 md:p-6 text-center">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden mx-auto mb-4" style={{ boxShadow: "0 0 0 1px rgba(255,255,255,0.08)" }}>
+                  <Image src={profile.portraitUrl} alt={profile.name} width={80} height={80} className="object-cover w-full h-full" />
+                </div>
+                <h3 className="text-base font-semibold" style={{ color: "rgba(245,245,247,0.9)" }}>{profile.name}</h3>
+                <p className="text-xs mt-1" style={{ color: "rgba(232,232,237,0.5)" }}>{profile.role}</p>
+                <div className="mt-3 inline-flex items-center gap-1.5 text-[0.65rem] font-medium px-2.5 py-1 rounded-full"
+                  style={{
+                    background: "rgba(201, 195, 184, 0.08)",
+                    color: "rgba(201, 195, 184, 0.7)",
+                    border: "1px solid rgba(201, 195, 184, 0.12)",
+                  }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: "rgba(201, 195, 184, 0.6)", animation: "pulse 2s ease-in-out infinite" }} />
+                  Open to Opportunities
+                </div>
+                <div className="mt-4 space-y-1 text-xs" style={{ color: "rgba(142,142,147,0.6)" }}>
+                  <div className="flex items-center justify-center gap-1"><MapPin size={10} /> {profile.location}</div>
+                  <div className="flex items-center justify-center gap-1"><Briefcase size={10} /> {profile.experience}</div>
+                </div>
               </div>
-              <button
-                ref={closeButtonRef}
-                onClick={onClose}
-                className="w-9 h-9 rounded-xl bg-white/[0.04] flex items-center justify-center hover:bg-white/[0.08] transition-colors text-muted hover:text-pearl flex-shrink-0"
-                aria-label="Close"
-              >
-                <X size={16} />
-              </button>
-            </div>
+            </Section>
 
-            <div ref={scrollRef} className="overflow-y-auto px-5 md:px-6 pb-6 space-y-4 scroll-smooth">
+            <Section delay={0.15}>
+              <div className="glass-panel p-4">
+                <SectionHeader icon={<Mail size={11} />} label="Connect" />
+                <div className="flex flex-col gap-2 text-xs mt-2">
+                  <a href={`mailto:${profile.email}`}
+                    className="flex items-center gap-2 transition-colors rounded-lg px-2 py-1.5"
+                    style={{ color: "rgba(111,128,149,0.6)" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(111,128,149,0.9)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(111,128,149,0.6)"; }}
+                  >
+                    <Mail size={11} /> <span>{profile.email}</span>
+                  </a>
+                  <a href={profile.linkedin} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2 transition-colors rounded-lg px-2 py-1.5"
+                    style={{ color: "rgba(111,128,149,0.6)" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(111,128,149,0.9)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(111,128,149,0.6)"; }}
+                  >
+                    <LinkedinIcon /> <span>{profile.linkedinDisplay}</span>
+                  </a>
+                </div>
+              </div>
+            </Section>
+
+            <Section delay={0.2}>
+              <DownloadButton compact />
+            </Section>
+          </div>
+
+          <div className="space-y-6">
+            <Section delay={0.1}>
               <div className="glass-panel p-5 md:p-6">
-                <h4 className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted/60 mb-3">Executive Summary</h4>
-                <p className="text-sm md:text-base text-muted leading-relaxed mb-3">{profile.about}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {executiveBadges.map((b) => (
-                    <GlassBadge key={b} label={b} />
+                <SectionHeader icon={<Award size={11} />} label="Executive Summary" />
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(142,142,147,0.8)" }}>
+                  {profile.about}
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {summaryHighlights.map((s) => (
+                    <div key={s.label} className="rounded-lg p-2.5"
+                      style={{
+                        background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
+                        border: "1px solid rgba(255,255,255,0.04)",
+                      }}
+                    >
+                      <div className="text-xs font-medium mb-0.5" style={{ color: "rgba(232,232,237,0.7)" }}>{s.label}</div>
+                      <div className="text-[0.65rem]" style={{ color: "rgba(142,142,147,0.5)" }}>{s.desc}</div>
+                    </div>
                   ))}
                 </div>
               </div>
+            </Section>
 
-              <div>
-                <h4 className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted/60 mb-3">Professional Experience</h4>
-                <div className="space-y-3">
-                  {experiences.map((exp, i) => (
-                    <ModalExperienceCard key={exp.company} exp={exp} index={i} />
-                  ))}
-                </div>
-              </div>
-
-              <div className="glass-panel p-5 md:p-6">
-                <h4 className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted/60 mb-3">Education</h4>
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-white/[0.04] flex items-center justify-center flex-shrink-0"><GraduationCap size={14} className="text-cyan/60" /></div>
-                  <div>
-                    <p className="text-sm md:text-base font-medium text-ice/80">{education.degree}</p>
-                    <p className="text-xs text-muted mt-0.5">{education.college} &middot; {education.year} &middot; {education.location}</p>
+            <Section delay={0.15}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {highlights.slice(0, 4).map((h) => (
+                  <div key={h.label} className="glass-card p-4 text-center">
+                    <div className="text-lg md:text-xl font-semibold tracking-tight mb-0.5"
+                      style={{ color: "rgba(245,245,247,0.9)" }}>
+                      {h.value}
+                    </div>
+                    <div className="text-xs" style={{ color: "rgba(142,142,147,0.6)" }}>
+                      {h.label}
+                    </div>
                   </div>
+                ))}
+              </div>
+            </Section>
+
+            <Section delay={0.2}>
+              <div>
+                <SectionHeader icon={<Briefcase size={11} />} label="Career Timeline" />
+                <div className="glass-panel p-5 md:p-6">
+                  <ExperienceTimeline />
                 </div>
               </div>
+            </Section>
 
-              <div className="glass-panel p-5 md:p-6">
-                <h4 className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted/60 mb-3">Skills &amp; Expertise</h4>
-                <div className="grid grid-cols-2 gap-3">
-                  {skills.map((skill) => (
-                    <div key={skill.category}>
-                      <div className="flex items-center gap-1.5 mb-1.5">
-                        <span className="text-cyan/60">{skillIconMap[skill.icon]}</span>
-                        <span className="text-[0.6rem] md:text-xs font-semibold uppercase tracking-wider text-ice/60">{skill.category}</span>
+            <Section delay={0.25}>
+              <div>
+                <SectionHeader icon={<BarChart3 size={11} />} label="Core Skills &amp; Expertise" />
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+                  {skills.filter(s => s.category !== "Education").map((skill) => (
+                    <div key={skill.category} className="glass-card p-4">
+                      <div className="flex items-center gap-1.5 mb-2">
+                        <span style={{ color: "rgba(111,128,149,0.6)" }}>{skillIconMap[skill.icon]}</span>
+                        <span className="text-[0.55rem] font-semibold uppercase tracking-wider" style={{ color: "rgba(232,232,237,0.5)" }}>{skill.category}</span>
                       </div>
                       <div className="flex flex-wrap gap-1">
                         {skill.items.map((item) => (
@@ -427,73 +445,34 @@ function ResumeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                   ))}
                 </div>
               </div>
+            </Section>
 
-              <div className="flex justify-center pt-2 pb-1">
-                <button onClick={onClose} className="text-sm text-muted/50 hover:text-muted transition-colors px-4 py-2">
-                  Close Profile
-                </button>
+            <Section delay={0.3}>
+              <div className="glass-panel p-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: "rgba(255,255,255,0.03)" }}>
+                    <GraduationCap size={13} style={{ color: "rgba(111,128,149,0.6)" }} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium" style={{ color: "rgba(232,232,237,0.8)" }}>{education.degree}</p>
+                    <p className="text-xs mt-0.5" style={{ color: "rgba(142,142,147,0.6)" }}>{education.college} &middot; {education.year} &middot; {education.location}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-export default function ResumeChapter() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const inView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [modalOpen, setModalOpen] = useState(false);
-
-  return (
-    <>
-      <section
-        ref={sectionRef}
-        id="resume"
-        className="relative z-10 py-[clamp(3rem,5vw,5rem)] px-4 md:px-6 overflow-hidden transition-colors duration-700"
-        style={{ backgroundColor: inView ? "rgba(0,0,0,0.3)" : "transparent" }}
-      >
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: inView ? "radial-gradient(ellipse 60% 35% at 50% 15%, rgba(168,216,234,0.03) 0%, transparent 60%)" : "none",
-          transition: "opacity 1s ease",
-        }} />
-
-        <div className="max-w-[800px] mx-auto">
-          <div
-            className="text-center mb-8 md:mb-10"
-            style={{
-              opacity: inView ? 1 : 0,
-              transform: inView ? "translateY(0)" : "translateY(12px)",
-              transition: "opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1)",
-            }}
-          >
-            <h2 className="text-[clamp(1.6rem,2.8vw,2.4rem)] font-semibold tracking-tight text-white/90 leading-[1.12]">
-              Professional Profile
-            </h2>
-            <p className="mt-2 text-[clamp(0.85rem,1vw,0.95rem)] text-white/30 max-w-[48ch] mx-auto leading-relaxed">
-              An executive overview of experience, expertise, and professional impact.
-            </p>
+            </Section>
           </div>
 
-          <ProfileCard onViewComplete={() => setModalOpen(true)} />
+        </div>
 
-          <div
-            className="mt-4 text-center"
-            style={{
-              opacity: inView ? 1 : 0,
-              transition: "opacity 0.5s ease",
-              transitionDelay: "0.5s",
-            }}
-          >
-            <p className="text-xs text-muted/30">
+        <Section delay={0.35}>
+          <div className="text-center pt-6">
+            <p className="text-xs" style={{ color: "rgba(142,142,147,0.3)" }}>
               {profile.name} &middot; {profile.role} &middot; Updated {profile.resumeLastUpdated}
             </p>
           </div>
-        </div>
-      </section>
-
-      <ResumeModal open={modalOpen} onClose={() => setModalOpen(false)} />
-    </>
+        </Section>
+      </div>
+    </section>
   );
 }

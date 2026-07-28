@@ -4,11 +4,11 @@ import { projects } from "@/lib/resume-data";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 
 const categoryColors: Record<string, string> = {
-  AI: "text-purple-300 border-purple-500/20 bg-purple-500/10",
-  Automation: "text-emerald-300 border-emerald-500/20 bg-emerald-500/10",
-  Design: "text-cyan-300 border-cyan-500/20 bg-cyan-500/10",
-  CX: "text-amber-300 border-amber-500/20 bg-amber-500/10",
-  Development: "text-blue-300 border-blue-500/20 bg-blue-500/10",
+  AI: "text-[#9A9085] border-[#9A9085]/20 bg-[#9A9085]/10",
+  Automation: "text-[#6F8095] border-[#6F8095]/20 bg-[#6F8095]/10",
+  Design: "text-[#C9C3B8] border-[#C9C3B8]/20 bg-[#C9C3B8]/10",
+  CX: "text-[#798073] border-[#798073]/20 bg-[#798073]/10",
+  Development: "text-[#6C737D] border-[#6C737D]/20 bg-[#6C737D]/10",
 };
 
 export default function ProjectsChapter() {

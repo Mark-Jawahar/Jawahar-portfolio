@@ -71,17 +71,17 @@ export default function Connect() {
                     <p className="text-xs font-medium text-muted">Email</p>
                     <p className="text-sm text-pearl truncate">{profile.email}</p>
                   </div>
-                  <ArrowRight size={14} className="text-muted/40 group-hover:text-cyan/60 transition-colors" />
+                  <ArrowRight size={14} className="text-muted/40 group-hover:text-[#6F8095] transition-colors" />
                 </a>
                 <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 glass-card p-4 group cursor-pointer">
                   <div className="w-10 h-10 rounded-lg bg-white/[0.04] flex items-center justify-center group-hover:bg-white/[0.07] transition-colors">
-                    <MessageCircle size={14} className="text-emerald-400/60" />
+                    <MessageCircle size={14} className="text-[#9A9085]/60" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium text-muted">WhatsApp</p>
                     <p className="text-sm text-pearl truncate">{profile.phone}</p>
                   </div>
-                  <ArrowRight size={14} className="text-muted/40 group-hover:text-emerald-400/60 transition-colors" />
+                  <ArrowRight size={14} className="text-muted/40 group-hover:text-[#9A9085] transition-colors" />
                 </a>
                 <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 glass-card p-4 group cursor-pointer">
                   <div className="w-10 h-10 rounded-lg bg-white/[0.04] flex items-center justify-center group-hover:bg-white/[0.07] transition-colors">
@@ -91,7 +91,7 @@ export default function Connect() {
                     <p className="text-xs font-medium text-muted">LinkedIn</p>
                     <p className="text-sm text-pearl truncate">{profile.linkedinDisplay}</p>
                   </div>
-                  <ArrowRight size={14} className="text-muted/40 group-hover:text-blue-400/60 transition-colors" />
+                  <ArrowRight size={14} className="text-muted/40 group-hover:text-[#6F8095] transition-colors" />
                 </a>
               </div>
             </ScrollReveal>
@@ -107,8 +107,8 @@ export default function Connect() {
 
                 {status === "sent" ? (
                   <div className="flex flex-col items-center justify-center py-12">
-                    <div className="w-14 h-14 rounded-full bg-emerald-500/10 flex items-center justify-center mb-4">
-                      <Check size={24} className="text-emerald-400" />
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center mb-4" style={{ background: "rgba(201,195,184,0.10)" }}>
+                      <Check size={24} style={{ color: "rgba(201,195,184,0.7)" }} />
                     </div>
                     <p className="text-sm font-medium text-pearl">Message sent!</p>
                     <p className="text-[0.7rem] text-muted mt-1">You&apos;ll be redirected to WhatsApp.</p>
@@ -124,7 +124,10 @@ export default function Connect() {
                           required
                           value={form.name}
                           onChange={(e) => setForm({ ...form, name: e.target.value })}
-                          className="w-full bg-white/[0.03] border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-pearl placeholder:text-muted/40 focus:outline-none focus:border-cyan/30 transition-colors"
+                          className="w-full bg-white/[0.03] border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-pearl placeholder:text-muted/40 focus:outline-none transition-colors"
+                          style={{ transition: "border-color 0.3s cubic-bezier(0.16,1,0.3,1)" }}
+                          onFocus={(e) => e.currentTarget.style.borderColor = "rgba(111,128,149,0.3)"}
+                          onBlur={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"}
                           placeholder="Your name"
                         />
                       </div>
@@ -136,7 +139,10 @@ export default function Connect() {
                           required
                           value={form.email}
                           onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          className="w-full bg-white/[0.03] border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-pearl placeholder:text-muted/40 focus:outline-none focus:border-cyan/30 transition-colors"
+                          className="w-full bg-white/[0.03] border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-pearl placeholder:text-muted/40 focus:outline-none transition-colors"
+                          style={{ transition: "border-color 0.3s cubic-bezier(0.16,1,0.3,1)" }}
+                          onFocus={(e) => e.currentTarget.style.borderColor = "rgba(111,128,149,0.3)"}
+                          onBlur={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"}
                           placeholder="your@email.com"
                         />
                       </div>
@@ -149,7 +155,10 @@ export default function Connect() {
                         rows={4}
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        className="w-full bg-white/[0.03] border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-pearl placeholder:text-muted/40 focus:outline-none focus:border-cyan/30 transition-colors resize-none"
+                        className="w-full bg-white/[0.03] border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-pearl placeholder:text-muted/40 focus:outline-none transition-colors resize-none"
+                          style={{ transition: "border-color 0.3s cubic-bezier(0.16,1,0.3,1)" }}
+                          onFocus={(e) => e.currentTarget.style.borderColor = "rgba(111,128,149,0.3)"}
+                          onBlur={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"}
                         placeholder="Tell me about your project or idea..."
                       />
                     </div>

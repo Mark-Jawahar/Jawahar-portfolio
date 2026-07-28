@@ -28,7 +28,28 @@ export default function Footer() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/[0.03] border border-white/[0.06] text-muted hover:text-pearl hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300"
+                className="flex items-center justify-center w-11 h-11 rounded-full transition-all duration-300"
+                style={{
+                  color: "rgba(142,142,147,0.6)",
+                  background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(201,195,184,0.06) 40%, rgba(111,128,149,0.03) 70%, rgba(255,255,255,0.08) 100%)",
+                  border: "1px solid rgba(255,255,255,0.09)",
+                  boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.10), 0 2px 8px rgba(0,0,0,0.06)",
+                  backdropFilter: "blur(16px) saturate(1.3)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.16) 0%, rgba(201,195,184,0.09) 40%, rgba(111,128,149,0.05) 70%, rgba(255,255,255,0.10) 100%)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
+                  e.currentTarget.style.color = "#e8e8ed";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "inset 0 1.5px 0 rgba(255,255,255,0.14), 0 4px 16px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(201,195,184,0.06) 40%, rgba(111,128,149,0.03) 70%, rgba(255,255,255,0.08) 100%)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.09)";
+                  e.currentTarget.style.color = "rgba(142,142,147,0.6)";
+                  e.currentTarget.style.transform = "none";
+                  e.currentTarget.style.boxShadow = "inset 0 1.5px 0 rgba(255,255,255,0.10), 0 2px 8px rgba(0,0,0,0.06)";
+                }}
                 aria-label={link.label}
               >
                 {iconMap[link.icon] || null}

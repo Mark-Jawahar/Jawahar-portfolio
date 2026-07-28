@@ -61,81 +61,151 @@ export default function Navigation() {
 
   return (
     <>
-      <div className="fixed top-4 left-0 right-0 z-50 flex justify-center pointer-events-none">
-      <nav
-        className="pointer-events-auto rounded-2xl flex items-center gap-8 px-5 py-2 w-fit max-w-[90vw]"
-        style={{
-          background: scrolled
-            ? "rgba(255, 255, 255, 0.10)"
-            : "rgba(255, 255, 255, 0.03)",
-          backdropFilter: "blur(24px) saturate(1.3)",
-          WebkitBackdropFilter: "blur(24px) saturate(1.3)",
-          border: "1px solid rgba(255, 255, 255, 0.06)",
-          boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.04)",
-          opacity: visible ? 1 : 0,
-          transform: visible
-            ? "translateY(0)"
-            : "translateY(-20px)",
-          transition: "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s ease",
-        }}
-      >
-        <button
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            setActive("");
+      <header className="fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none">
+        <nav
+          className="pointer-events-auto rounded-2xl flex items-center gap-8 px-5 py-2 w-fit max-w-[90vw] relative"
+          style={{
+            background: scrolled
+              ? "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(201,195,184,0.07) 35%, rgba(111,128,149,0.04) 60%, rgba(255,255,255,0.10) 100%)"
+              : "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(201,195,184,0.05) 40%, rgba(111,128,149,0.03) 60%, rgba(255,255,255,0.07) 100%)",
+            backdropFilter: "blur(48px) saturate(1.4)",
+            WebkitBackdropFilter: "blur(48px) saturate(1.4)",
+            border: "1px solid rgba(255,255,255,0.10)",
+            boxShadow: scrolled
+              ? "inset 0 1.5px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(255,255,255,0.04), 0 4px 16px rgba(0,0,0,0.10), 0 12px 48px rgba(0,0,0,0.06)"
+              : "inset 0 1.5px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(0,0,0,0.02)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0) translateX(-50%)" : "translateY(-20px) translateX(-50%)",
+            left: "50%",
+            transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1), background 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s cubic-bezier(0.16,1,0.3,1)",
           }}
-          className="text-sm md:text-base font-medium tracking-tight text-ice hover:text-pearl transition-colors"
         >
-          JA
-        </button>
+          <div
+            className="absolute inset-0 rounded-[inherit] pointer-events-none"
+            style={{
+              background: "linear-gradient(105deg, transparent 5%, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 35%, rgba(201,195,184,0.03) 45%, transparent 60%)",
+            }}
+          />
 
-        <div className="hidden md:flex items-center gap-1">
-          {chapters.slice(0, 5).map((ch) => (
-            <button
-              key={ch.id}
-              onClick={() => handleClick(ch.id)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ${
-                active === ch.id
-                  ? "bg-white/[0.08] backdrop-blur-sm text-pearl"
-                  : "text-muted hover:text-ice hover:bg-white/[0.03]"
-              }`}
-            >
-              {ch.label}
-            </button>
-          ))}
-        </div>
+          <button
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setActive("");
+            }}
+            className="relative text-sm md:text-base font-medium tracking-tight text-ice hover:text-pearl transition-colors"
+          >
+            JA
+          </button>
 
-        <button
-          onClick={() => handleClick("connect")}
-          className="hidden md:flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-white/[0.10] backdrop-blur-sm border border-white/[0.08] text-pearl text-sm font-medium hover:bg-white/[0.15] hover:border-white/[0.12] transition-all duration-300"
-        >
-          Let&apos;s Talk
-        </button>
+          <div className="hidden md:flex items-center gap-1">
+            {chapters.slice(0, 5).map((ch) => (
+              <button
+                key={ch.id}
+                onClick={() => handleClick(ch.id)}
+                style={{
+                  transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
+                }}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
+                  active === ch.id
+                    ? "text-pearl"
+                    : "text-muted hover:text-ice"
+                }`}
+              >
+                {active === ch.id && (
+                  <span
+                    className="absolute inset-0 rounded-lg pointer-events-none"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%)",
+                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 4px rgba(0,0,0,0.04)",
+                    }}
+                  />
+                )}
+                <span className="relative">{ch.label}</span>
+              </button>
+            ))}
+          </div>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden p-1.5 rounded-lg text-muted hover:text-pearl transition-colors"
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          {open ? <X size={16} /> : <Menu size={16} />}
-        </button>
-      </nav>
-      </div>
+          <button
+            onClick={() => handleClick("connect")}
+            className="hidden md:flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(201,195,184,0.07) 40%, rgba(111,128,149,0.03) 70%, rgba(255,255,255,0.10) 100%)",
+              backdropFilter: "blur(12px) saturate(1.3)",
+              WebkitBackdropFilter: "blur(12px) saturate(1.3)",
+              border: "1px solid rgba(255,255,255,0.10)",
+              color: "#e8e8ed",
+              boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.14), 0 2px 8px rgba(0,0,0,0.06)",
+              transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(201,195,184,0.10) 40%, rgba(111,128,149,0.05) 70%, rgba(255,255,255,0.12) 100%)";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+              e.currentTarget.style.transform = "translateY(-0.5px) scale(1.02)";
+              e.currentTarget.style.boxShadow = "inset 0 1.5px 0 rgba(255,255,255,0.18), 0 4px 16px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(201,195,184,0.07) 40%, rgba(111,128,149,0.03) 70%, rgba(255,255,255,0.10) 100%)";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)";
+              e.currentTarget.style.transform = "none";
+              e.currentTarget.style.boxShadow = "inset 0 1.5px 0 rgba(255,255,255,0.14), 0 2px 8px rgba(0,0,0,0.06)";
+            }}
+          >
+            Let&apos;s Talk
+          </button>
+
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden p-1.5 rounded-lg text-muted hover:text-pearl transition-colors relative"
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            {open ? <X size={16} /> : <Menu size={16} />}
+          </button>
+        </nav>
+      </header>
 
       {open && (
         <div className="fixed inset-0 z-40 flex md:hidden">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => setOpen(false)} />
-          <div className="relative ml-auto w-64 h-full bg-background-secondary border-l border-white/[0.06] p-6 pt-20">
-            <div className="flex flex-col gap-1">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div
+            className="relative ml-auto w-72 h-full p-6 pt-24"
+            style={{
+              background: "linear-gradient(135deg, rgba(8,8,10,0.92) 0%, rgba(5,5,5,0.88) 100%)",
+              backdropFilter: "blur(40px) saturate(1.6)",
+              WebkitBackdropFilter: "blur(40px) saturate(1.6)",
+              borderLeft: "1px solid rgba(255,255,255,0.06)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04), -4px 0 24px rgba(0,0,0,0.2)",
+            }}
+          >
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "linear-gradient(105deg, transparent 10%, rgba(255,255,255,0.03) 30%, rgba(201,195,184,0.02) 45%, rgba(111,128,149,0.01) 52%, transparent 60%)",
+              }}
+            />
+            <div className="relative flex flex-col gap-1">
               {chapters.map((ch) => (
                 <button
                   key={ch.id}
                   onClick={() => handleClick(ch.id)}
-                  className={`text-left px-3 py-2.5 rounded-xl text-sm transition-all ${
-                    active === ch.id
-                      ? "bg-white/10 text-pearl"
-                      : "text-muted hover:text-ice hover:bg-white/[0.03]"
-                  }`}
+                  className="text-left px-3 py-2.5 rounded-xl text-sm transition-all relative"
+                  style={{
+                    color: active === ch.id ? "#e8e8ed" : "#8e8e93",
+                    background: active === ch.id
+                      ? "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)"
+                      : "transparent",
+                    boxShadow: active === ch.id ? "inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 4px rgba(0,0,0,0.04)" : "none",
+                    transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (active !== ch.id) {
+                      e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (active !== ch.id) {
+                      e.currentTarget.style.background = "transparent";
+                    }
+                  }}
                 >
                   <span className="text-[0.6rem] font-mono opacity-40 mr-2">{ch.number}</span>
                   {ch.label}
@@ -144,7 +214,17 @@ export default function Navigation() {
               <hr className="my-3 border-white/[0.06]" />
               <a
                 href={`mailto:${profile.email}`}
-                className="px-3 py-2.5 rounded-xl text-sm text-cyan hover:bg-white/[0.03] transition-all"
+                className="px-3 py-2.5 rounded-xl text-sm transition-all"
+                style={{
+                  color: "#6F8095",
+                  transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                }}
               >
                 {profile.email}
               </a>

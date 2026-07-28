@@ -3,12 +3,18 @@
 import { highlights } from "@/lib/resume-data";
 import { TrendingUp, Users, BarChart3, Zap } from "lucide-react";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import ScrollParallax from "@/components/effects/ScrollParallax";
 
 const iconMap = [TrendingUp, Users, BarChart3, Zap, Users, BarChart3];
 
 export default function Impact() {
   return (
     <section id="impact" className="chapter-section relative z-10">
+      <ScrollParallax speed={0.15} offset={80} className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px]" style={{
+          background: "radial-gradient(ellipse at center, rgba(111,128,149,0.03) 0%, transparent 60%)",
+        }} />
+      </ScrollParallax>
       <div className="chapter-container">
         <ScrollReveal>
           <div className="chapter-label mb-6">
@@ -35,7 +41,7 @@ export default function Impact() {
                 <div className="glass-card p-5 md:p-6 text-center group">
                   <div className="flex justify-center mb-3">
                     <div className="w-10 h-10 rounded-lg bg-white/[0.03] flex items-center justify-center group-hover:bg-white/[0.06] transition-colors">
-                      <Icon size={16} className="text-cyan/60" />
+                      <Icon size={16} style={{ color: "rgba(111, 128, 149, 0.6)" }} />
                     </div>
                   </div>
                   <div className="stat-value text-gradient mb-1">{item.value}</div>

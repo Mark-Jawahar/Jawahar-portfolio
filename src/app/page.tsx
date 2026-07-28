@@ -18,7 +18,6 @@ export default function Home() {
       <AuroraBackground />
       <Particles />
       <MouseGlow />
-      <div className="noise-overlay" />
       <Navigation />
       <main className="relative z-10">
         <Hero />

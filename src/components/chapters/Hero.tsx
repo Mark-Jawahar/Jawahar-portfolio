@@ -11,25 +11,38 @@ export default function Hero() {
   const [mouseX, setMouseX] = useState(0.5);
   const [mouseY, setMouseY] = useState(0.5);
   const [mounted, setMounted] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return;
     const onMove = (e: MouseEvent) => {
       setMouseX(e.clientX / window.innerWidth);
       setMouseY(e.clientY / window.innerHeight);
     };
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
-  }, []);
+  }, [reducedMotion]);
 
-  const offsetX = (mouseX - 0.5) * 8;
-  const offsetY = (mouseY - 0.5) * 8;
+  const offsetX = reducedMotion ? 0 : (mouseX - 0.5) * 8;
+  const offsetY = reducedMotion ? 0 : (mouseY - 0.5) * 8;
 
   return (
     <section
       ref={sectionRef}
       id="introduction"
-      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-16 overflow-hidden"
+      className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 pt-36 pb-16 overflow-hidden"
+      style={{
+        background: "radial-gradient(ellipse 70% 40% at 50% 30%, rgba(111,128,149,0.03) 0%, transparent 60%), radial-gradient(ellipse 50% 30% at 80% 70%, rgba(201,195,184,0.02) 0%, transparent 50%)",
+      }}
     >
       <div
         className="flex flex-col items-center text-center max-w-2xl mx-auto"
@@ -57,9 +70,13 @@ export default function Hero() {
           />
         </div>
 
-        <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 animate-pulse" />
-          <span className="text-xs sm:text-sm font-medium text-muted tracking-wider uppercase">{profile.location}</span>
+        <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full" style={{
+          background: "linear-gradient(135deg, rgba(201,195,184,0.10) 0%, rgba(111,128,149,0.05) 100%)",
+          border: "1px solid rgba(201,195,184,0.12)",
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 2px 8px rgba(0,0,0,0.04)",
+        }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-champagne-silver/80 animate-pulse" style={{ background: "rgba(201,195,184,0.6)" }} />
+          <span className="text-xs sm:text-sm font-medium tracking-wider uppercase" style={{ color: "rgba(201,195,184,0.7)" }}>{profile.location}</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-[1.06] mb-4 text-pearl">
@@ -71,9 +88,9 @@ export default function Hero() {
           {profile.role}
         </p>
 
-         <p className="text-sm sm:text-base text-muted leading-relaxed max-w-[55ch] mx-auto mb-10">
-           Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services. Passionate about delivering seamless customer experiences, improving operational processes, and building long-term customer relationships.
-         </p>
+         <p className="text-sm sm:text-base leading-relaxed max-w-[55ch] mx-auto mb-10" style={{ color: "rgba(142,142,147,0.8)" }}>
+            Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, Client Relationship Management, and Customer Lifecycle Management across EdTech, Real Estate, and Financial Services. Passionate about delivering seamless customer experiences, improving operational processes, and building long-term customer relationships.
+          </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
           <button
@@ -99,7 +116,7 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted/40 hover:text-muted/80 transition-colors"
         aria-label="Scroll down"
       >
-        <ChevronDown size={20} className="animate-bounce" />
+        <ChevronDown size={20} className="animate-float-subtle" />
       </button>
     </section>
   );

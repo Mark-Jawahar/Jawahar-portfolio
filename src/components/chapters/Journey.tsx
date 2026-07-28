@@ -3,6 +3,7 @@
 import { experiences } from "@/lib/resume-data";
 import { Briefcase, MapPin, Calendar } from "lucide-react";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import ScrollParallax from "@/components/effects/ScrollParallax";
 
 export default function Journey() {
   return (
@@ -26,13 +27,15 @@ export default function Journey() {
         </ScrollReveal>
 
         <div className="relative">
-          <div className="absolute left-[3px] md:left-[15px] top-0 bottom-0 w-px bg-gradient-to-b from-cyan/20 via-lavender/10 to-transparent" />
+          <ScrollParallax speed={0.2} offset={100}>
+            <div className="absolute left-[3px] md:left-[15px] top-0 bottom-0 w-px" style={{ background: "linear-gradient(to bottom, rgba(111,128,149,0.2), rgba(91,100,116,0.1), transparent)" }} />
+          </ScrollParallax>
 
           <div className="space-y-6 md:space-y-8">
             {experiences.map((exp, i) => (
               <ScrollReveal key={`${exp.company}-${i}`} delay={0.1 * i}>
                 <div className="relative pl-8 md:pl-14">
-                  <div className="absolute left-0 md:left-[10px] top-1.5 w-[7px] h-[7px] rounded-full bg-cyan ring-[3px] ring-cyan/10" />
+                  <div className="absolute left-0 md:left-[10px] top-1.5 w-[7px] h-[7px] rounded-full" style={{ background: "rgba(111,128,149,0.7)", boxShadow: "0 0 0 3px rgba(111,128,149,0.15)" }} />
 
                   <div className="glass-card p-5 md:p-6">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-2">
@@ -44,7 +47,7 @@ export default function Journey() {
                     </div>
 
                     <div className="flex items-center gap-2 mb-3">
-                      <Briefcase size={12} className="text-cyan/60" />
+                      <Briefcase size={12} style={{ color: "rgba(111, 128, 149, 0.6)" }} />
                       <span className="text-sm font-medium text-ice/80">{exp.role}</span>
                       <MapPin size={12} className="text-muted ml-1" />
                       <span className="text-xs text-muted">{exp.location}</span>
@@ -55,7 +58,7 @@ export default function Journey() {
                     <div className="grid sm:grid-cols-2 gap-2">
                       {exp.achievements.map((ach, j) => (
                         <div key={j} className="flex items-start gap-2">
-                          <span className="mt-[5px] w-1.5 h-1.5 rounded-full bg-cyan/40 flex-shrink-0" />
+                          <span className="mt-[5px] w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "rgba(111, 128, 149, 0.4)" }} />
                           <span className="text-xs md:text-sm text-muted leading-relaxed">{ach}</span>
                         </div>
                       ))}
