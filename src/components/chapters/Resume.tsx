@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { useInView } from "framer-motion";
 import { motion } from "framer-motion";
@@ -11,6 +11,7 @@ import {
   Award, TrendingUp, Clock, ChevronDown,
   Target, Sparkles, Eye,
 } from "lucide-react";
+import ResumeOverlay from "@/components/effects/ResumeOverlay";
 import { profile, experiences, skills, education, highlights, summaryHighlights } from "@/lib/resume-data";
 
 const skillIconMap: Record<string, React.ReactNode> = {
@@ -56,30 +57,6 @@ function SectionHeader({ icon, label }: { icon: React.ReactNode; label: string }
   );
 }
 
-function Collapsible({ expanded, children }: { expanded: boolean; children: React.ReactNode }) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      setHeight(contentRef.current.scrollHeight);
-    }
-  }, [expanded, children]);
-
-  return (
-    <motion.div
-      initial={false}
-      animate={{ height: expanded ? height : 0, opacity: expanded ? 1 : 0 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      style={{ overflow: "hidden" }}
-    >
-      <div ref={contentRef}>
-        {children}
-      </div>
-    </motion.div>
-  );
-}
-
 function DownloadButton({ compact = false }: { compact?: boolean }) {
   const [phase, setPhase] = useState<"idle" | "preparing" | "downloading" | "done">("idle");
 
@@ -108,7 +85,7 @@ function DownloadButton({ compact = false }: { compact?: boolean }) {
       className="relative overflow-hidden rounded-xl w-full text-sm font-medium cursor-pointer disabled:cursor-not-allowed group"
       style={{
         padding: compact ? "0.6rem 1rem" : "0.7rem 1.4rem",
-        background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+        background: "rgba(255,255,255,0.03)",
         border: "1px solid rgba(255,255,255,0.07)",
         color: phase === "done" ? "rgba(142,142,147,0.6)" : "rgba(232,232,237,0.7)",
         boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 4px rgba(0,0,0,0.04)",
@@ -116,7 +93,7 @@ function DownloadButton({ compact = false }: { compact?: boolean }) {
       }}
       onMouseEnter={(e) => {
         if (phase === "idle") {
-          e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)";
+          e.currentTarget.style.background = "rgba(255,255,255,0.05)";
           e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
           e.currentTarget.style.color = "#e8e8ed";
           e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.10), 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04)";
@@ -124,7 +101,7 @@ function DownloadButton({ compact = false }: { compact?: boolean }) {
       }}
       onMouseLeave={(e) => {
         if (phase === "idle") {
-          e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)";
+          e.currentTarget.style.background = "rgba(255,255,255,0.03)";
           e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
           e.currentTarget.style.color = "rgba(232,232,237,0.7)";
           e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 4px rgba(0,0,0,0.04)";
@@ -170,14 +147,14 @@ function SkillCategory({ category, icon, items }: { category: string; icon: Reac
 
   return (
     <div className="rounded-xl overflow-hidden" style={{
-      background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
+      background: "rgba(255,255,255,0.02)",
       border: "1px solid rgba(255,255,255,0.05)",
     }}>
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-4 py-3 cursor-pointer"
-        style={{ transition: "all 0.2s ease" }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
+        style={{ transition: "background 0.2s ease" }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.02)"; }}
         onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
       >
         <div className="flex items-center gap-2.5">
@@ -198,131 +175,24 @@ function SkillCategory({ category, icon, items }: { category: string; icon: Reac
           <ChevronDown size={12} />
         </motion.div>
       </button>
-      <Collapsible expanded={open}>
+      <div style={{
+        maxHeight: open ? "300px" : "0",
+        opacity: open ? 1 : 0,
+        overflow: "hidden",
+        transition: "max-height 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease",
+      }}>
         <div className="px-4 pb-3 pt-1 flex flex-wrap gap-1.5">
           {items.map((item) => (
-            <span
-              key={item}
-              className="text-xs px-2.5 py-1 rounded-md whitespace-nowrap"
-              style={{
-                color: "rgba(142,142,147,0.6)",
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.04)",
-              }}
-            >
+            <span key={item} className="text-xs px-2.5 py-1 rounded-md" style={{
+              color: "rgba(142,142,147,0.6)",
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.04)",
+            }}>
               {item}
             </span>
           ))}
         </div>
-      </Collapsible>
-    </div>
-  );
-}
-
-function CompanyAccordion({
-  exp,
-  index,
-  isOpen,
-  onToggle,
-}: {
-  exp: typeof experiences[0];
-  index: number;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  const stats = exp.achievements.slice(0, 2);
-
-  return (
-    <div className="rounded-xl overflow-hidden" style={{
-      background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
-      border: "1px solid rgba(255,255,255,0.05)",
-      transition: "all 0.3s ease",
-    }}>
-      <button
-        onClick={onToggle}
-        className="w-full text-left cursor-pointer px-5 py-4"
-        style={{ transition: "all 0.2s ease" }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.02)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
-      >
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-sm font-semibold" style={{ color: "#e8e8ed" }}>{exp.company}</span>
-              {index === 0 && (
-                <span className="text-[0.5rem] font-semibold px-1.5 py-0.5 rounded-full uppercase tracking-wider"
-                  style={{
-                    background: "rgba(142, 142, 147, 0.08)",
-                    color: "rgba(142, 142, 147, 0.5)",
-                    border: "1px solid rgba(142, 142, 147, 0.08)",
-                  }}
-                >
-                  Current
-                </span>
-              )}
-            </div>
-            <p className="text-xs mt-0.5" style={{ color: "rgba(232, 232, 237, 0.45)" }}>
-              {exp.role} &middot; {exp.period}
-            </p>
-            <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1.5">
-              {stats.map((stat, j) => (
-                <span key={j} className="text-[0.65rem] flex items-center gap-1" style={{ color: "rgba(142, 142, 147, 0.45)" }}>
-                  <span style={{ color: "rgba(142, 142, 147, 0.25)" }}>◆</span>
-                  {stat}
-                </span>
-              ))}
-            </div>
-          </div>
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-shrink-0 mt-1"
-            style={{ color: "rgba(142,142,147,0.3)" }}
-          >
-            <ChevronDown size={14} />
-          </motion.div>
-        </div>
-      </button>
-
-      <Collapsible expanded={isOpen}>
-        <div className="px-5 pb-5 space-y-4">
-
-          <div>
-            <h4 className="text-[0.55rem] font-semibold uppercase tracking-[0.15em] mb-2" style={{ color: "rgba(142,142,147,0.5)" }}>
-              <span className="flex items-center gap-1.5">
-                <span style={{ color: "rgba(142,142,147,0.3)" }}><Target size={10} /></span>
-                Responsibilities
-              </span>
-            </h4>
-            <ul className="space-y-1.5">
-              {exp.responsibilities.map((r, j) => (
-                <li key={j} className="text-xs flex items-start gap-2 leading-relaxed" style={{ color: "rgba(142,142,147,0.65)" }}>
-                  <span className="mt-[5px] w-1 h-1 rounded-full flex-shrink-0" style={{ background: "rgba(142,142,147,0.2)" }} />
-                  {r}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-[0.55rem] font-semibold uppercase tracking-[0.15em] mb-2" style={{ color: "rgba(142,142,147,0.5)" }}>
-              <span className="flex items-center gap-1.5">
-                <span style={{ color: "rgba(142,142,147,0.3)" }}><Sparkles size={10} /></span>
-                Achievements
-              </span>
-            </h4>
-            <ul className="space-y-1.5">
-              {exp.achievements.map((a, j) => (
-                <li key={j} className="text-xs flex items-start gap-2 leading-relaxed" style={{ color: "rgba(142,142,147,0.65)" }}>
-                  <span style={{ color: "rgba(142,142,147,0.25)" }} className="flex-shrink-0">◆</span>
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-        </div>
-      </Collapsible>
+      </div>
     </div>
   );
 }
@@ -355,19 +225,7 @@ const statIcons = [
 export default function ResumeChapter() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [detailOpen, setDetailOpen] = useState(false);
-  const [openCompany, setOpenCompany] = useState<number | null>(0);
-
-  const toggleCompany = useCallback((index: number) => {
-    setOpenCompany((prev) => (prev === index ? null : index));
-  }, []);
-
-  const toggleDetail = useCallback(() => {
-    setDetailOpen((prev) => {
-      if (!prev) setOpenCompany(0);
-      return !prev;
-    });
-  }, []);
+  const [overlayOpen, setOverlayOpen] = useState(false);
 
   const shortSummary = "Customer experience leader with 5+ years of expertise in customer onboarding, lifecycle management, and process excellence. Currently leading onboarding initiatives for 500+ learners at Hello Mentor, standardizing processes and driving measurable improvements in customer satisfaction and operational efficiency across EdTech, Real Estate, and Financial Services.";
 
@@ -384,6 +242,8 @@ export default function ResumeChapter() {
           transition: "opacity 1s ease",
         }} />
       </ScrollParallax>
+
+      <ResumeOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} />
 
       <div className="max-w-[800px] mx-auto">
         <Section delay={0}>
@@ -450,7 +310,7 @@ export default function ResumeChapter() {
                 {summaryHighlights.map((s) => (
                   <div key={s.label} className="rounded-lg p-2.5"
                     style={{
-                      background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
+                      background: "rgba(255,255,255,0.02)",
                       border: "1px solid rgba(255,255,255,0.04)",
                     }}
                   >
@@ -532,117 +392,32 @@ export default function ResumeChapter() {
 
           <Section delay={0.23}>
             <button
-              onClick={toggleDetail}
+              onClick={() => setOverlayOpen(true)}
               className="w-full group cursor-pointer"
             >
               <div className="flex items-center justify-center gap-2 py-3 rounded-xl transition-all duration-300"
                 style={{
-                  background: detailOpen
-                    ? "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)"
-                    : "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
+                  background: "rgba(255,255,255,0.04)",
                   border: "1px solid rgba(255,255,255,0.06)",
                   transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.06)";
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = detailOpen
-                    ? "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)"
-                    : "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.04)";
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
                 }}
               >
-                <motion.span
-                  animate={{ rotate: detailOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ color: "rgba(142,142,147,0.4)", display: "flex" }}
-                >
-                  <Eye size={13} />
-                </motion.span>
+                <Eye size={13} style={{ color: "rgba(142,142,147,0.4)" }} />
                 <span className="text-xs font-medium" style={{ color: "rgba(232,232,237,0.5)" }}>
-                  {detailOpen ? "Hide Detailed Interactive Resume" : "View Detailed Interactive Resume"}
+                  View Detailed Interactive Resume
                 </span>
               </div>
             </button>
           </Section>
 
-          <Collapsible expanded={detailOpen}>
-            <div className="space-y-5 pt-2">
-
-              <div className="glass-panel p-5 md:p-6 space-y-5">
-
-                <div className="flex items-center justify-between gap-4 sticky top-0 z-10 -mx-2 px-2 -mt-2 pt-2 pb-2"
-                  style={{
-                    background: "rgba(0,0,0,0.6)",
-                    backdropFilter: "blur(12px)",
-                    WebkitBackdropFilter: "blur(12px)",
-                    borderRadius: "12px",
-                  }}
-                >
-                  <h3 className="text-sm font-semibold" style={{ color: "rgba(245,245,247,0.8)" }}>Detailed Resume</h3>
-                  <div className="max-w-[180px]">
-                    <DownloadButton compact />
-                  </div>
-                </div>
-
-                <div className="space-y-2.5">
-                  {experiences.map((exp, i) => (
-                    <CompanyAccordion
-                      key={exp.company}
-                      exp={exp}
-                      index={i}
-                      isOpen={openCompany === i}
-                      onToggle={() => toggleCompany(i)}
-                    />
-                  ))}
-                </div>
-
-                <div className="rounded-xl overflow-hidden px-5 py-4" style={{
-                  background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
-                  border: "1px solid rgba(255,255,255,0.05)",
-                }}>
-                  <h4 className="text-[0.55rem] font-semibold uppercase tracking-[0.15em] mb-3" style={{ color: "rgba(142,142,147,0.5)" }}>
-                    <span className="flex items-center gap-1.5">
-                      <GraduationCap size={10} style={{ color: "rgba(142,142,147,0.3)" }} />
-                      Education
-                    </span>
-                  </h4>
-                  <p className="text-sm font-medium" style={{ color: "rgba(232,232,237,0.8)" }}>{education.degree}</p>
-                  <p className="text-xs mt-0.5" style={{ color: "rgba(142,142,147,0.6)" }}>{education.college} &middot; {education.year} &middot; {education.location}</p>
-                </div>
-
-                <div className="rounded-xl overflow-hidden px-5 py-4" style={{
-                  background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
-                  border: "1px solid rgba(255,255,255,0.05)",
-                }}>
-                  <h4 className="text-[0.55rem] font-semibold uppercase tracking-[0.15em] mb-3" style={{ color: "rgba(142,142,147,0.5)" }}>
-                    <span className="flex items-center gap-1.5">
-                      <BarChart3 size={10} style={{ color: "rgba(142,142,147,0.3)" }} />
-                      Skills &amp; Tools
-                    </span>
-                  </h4>
-                  <div className="flex flex-wrap gap-1.5">
-                    {skills.flatMap(s => s.items).map((item) => (
-                      <span
-                        key={item}
-                        className="text-xs px-2.5 py-1 rounded-md whitespace-nowrap"
-                        style={{
-                          color: "rgba(142,142,147,0.6)",
-                          background: "rgba(255,255,255,0.03)",
-                          border: "1px solid rgba(255,255,255,0.04)",
-                        }}
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </Collapsible>
         </div>
 
         <Section delay={0.35}>
