@@ -66,8 +66,8 @@ export default function Navigation() {
           className="pointer-events-auto rounded-2xl flex items-center gap-8 px-5 py-2 w-fit max-w-[90vw] relative"
           style={{
             background: scrolled
-              ? "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(201,195,184,0.07) 35%, rgba(111,128,149,0.04) 60%, rgba(255,255,255,0.10) 100%)"
-              : "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(201,195,184,0.05) 40%, rgba(111,128,149,0.03) 60%, rgba(255,255,255,0.07) 100%)",
+              ? "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 70%, rgba(255,255,255,0.08) 100%)"
+              : "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 70%, rgba(255,255,255,0.05) 100%)",
             backdropFilter: "blur(48px) saturate(1.4)",
             WebkitBackdropFilter: "blur(48px) saturate(1.4)",
             border: "1px solid rgba(255,255,255,0.10)",
@@ -75,15 +75,14 @@ export default function Navigation() {
               ? "inset 0 1.5px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(255,255,255,0.04), 0 4px 16px rgba(0,0,0,0.10), 0 12px 48px rgba(0,0,0,0.06)"
               : "inset 0 1.5px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(0,0,0,0.02)",
             opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0) translateX(-50%)" : "translateY(-20px) translateX(-50%)",
-            left: "50%",
+            transform: visible ? "translateY(0)" : "translateY(-20px)",
             transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1), background 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s cubic-bezier(0.16,1,0.3,1)",
           }}
         >
           <div
             className="absolute inset-0 rounded-[inherit] pointer-events-none"
             style={{
-              background: "linear-gradient(105deg, transparent 5%, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 35%, rgba(201,195,184,0.03) 45%, transparent 60%)",
+              background: "linear-gradient(105deg, transparent 5%, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 35%, transparent 60%)",
             }}
           />
 
@@ -115,8 +114,8 @@ export default function Navigation() {
                   <span
                     className="absolute inset-0 rounded-lg pointer-events-none"
                     style={{
-                      background: "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%)",
-                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 1px 4px rgba(0,0,0,0.04)",
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
+                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 4px rgba(0,0,0,0.04)",
                     }}
                   />
                 )}
@@ -129,25 +128,25 @@ export default function Navigation() {
             onClick={() => handleClick("connect")}
             className="hidden md:flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium relative overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(201,195,184,0.07) 40%, rgba(111,128,149,0.03) 70%, rgba(255,255,255,0.10) 100%)",
+              background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 70%, rgba(255,255,255,0.08) 100%)",
               backdropFilter: "blur(12px) saturate(1.3)",
               WebkitBackdropFilter: "blur(12px) saturate(1.3)",
-              border: "1px solid rgba(255,255,255,0.10)",
+              border: "1px solid rgba(255,255,255,0.08)",
               color: "#e8e8ed",
-              boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.14), 0 2px 8px rgba(0,0,0,0.06)",
+              boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.12), 0 2px 8px rgba(0,0,0,0.06)",
               transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(201,195,184,0.10) 40%, rgba(111,128,149,0.05) 70%, rgba(255,255,255,0.12) 100%)";
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+              e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.07) 70%, rgba(255,255,255,0.10) 100%)";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)";
               e.currentTarget.style.transform = "translateY(-0.5px) scale(1.02)";
-              e.currentTarget.style.boxShadow = "inset 0 1.5px 0 rgba(255,255,255,0.18), 0 4px 16px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)";
+              e.currentTarget.style.boxShadow = "inset 0 1.5px 0 rgba(255,255,255,0.16), 0 4px 16px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.06)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.14) 0%, rgba(201,195,184,0.07) 40%, rgba(111,128,149,0.03) 70%, rgba(255,255,255,0.10) 100%)";
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)";
+              e.currentTarget.style.background = "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 70%, rgba(255,255,255,0.08) 100%)";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
               e.currentTarget.style.transform = "none";
-              e.currentTarget.style.boxShadow = "inset 0 1.5px 0 rgba(255,255,255,0.14), 0 2px 8px rgba(0,0,0,0.06)";
+              e.currentTarget.style.boxShadow = "inset 0 1.5px 0 rgba(255,255,255,0.12), 0 2px 8px rgba(0,0,0,0.06)";
             }}
           >
             Let&apos;s Talk
@@ -179,7 +178,7 @@ export default function Navigation() {
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: "linear-gradient(105deg, transparent 10%, rgba(255,255,255,0.03) 30%, rgba(201,195,184,0.02) 45%, rgba(111,128,149,0.01) 52%, transparent 60%)",
+                background: "linear-gradient(105deg, transparent 10%, rgba(255,255,255,0.02) 30%, transparent 60%)",
               }}
             />
             <div className="relative flex flex-col gap-1">
@@ -216,7 +215,7 @@ export default function Navigation() {
                 href={`mailto:${profile.email}`}
                 className="px-3 py-2.5 rounded-xl text-sm transition-all"
                 style={{
-                  color: "#6F8095",
+                  color: "rgba(142,142,147,0.6)",
                   transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
                 }}
                 onMouseEnter={(e) => {
