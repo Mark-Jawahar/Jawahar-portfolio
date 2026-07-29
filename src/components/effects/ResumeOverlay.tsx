@@ -155,7 +155,7 @@ export default function ResumeOverlay({ open, onClose }: { open: boolean; onClos
 
           <motion.div
             className="resume-glass relative w-full overflow-y-auto"
-            style={{ maxWidth: "85vw", maxHeight: "90vh", borderRadius: "24px" }}
+            style={{ maxWidth: "85vw", maxHeight: "90vh" }}
             initial={{ opacity: 0, scale: 0.92, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 24 }}
