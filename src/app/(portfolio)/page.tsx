@@ -7,13 +7,13 @@ import { Contact } from "@/sections/contact";
 
 export default function PortfolioPage() {
   return (
-    <>
+    <div id="portfolio-content">
       <Hero />
       <About />
       <Impact />
       <Journey />
       <Resume />
       <Contact />
-    </>
+    </div>
   );
 }

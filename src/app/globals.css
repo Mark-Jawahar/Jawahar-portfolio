@@ -50,6 +50,7 @@
 :root {
   --background: oklch(0.04 0.008 280);
   --foreground: oklch(0.96 0.01 280);
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
   --card: oklch(0.08 0.01 280 / 0.5);
   --card-foreground: oklch(0.96 0.01 280);
   --popover: oklch(0.06 0.008 280);
@@ -95,6 +96,41 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid oklch(1 0 0 / 0.06);
+}
+
+.resume-glass {
+  background: oklch(0.05 0.012 280 / 0.5);
+  backdrop-filter: blur(48px);
+  -webkit-backdrop-filter: blur(48px);
+  border: 1px solid oklch(1 0 0 / 0.06);
+  box-shadow:
+    0 0 0 1px oklch(0.7 0.08 240 / 0.06),
+    0 0 80px oklch(0.7 0.08 240 / 0.05),
+    0 0 160px oklch(0.7 0.08 240 / 0.03),
+    inset 0 1px 0 oklch(1 1 0 / 0.03);
+}
+
+@media (max-width: 639px) {
+  .resume-glass {
+    border-radius: 0;
+    box-shadow: none;
+    border-left: none;
+    border-right: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: oklch(0.04 0.008 280);
+  }
+}
+
+#portfolio-content.resume-viewer-active {
+  transform: scale(0.97);
+  filter: blur(6px);
+  pointer-events: none;
+  transition: transform 0.5s var(--ease-premium), filter 0.5s var(--ease-premium);
+}
+
+#portfolio-content {
+  transition: transform 0.4s var(--ease-premium), filter 0.4s var(--ease-premium);
 }
 
 .text-gradient {
