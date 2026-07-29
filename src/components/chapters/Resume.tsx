@@ -412,7 +412,7 @@ export default function ResumeChapter() {
               >
                 <Eye size={13} style={{ color: "rgba(142,142,147,0.4)" }} />
                 <span className="text-xs font-medium" style={{ color: "rgba(232,232,237,0.5)" }}>
-                  View Detailed Interactive Resume
+                  View Resume
                 </span>
               </div>
             </button>
