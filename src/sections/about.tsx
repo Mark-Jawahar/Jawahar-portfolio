@@ -89,7 +89,7 @@ export function About() {
                     transition={{ delay: 0.2 + i * 0.07, duration: 0.5, ease: EASE }}
                     className="group flex flex-col items-start gap-3"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center transition-all duration-500 group-hover:bg-blue-500/20 group-hover:border-blue-400/30 group-hover:scale-110 group-hover:-rotate-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center transition-all duration-300 group-hover:bg-blue-500/20 group-hover:border-blue-400/30">
                       <area.icon
                         size={18}
                         className="text-blue-300/80 group-hover:text-blue-200/90 transition-colors"

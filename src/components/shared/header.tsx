@@ -37,7 +37,7 @@ export function Header() {
               className="group flex items-center gap-1 text-sm font-medium tracking-wider text-white/80 hover:text-white transition-colors"
             >
               <span>JA</span>
-              <span className="text-blue-400/80 group-hover:scale-125 transition-transform">
+              <span className="text-blue-400/80">
                 .
               </span>
             </button>

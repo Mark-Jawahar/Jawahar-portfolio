@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { ArrowDown, Download, Mail } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { scrollToSection } from "@/lib/scroll";
-import { Magnetic } from "@/components/shared/magnetic";
 import { EASE } from "@/lib/motion";
 
 const container: Variants = {
@@ -23,29 +22,20 @@ export function Hero() {
   const p = useSpring(scrollYProgress, { stiffness: 80, damping: 24, restDelta: 0.001 });
   const reducedMotion = useReducedMotion();
 
-  /* Portrait choreography — every value is derived from scroll progress. */
-  const portraitX = useTransform(
-    p,
-    [0, 0.1, 0.2, 0.35, 0.5, 0.65, 0.8, 1],
-    ["10%", "8%", "4%", "-8%", "-18%", "-28%", "-22%", "-24%"]
-  );
-  const portraitY = useTransform(
-    p,
-    [0, 0.1, 0.2, 0.35, 0.5, 0.65, 0.8, 1],
-    ["0%", "-4%", "-12%", "-22%", "-30%", "-38%", "-46%", "-60%"]
-  );
-  const portraitScale = useTransform(
-    p,
-    [0, 0.1, 0.2, 0.35, 0.5, 0.65, 0.8, 1],
-    [1, 0.9, 0.82, 0.68, 0.58, 0.5, 0.42, 0.3]
-  );
-  const portraitRotate = useTransform(p, [0, 0.4, 0.7, 1], [0, -0.6, -0.9, -1]);
-  const portraitOpacity = useTransform(p, [0, 0.6, 0.85, 0.95, 1], [1, 1, 0.7, 0.35, 0]);
-  const portraitBlur = useTransform(p, [0.8, 0.93, 1], ["blur(0px)", "blur(5px)", "blur(14px)"]);
-  const portraitZ = useTransform(p, [0, 0.35, 0.7, 1], [0, 80, 60, 0]);
-  const portraitOrigin = useTransform(p, [0, 1], ["50% 50%", "20% 85%"]);
+  /*
+   * Portrait choreography — every value is derived from scroll progress.
+   * A single, gentle arc: settle right, drift up-left, then recede.
+   */
+  const portraitX = useTransform(p, [0, 0.25, 0.5, 0.75, 1], ["10%", "6%", "-6%", "-14%", "-16%"]);
+  const portraitY = useTransform(p, [0, 0.25, 0.5, 0.75, 1], ["0%", "-8%", "-16%", "-28%", "-42%"]);
+  const portraitScale = useTransform(p, [0, 0.25, 0.5, 0.75, 1], [1, 0.88, 0.7, 0.55, 0.4]);
+  const portraitRotate = useTransform(p, [0, 0.5, 1], [0, -0.5, -0.8]);
+  const portraitOpacity = useTransform(p, [0, 0.35, 0.6, 0.8, 1], [1, 0.92, 0.78, 0.45, 0]);
+  const portraitBlur = useTransform(p, [0.85, 0.95, 1], ["blur(0px)", "blur(4px)", "blur(12px)"]);
+  const portraitZ = useTransform(p, [0, 0.4, 0.75, 1], [0, 70, 50, 0]);
+  const portraitOrigin = useTransform(p, [0, 1], ["50% 50%", "25% 80%"]);
 
-  /* Mount entrance (not viewport-triggered). */
+  /* Mount entrance only — never scroll-triggered. */
   const portraitEnter = useMotionValue(0);
   useEffect(() => {
     const controls = animate(portraitEnter, 1, { duration: 1.2, ease: EASE, delay: 0.35 });
@@ -54,20 +44,21 @@ export function Hero() {
   const entranceOpacity = useTransform(portraitEnter, [0, 1], [0, 1]);
   const entranceY = useTransform(portraitEnter, [0, 1], [24, 0]);
 
-  /* Parallax layers — background 0.3, decorative 1.4. */
+  /* Parallax layers — background drifts slowly, decorative elements faster. */
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1.3, 1.15]);
   const bgOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.7, 0.45]);
   const decorY = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
   const decorOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 0.3, 0.1]);
 
-  /* Large typography — speed ~1.1, fades as the pinned hero releases. */
+  /* Large typography — recedes and blurs softly as the hero releases. */
   const textY = useTransform(p, [0, 0.16], ["0%", "-18%"]);
   const textOpacity = useTransform(p, [0, 0.12], [1, 0]);
+  const textBlur = useTransform(p, [0, 0.12], ["blur(0px)", "blur(8px)"]);
 
   return (
     <section id="home" className="relative z-20">
-      {/* Fixed background stage (parallax 0.3) */}
+      {/* Fixed background stage */}
       <motion.div
         style={{
           y: reducedMotion ? 0 : bgY,
@@ -89,11 +80,14 @@ export function Hero() {
       >
         <div className="absolute top-[18%] right-[10%] w-40 h-40 rounded-full bg-blue-500/5 blur-[90px]" />
         <div className="absolute bottom-[25%] left-[6%] w-52 h-52 rounded-full bg-purple-500/4 blur-[100px]" />
-        <div className="absolute top-[12%] left-[12%] w-72 h-72 rounded-full border border-white/5" />
       </motion.div>
 
-      {/* Fixed portrait — fully driven by scroll progress */}
-      <div className="fixed inset-0 z-30 pointer-events-none" style={{ perspective: 1200 }}>
+      {/* Fixed portrait — the cinematic subject, fully driven by scroll */}
+      <div
+        className="fixed inset-0 z-30 pointer-events-none"
+        style={{ perspective: 1200 }}
+        data-cinematic-portrait
+      >
         <motion.div
           className="relative w-full h-full will-change-transform"
           style={{
@@ -107,10 +101,10 @@ export function Hero() {
             transformOrigin: reducedMotion ? "50% 50%" : portraitOrigin,
           }}
         >
-          <div className="w-full h-full flex items-center justify-center mt-[12vh] lg:mt-0">
+          <div className="w-full h-full flex items-center justify-center mt-[16vh] lg:mt-0">
             <motion.div
               style={{ opacity: entranceOpacity, y: entranceY }}
-              className="relative w-[min(70vw,300px)] sm:w-[min(50vw,340px)] lg:w-[min(36vw,430px)] aspect-square"
+              className="relative w-[min(64vw,280px)] sm:w-[min(50vw,340px)] lg:w-[min(36vw,430px)] aspect-square"
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/15 via-purple-500/8 to-transparent blur-[80px]" />
               <motion.img
@@ -127,10 +121,17 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Pinned hero — stays while the next section appears underneath */}
-      <div className="relative h-[220vh]">
+      {/* Pinned hero — text recedes while the next section emerges beneath */}
+      <div className="relative h-[180vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
-          <motion.div style={{ y: reducedMotion ? 0 : textY, opacity: reducedMotion ? 1 : textOpacity }} className="w-full h-full">
+          <motion.div
+            style={{
+              y: reducedMotion ? 0 : textY,
+              opacity: reducedMotion ? 1 : textOpacity,
+              filter: reducedMotion ? "none" : textBlur,
+            }}
+            className="w-full h-full"
+          >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center pt-24">
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center w-full">
                 <motion.div
@@ -143,7 +144,7 @@ export function Hero() {
                     variants={item}
                     className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60 tracking-wider uppercase mb-10"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
                     Available for opportunities
                   </motion.div>
 
@@ -178,35 +179,31 @@ export function Hero() {
                     variants={item}
                     className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
                   >
-                    <Magnetic strength={0.25}>
-                      <a
-                        href="#contact"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          scrollToSection("contact");
-                        }}
-                        className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-                      >
-                        <Mail
-                          size={16}
-                          className="group-hover:scale-110 group-hover:rotate-6 transition-transform"
-                        />
-                        Get in touch
-                      </a>
-                    </Magnetic>
-                    <Magnetic strength={0.25}>
-                      <a
-                        href={siteConfig.resumeUrl}
-                        download
-                        className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300/90 text-sm font-medium hover:bg-blue-500/20 hover:border-blue-400/30 transition-all duration-300"
-                      >
-                        <Download
-                          size={16}
-                          className="group-hover:scale-110 transition-transform"
-                        />
-                        Download Resume
-                      </a>
-                    </Magnetic>
+                    <a
+                      href="#contact"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection("contact");
+                      }}
+                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                    >
+                      <Mail
+                        size={16}
+                        className="group-hover:scale-110 transition-transform"
+                      />
+                      Get in touch
+                    </a>
+                    <a
+                      href={siteConfig.resumeUrl}
+                      download
+                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300/90 text-sm font-medium hover:bg-blue-500/20 hover:border-blue-400/30 transition-all duration-300"
+                    >
+                      <Download
+                        size={16}
+                        className="group-hover:scale-110 transition-transform"
+                      />
+                      Download Resume
+                    </a>
                   </motion.div>
 
                   <motion.div

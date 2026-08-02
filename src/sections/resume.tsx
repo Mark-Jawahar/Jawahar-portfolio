@@ -8,7 +8,6 @@ import { Download, MapPin, Mail, ExternalLink, GraduationCap } from "lucide-reac
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/data/experience";
 import { ResumeOverlay } from "@/components/shared/ResumeOverlay";
-import { Magnetic } from "@/components/shared/magnetic";
 import { EASE } from "@/lib/motion";
 
 const metrics = [
@@ -27,7 +26,8 @@ const expertise = [
   "Operations",
 ];
 
-function truncate(text: string, max = 90) {
+function truncate(text?: string, max = 90) {
+  if (!text) return "";
   return text.length > max ? text.slice(0, max).replace(/\s+\S*$/, "") + "..." : text;
 }
 
@@ -68,7 +68,7 @@ export function Resume() {
             className="glass rounded-3xl p-6 sm:p-8 lg:p-10"
           >
             {/* Profile Header */}
-            <div className="flex flex-col sm:flex-row items-start gap-5 mb-8 pb-8 border-b border-white/5">
+            <header className="flex flex-col sm:flex-row items-start gap-5 pb-8 border-b border-white/5">
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border border-white/10 shrink-0">
                 <Image
                   src={siteConfig.avatarUrl}
@@ -131,64 +131,64 @@ export function Resume() {
                   </a>
                 </div>
               </div>
-            </div>
+            </header>
 
             {/* Metrics */}
-            <div className="grid grid-cols-4 gap-3 mb-8 pb-8 border-b border-white/5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8 py-8 border-b border-white/5">
               {metrics.map((m) => (
-                <div key={m.value} className="text-center">
+                <div key={m.value}>
                   <p className="text-2xl sm:text-3xl font-light text-gradient tracking-tight">
                     {m.value}
                   </p>
-                  <p className="text-[11px] text-white/40 mt-1.5">{m.label}</p>
+                  <p className="text-[11px] text-white/40 mt-1">{m.label}</p>
                 </div>
               ))}
             </div>
 
-            {/* Executive Summary */}
-            <div className="mb-8 pb-8 border-b border-white/5">
-              <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider mb-4">
-                Executive Summary
-              </h4>
-              <p className="text-sm text-white/65 leading-[1.8]">
-                Customer Experience Specialist with 5+ years of experience in
-                Customer Onboarding, Customer Success, and Client Relationship
-                Management across EdTech, Real Estate, and Financial Services.
-                Proven track record of managing end-to-end onboarding for 500+
-                learners and delivering measurable improvements in customer
-                satisfaction and operational efficiency.
-              </p>
-            </div>
-
-            {/* Core Expertise */}
-            <div className="mb-8 pb-8 border-b border-white/5">
-              <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider mb-4">
-                Core Expertise
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {expertise.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1.5 rounded-lg text-xs bg-white/5 border border-white/10 text-white/60"
-                  >
-                    {skill}
-                  </span>
-                ))}
+            {/* Summary + Expertise */}
+            <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 py-8 border-b border-white/5">
+              <div className="lg:col-span-3">
+                <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider mb-4">
+                  Executive Summary
+                </h4>
+                <p className="text-sm text-white/65 leading-[1.8]">
+                  Customer Experience Specialist with 5+ years of experience in
+                  Customer Onboarding, Customer Success, and Client Relationship
+                  Management across EdTech, Real Estate, and Financial Services.
+                  Proven track record of managing end-to-end onboarding for 500+
+                  learners and delivering measurable improvements in customer
+                  satisfaction and operational efficiency.
+                </p>
+              </div>
+              <div className="lg:col-span-2">
+                <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider mb-4">
+                  Core Expertise
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {expertise.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1.5 rounded-lg text-xs bg-white/5 border border-white/10 text-white/60"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Career Timeline */}
-            <div className="mb-8 pb-8 border-b border-white/5">
-              <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider mb-4">
-                Career Timeline
+            {/* Career Highlights */}
+            <div className="py-8">
+              <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider mb-5">
+                Career Highlights
               </h4>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {workExperiences.map((exp) => (
                   <div
                     key={exp.id}
                     className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/[0.04] transition-colors"
                   >
-                    <div className="w-2.5 h-2.5 rounded-full bg-blue-400/50 mt-2 shrink-0 ring-2 ring-blue-400/10 transition-all duration-300 hover:ring-blue-400/30" />
+                    <div className="w-2 h-2 rounded-full bg-blue-400/50 mt-2 shrink-0 ring-2 ring-blue-400/10" />
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                         <p className="text-sm text-white/80 font-medium">
@@ -210,14 +210,11 @@ export function Resume() {
               </div>
             </div>
 
-            {/* Education */}
-            <div className="mb-8 pb-8 border-b border-white/5">
-              <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider mb-4">
-                Education
-              </h4>
+            {/* Education + View Resume */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pt-8 border-t border-white/5">
               {educationExperience && (
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] transition-colors hover:bg-white/[0.06]">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-400/20 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-400/20 flex items-center justify-center shrink-0">
                     <GraduationCap size={14} className="text-amber-300/60" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -231,22 +228,16 @@ export function Resume() {
                   </div>
                 </div>
               )}
-            </div>
-
-            {/* View Resume CTA */}
-            <div className="text-center">
-              <Magnetic strength={0.2}>
-                <button
-                  onClick={openOverlay}
-                  className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-white/5 border border-white/10 text-white/60 text-sm font-medium hover:bg-white/10 hover:border-white/20 hover:text-white/85 transition-all duration-300"
-                >
-                  View Resume
-                  <ExternalLink
-                    size={14}
-                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                  />
-                </button>
-              </Magnetic>
+              <button
+                onClick={openOverlay}
+                className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-white/5 border border-white/10 text-white/60 text-sm font-medium hover:bg-white/10 hover:border-white/20 hover:text-white/85 transition-all duration-300 shrink-0"
+              >
+                View Resume
+                <ExternalLink
+                  size={14}
+                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                />
+              </button>
             </div>
           </motion.div>
         </div>

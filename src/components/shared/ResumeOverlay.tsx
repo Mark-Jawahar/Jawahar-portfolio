@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X, ChevronDown, Download } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/data/experience";
 import { skills } from "@/data/skills";
+import { getLenis } from "@/lib/scroll";
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -16,10 +17,14 @@ interface ResumeOverlayProps {
 
 export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const el = document.getElementById("portfolio-content");
     if (el) el.classList.add("resume-viewer-active");
+
+    const lenis = getLenis();
+    lenis?.stop();
 
     const prevOverflow = document.body.style.overflow;
     const prevScrollY = window.scrollY;
@@ -33,14 +38,19 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
     };
     document.addEventListener("keydown", handleKeyDown);
 
+    const prevFocus = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+
     return () => {
       if (el) el.classList.remove("resume-viewer-active");
+      lenis?.start();
       document.body.style.overflow = prevOverflow;
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
       window.scrollTo(0, prevScrollY);
       document.removeEventListener("keydown", handleKeyDown);
+      prevFocus?.focus();
     };
   }, [onClose]);
 
@@ -67,6 +77,9 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       transition={{ duration: 0.3, ease }}
       className="fixed inset-0 z-[9999] flex flex-col sm:items-center sm:justify-center bg-black sm:bg-black/70"
       onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Resume viewer"
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 12 }}
@@ -93,6 +106,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               <span className="sm:hidden">PDF</span>
             </a>
             <button
+              ref={closeButtonRef}
               onClick={onClose}
               className="w-8 h-8 rounded-lg flex items-center justify-center text-white/40 hover:text-white/80 hover:bg-white/5 transition-all"
               aria-label="Close resume viewer"

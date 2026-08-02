@@ -138,6 +138,10 @@ section[id] {
   transition: transform 0.5s var(--ease-premium), filter 0.5s var(--ease-premium);
 }
 
+#portfolio-content.resume-viewer-active [data-cinematic-portrait] {
+  visibility: hidden;
+}
+
 #portfolio-content {
   transition: transform 0.4s var(--ease-premium), filter 0.4s var(--ease-premium);
 }
@@ -179,13 +183,6 @@ section[id] {
     box-shadow: none;
   }
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-in { animation: fadeIn 0.8s var(--ease-premium) forwards; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -4,7 +4,6 @@ import { motion, type Variants } from "framer-motion";
 import { SectionBadge } from "@/components/ui/section-badge";
 import { Mail, ExternalLink, MessageCircle, Download, ArrowUpRight } from "lucide-react";
 import { siteConfig, socialLinks } from "@/config/site";
-import { Magnetic } from "@/components/shared/magnetic";
 import { EASE } from "@/lib/motion";
 
 const iconMap: Record<string, typeof Mail> = {
@@ -68,10 +67,10 @@ export function Contact() {
                     rel={link.id !== "email" ? "noopener noreferrer" : undefined}
                     className="group glass rounded-2xl p-5 sm:p-6 flex items-center gap-4 glass-card"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center shrink-0 transition-all duration-500 group-hover:bg-blue-500/20 group-hover:border-blue-400/30 group-hover:scale-110 group-hover:-rotate-3">
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-blue-500/20 group-hover:border-blue-400/30">
                       <Icon
                         size={18}
-                        className="text-blue-300/80 group-hover:text-blue-200/90 transition-transform duration-500 group-hover:scale-110"
+                        className="text-blue-300/80 group-hover:text-blue-200/90 transition-colors"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -95,22 +94,20 @@ export function Contact() {
             variants={cardItem}
             className="text-center"
           >
-            <Magnetic strength={0.2}>
-              <a
-                href={siteConfig.resumeUrl}
-                download
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-              >
-                <Download
-                  size={16}
-                  className="group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform"
-                />
-                Download Resume
-                <span className="text-white/20 group-hover:text-white/40 transition-colors">
-                  PDF
-                </span>
-              </a>
-            </Magnetic>
+            <a
+              href={siteConfig.resumeUrl}
+              download
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+            >
+              <Download
+                size={16}
+                className="group-hover:scale-110 transition-transform"
+              />
+              Download Resume
+              <span className="text-white/20 group-hover:text-white/40 transition-colors">
+                PDF
+              </span>
+            </a>
           </motion.div>
         </motion.div>
       </div>

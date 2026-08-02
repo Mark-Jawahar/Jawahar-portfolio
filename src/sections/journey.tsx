@@ -6,7 +6,6 @@ import {
   AnimatePresence,
   useScroll,
   useSpring,
-  useInView,
 } from "framer-motion";
 import { SectionBadge } from "@/components/ui/section-badge";
 import { Briefcase, GraduationCap, ChevronDown, MapPin, Calendar } from "lucide-react";
@@ -16,30 +15,17 @@ import { cn } from "@/lib/utils";
 
 function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
   const isEducation = exp.type === "education";
 
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ delay: index * 0.08, duration: 0.7, ease: EASE }}
       className="relative pl-14 sm:pl-20"
     >
-      <motion.div
-        animate={
-          inView
-            ? {
-                boxShadow: isEducation
-                  ? "0 0 0 1px rgba(16,185,129,0.25), 0 0 30px rgba(16,185,129,0.15)"
-                  : "0 0 0 1px rgba(59,130,246,0.25), 0 0 30px rgba(59,130,246,0.15)",
-              }
-            : {}
-        }
-        transition={{ duration: 0.8, ease: EASE }}
+      <div
         className={cn(
           "absolute left-0 top-1 w-12 sm:w-16 h-12 sm:h-16 rounded-xl flex items-center justify-center border",
           isEducation
@@ -52,7 +38,7 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
         ) : (
           <Briefcase size={18} className="text-blue-300/80" />
         )}
-      </motion.div>
+      </div>
 
       <div
         className={cn(
@@ -63,12 +49,7 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
       >
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex-1 min-w-0">
-            <h3
-              className={cn(
-                "text-white font-medium text-base sm:text-lg transition-colors duration-500",
-                inView ? "text-white" : "text-white/60"
-              )}
-            >
+            <h3 className="text-white font-medium text-base sm:text-lg">
               {exp.title}
             </h3>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5">
