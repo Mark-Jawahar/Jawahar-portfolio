@@ -65,16 +65,16 @@ export const caseStudies: CaseStudy[] = [
       "In high-stakes, high-volume work, clear ownership and service levels build more trust than any single interaction.",
   },
   {
-    id: "daztek-lead-qualification",
+    id: "dalztek-lead-qualification",
     title: "Lead Qualification Workflow",
-    company: "Daztek Online Services",
+    company: "Dalztek Online Services",
     category: "Lead Management",
     summary:
       "Qualified 150+ leads a month with a repeatable, documented workflow that made follow-up quality consistent.",
     challenge:
       "Lead volume varied month to month, and follow-up quality depended on who picked up the phone. Data lived in spreadsheets, and documentation was thin.",
     situation:
-      "Daztek qualified 150+ inbound and outbound leads every month across domestic and international loan products. Customers needed clear guidance through a high-stakes application journey.",
+      "Dalztek qualified 150+ inbound and outbound leads every month across domestic and international loan products. Customers needed clear guidance through a high-stakes application journey.",
     actions: [
       "Built a simple qualification checklist so every lead was assessed consistently before handoff.",
       "Documented the process and tracked every lead in Excel — status, follow-up schedule, and next action.",

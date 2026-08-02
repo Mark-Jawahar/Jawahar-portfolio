@@ -161,7 +161,7 @@ export function Hero() {
               className="hidden lg:flex items-center gap-6 mt-16 text-graphite text-xs tracking-widest uppercase"
             >
               <span className="text-graphite/70">Trusted by</span>
-              {["Hello Mentor", "NoBrokers", "Daztek"].map((company) => (
+              {["Hello Mentor", "NoBrokers", "Dalztek"].map((company) => (
                 <span
                   key={company}
                   className="text-graphite/80 font-medium hover:text-silver/80 transition-colors"

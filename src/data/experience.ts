@@ -39,9 +39,9 @@ export const experiences: Experience[] = [
     order: 2,
   },
   {
-    id: "daztek",
+    id: "dalztek",
     title: "Senior Lead Generation Executive",
-    company: "Daztek Online Services Pvt Ltd",
+    company: "Dalztek Online Services Pvt Ltd",
     location: "Bengaluru, Karnataka",
     period: "July 2021 — Aug 2023",
     description:

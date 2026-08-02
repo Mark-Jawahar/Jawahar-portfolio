@@ -30,7 +30,7 @@
 ## v2.2 — Content & Polish (Product Polish phase)
 
 ### New content
-- **Selected Case Studies** section with 5 resume-grounded case studies (Hello Mentor onboarding, NoBrokers transactions, Daztek lead qualification, journey improvement, CRM process optimization). Each card opens a glass modal with Challenge / Situation / Actions Taken / Tools Used / Collaboration / Result / Key Learnings.
+- **Selected Case Studies** section with 5 resume-grounded case studies (Hello Mentor onboarding, NoBrokers transactions, Dalztek lead qualification, journey improvement, CRM process optimization). Each card opens a glass modal with Challenge / Situation / Actions Taken / Tools Used / Collaboration / Result / Key Learnings.
 - **How I Work** section with 5 principle cards: Listen First, Think in Processes, Collaborate Across Teams, Use Data with Empathy, Always Improve.
 - New page order: Hero → About → How I Work → Impact → Journey → Case Studies → Resume → Contact.
 
