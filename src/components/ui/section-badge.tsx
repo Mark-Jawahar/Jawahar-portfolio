@@ -16,7 +16,7 @@ export function SectionBadge({ label }: SectionBadgeProps) {
       transition={{ duration: 0.6, ease: EASE }}
       className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60 tracking-wider uppercase"
     >
-      <span className="w-1.5 h-1.5 rounded-full bg-blue-400/60" />
+      <span className="w-1.5 h-1.5 rounded-full bg-accent-bright/70" />
       {label}
     </motion.div>
   );

@@ -93,37 +93,37 @@ export function Resume() {
                       <h3 className="text-xl font-medium text-white">
                         {siteConfig.name}
                       </h3>
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-[10px] font-medium text-emerald-300/80">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent-bright/10 border border-accent-bright/25 text-[10px] font-medium text-accent-bright/90">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent-bright/70" />
                         Open to Opportunities
                       </span>
                     </div>
-                    <p className="text-sm text-white/50 mt-0.5">
+                    <p className="text-sm text-silver/75 mt-0.5">
                       {siteConfig.role}
                     </p>
                   </div>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-white/40 shrink-0">
-                    <MapPin size={12} className="text-blue-300/60" />
+                  <span className="inline-flex items-center gap-1.5 text-xs text-graphite shrink-0">
+                    <MapPin size={12} className="text-accent-bright/70" />
                     {siteConfig.location}
                   </span>
                 </div>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-3 text-xs text-white/40">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-3 text-xs text-graphite">
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="hover:text-white/70 transition-colors inline-flex items-center gap-1.5"
+                    className="hover:text-silver transition-colors inline-flex items-center gap-1.5"
                   >
-                    <Mail size={11} className="text-blue-300/50" />
+                    <Mail size={11} className="text-accent-bright/70" />
                     {siteConfig.email}
                   </a>
                   <a
                     href="https://linkedin.com/in/jawahar-a-47037a240"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white/70 transition-colors inline-flex items-center gap-1.5"
+                    className="hover:text-silver transition-colors inline-flex items-center gap-1.5"
                   >
                     <svg
                       viewBox="0 0 24 24"
-                      className="w-3 h-3 fill-current text-blue-300/50"
+                      className="w-3 h-3 fill-current text-accent-bright/70"
                     >
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
@@ -132,9 +132,9 @@ export function Resume() {
                   <a
                     href={siteConfig.resumeUrl}
                     download
-                    className="inline-flex items-center gap-1.5 hover:text-white/70 transition-colors"
+                    className="inline-flex items-center gap-1.5 hover:text-silver transition-colors"
                   >
-                    <Download size={11} className="text-blue-300/50" />
+                    <Download size={11} className="text-accent-bright/70" />
                     Resume PDF
                   </a>
                 </div>
@@ -148,7 +148,7 @@ export function Resume() {
                   <p className="text-2xl sm:text-3xl font-light text-gradient tracking-tight">
                     {m.value}
                   </p>
-                  <p className="text-[11px] text-white/40 mt-1">{m.label}</p>
+                  <p className="text-[11px] text-graphite mt-1">{m.label}</p>
                 </div>
               ))}
             </div>
@@ -159,7 +159,7 @@ export function Resume() {
                 <h4 className="text-xs font-medium text-white/60 uppercase tracking-wider mb-4">
                   Executive Summary
                 </h4>
-                <p className="text-sm text-white/65 leading-[1.8]">
+                <p className="text-[15px] text-silver/80 leading-[1.85]">
                   Customer Experience Specialist with 5+ years of experience in
                   Customer Onboarding, Customer Success, and Client Relationship
                   Management across EdTech, Real Estate, and Financial Services.
@@ -196,20 +196,20 @@ export function Resume() {
                     key={exp.id}
                     className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/[0.04] transition-colors"
                   >
-                    <div className="w-2 h-2 rounded-full bg-blue-400/50 mt-2 shrink-0 ring-2 ring-blue-400/10" />
+                    <div className="w-2 h-2 rounded-full bg-accent/60 mt-2 shrink-0 ring-2 ring-accent/15" />
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                        <p className="text-sm text-white/80 font-medium">
+                        <p className="text-sm text-silver/90 font-medium">
                           {exp.company}
                         </p>
-                        <span className="text-[11px] text-white/30 font-mono shrink-0">
+                        <span className="text-[11px] text-graphite font-mono shrink-0">
                           {exp.period}
                         </span>
                       </div>
-                      <p className="text-xs text-white/50 mt-0.5">
+                      <p className="text-xs text-silver/70 mt-0.5">
                         {exp.title}
                       </p>
-                      <p className="text-xs text-white/35 mt-1.5 leading-relaxed">
+                      <p className="text-xs text-graphite mt-1.5 leading-relaxed">
                         {truncate(exp.achievements[0])}
                       </p>
                     </div>
@@ -222,14 +222,14 @@ export function Resume() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pt-8 border-t border-white/5">
               {educationExperience && (
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-400/20 flex items-center justify-center shrink-0">
-                    <GraduationCap size={14} className="text-amber-300/60" />
+                  <div className="w-8 h-8 rounded-lg bg-accent-violet/10 border border-accent-violet/25 flex items-center justify-center shrink-0">
+                    <GraduationCap size={14} className="text-accent-violet/80" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-white/80">
+                    <p className="text-sm text-silver/90">
                       {educationExperience.title}
                     </p>
-                    <p className="text-xs text-white/40">
+                    <p className="text-xs text-graphite">
                       {educationExperience.company} &middot;{" "}
                       {educationExperience.period}
                     </p>
@@ -238,7 +238,7 @@ export function Resume() {
               )}
               <button
                 onClick={openOverlay}
-                className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-white/5 border border-white/10 text-white/60 text-sm font-medium hover:bg-white/10 hover:border-white/20 hover:text-white/85 transition-all duration-300 shrink-0"
+                className="btn btn-ghost px-7 py-3 shrink-0"
               >
                 View Resume
                 <ExternalLink

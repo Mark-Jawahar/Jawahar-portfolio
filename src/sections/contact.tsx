@@ -41,7 +41,7 @@ export function Contact() {
             Let&apos;s{" "}
             <span className="text-gradient font-semibold">Connect</span>
           </h2>
-          <p className="text-white/40 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+          <p className="text-silver/75 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
             Open to opportunities, collaborations, and conversations around customer experience and success.
           </p>
         </motion.div>
@@ -67,23 +67,23 @@ export function Contact() {
                     rel={link.id !== "email" ? "noopener noreferrer" : undefined}
                     className="group glass rounded-2xl p-5 sm:p-6 flex items-center gap-4 glass-card"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-blue-500/20 group-hover:border-blue-400/30">
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/25 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-accent/15 group-hover:border-accent/35">
                       <Icon
                         size={18}
-                        className="text-blue-300/80 group-hover:text-blue-200/90 transition-colors"
+                        className="text-accent-bright/80 group-hover:text-accent-bright transition-colors"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs text-white/40 tracking-wider uppercase mb-0.5 group-hover:text-white/60 transition-colors">
+                      <p className="text-xs text-graphite tracking-wider uppercase mb-0.5 group-hover:text-silver transition-colors">
                         {link.label}
                       </p>
-                      <p className="text-sm text-white/80 truncate">
+                      <p className="text-sm text-silver/90 truncate">
                         {link.platform}
                       </p>
                     </div>
                     <ArrowUpRight
                       size={16}
-                      className="text-white/20 group-hover:text-white/60 transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"
+                      className="text-graphite group-hover:text-silver transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"
                     />
                   </motion.a>
                 );
@@ -97,14 +97,14 @@ export function Contact() {
             <a
               href={siteConfig.resumeUrl}
               download
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+              className="btn btn-ghost px-8 py-4"
             >
               <Download
                 size={16}
                 className="group-hover:scale-110 transition-transform"
               />
               Download Resume
-              <span className="text-white/20 group-hover:text-white/40 transition-colors">
+              <span className="text-graphite group-hover:text-silver transition-colors">
                 PDF
               </span>
             </a>

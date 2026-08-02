@@ -29,14 +29,14 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
         className={cn(
           "absolute left-0 top-1 w-12 sm:w-16 h-12 sm:h-16 rounded-xl flex items-center justify-center border",
           isEducation
-            ? "bg-emerald-500/10 border-emerald-400/20"
-            : "bg-blue-500/10 border-blue-400/20"
+            ? "bg-accent-violet/10 border-accent-violet/25"
+            : "bg-accent/10 border-accent/25"
         )}
       >
         {isEducation ? (
-          <GraduationCap size={18} className="text-emerald-300/80" />
+          <GraduationCap size={18} className="text-accent-violet/80" />
         ) : (
-          <Briefcase size={18} className="text-blue-300/80" />
+          <Briefcase size={18} className="text-accent-bright/80" />
         )}
       </div>
 
@@ -53,15 +53,15 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
               {exp.title}
             </h3>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5">
-              <p className="text-white/50 text-sm">{exp.company}</p>
-              <span className="flex items-center gap-1.5 text-xs text-white/30">
-                <MapPin size={10} className="shrink-0 text-blue-300/50" />
+              <p className="text-silver/75 text-sm">{exp.company}</p>
+              <span className="flex items-center gap-1.5 text-xs text-graphite">
+                <MapPin size={10} className="shrink-0 text-accent-bright/60" />
                 {exp.location}
               </span>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-xs text-white/30 font-mono whitespace-nowrap">
+            <span className="flex items-center gap-1.5 text-xs text-graphite font-mono whitespace-nowrap">
               <Calendar size={10} className="shrink-0" />
               {exp.period}
             </span>
@@ -70,7 +70,7 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
               transition={{ duration: 0.4, ease: EASE }}
               className="shrink-0"
             >
-              <ChevronDown size={16} className="text-white/30" />
+              <ChevronDown size={16} className="text-graphite" />
             </motion.div>
           </div>
         </div>
@@ -84,7 +84,7 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
               transition={{ duration: 0.45, ease: EASE }}
               className="overflow-hidden"
             >
-              <p className="text-sm text-white/30 leading-relaxed mt-4 mb-4 border-t border-white/5 pt-4">
+              <p className="text-graphite text-[15px] leading-relaxed mt-4 mb-4 border-t border-white/5 pt-4">
                 {exp.description}
               </p>
               {exp.achievements.length > 0 && (
@@ -95,9 +95,9 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: j * 0.05, duration: 0.35, ease: EASE }}
-                      className="flex items-start gap-3 text-white/40 text-sm leading-relaxed"
+                      className="flex items-start gap-3 text-silver/70 text-[15px] leading-relaxed"
                     >
-                      <span className="mt-2 w-1 h-1 rounded-full bg-blue-400/40 shrink-0" />
+                      <span className="mt-2 w-1 h-1 rounded-full bg-accent/50 shrink-0" />
                       {achievement}
                     </motion.li>
                   ))}
@@ -142,7 +142,7 @@ export function Journey() {
           <div className="absolute left-[23px] sm:left-8 top-0 bottom-0 w-px bg-white/5" />
           <motion.div
             style={{ scaleY }}
-            className="absolute left-[23px] sm:left-8 top-0 bottom-0 w-px origin-top bg-gradient-to-b from-blue-400/50 via-blue-400/20 to-transparent"
+            className="absolute left-[23px] sm:left-8 top-0 bottom-0 w-px origin-top bg-gradient-to-b from-accent/50 via-accent/20 to-transparent"
           />
 
           <div className="space-y-8 sm:space-y-10">

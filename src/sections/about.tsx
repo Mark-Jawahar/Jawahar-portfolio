@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { SectionBadge } from "@/components/ui/section-badge";
+import { siteConfig } from "@/config/site";
 import { Users, Target, MessageCircle, Lightbulb, TrendingUp, Heart } from "lucide-react";
 import { EASE } from "@/lib/motion";
 
@@ -46,7 +48,7 @@ export function About() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
-              className="space-y-5 text-white/40 leading-[1.9] text-sm sm:text-base"
+              className="space-y-5 text-silver/75 leading-[1.95] text-[15px] sm:text-base"
             >
               <motion.p variants={paragraphItem}>
                 I am a Customer Experience Specialist based in Bengaluru with over 5 years of experience
@@ -76,9 +78,20 @@ export function About() {
             transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
           >
             <div className="glass rounded-3xl p-8 sm:p-10 glass-card">
-              <h3 className="text-sm font-medium text-white/60 tracking-wider uppercase mb-8">
-                Core Focus Areas
-              </h3>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/10 shrink-0">
+                  <Image
+                    src={siteConfig.avatarUrl}
+                    alt={siteConfig.name}
+                    fill
+                    sizes="48px"
+                    className="object-cover"
+                  />
+                </div>
+                <h3 className="text-sm font-medium text-white/60 tracking-wider uppercase">
+                  Core Focus Areas
+                </h3>
+              </div>
               <div className="grid grid-cols-2 gap-6">
                 {focusAreas.map((area, i) => (
                   <motion.div
@@ -89,13 +102,13 @@ export function About() {
                     transition={{ delay: 0.2 + i * 0.07, duration: 0.5, ease: EASE }}
                     className="group flex flex-col items-start gap-3"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center transition-all duration-300 group-hover:bg-blue-500/20 group-hover:border-blue-400/30">
+                    <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/25 flex items-center justify-center transition-all duration-300 group-hover:bg-accent/15 group-hover:border-accent/35">
                       <area.icon
                         size={18}
-                        className="text-blue-300/80 group-hover:text-blue-200/90 transition-colors"
+                        className="text-accent-bright/80 group-hover:text-accent-bright transition-colors"
                       />
                     </div>
-                    <span className="text-sm text-white/70 group-hover:text-white/90 transition-colors">
+                    <span className="text-sm text-silver/80 group-hover:text-white transition-colors">
                       {area.label}
                     </span>
                   </motion.div>

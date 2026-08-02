@@ -68,7 +68,7 @@ export function Impact() {
             Customer Impact,<br />
             <span className="text-gradient font-semibold">Measured.</span>
           </h2>
-          <p className="text-white/40 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-silver/75 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             Every metric reflects meaningful improvements in customer experience, operational excellence, and long-term business value.
           </p>
         </motion.div>
@@ -87,15 +87,15 @@ export function Impact() {
               className="group relative"
             >
               <div className="glass rounded-2xl p-6 sm:p-8 h-full glass-card">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="relative z-10">
                   <div className="text-5xl sm:text-6xl font-light text-gradient mb-3 tracking-tight">
                     <Counter end={stat.value} suffix={stat.suffix} />
                   </div>
-                  <h3 className="text-white/80 font-medium text-sm sm:text-base mb-1">
+                  <h3 className="text-silver/90 font-medium text-sm sm:text-base mb-1">
                     {stat.label}
                   </h3>
-                  <p className="text-white/30 text-xs sm:text-sm">{stat.sublabel}</p>
+                  <p className="text-graphite text-xs sm:text-sm">{stat.sublabel}</p>
                 </div>
               </div>
             </motion.div>

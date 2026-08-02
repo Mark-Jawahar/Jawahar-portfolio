@@ -26,18 +26,18 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-black/60 backdrop-blur-2xl border-b border-white/5"
-            : "bg-gradient-to-b from-black/50 to-transparent"
+            ? "bg-black/55 backdrop-blur-xl border-b border-white/5 shadow-[0_1px_0_rgba(0,0,0,0.4)]"
+            : "bg-gradient-to-b from-black/40 to-transparent"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
             <button
               onClick={() => handleClick("home")}
-              className="group flex items-center gap-1 text-sm font-medium tracking-wider text-white/80 hover:text-white transition-colors"
+              className="group flex items-center gap-1 text-sm font-medium tracking-wider text-silver hover:text-white transition-colors"
             >
               <span>JA</span>
-              <span className="text-blue-400/80">
+              <span className="text-accent-bright/90">
                 .
               </span>
             </button>
@@ -52,13 +52,13 @@ export function Header() {
                     onClick={() => handleClick(id)}
                     className={cn(
                       "relative px-4 py-2 text-sm tracking-wide transition-colors duration-300",
-                      active ? "text-white" : "text-white/40 hover:text-white/70"
+                      active ? "text-white" : "text-graphite hover:text-silver"
                     )}
                   >
                     {active && (
                       <motion.span
                         layoutId="activeNav"
-                        className="absolute inset-0 rounded-full bg-white/5 border border-white/10"
+                        className="absolute inset-0 rounded-full bg-accent/10 border border-accent/25"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -70,7 +70,7 @@ export function Header() {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center text-white/60 hover:text-white transition-colors"
+              className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center text-graphite hover:text-white transition-colors"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -86,7 +86,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8"
+            className="fixed inset-0 z-40 bg-black/90 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8"
           >
             {NAV_ITEMS.map((item, i) => (
               <motion.button
@@ -99,7 +99,7 @@ export function Header() {
                   "text-2xl tracking-wide transition-colors",
                   activeSection === item.href.slice(1)
                     ? "text-white"
-                    : "text-white/30 hover:text-white/60"
+                    : "text-graphite hover:text-silver"
                 )}
               >
                 {item.label}
