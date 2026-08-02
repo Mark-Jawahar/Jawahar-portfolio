@@ -1,14 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionBadge } from "@/components/ui/section-badge";
 import { Download, MapPin, Mail, ExternalLink, GraduationCap } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/data/experience";
-import { ResumeOverlay } from "@/components/shared/ResumeOverlay";
 import { EASE } from "@/lib/motion";
+
+const ResumeOverlay = dynamic(
+  () =>
+    import("@/components/shared/ResumeOverlay").then(
+      (m) => m.ResumeOverlay
+    ),
+  { ssr: false }
+);
 
 const metrics = [
   { value: "500+", label: "Learners" },

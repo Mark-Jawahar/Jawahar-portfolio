@@ -17,7 +17,7 @@ export const siteConfig: SiteSettings = {
   location: "Bengaluru, Karnataka",
   role: "Customer Experience Specialist",
   resumeUrl: "/resume/Jawahar_A_Resume.pdf",
-  avatarUrl: "/images/profile.png",
+  avatarUrl: "/images/profile.jpg",
   ogImage: "/og/default.jpg",
   keywords: [
     "Customer Experience",

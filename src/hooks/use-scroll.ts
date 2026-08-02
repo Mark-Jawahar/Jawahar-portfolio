@@ -2,44 +2,52 @@
 
 import { useState, useEffect, useRef } from "react";
 
+const SECTIONS = ["home", "about", "impact", "journey", "resume", "contact"];
+
 export function useScroll() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
 
-  const isVisibleRef = useRef(true);
-
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollY(currentScrollY);
-      setScrolled(currentScrollY > 50);
+    let ticking = false;
+    let rafId = 0;
 
-      const direction = currentScrollY > lastScrollY.current ? "down" : "up";
-      if (currentScrollY > 80 && direction === "down") {
-        isVisibleRef.current = false;
-        setIsVisible(false);
-      } else if (direction === "up") {
-        isVisibleRef.current = true;
-        setIsVisible(true);
-      }
+    const update = () => {
+      ticking = false;
+      const currentScrollY = window.scrollY;
+
+      setScrolled(currentScrollY > 50);
+      setIsVisible(
+        currentScrollY <= 80 || currentScrollY <= lastScrollY.current
+      );
       lastScrollY.current = currentScrollY;
 
-      const sections = ["home", "about", "impact", "journey", "resume", "contact"];
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
+      let current = "home";
+      for (let i = SECTIONS.length - 1; i >= 0; i--) {
+        const el = document.getElementById(SECTIONS[i]);
         if (el && el.getBoundingClientRect().top <= 200) {
-          setActiveSection(sections[i]);
+          current = SECTIONS[i];
           break;
         }
       }
+      setActiveSection(current);
     };
 
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      rafId = requestAnimationFrame(update);
+    };
+
+    update();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  return { scrolled, activeSection, scrollY, isVisible };
+  return { scrolled, activeSection, isVisible };
 }

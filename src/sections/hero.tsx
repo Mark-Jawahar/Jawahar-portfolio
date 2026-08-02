@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useReducedMotion, animate, type Variants } from "framer-motion";
 import { useEffect } from "react";
 import { ArrowDown, Download, Mail } from "lucide-react";
@@ -107,11 +108,13 @@ export function Hero() {
               className="relative w-[min(64vw,280px)] sm:w-[min(50vw,340px)] lg:w-[min(36vw,430px)] aspect-square"
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/15 via-purple-500/8 to-transparent blur-[80px]" />
-              <motion.img
+              <Image
                 src={siteConfig.avatarUrl}
                 alt={siteConfig.name}
-                draggable={false}
-                className="relative w-full h-full object-cover rounded-full border border-white/10 shadow-2xl glow"
+                fill
+                priority
+                sizes="(max-width: 640px) 64vw, (max-width: 1024px) 50vw, 36vw"
+                className="object-cover rounded-full border border-white/10 shadow-2xl glow"
               />
               <div className="absolute -bottom-3 -right-3 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-blue-500/10 border border-blue-400/20 backdrop-blur-xl flex items-center justify-center">
                 <span className="text-sm text-blue-300/70 font-medium">5+ Yrs</span>
