@@ -8,6 +8,8 @@ import { Download, MapPin, Mail, ExternalLink, GraduationCap } from "lucide-reac
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/data/experience";
 import { ResumeOverlay } from "@/components/shared/ResumeOverlay";
+import { Magnetic } from "@/components/shared/magnetic";
+import { EASE } from "@/lib/motion";
 
 const metrics = [
   { value: "500+", label: "Learners" },
@@ -40,7 +42,7 @@ export function Resume() {
 
   return (
     <>
-      <section id="resume" className="relative py-24 sm:py-32 lg:py-40">
+      <section id="resume" className="relative py-24 sm:py-36 lg:py-44">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_oklch(0.7_0.08_240_/_0.04),_transparent_60%)]" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,11 +50,11 @@ export function Resume() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mb-12 sm:mb-16"
+            transition={{ duration: 0.7, ease: EASE }}
+            className="text-center mb-14 sm:mb-20"
           >
             <SectionBadge label="Resume" />
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight mt-6">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-6 leading-[1.08]">
               Executive{" "}
               <span className="text-gradient font-semibold">Profile</span>
             </h2>
@@ -62,7 +64,7 @@ export function Resume() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, ease: EASE }}
             className="glass rounded-3xl p-6 sm:p-8 lg:p-10"
           >
             {/* Profile Header */}
@@ -135,10 +137,10 @@ export function Resume() {
             <div className="grid grid-cols-4 gap-3 mb-8 pb-8 border-b border-white/5">
               {metrics.map((m) => (
                 <div key={m.value} className="text-center">
-                  <p className="text-xl sm:text-2xl font-semibold text-white">
+                  <p className="text-2xl sm:text-3xl font-light text-gradient tracking-tight">
                     {m.value}
                   </p>
-                  <p className="text-[11px] text-white/40 mt-0.5">{m.label}</p>
+                  <p className="text-[11px] text-white/40 mt-1.5">{m.label}</p>
                 </div>
               ))}
             </div>
@@ -186,7 +188,7 @@ export function Resume() {
                     key={exp.id}
                     className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/[0.04] transition-colors"
                   >
-                    <div className="w-2 h-2 rounded-full bg-blue-400/50 mt-2 shrink-0 ring-2 ring-blue-400/10" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-blue-400/50 mt-2 shrink-0 ring-2 ring-blue-400/10 transition-all duration-300 hover:ring-blue-400/30" />
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                         <p className="text-sm text-white/80 font-medium">
@@ -214,8 +216,8 @@ export function Resume() {
                 Education
               </h4>
               {educationExperience && (
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03]">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-400/20 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] transition-colors hover:bg-white/[0.06]">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-400/20 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110">
                     <GraduationCap size={14} className="text-amber-300/60" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -233,16 +235,18 @@ export function Resume() {
 
             {/* View Resume CTA */}
             <div className="text-center">
-              <button
-                onClick={openOverlay}
-                className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white/60 text-sm font-medium hover:bg-white/10 hover:border-white/20 hover:text-white/85 transition-all duration-300"
-              >
-                View Resume
-                <ExternalLink
-                  size={14}
-                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                />
-              </button>
+              <Magnetic strength={0.2}>
+                <button
+                  onClick={openOverlay}
+                  className="group inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-white/5 border border-white/10 text-white/60 text-sm font-medium hover:bg-white/10 hover:border-white/20 hover:text-white/85 transition-all duration-300"
+                >
+                  View Resume
+                  <ExternalLink
+                    size={14}
+                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                  />
+                </button>
+              </Magnetic>
             </div>
           </motion.div>
         </div>
