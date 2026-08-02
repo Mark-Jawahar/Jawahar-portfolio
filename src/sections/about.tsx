@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { SectionBadge } from "@/components/ui/section-badge";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 import { siteConfig } from "@/config/site";
 import { Users, Target, MessageCircle, Lightbulb, TrendingUp, Heart } from "lucide-react";
 import { EASE } from "@/lib/motion";
@@ -71,51 +72,51 @@ export function About() {
             </motion.div>
           </motion.div>
 
-          <motion.div
+          <LiquidGlassCard
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
+            tilt={false}
+            className="rounded-3xl p-8 sm:p-10"
           >
-            <div className="glass rounded-3xl p-8 sm:p-10 glass-card">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/10 shrink-0">
-                  <Image
-                    src={siteConfig.avatarUrl}
-                    alt={siteConfig.name}
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                  />
-                </div>
-                <h3 className="text-sm font-medium text-white/60 tracking-wider uppercase">
-                  Core Focus Areas
-                </h3>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/10 shrink-0">
+                <Image
+                  src={siteConfig.avatarUrl}
+                  alt={siteConfig.name}
+                  fill
+                  sizes="48px"
+                  className="object-cover"
+                />
               </div>
-              <div className="grid grid-cols-2 gap-6">
-                {focusAreas.map((area, i) => (
-                  <motion.div
-                    key={area.label}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + i * 0.07, duration: 0.5, ease: EASE }}
-                    className="group flex flex-col items-start gap-3"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/25 flex items-center justify-center transition-all duration-300 group-hover:bg-accent/15 group-hover:border-accent/35">
-                      <area.icon
-                        size={18}
-                        className="text-accent-bright/80 group-hover:text-accent-bright transition-colors"
-                      />
-                    </div>
-                    <span className="text-sm text-silver/80 group-hover:text-white transition-colors">
-                      {area.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
+              <h3 className="text-sm font-medium text-white/60 tracking-wider uppercase">
+                Core Focus Areas
+              </h3>
             </div>
-          </motion.div>
+            <div className="grid grid-cols-2 gap-6">
+              {focusAreas.map((area, i) => (
+                <motion.div
+                  key={area.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.07, duration: 0.5, ease: EASE }}
+                  className="group flex flex-col items-start gap-3"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/25 flex items-center justify-center transition-all duration-300 group-hover:bg-accent/15 group-hover:border-accent/35">
+                    <area.icon
+                      size={18}
+                      className="text-accent-bright/80 group-hover:text-accent-bright transition-colors"
+                    />
+                  </div>
+                  <span className="text-sm text-silver/80 group-hover:text-white transition-colors">
+                    {area.label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </LiquidGlassCard>
         </div>
       </div>
     </section>

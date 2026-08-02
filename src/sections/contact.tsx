@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import { SectionBadge } from "@/components/ui/section-badge";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 import { Mail, ExternalLink, MessageCircle, Download, ArrowUpRight } from "lucide-react";
 import { siteConfig, socialLinks } from "@/config/site";
 import { EASE } from "@/lib/motion";
@@ -59,13 +60,14 @@ export function Contact() {
               .map((link) => {
                 const Icon = iconMap[link.icon] || ExternalLink;
                 return (
-                  <motion.a
+                  <LiquidGlassCard
                     key={link.id}
+                    as="a"
                     variants={cardItem}
                     href={link.url}
                     target={link.id !== "email" ? "_blank" : undefined}
                     rel={link.id !== "email" ? "noopener noreferrer" : undefined}
-                    className="group glass rounded-2xl p-5 sm:p-6 flex items-center gap-4 glass-card"
+                    className="group rounded-2xl p-5 sm:p-6 flex items-center gap-4"
                   >
                     <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/25 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-accent/15 group-hover:border-accent/35">
                       <Icon
@@ -85,7 +87,7 @@ export function Contact() {
                       size={16}
                       className="text-graphite group-hover:text-silver transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"
                     />
-                  </motion.a>
+                  </LiquidGlassCard>
                 );
               })}
           </div>

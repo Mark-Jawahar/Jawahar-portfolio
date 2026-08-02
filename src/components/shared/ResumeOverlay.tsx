@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X, ChevronDown, Download } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/data/experience";
 import { skills } from "@/data/skills";
-import { getLenis } from "@/lib/scroll";
+import { useModalLock } from "@/hooks/use-modal-lock";
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -18,41 +18,9 @@ interface ResumeOverlayProps {
 export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const el = document.getElementById("portfolio-content");
-    if (el) el.classList.add("resume-viewer-active");
-
-    const lenis = getLenis();
-    lenis?.stop();
-
-    const prevOverflow = document.body.style.overflow;
-    const prevScrollY = window.scrollY;
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${prevScrollY}px`;
-    document.body.style.width = "100%";
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", handleKeyDown);
-
-    const prevFocus = document.activeElement as HTMLElement | null;
-    closeButtonRef.current?.focus();
-
-    return () => {
-      if (el) el.classList.remove("resume-viewer-active");
-      lenis?.start();
-      document.body.style.overflow = prevOverflow;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      window.scrollTo(0, prevScrollY);
-      document.removeEventListener("keydown", handleKeyDown);
-      prevFocus?.focus();
-    };
-  }, [onClose]);
+  useModalLock(onClose, panelRef);
 
   const toggleExpand = useCallback((id: string) => {
     setExpandedId((prev) => (prev === id ? null : id));
@@ -82,24 +50,25 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       aria-label="Resume viewer"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 12 }}
+        ref={panelRef}
+        initial={{ opacity: 0, scale: 0.96, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 12 }}
+        exit={{ opacity: 0, scale: 0.96, y: 16 }}
         transition={{ duration: 0.4, ease, delay: 0.05 }}
         className="relative flex flex-col w-full h-full
                    sm:h-auto sm:max-h-[90vh] sm:rounded-2xl
-                   overflow-hidden sm:resume-glass bg-black"
+                   overflow-hidden glass-panel bg-black"
         style={{ maxWidth: "min(85vw, 960px)" }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Sticky Header */}
-        <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/5 bg-black/90 sm:bg-black/60 sm:backdrop-blur-xl">
+        {/* Sticky Header — stays visible while content scrolls */}
+        <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10 bg-black/50 backdrop-blur-xl">
           <span className="text-sm font-medium text-silver">Resume</span>
           <div className="flex items-center gap-3">
             <a
               href={siteConfig.resumeUrl}
               download
-              className="inline-flex items-center gap-1.5 text-xs text-graphite hover:text-silver transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs text-graphite hover:text-accent-bright hover:text-white transition-colors active:scale-95"
             >
               <Download size={13} />
               <span className="hidden sm:inline">Download PDF</span>
@@ -108,7 +77,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
             <button
               ref={closeButtonRef}
               onClick={onClose}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-graphite hover:text-white hover:bg-white/5 transition-all"
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-graphite hover:text-white hover:bg-white/10 active:scale-90 transition-all"
               aria-label="Close resume viewer"
             >
               <X size={16} />
@@ -117,7 +86,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
         </div>
 
         {/* Scrollable Document Content */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto modal-scroll">
           <div className="px-4 sm:px-10 lg:px-14 py-6 sm:py-10 lg:py-12">
             <div className="mx-auto" style={{ maxWidth: "640px" }}>
               {/* Resume Header */}
@@ -245,7 +214,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                                     key={i}
                                     className="text-[13px] text-silver/80 leading-[1.85] pl-4 relative"
                                   >
-                                    <span className="absolute left-0 top-[0.55em] w-1 h-1 rounded-full bg-white/15" />
+                                    <span className="absolute left-0 top-[0.55em] w-1 h-1 rounded-full bg-accent/60" />
                                     {a}
                                   </li>
                                 ))}

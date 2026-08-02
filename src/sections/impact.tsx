@@ -3,6 +3,7 @@
 import { motion, useInView, useMotionValue, useTransform, useMotionTemplate, useReducedMotion, animate, type Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { SectionBadge } from "@/components/ui/section-badge";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 import { EASE } from "@/lib/motion";
 
 interface CounterProps {
@@ -81,24 +82,22 @@ export function Impact() {
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           {stats.map((stat) => (
-            <motion.div
+            <LiquidGlassCard
               key={stat.label}
               variants={gridItem}
-              className="group relative"
+              className="group rounded-2xl p-6 sm:p-8 h-full"
             >
-              <div className="glass rounded-2xl p-6 sm:p-8 h-full glass-card">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="relative z-10">
-                  <div className="text-5xl sm:text-6xl font-light text-gradient mb-3 tracking-tight">
-                    <Counter end={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <h3 className="text-silver/90 font-medium text-sm sm:text-base mb-1">
-                    {stat.label}
-                  </h3>
-                  <p className="text-graphite text-xs sm:text-sm">{stat.sublabel}</p>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="relative z-10">
+                <div className="text-5xl sm:text-6xl font-light text-gradient mb-3 tracking-tight">
+                  <Counter end={stat.value} suffix={stat.suffix} />
                 </div>
+                <h3 className="text-silver/90 font-medium text-sm sm:text-base mb-1">
+                  {stat.label}
+                </h3>
+                <p className="text-graphite text-xs sm:text-sm">{stat.sublabel}</p>
               </div>
-            </motion.div>
+            </LiquidGlassCard>
           ))}
         </motion.div>
       </div>

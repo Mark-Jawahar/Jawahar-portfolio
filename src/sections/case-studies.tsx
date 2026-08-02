@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X, ArrowRight, ArrowUpRight } from "lucide-react";
 import { SectionBadge } from "@/components/ui/section-badge";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 import { caseStudies, type CaseStudy } from "@/data/case-studies";
-import { getLenis } from "@/lib/scroll";
+import { useModalLock } from "@/hooks/use-modal-lock";
 import { EASE } from "@/lib/motion";
 
 const gridContainer: Variants = {
@@ -26,41 +27,9 @@ interface CaseStudyModalProps {
 
 function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const el = document.getElementById("portfolio-content");
-    if (el) el.classList.add("resume-viewer-active");
-
-    const lenis = getLenis();
-    lenis?.stop();
-
-    const prevOverflow = document.body.style.overflow;
-    const prevScrollY = window.scrollY;
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${prevScrollY}px`;
-    document.body.style.width = "100%";
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", handleKeyDown);
-
-    const prevFocus = document.activeElement as HTMLElement | null;
-    closeButtonRef.current?.focus();
-
-    return () => {
-      if (el) el.classList.remove("resume-viewer-active");
-      lenis?.start();
-      document.body.style.overflow = prevOverflow;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      window.scrollTo(0, prevScrollY);
-      document.removeEventListener("keydown", handleKeyDown);
-      prevFocus?.focus();
-    };
-  }, [onClose]);
+  useModalLock(onClose, panelRef);
 
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent) => {
@@ -82,18 +51,19 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
       aria-label={study.title}
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.97, y: 14 }}
+        ref={panelRef}
+        initial={{ opacity: 0, scale: 0.96, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.97, y: 14 }}
+        exit={{ opacity: 0, scale: 0.96, y: 16 }}
         transition={{ duration: 0.4, ease: EASE, delay: 0.05 }}
         className="relative flex flex-col w-full h-full
                    sm:h-auto sm:max-h-[90vh] sm:rounded-2xl
-                   overflow-hidden sm:resume-glass bg-black"
+                   overflow-hidden glass-panel bg-black"
         style={{ maxWidth: "min(85vw, 820px)" }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Sticky Header */}
-        <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/5 bg-black/90 sm:bg-black/60 sm:backdrop-blur-xl">
+        {/* Sticky Header — stays visible while content scrolls */}
+        <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10 bg-black/50 backdrop-blur-xl">
           <div className="min-w-0">
             <p className="text-xs text-graphite uppercase tracking-wider truncate">
               {study.category}
@@ -103,7 +73,7 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
           <button
             ref={closeButtonRef}
             onClick={onClose}
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-graphite hover:text-white hover:bg-white/5 transition-all shrink-0"
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-graphite hover:text-white hover:bg-white/10 active:scale-90 transition-all shrink-0"
             aria-label="Close case study"
           >
             <X size={16} />
@@ -111,7 +81,7 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto modal-scroll">
           <div className="px-4 sm:px-8 lg:px-10 py-6 sm:py-8">
             <div className="mx-auto" style={{ maxWidth: "640px" }}>
               <h2 className="text-xl sm:text-2xl font-light text-white tracking-tight mb-6 leading-snug">
@@ -244,14 +214,15 @@ export function CaseStudies() {
             className="grid md:grid-cols-2 gap-4 sm:gap-6"
           >
             {caseStudies.map((study) => (
-              <motion.button
+              <LiquidGlassCard
                 key={study.id}
+                as="button"
                 variants={gridItem}
                 onClick={() => setSelected(study)}
                 className={
                   study.id === "crm-process-optimization"
-                    ? "text-left group glass rounded-2xl p-6 sm:p-8 glass-card md:col-span-2"
-                    : "text-left group glass rounded-2xl p-6 sm:p-8 glass-card"
+                    ? "text-left rounded-2xl p-6 sm:p-8 md:col-span-2"
+                    : "text-left rounded-2xl p-6 sm:p-8"
                 }
               >
                 <div className="flex flex-col h-full">
@@ -277,7 +248,7 @@ export function CaseStudies() {
                     <ArrowRight size={14} />
                   </span>
                 </div>
-              </motion.button>
+              </LiquidGlassCard>
             ))}
           </motion.div>
         </div>

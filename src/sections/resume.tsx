@@ -73,7 +73,7 @@ export function Resume() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="glass rounded-3xl p-6 sm:p-8 lg:p-10"
+            className="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10"
           >
             {/* Profile Header */}
             <header className="flex flex-col sm:flex-row items-start gap-5 pb-8 border-b border-white/5">

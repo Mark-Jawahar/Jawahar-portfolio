@@ -1,7 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  type Variants,
+} from "framer-motion";
 import { ArrowDown, Download, Mail } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { scrollToSection } from "@/lib/scroll";
@@ -30,14 +37,32 @@ const portraitItem: Variants = {
 export function Hero() {
   const reducedMotion = useReducedMotion();
 
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const parallaxX = useSpring(useTransform(mx, [-0.5, 0.5], [-5, 5]), {
+    stiffness: 160,
+    damping: 24,
+  });
+  const parallaxY = useSpring(useTransform(my, [-0.5, 0.5], [-5, 5]), {
+    stiffness: 160,
+    damping: 24,
+  });
+
   const motionContainer = reducedMotion ? { hidden: {}, show: {} } : container;
   const motionItem = reducedMotion ? { hidden: {}, show: {} } : item;
   const motionPortrait = reducedMotion ? { hidden: {}, show: {} } : portraitItem;
+
+  const handlePointerMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (reducedMotion) return;
+    mx.set((e.clientX - window.innerWidth / 2) / window.innerWidth);
+    my.set((e.clientY - window.innerHeight / 2) / window.innerHeight);
+  };
 
   return (
     <section
       id="home"
       className="relative min-h-screen flex flex-col overflow-hidden"
+      onMouseMove={handlePointerMove}
     >
       {/* Background stage — contained to the hero */}
       <motion.div
@@ -152,7 +177,14 @@ export function Hero() {
             variants={motionPortrait}
             className="relative mx-auto lg:ml-auto w-[min(72vw,300px)] sm:w-[min(56vw,360px)] lg:w-[min(36vw,430px)]"
           >
-            <div className="relative aspect-square">
+            <motion.div
+              className="relative aspect-square"
+              style={
+                reducedMotion
+                  ? undefined
+                  : { x: parallaxX, y: parallaxY }
+              }
+            >
               <div className="absolute -inset-6 rounded-full bg-gradient-to-br from-accent-bright/15 via-accent-violet/8 to-transparent blur-[70px]" />
               <div className="absolute inset-0 rounded-full ring-1 ring-white/10" />
               <Image
@@ -168,7 +200,7 @@ export function Hero() {
                   5+ Yrs
                 </span>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.3 — Liquid Glass upgrade
+- New `LiquidGlassCard` component (pointer tilt/glow/lift, reduced-motion aware) used across About, Impact, Contact, Case Studies, and How I Work.
+- New `useModalLock` hook: scroll-lock + focus trap + ESC close + Lenis pause, shared by Resume Viewer and Case Study modals (replaces duplicated inline logic).
+- Unified Liquid Glass material in globals.css (.glass / .liquid-glass / .glass-panel) with layered reflections, luminous borders, premium easing.
+- Hero portrait subtle pointer parallax (GPU transforms, disabled with reduced motion).
+- Refined scrollbar, button, and focus-visible styling.
+- Fix: hero parallax values were computed but never applied; wired to the portrait (motion values only).
+
 ## v2.2 — Content & Polish (Product Polish phase)
 
 ### New content

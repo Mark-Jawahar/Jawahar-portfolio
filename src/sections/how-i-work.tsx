@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import { SectionBadge } from "@/components/ui/section-badge";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 import { EASE } from "@/lib/motion";
 
 const principles = [
@@ -73,13 +74,13 @@ export function HowIWork() {
           className="grid md:grid-cols-2 gap-4 sm:gap-6"
         >
           {principles.map((principle, i) => (
-            <motion.div
+            <LiquidGlassCard
               key={principle.title}
               variants={gridItem}
               className={
                 i === principles.length - 1
-                  ? "glass rounded-2xl p-7 sm:p-9 glass-card md:col-span-2 flex md:flex-row md:items-center gap-5 md:gap-8"
-                  : "glass rounded-2xl p-7 sm:p-9 glass-card"
+                  ? "rounded-2xl p-7 sm:p-9 md:col-span-2 flex md:flex-row md:items-center gap-5 md:gap-8"
+                  : "rounded-2xl p-7 sm:p-9"
               }
             >
               <div
@@ -99,7 +100,7 @@ export function HowIWork() {
                   {principle.description}
                 </p>
               </div>
-            </motion.div>
+            </LiquidGlassCard>
           ))}
         </motion.div>
       </div>
