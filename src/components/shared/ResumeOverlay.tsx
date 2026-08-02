@@ -19,8 +19,9 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  useModalLock(onClose, panelRef);
+  useModalLock(onClose, panelRef, scrollRef);
 
   const toggleExpand = useCallback((id: string) => {
     setExpandedId((prev) => (prev === id ? null : id));
@@ -62,7 +63,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Sticky Header — stays visible while content scrolls */}
-        <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10 bg-black/50 backdrop-blur-xl">
+        <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5 border-b border-white/10 bg-black/50 backdrop-blur-xl">
           <span className="text-sm font-medium text-silver">Resume</span>
           <div className="flex items-center gap-3">
             <a
@@ -86,26 +87,31 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
         </div>
 
         {/* Scrollable Document Content */}
-        <div className="flex-1 overflow-y-auto modal-scroll">
-          <div className="px-4 sm:px-10 lg:px-14 py-6 sm:py-10 lg:py-12">
-            <div className="mx-auto" style={{ maxWidth: "640px" }}>
+        <div
+          ref={scrollRef}
+          data-lenis-prevent
+          tabIndex={0}
+          className="flex-1 overflow-y-auto modal-scroll outline-none"
+        >
+          <div className="px-4 sm:px-10 lg:px-12 py-6 sm:py-10 lg:py-14">
+            <div className="mx-auto w-full" style={{ maxWidth: "720px" }}>
               {/* Resume Header */}
-              <div className="mb-10 pb-8 border-b border-white/5">
-                <h1 className="text-2xl sm:text-3xl font-light text-white tracking-tight">
+              <div className="mb-12 pb-9 border-b border-white/5">
+                <h1 className="text-5xl lg:text-[54px] font-light text-white tracking-tight leading-[1.05]">
                   {siteConfig.name}
                 </h1>
-                <p className="text-sm text-silver/75 mt-1.5">
+                <p className="text-2xl sm:text-[26px] text-silver/80 mt-3 font-light">
                   {siteConfig.role}
                 </p>
-                <p className="text-xs text-graphite mt-3 leading-relaxed">
+                <p className="text-base text-graphite mt-4 leading-relaxed">
                   {siteConfig.location} &middot; {siteConfig.email}
                 </p>
               </div>
 
               {/* Professional Summary */}
-              <section className="mb-10">
+              <section className="mb-12">
                 <SectionTitle>Professional Summary</SectionTitle>
-                <p className="text-[15px] text-silver/85 leading-[1.95]">
+                <p className="text-lg text-silver/85 leading-[1.75]">
                   Customer Experience Specialist with 5+ years of experience in
                   Customer Onboarding, Customer Success, and Client Relationship
                   Management across EdTech, Real Estate, and Financial Services.
@@ -119,12 +125,12 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               </section>
 
               {/* Skills */}
-              <section className="mb-10">
+              <section className="mb-12">
                 <SectionTitle>Skills</SectionTitle>
-                <div className="space-y-4">
+                <div className="space-y-5">
                   {categories.map((category) => (
                     <div key={category}>
-                      <p className="text-xs text-graphite mb-2.5">
+                      <p className="text-base text-graphite mb-3">
                         {category}
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -133,7 +139,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                           .map((skill) => (
                             <span
                               key={skill.id}
-                              className="px-3 py-1.5 rounded-lg text-xs bg-white/5 border border-white/10 text-silver/80"
+                              className="px-3.5 py-1.5 rounded-lg text-sm bg-white/5 border border-white/10 text-silver/80"
                             >
                               {skill.name}
                             </span>
@@ -145,7 +151,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               </section>
 
               {/* Professional Experience */}
-              <section className="mb-10">
+              <section className="mb-12">
                 <SectionTitle>Professional Experience</SectionTitle>
                 <div className="space-y-6">
                   {workExperiences.map((exp) => (
@@ -153,27 +159,27 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                       key={exp.id}
                       className="rounded-xl bg-white/[0.03] border border-white/5 overflow-hidden"
                     >
-                      <div className="p-5 sm:p-6">
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+                      <div className="p-5 sm:p-7">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 mb-4">
                           <div>
-                            <h3 className="text-sm font-medium text-white/90">
+                            <h3 className="text-lg font-medium text-white/90">
                               {exp.company}
                             </h3>
-                            <p className="text-xs text-silver/70 mt-0.5">
+                            <p className="text-sm text-silver/70 mt-1">
                               {exp.title}
                             </p>
                           </div>
-                          <div className="text-xs text-graphite font-mono shrink-0 text-left sm:text-right">
+                          <div className="text-sm text-graphite font-mono shrink-0 text-left sm:text-right">
                             <p>{exp.period}</p>
                             <p className="text-graphite/80">{exp.location}</p>
                           </div>
                         </div>
 
-                        <ul className="space-y-2.5">
+                        <ul className="space-y-3">
                           {exp.achievements.slice(0, 2).map((a, i) => (
                             <li
                               key={i}
-                              className="text-[13px] text-silver/80 leading-[1.85] pl-4 relative"
+                              className="text-[17px] sm:text-[18px] text-silver/80 leading-[1.75] pl-4 relative"
                             >
                               <span className="absolute left-0 top-[0.55em] w-1 h-1 rounded-full bg-accent/50" />
                               {a}
@@ -185,13 +191,13 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                           <>
                             <button
                               onClick={() => toggleExpand(exp.id)}
-                              className="group inline-flex items-center gap-1.5 mt-2.5 text-xs text-accent-bright/80 hover:text-accent-bright transition-colors"
+                              className="group inline-flex items-center gap-1.5 mt-3 text-sm text-accent-bright/80 hover:text-accent-bright transition-colors"
                             >
                               {expandedId === exp.id
                                 ? "Hide Responsibilities"
                                 : `View Responsibilities (${exp.achievements.length - 2})`}
                               <ChevronDown
-                                size={12}
+                                size={13}
                                 className={`transition-transform duration-200 ${
                                   expandedId === exp.id ? "rotate-180" : ""
                                 }`}
@@ -208,11 +214,11 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                               transition={{ duration: 0.3, ease }}
                               className="overflow-hidden"
                             >
-                              <ul className="space-y-2.5 mt-3 pt-3 border-t border-white/5">
+                              <ul className="space-y-3 mt-4 pt-4 border-t border-white/5">
                                 {exp.achievements.slice(2).map((a, i) => (
                                   <li
                                     key={i}
-                                    className="text-[13px] text-silver/80 leading-[1.85] pl-4 relative"
+                                    className="text-[17px] sm:text-[18px] text-silver/80 leading-[1.75] pl-4 relative"
                                   >
                                     <span className="absolute left-0 top-[0.55em] w-1 h-1 rounded-full bg-accent/60" />
                                     {a}
@@ -232,11 +238,11 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               <section>
                 <SectionTitle>Education</SectionTitle>
                 {education && (
-                  <div className="rounded-xl bg-white/[0.03] border border-white/5 p-5 sm:p-6">
-                    <h3 className="text-sm font-medium text-white/90">
+                  <div className="rounded-xl bg-white/[0.03] border border-white/5 p-5 sm:p-7">
+                    <h3 className="text-lg font-medium text-white/90">
                       {education.title}
                     </h3>
-                    <p className="text-xs text-silver/70 mt-1">
+                    <p className="text-sm text-silver/70 mt-1.5">
                       {education.company} &middot; {education.period}
                     </p>
                   </div>
@@ -273,7 +279,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-[11px] font-semibold text-graphite uppercase tracking-[0.12em] mb-5">
+    <h2 className="text-[15px] font-semibold text-graphite uppercase tracking-[0.12em] mb-6">
       {children}
     </h2>
   );

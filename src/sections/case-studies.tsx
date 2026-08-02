@@ -81,7 +81,7 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto modal-scroll">
+        <div className="flex-1 overflow-y-auto modal-scroll" data-lenis-prevent>
           <div className="px-4 sm:px-8 lg:px-10 py-6 sm:py-8">
             <div className="mx-auto" style={{ maxWidth: "640px" }}>
               <h2 className="text-xl sm:text-2xl font-light text-white tracking-tight mb-6 leading-snug">

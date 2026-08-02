@@ -15,7 +15,8 @@ const FOCUSABLE =
  */
 export function useModalLock(
   onClose: () => void,
-  panelRef: RefObject<HTMLElement | null>
+  panelRef: RefObject<HTMLElement | null>,
+  initialFocusRef?: RefObject<HTMLElement | null>
 ) {
   useEffect(() => {
     const content = document.getElementById("portfolio-content");
@@ -65,7 +66,13 @@ export function useModalLock(
     document.addEventListener("keydown", handleKeyDown);
 
     const frame = requestAnimationFrame(() => {
-      panelRef.current?.querySelector<HTMLElement>(FOCUSABLE)?.focus();
+      if (initialFocusRef?.current) {
+        initialFocusRef.current.focus();
+        return;
+      }
+      panelRef.current
+        ?.querySelector<HTMLElement>(FOCUSABLE)
+        ?.focus();
     });
 
     return () => {
@@ -79,5 +86,5 @@ export function useModalLock(
       document.removeEventListener("keydown", handleKeyDown);
       prevFocus?.focus();
     };
-  }, [onClose, panelRef]);
+  }, [onClose, panelRef, initialFocusRef]);
 }

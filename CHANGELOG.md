@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.5 — Resume Viewer refinement
+- **Native scrolling inside modals:** added `data-lenis-prevent` to the Resume and Case Study modal scroll containers so Lenis never intercepts wheel/trackpad/touch inside them (Lenis calls `event.preventDefault()` on non-prevented events when paused — this was blocking trackpad scroll). Verified via CDP: wheel/trackpad scrolls the modal only, page position stays locked, and the exact scroll position is restored on close.
+- **Keyboard scrolling:** the Resume scroll area is focusable (`tabIndex={0}`, no outline) and receives initial focus on open via an optional `initialFocusRef` in `useModalLock`, so PageDown/Arrows/Home/End work immediately after the modal opens.
+- **Premium document layout:** reading column widened 640px → 720px, larger type scale (name 48–54px, role 24–28px, section titles 15px uppercase tracked, body 18px, bullets 17–18px, metadata 16px, line-height 1.75), and more generous spacing/padding.
+- **Refined glass:** `.glass-panel` lightened with a stronger luminous border, soft inner accent glow, and brighter inner highlight (mobile keeps near-opaque readability).
+- **Verified:** lint + `next build --webpack` clean; desktop + mobile (390px) wheel/keyboard/backdrop scroll, sticky header, exact-restore, zero console issues, zero horizontal overflow.
+
 ## v2.4 — Scroll architecture unification
 - **Refresh always starts at top:** inline script in the root layout sets `history.scrollRestoration = "manual"` and scrolls to top before first paint; Lenis also re-syncs to top on init. Works across Chrome, Edge, Safari, Firefox, and mobile.
 - **Lenis is the single scroll controller:** removed the conflicting CSS `scroll-behavior: smooth` on `html`; enabled `syncTouch` so Lenis stays in sync with native touch scroll.
