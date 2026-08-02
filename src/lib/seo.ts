@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@/config/site";
+import { siteConfig, siteUrl } from "@/config/site";
 
 interface SEOProps {
   title?: string;
@@ -22,14 +22,14 @@ export function generateMetadata({
   const fullTitle = title ? `${title} | ${siteName}` : siteConfig.title;
   const desc = description || siteConfig.description;
   const image = ogImage || siteConfig.ogImage;
-  const url = canonical || siteConfig.name;
+  const url = canonical || siteUrl;
 
   return {
     title: fullTitle,
     description: desc,
     keywords: keywords || siteConfig.keywords,
     authors: [{ name: siteConfig.name }],
-    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
+    metadataBase: new URL(siteUrl),
     alternates: { canonical },
     openGraph: {
       title: fullTitle,
@@ -59,7 +59,7 @@ export function jsonLd() {
     email: siteConfig.email,
     telephone: siteConfig.phone,
     address: { "@type": "PostalAddress", addressLocality: siteConfig.location },
-    url: process.env.NEXT_PUBLIC_APP_URL,
+    url: siteUrl,
     image: siteConfig.avatarUrl,
     sameAs: [
       "https://linkedin.com/in/jawahar-a-47037a240",

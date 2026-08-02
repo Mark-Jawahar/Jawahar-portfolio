@@ -1,5 +1,12 @@
 import type { SiteSettings, SocialLink } from "@/types";
 
+const configuredUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() ?? "";
+export const siteUrl = (
+  configuredUrl && !/^https?:\/\/localhost/.test(configuredUrl)
+    ? configuredUrl
+    : "https://portfolio-v2-mocha-mu.vercel.app"
+).replace(/\/$/, "");
+
 export const siteConfig: SiteSettings = {
   name: "Jawahar A",
   title: "Jawahar A | Customer Experience Specialist",
