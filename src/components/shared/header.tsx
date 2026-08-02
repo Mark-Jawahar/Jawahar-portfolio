@@ -44,7 +44,7 @@ export function Header() {
 
             <nav className="hidden md:flex items-center gap-1">
               {NAV_ITEMS.map((item) => {
-                const id = item.href.slice(1);
+                const id = item.href.split("#")[1] ?? item.href;
                 const active = activeSection === id;
                 return (
                   <button
@@ -88,23 +88,24 @@ export function Header() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-40 bg-black/90 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8"
           >
-            {NAV_ITEMS.map((item, i) => (
-              <motion.button
-                key={item.href}
-                onClick={() => handleClick(item.href.slice(1))}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className={cn(
-                  "text-2xl tracking-wide transition-colors",
-                  activeSection === item.href.slice(1)
-                    ? "text-white"
-                    : "text-graphite hover:text-silver"
-                )}
-              >
-                {item.label}
-              </motion.button>
-            ))}
+            {NAV_ITEMS.map((item, i) => {
+              const id = item.href.split("#")[1] ?? item.href;
+              return (
+                <motion.button
+                  key={item.href}
+                  onClick={() => handleClick(id)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className={cn(
+                    "text-2xl tracking-wide transition-colors",
+                    activeSection === id ? "text-white" : "text-graphite hover:text-silver"
+                  )}
+                >
+                  {item.label}
+                </motion.button>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>

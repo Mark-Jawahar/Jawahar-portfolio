@@ -20,9 +20,11 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.6,
+      syncTouch: true,
     });
 
     setLenis(lenis);
+    lenis.scrollTo(0, { immediate: true });
 
     function raf(time: number) {
       lenis.raf(time);

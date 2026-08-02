@@ -32,13 +32,17 @@ function Counter({ end, suffix = "" }: CounterProps) {
   return <motion.span ref={ref}>{text}</motion.span>;
 }
 
-const stats = [
-  { value: 500, suffix: "+", label: "Learners Onboarded", sublabel: "End-to-end onboarding" },
-  { value: 80, suffix: "+", label: "Transactions Managed", sublabel: "Concurrent property deals" },
-  { value: 150, suffix: "+", label: "Leads Qualified/Month", sublabel: "Inbound & outbound" },
-  { value: 48, suffix: "hr SLA", label: "Escalation Resolution", sublabel: "Client satisfaction" },
-  { value: 5, suffix: "+ Years", label: "Industry Experience", sublabel: "EdTech, Real Estate, Fin Services" },
-  { value: 100, suffix: "%", label: "CSAT Oriented", sublabel: "Customer-first approach" },
+type Stat =
+  | { label: string; sublabel: string; value: number; suffix?: string }
+  | { label: string; sublabel: string; headline: string };
+
+const stats: Stat[] = [
+  { value: 500, suffix: "+", label: "Learners Onboarded", sublabel: "Seamless onboarding journeys" },
+  { value: 80, suffix: "+", label: "Property Transactions", sublabel: "End-to-end client management" },
+  { value: 150, suffix: "+", label: "Customer Leads Managed", sublabel: "Monthly qualification & follow-up" },
+  { value: 30, suffix: "%", label: "Process Improvement", sublabel: "Standardized onboarding workflows" },
+  { value: 5, suffix: "+ Years", label: "Experience", sublabel: "Across EdTech, Real Estate & Financial Services" },
+  { headline: "Customer-First", label: "Mindset", sublabel: "Empathy-driven service & long-term relationships" },
 ];
 
 const gridContainer: Variants = {
@@ -90,7 +94,13 @@ export function Impact() {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               <div className="relative z-10">
                 <div className="text-5xl sm:text-6xl font-light text-gradient mb-3 tracking-tight">
-                  <Counter end={stat.value} suffix={stat.suffix} />
+                  {"value" in stat ? (
+                    <Counter end={stat.value} suffix={stat.suffix} />
+                  ) : (
+                    <span className="block text-3xl sm:text-4xl leading-tight">
+                      {stat.headline}
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-silver/90 font-medium text-sm sm:text-base mb-1">
                   {stat.label}

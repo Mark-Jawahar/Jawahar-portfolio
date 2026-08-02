@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.4 — Scroll architecture unification
+- **Refresh always starts at top:** inline script in the root layout sets `history.scrollRestoration = "manual"` and scrolls to top before first paint; Lenis also re-syncs to top on init. Works across Chrome, Edge, Safari, Firefox, and mobile.
+- **Lenis is the single scroll controller:** removed the conflicting CSS `scroll-behavior: smooth` on `html`; enabled `syncTouch` so Lenis stays in sync with native touch scroll.
+- **Fixed header navigation (previously broken):** nav items are `/#section`, and `href.slice(1)` produced `#section`, so `getElementById("#section")` returned null — nav clicks never scrolled and active-state highlighting never matched. Now the id is extracted via `split("#")[1]`.
+- **Unified nav scrolling:** `scrollToSection` now uses Lenis only (consistent 1.4s ease-out-expo) and relies on Lenis's native `scroll-margin-top` support (88px) to clear the fixed header — verified landing at exactly 88px on desktop and mobile drawer.
+- **Framer Motion `useScroll`** (journey timeline) stays synced to the same native window scroll; no duplicate listeners.
+- **Modal isolation verified:** Resume + Case Study modals lock the background (`overflow:hidden` + Lenis pause + `overscroll-behavior:contain`), scroll their own content, and restore the exact page position on close.
+- **Verified:** refresh-at-top, nav offset (88px), modal exact-restore, zero console warnings, zero horizontal overflow at 10 viewports, Lighthouse mobile 91 / desktop 100 / CLS 0.
+
+## v2.4a — Impact cards content refinement
+- Replaced internal operational KPIs with customer-value messaging: 500+ Learners Onboarded, 80+ Property Transactions, 150+ Customer Leads Managed, 30% Process Improvement, 5+ Years Experience, and a non-numeric Customer-First Mindset card (headline variant, same card structure).
+
 ## v2.3 — Liquid Glass upgrade
 - New `LiquidGlassCard` component (pointer tilt/glow/lift, reduced-motion aware) used across About, Impact, Contact, Case Studies, and How I Work.
 - New `useModalLock` hook: scroll-lock + focus trap + ESC close + Lenis pause, shared by Resume Viewer and Case Study modals (replaces duplicated inline logic).
