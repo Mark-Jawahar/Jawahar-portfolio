@@ -160,11 +160,11 @@ export function Hero() {
               variants={motionItem}
               className="hidden lg:flex items-center gap-6 mt-16 text-graphite text-xs tracking-widest uppercase"
             >
-              <span className="text-graphite/70">Trusted by</span>
+              <span className="text-graphite">Trusted by</span>
               {["Hello Mentor", "NoBrokers", "Dalztek"].map((company) => (
                 <span
                   key={company}
-                  className="text-graphite/80 font-medium hover:text-silver/80 transition-colors"
+                  className="text-graphite font-medium hover:text-silver/80 transition-colors"
                 >
                   {company}
                 </span>

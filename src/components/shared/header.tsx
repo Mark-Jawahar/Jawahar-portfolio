@@ -35,6 +35,7 @@ export function Header() {
             <button
               onClick={() => handleClick("home")}
               className="group flex items-center gap-1 text-sm font-medium tracking-wider text-silver hover:text-white transition-colors"
+              aria-label="Go to home"
             >
               <span>JA</span>
               <span className="text-accent-bright/90">
@@ -42,14 +43,19 @@ export function Header() {
               </span>
             </button>
 
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
               {NAV_ITEMS.map((item) => {
                 const id = item.href.split("#")[1] ?? item.href;
                 const active = activeSection === id;
                 return (
-                  <button
+                  <a
                     key={item.href}
-                    onClick={() => handleClick(id)}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleClick(id);
+                    }}
+                    aria-current={active ? "true" : undefined}
                     className={cn(
                       "relative px-4 py-2 text-sm tracking-wide transition-colors duration-300",
                       active ? "text-white" : "text-graphite hover:text-silver"
@@ -63,7 +69,7 @@ export function Header() {
                       />
                     )}
                     <span className="relative z-10">{item.label}</span>
-                  </button>
+                  </a>
                 );
               })}
             </nav>
@@ -72,6 +78,8 @@ export function Header() {
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center text-graphite hover:text-white transition-colors"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -86,24 +94,32 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            id="mobile-menu"
+            role="dialog"
+            aria-label="Navigation menu"
             className="fixed inset-0 z-40 bg-black/90 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8"
           >
             {NAV_ITEMS.map((item, i) => {
               const id = item.href.split("#")[1] ?? item.href;
               return (
-                <motion.button
+                <motion.a
                   key={item.href}
-                  onClick={() => handleClick(id)}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleClick(id);
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  aria-current={activeSection === id ? "true" : undefined}
                   className={cn(
                     "text-2xl tracking-wide transition-colors",
                     activeSection === id ? "text-white" : "text-graphite hover:text-silver"
                   )}
                 >
                   {item.label}
-                </motion.button>
+                </motion.a>
               );
             })}
           </motion.div>

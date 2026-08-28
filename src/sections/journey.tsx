@@ -41,11 +41,21 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
       </div>
 
       <div
+        role="button"
+        tabIndex={0}
+        aria-expanded={isOpen}
+        aria-controls={`${exp.id}-details`}
+        onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }
+        }}
         className={cn(
           "glass rounded-2xl p-6 sm:p-8 transition-all duration-500 cursor-pointer glass-card",
           isOpen ? "bg-white/[0.08]" : ""
         )}
-        onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -83,6 +93,7 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.45, ease: EASE }}
               className="overflow-hidden"
+              id={`${exp.id}-details`}
             >
               <p className="text-graphite text-[15px] leading-relaxed mt-4 mb-4 border-t border-white/5 pt-4">
                 {exp.description}

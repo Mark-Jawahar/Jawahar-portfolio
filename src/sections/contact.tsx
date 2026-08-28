@@ -99,7 +99,7 @@ export function Contact() {
             <a
               href={siteConfig.resumeUrl}
               download
-              className="btn btn-ghost px-8 py-4"
+              className="btn btn-ghost group px-8 py-4"
             >
               <Download
                 size={16}

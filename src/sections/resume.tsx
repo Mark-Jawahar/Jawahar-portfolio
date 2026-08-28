@@ -238,7 +238,7 @@ export function Resume() {
               )}
               <button
                 onClick={openOverlay}
-                className="btn btn-ghost px-7 py-3 shrink-0"
+                className="btn btn-ghost group px-7 py-3 shrink-0"
               >
                 View Resume
                 <ExternalLink

@@ -26,10 +26,10 @@ interface CaseStudyModalProps {
 }
 
 function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  useModalLock(onClose, panelRef);
+  useModalLock(onClose, panelRef, scrollRef);
 
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent) => {
@@ -71,7 +71,6 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
             <p className="text-sm text-silver truncate">{study.company}</p>
           </div>
           <button
-            ref={closeButtonRef}
             onClick={onClose}
             className="w-8 h-8 rounded-lg flex items-center justify-center text-graphite hover:text-white hover:bg-white/10 active:scale-90 transition-all shrink-0"
             aria-label="Close case study"
@@ -81,7 +80,12 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto modal-scroll" data-lenis-prevent>
+        <div
+          ref={scrollRef}
+          data-lenis-prevent
+          tabIndex={0}
+          className="flex-1 overflow-y-auto modal-scroll outline-none"
+        >
           <div className="px-4 sm:px-8 lg:px-10 py-6 sm:py-8">
             <div className="mx-auto" style={{ maxWidth: "640px" }}>
               <h2 className="text-xl sm:text-2xl font-light text-white tracking-tight mb-6 leading-snug">

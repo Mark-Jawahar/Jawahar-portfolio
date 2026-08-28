@@ -17,7 +17,6 @@ interface ResumeOverlayProps {
 
 export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -76,7 +75,6 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               <span className="sm:hidden">PDF</span>
             </a>
             <button
-              ref={closeButtonRef}
               onClick={onClose}
               className="w-8 h-8 rounded-lg flex items-center justify-center text-graphite hover:text-white hover:bg-white/10 active:scale-90 transition-all"
               aria-label="Close resume viewer"
@@ -171,7 +169,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                           </div>
                           <div className="text-sm text-graphite font-mono shrink-0 text-left sm:text-right">
                             <p>{exp.period}</p>
-                            <p className="text-graphite/80">{exp.location}</p>
+                            <p>{exp.location}</p>
                           </div>
                         </div>
 
