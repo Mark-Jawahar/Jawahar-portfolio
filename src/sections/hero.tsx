@@ -61,7 +61,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col overflow-hidden"
+      className="relative min-h-screen min-h-[100svh] flex flex-col overflow-hidden"
       onMouseMove={handlePointerMove}
     >
       {/* Background stage — contained to the hero */}
@@ -88,17 +88,17 @@ export function Hero() {
         <div className="absolute bottom-[18%] left-[4%] w-56 h-56 rounded-full bg-[oklch(0.65_0.02_290_/_0.025)] blur-[130px]" />
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col">
         <motion.div
           variants={motionContainer}
           initial="hidden"
           animate="show"
-          className="grid lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-10 items-center w-full pt-32 pb-10 lg:pt-24 lg:pb-16"
+          className="grid lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-10 items-start w-full pt-20 pb-10 lg:pt-24 lg:pb-16"
         >
-          <motion.div variants={motionItem} className="text-center lg:text-left">
+          <motion.div variants={motionItem} className="text-center lg:text-left order-2 lg:order-1">
             <motion.div
               variants={motionItem}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60 tracking-wider uppercase mb-9"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60 tracking-wider uppercase mb-6"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-accent-bright/80" />
               Open to opportunities
@@ -106,9 +106,9 @@ export function Hero() {
 
             <motion.h1
               variants={motionItem}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight mb-6 leading-[1.04]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight mb-4 leading-[1.04]"
             >
-              <span className="block text-white/40 font-extralight text-3xl sm:text-4xl md:text-5xl mb-4">
+              <span className="block text-white/40 font-extralight text-2xl sm:text-3xl md:text-4xl mb-3">
                 Hi, I&apos;m
               </span>
               <span className="text-gradient font-semibold">
@@ -118,14 +118,14 @@ export function Hero() {
 
             <motion.p
               variants={motionItem}
-              className="text-xl sm:text-2xl text-silver/90 font-light tracking-wide mb-3"
+              className="text-lg sm:text-xl text-silver/90 font-light tracking-wide mb-3"
             >
               {siteConfig.role}
             </motion.p>
 
             <motion.p
               variants={motionItem}
-              className="text-[15px] sm:text-base text-graphite max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed"
+              className="text-[15px] sm:text-base text-graphite max-w-md mx-auto lg:mx-0 mb-6 leading-relaxed"
             >
               5+ years across Customer Success, Customer Experience, and Operations.
               I build scalable onboarding, cut repeat queries, and lead a 10-person
@@ -135,7 +135,7 @@ export function Hero() {
             {/* Supporting Metrics */}
             <motion.div
               variants={motionItem}
-              className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 text-center lg:text-left"
+              className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 text-center lg:text-left"
             >
               <div className="glass rounded-xl p-4 sm:p-5 flex flex-col items-center gap-1">
                 <span className="text-2xl sm:text-3xl font-light text-gradient">10</span>
@@ -157,7 +157,7 @@ export function Hero() {
 
             <motion.div
               variants={motionItem}
-              className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start mb-8"
             >
               <a
                 href="#contact"
@@ -165,7 +165,7 @@ export function Hero() {
                   e.preventDefault();
                   scrollToSection("contact");
                 }}
-                className="btn btn-ghost px-7 py-3.5"
+                className="btn btn-ghost px-6 py-3"
               >
                 <Mail size={16} />
                 Get in touch
@@ -173,7 +173,7 @@ export function Hero() {
               <a
                 href={siteConfig.resumeUrl}
                 download
-                className="btn btn-primary px-7 py-3.5"
+                className="btn btn-primary px-6 py-3"
               >
                 <Download size={16} />
                 Download Resume
@@ -182,7 +182,7 @@ export function Hero() {
 
             <motion.div
               variants={motionItem}
-              className="hidden lg:flex items-center gap-6 mt-16 text-silver/70 text-xs tracking-widest uppercase"
+              className="hidden lg:flex items-center gap-6 mt-8 text-silver/70 text-xs tracking-widest uppercase"
             >
               <span className="text-silver/60">Trusted by</span>
               {["Hello Mentor", "NoBrokers", "Dalztek"].map((company) => (
@@ -199,7 +199,7 @@ export function Hero() {
           {/* Portrait — large, elegant, confined to the hero */}
           <motion.div
             variants={motionPortrait}
-            className="relative mx-auto lg:ml-auto w-[min(72vw,300px)] sm:w-[min(56vw,360px)] lg:w-[min(36vw,430px)]"
+            className="relative mx-auto lg:ml-auto w-[min(72vw,280px)] sm:w-[min(56vw,320px)] lg:w-[min(36vw,430px)] order-1 lg:order-2 mt-8 lg:mt-0"
           >
             <motion.div
               className="relative aspect-square"
@@ -219,8 +219,8 @@ export function Hero() {
                 sizes="(max-width: 640px) 72vw, (max-width: 1024px) 56vw, 36vw"
                 className="object-cover rounded-full border border-white/10 shadow-2xl glow"
               />
-              <div className="absolute -bottom-3 -right-3 w-24 h-24 sm:w-28 sm:h-28 rounded-full glass border-accent/20 flex items-center justify-center">
-                <span className="text-sm text-accent-bright/90 font-medium">
+              <div className="absolute bottom-3 right-3 w-20 h-20 sm:w-24 sm:h-24 rounded-full glass border-accent/20 flex items-center justify-center">
+                <span className="text-xs sm:text-sm text-accent-bright/90 font-medium">
                   5+ Yrs
                 </span>
               </div>

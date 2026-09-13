@@ -398,3 +398,54 @@ section[id] {
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   SAFE AREA UTILITIES — iOS / Android notch & home indicator
+   ============================================================ */
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+.safe-horizontal {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.safe-vertical {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Full screen viewport height with safe area support */
+.min-h-screen-safe {
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+}
+
+@supports (height: 100dvh) {
+  .min-h-screen-safe {
+    min-height: 100dvh;
+  }
+}
+
+/* Hero specific mobile height */
+@media (max-width: 639px) {
+  .min-h-hero-mobile {
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+}
