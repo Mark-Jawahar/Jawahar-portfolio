@@ -99,7 +99,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                   {siteConfig.name}
                 </h1>
                 <p className="text-2xl sm:text-[26px] text-silver/80 mt-3 font-light">
-                  {siteConfig.role}
+                  Assistant Team Lead — Customer Experience
                 </p>
                 <p className="text-base text-graphite mt-4 leading-relaxed">
                   {siteConfig.location} &middot; {siteConfig.email}
@@ -110,15 +110,14 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               <section className="mb-12">
                 <SectionTitle>Professional Summary</SectionTitle>
                 <p className="text-lg text-silver/85 leading-[1.75]">
-                  Customer Experience Specialist with 5+ years of experience in
-                  Customer Onboarding, Customer Success, and Client Relationship
-                  Management across EdTech, Real Estate, and Financial Services.
-                  Proven track record of managing end-to-end onboarding for 500+
-                  learners, handling 80+ concurrent high-value property
-                  transactions, and qualifying 150+ leads monthly. Adept at CRM
-                  management, process improvement, cross-functional
-                  collaboration, and delivering measurable improvements in
-                  customer satisfaction and operational efficiency.
+                  Assistant Team Lead — Customer Experience with 5+ years across
+                  Customer Success, Onboarding, and CX Operations in EdTech,
+                  Real Estate, and Financial Services. Leads a 10-member team,
+                  onboarded 500+ learners, cut repeat queries 30%, lifted CSAT
+                  25%, improved productivity 20% through process optimization
+                  and cross-functional collaboration. Earlier: managed 80+
+                  concurrent property transactions (48-hour SLA) and qualified
+                  150+ leads monthly.
                 </p>
               </section>
 

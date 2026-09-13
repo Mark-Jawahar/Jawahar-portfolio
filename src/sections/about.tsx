@@ -5,16 +5,16 @@ import { motion, type Variants } from "framer-motion";
 import { SectionBadge } from "@/components/ui/section-badge";
 import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 import { siteConfig } from "@/config/site";
-import { Users, Target, MessageCircle, Lightbulb, TrendingUp, Heart } from "lucide-react";
+import { Users, Target, RefreshCw, AlertTriangle, BarChart2, Database } from "lucide-react";
 import { EASE } from "@/lib/motion";
 
 const focusAreas = [
-  { icon: Users, label: "Customer Experience" },
-  { icon: Target, label: "Customer Success" },
-  { icon: MessageCircle, label: "Communication" },
-  { icon: Lightbulb, label: "Problem Solving" },
-  { icon: TrendingUp, label: "Continuous Learning" },
-  { icon: Heart, label: "Professional Growth" },
+  { icon: Users, label: "Customer Success" },
+  { icon: Target, label: "Customer Onboarding" },
+  { icon: RefreshCw, label: "Customer Lifecycle Management" },
+  { icon: AlertTriangle, label: "Escalation Management" },
+  { icon: BarChart2, label: "Process Improvement" },
+  { icon: Database, label: "CRM & Operations" },
 ];
 
 const paragraphContainer: Variants = {
@@ -30,7 +30,7 @@ const paragraphItem: Variants = {
 export function About() {
   return (
     <section id="about" className="relative py-24 sm:py-36 lg:py-44">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_oklch(0.7_0.08_240_/_0.05),_transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_oklch(0.4_0.03_240_/_0.04),_transparent_65%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -44,7 +44,7 @@ export function About() {
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-6 mb-8 leading-[1.08]">
               Who <span className="text-gradient font-semibold">I Am</span>
             </h2>
-            <motion.div
+<motion.div
               variants={paragraphContainer}
               initial="hidden"
               whileInView="show"
@@ -52,22 +52,24 @@ export function About() {
               className="space-y-5 text-silver/75 leading-[1.95] text-[15px] sm:text-base"
             >
               <motion.p variants={paragraphItem}>
-                I am a Customer Experience Specialist based in Bengaluru with over 5 years of experience
-                helping people navigate complex service journeys across EdTech, Real Estate, and Financial Services.
-                My work sits at the intersection of empathy and process — understanding what customers need and
-                building the systems to deliver it consistently.
+                I&apos;m an Assistant Team Lead — Customer Experience in Bengaluru with 5+ years
+                across Customer Success, Customer Onboarding, and CX Operations in EdTech,
+                Real Estate, and Financial Services. I lead a 10-member CX team, onboard
+                500+ learners, and have cut repeat queries by 30%, lifted CSAT 25%, and
+                improved team productivity 20%.
               </motion.p>
               <motion.p variants={paragraphItem}>
-                From onboarding 500+ learners onto an EdTech platform to managing 80+ concurrent property transactions
-                in a high-velocity real estate marketplace, I have learned that great customer experience is not a
-                department — it is a mindset. I take pride in being the person customers can rely on, whether they
-                are signing up for a course, buying a home, or securing a loan.
+                My career path — Lead Generation (2021) to Relationship Management (2023)
+                to Customer Experience (2024) and now Assistant Team Lead (2026) — reflects
+                a consistent focus on scalable customer operations. I&apos;ve managed 80+
+                concurrent property transactions with a 48-hour SLA and qualified 150+
+                leads monthly.
               </motion.p>
               <motion.p variants={paragraphItem}>
-                I believe in progress through process. By creating standardized onboarding workflows, maintaining
-                meticulous CRM records, and collaborating across teams, I have helped turn fragmented customer journeys
-                into seamless experiences. Every template I write, every escalation I resolve, and every insight I share
-                is driven by one goal: making the customer feel seen, heard, and valued.
+                I turn fragmented customer journeys into measurable outcomes: structured
+                onboarding workflows, proactive communication cadences, KPI-driven coaching,
+                CRM hygiene, and cross-functional collaboration with Product, Sales,
+                Marketing, and Operations to resolve UX pain points at the root.
               </motion.p>
             </motion.div>
           </motion.div>

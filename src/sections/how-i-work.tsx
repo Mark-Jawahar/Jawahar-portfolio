@@ -9,27 +9,27 @@ const principles = [
   {
     title: "Listen First",
     description:
-      "Understanding the customer's real problem before proposing solutions.",
+      "Understand the customer's real problem before proposing solutions. At Hello Mentor, this meant shadowing support calls and reading 200+ parent emails to redesign onboarding, cutting confusion by 40%.",
   },
   {
-    title: "Think in Processes",
+    title: "Build Repeatable Processes",
     description:
-      "Rather than solving the same issue repeatedly, I improve the process so the problem occurs less often.",
+      "Turn recurring issues into workflows, checklists, templates, and playbooks. Standardized onboarding for 500+ learners and a qualification checklist for 150+ monthly leads made follow-up quality consistent regardless of volume.",
   },
   {
     title: "Collaborate Across Teams",
     description:
-      "Great customer experiences are built through collaboration with Admissions, Product, Operations, Marketing, and Support.",
+      "Great customer experiences are built through collaboration with Product, Sales, Marketing, Operations, and Support. Partnered with these teams to resolve 3 major UX pain points and align handoffs across the learner journey.",
   },
   {
-    title: "Use Data with Empathy",
+    title: "Measure What Matters",
     description:
-      "Customer feedback, CRM insights, and operational metrics guide decisions — but empathy remains the foundation.",
+      "Use CSAT, NPS, CRM insights, and operational metrics to guide decisions — empathy remains the foundation. Zero escalation breaches over 12 months came from tracking the right signals, not just reacting.",
   },
   {
-    title: "Always Improve",
+    title: "Improve at Scale",
     description:
-      "I continuously refine documentation, workflows, and communication to create smoother experiences for customers and internal teams.",
+      "Fix the process instead of repeatedly fixing the same issue. A knowledge base and proactive cadence cut repeat queries by 30% (15+ hours saved weekly); team productivity rose 20% via data-driven coaching and CRM hygiene.",
   },
 ];
 
@@ -46,7 +46,7 @@ const gridItem: Variants = {
 export function HowIWork() {
   return (
     <section id="how-i-work" className="relative py-24 sm:py-36 lg:py-44">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_oklch(0.7_0.05_285_/_0.04),_transparent_65%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_oklch(0.4_0.025_285_/_0.03),_transparent_60%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -57,7 +57,7 @@ export function HowIWork() {
           className="text-center mb-16 sm:mb-20"
         >
           <SectionBadge label="Approach" />
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-6 mb-6 leading-[1.08]">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-6 mb-6 leading-[1.08]" aria-label="How I Work">
             How I{" "}
             <span className="text-gradient font-semibold">Work</span>
           </h2>

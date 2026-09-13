@@ -19,19 +19,19 @@ const ResumeOverlay = dynamic(
 );
 
 const metrics = [
-  { value: "500+", label: "Learners" },
-  { value: "5+", label: "Years" },
-  { value: "25%", label: "CSAT" },
-  { value: "30%", label: "Queries" },
+  { value: "10", label: "Team Members Led" },
+  { value: "500+", label: "Learners Onboarded" },
+  { value: "30%", label: "Repeat Query Reduction" },
+  { value: "25%", label: "CSAT Improvement" },
 ];
 
 const expertise = [
   "Customer Success",
   "Customer Onboarding",
-  "CRM",
+  "Customer Lifecycle Management",
+  "Escalation Management",
   "Process Improvement",
-  "Cross-functional Collaboration",
-  "Operations",
+  "CRM & Operations",
 ];
 
 function truncate(text?: string, max = 90) {
@@ -51,7 +51,7 @@ export function Resume() {
   return (
     <>
       <section id="resume" className="relative py-24 sm:py-36 lg:py-44">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_oklch(0.7_0.08_240_/_0.04),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_oklch(0.4_0.03_240_/_0.03),_transparent_60%)]" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -63,8 +63,8 @@ export function Resume() {
           >
             <SectionBadge label="Resume" />
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-6 leading-[1.08]">
-              Executive{" "}
-              <span className="text-gradient font-semibold">Profile</span>
+              Assistant Team Lead{" "}
+              <span className="text-gradient font-semibold">— Customer Experience</span>
             </h2>
           </motion.div>
 
@@ -160,12 +160,11 @@ export function Resume() {
                   Executive Summary
                 </h4>
                 <p className="text-[15px] text-silver/80 leading-[1.85]">
-                  Customer Experience Specialist with 5+ years of experience in
-                  Customer Onboarding, Customer Success, and Client Relationship
-                  Management across EdTech, Real Estate, and Financial Services.
-                  Proven track record of managing end-to-end onboarding for 500+
-                  learners and delivering measurable improvements in customer
-                  satisfaction and operational efficiency.
+                  Assistant Team Lead — Customer Experience with 5+ years across
+                  Customer Success, Onboarding, and CX Operations. Leads a
+                  10-member team, onboarded 500+ learners, cut repeat queries
+                  30%, lifted CSAT 25%, improved productivity 20% through
+                  process optimization and cross-functional collaboration.
                 </p>
               </div>
               <div className="lg:col-span-2">

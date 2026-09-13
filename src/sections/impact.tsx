@@ -37,12 +37,15 @@ type Stat =
   | { label: string; sublabel: string; headline: string };
 
 const stats: Stat[] = [
-  { value: 500, suffix: "+", label: "Learners Onboarded", sublabel: "Seamless onboarding journeys" },
-  { value: 80, suffix: "+", label: "Property Transactions", sublabel: "End-to-end client management" },
-  { value: 150, suffix: "+", label: "Customer Leads Managed", sublabel: "Monthly qualification & follow-up" },
-  { value: 30, suffix: "%", label: "Process Improvement", sublabel: "Standardized onboarding workflows" },
-  { value: 5, suffix: "+ Years", label: "Experience", sublabel: "Across EdTech, Real Estate & Financial Services" },
-  { headline: "Customer-First", label: "Mindset", sublabel: "Empathy-driven service & long-term relationships" },
+  { value: 10, suffix: "", label: "CX Team Members Led", sublabel: "Onboarding, support, escalations" },
+  { value: 500, suffix: "+", label: "Learners Onboarded", sublabel: "Structured onboarding journeys" },
+  { value: 30, suffix: "%", label: "Reduction in Repeat Queries", sublabel: "Knowledge base & proactive outreach" },
+  { value: 25, suffix: "%", label: "CSAT Improvement", sublabel: "Zero escalation breaches in 12 months" },
+  { value: 20, suffix: "%", label: "Faster Onboarding", sublabel: "Standardized workflows and templates" },
+  { value: 20, suffix: "%", label: "Team Productivity Improvement", sublabel: "Data-driven coaching and CRM hygiene" },
+  { value: 80, suffix: "+", label: "Property Transactions", sublabel: "Full-cycle client management" },
+  { value: 150, suffix: "+", label: "Customer Leads Monthly", sublabel: "Qualification and follow-up" },
+  { value: 5, suffix: "+ Years", label: "Experience", sublabel: "EdTech, Real Estate, Financial Services" },
 ];
 
 const gridContainer: Variants = {
@@ -58,7 +61,7 @@ const gridItem: Variants = {
 export function Impact() {
   return (
     <section id="impact" className="relative py-24 sm:py-36 lg:py-44">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_oklch(0.7_0.08_240_/_0.04),_transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_oklch(0.4_0.03_240_/_0.035),_transparent_65%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -74,7 +77,7 @@ export function Impact() {
             <span className="text-gradient font-semibold">Measured.</span>
           </h2>
           <p className="text-silver/75 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Every metric reflects meaningful improvements in customer experience, operational excellence, and long-term business value.
+            Every metric reflects real improvements in customer experience, operations, and long-term business value.
           </p>
         </motion.div>
 

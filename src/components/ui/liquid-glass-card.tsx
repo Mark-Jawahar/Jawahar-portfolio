@@ -66,7 +66,7 @@ export function LiquidGlassCard({
 
   const glowX = useTransform(px, (v) => `${v * 100}%`);
   const glowY = useTransform(py, (v) => `${v * 100}%`);
-  const glare = useMotionTemplate`radial-gradient(360px circle at ${glowX} ${glowY}, oklch(0.84 0.05 225 / 0.1), transparent 62%)`;
+  const glare = useMotionTemplate`radial-gradient(360px circle at ${glowX} ${glowY}, oklch(0.85 0.04 225 / 0.08), transparent 62%)`;
 
   const Component = MotionTag[as];
   const enableTilt = tilt && !reduced;

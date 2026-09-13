@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 
 function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
+  const isClient = typeof window !== "undefined";
   const isEducation = exp.type === "education";
 
   return (
@@ -86,7 +87,7 @@ function ExpandableCard({ exp, index }: { exp: typeof experiences[0]; index: num
         </div>
 
         <AnimatePresence>
-          {isOpen && (
+          {isClient && isOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
@@ -132,7 +133,7 @@ export function Journey() {
 
   return (
     <section id="journey" className="relative py-24 sm:py-36 lg:py-44">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_oklch(0.7_0.08_240_/_0.03),_transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_oklch(0.4_0.025_240_/_0.025),_transparent_60%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div

@@ -9,13 +9,13 @@ export const siteUrl = (
 
 export const siteConfig: SiteSettings = {
   name: "Jawahar A",
-  title: "Jawahar A | Customer Experience Specialist",
+  title: "Jawahar A | Assistant Team Lead — Customer Experience",
   description:
-    "Customer Experience Specialist with 5+ years of experience in Customer Success, Customer Onboarding, CRM, Process Improvement, and Client Relationship Management across EdTech, Real Estate, and Financial Services.",
+    "Assistant Team Lead — Customer Experience with 5+ years across Customer Success, Onboarding, and CX Operations. Led 10-member team, onboarded 500+ learners, cut repeat queries 30%, lifted CSAT 25%. EdTech, Real Estate, Financial Services.",
   email: "markjawahar17@gmail.com",
   phone: "+91 9620151434",
   location: "Bengaluru, Karnataka",
-  role: "Customer Experience Specialist",
+  role: "Assistant Team Lead · Customer Experience",
   resumeUrl: "/resume/Jawahar_A_Resume.pdf",
   avatarUrl: "/images/profile.jpg",
   ogImage: "/og-image.png",
@@ -26,7 +26,8 @@ export const siteConfig: SiteSettings = {
     "Zoho",
     "Customer Onboarding",
     "Process Improvement",
-    "Client Relationship",
+    "Escalation Management",
+    "Team Leadership",
     "Jawahar A",
     "Bengaluru",
     "Portfolio",

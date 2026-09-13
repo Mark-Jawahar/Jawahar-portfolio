@@ -27,7 +27,7 @@ const cardItem: Variants = {
 export function Contact() {
   return (
     <section id="contact" className="relative py-24 sm:py-36 lg:py-44">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_oklch(0.7_0.08_240_/_0.06),_transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_oklch(0.4_0.03_240_/_0.04),_transparent_60%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -39,11 +39,11 @@ export function Contact() {
         >
           <SectionBadge label="Contact" />
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-6 mb-6 leading-[1.08]">
-            Let&apos;s{" "}
-            <span className="text-gradient font-semibold">Connect</span>
+            Let&apos;s build better{" "}
+            <span className="text-gradient font-semibold">customer experiences.</span>
           </h2>
           <p className="text-silver/75 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-            Open to opportunities, collaborations, and conversations around customer experience and success.
+            Open to Customer Success, Customer Experience, and CX Operations roles.
           </p>
         </motion.div>
 

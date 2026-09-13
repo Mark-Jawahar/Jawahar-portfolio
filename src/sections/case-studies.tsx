@@ -189,7 +189,7 @@ export function CaseStudies() {
   return (
     <>
       <section id="case-studies" className="relative py-24 sm:py-36 lg:py-44">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_oklch(0.72_0.06_250_/_0.04),_transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_oklch(0.45_0.03_250_/_0.03),_transparent_65%)]" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div

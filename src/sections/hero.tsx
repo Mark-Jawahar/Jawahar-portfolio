@@ -72,11 +72,11 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         aria-hidden
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_oklch(0.72_0.06_250_/_0.1),_transparent_65%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_oklch(0.7_0.05_285_/_0.06),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_oklch(0.45_0.03_250_/_0.06),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_oklch(0.4_0.025_285_/_0.04),_transparent_55%)]" />
       </motion.div>
 
-      {/* Decorative elements */}
+      {/* Decorative elements — subtle ambient lighting */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -84,8 +84,8 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         aria-hidden
       >
-        <div className="absolute top-[16%] right-[8%] w-40 h-40 rounded-full bg-accent/5 blur-[90px]" />
-        <div className="absolute bottom-[18%] left-[4%] w-52 h-52 rounded-full bg-accent-violet/4 blur-[100px]" />
+        <div className="absolute top-[16%] right-[8%] w-48 h-48 rounded-full bg-[oklch(0.7_0.025_200_/_0.035)] blur-[120px]" />
+        <div className="absolute bottom-[18%] left-[4%] w-56 h-56 rounded-full bg-[oklch(0.65_0.02_290_/_0.025)] blur-[130px]" />
       </motion.div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex items-center">
@@ -101,7 +101,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white/60 tracking-wider uppercase mb-9"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-accent-bright/80" />
-              Available for opportunities
+              Open to opportunities
             </motion.div>
 
             <motion.h1
@@ -125,11 +125,35 @@ export function Hero() {
 
             <motion.p
               variants={motionItem}
-              className="text-[15px] sm:text-base text-graphite max-w-md mx-auto lg:mx-0 mb-11 leading-relaxed"
+              className="text-[15px] sm:text-base text-graphite max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed"
             >
-              5+ years transforming customer journeys across EdTech, Real
-              Estate, and Financial Services.
+              5+ years across Customer Success, Customer Experience, and Operations.
+              I build scalable onboarding, cut repeat queries, and lead a 10-person
+              CX team, turning fragmented journeys into measurable outcomes.
             </motion.p>
+
+            {/* Supporting Metrics */}
+            <motion.div
+              variants={motionItem}
+              className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 text-center lg:text-left"
+            >
+              <div className="glass rounded-xl p-4 sm:p-5 flex flex-col items-center gap-1">
+                <span className="text-2xl sm:text-3xl font-light text-gradient">10</span>
+                <span className="text-xs text-graphite uppercase tracking-wider">Team Members Led</span>
+              </div>
+              <div className="glass rounded-xl p-4 sm:p-5 flex flex-col items-center gap-1">
+                <span className="text-2xl sm:text-3xl font-light text-gradient">500+</span>
+                <span className="text-xs text-graphite uppercase tracking-wider">Learners Onboarded</span>
+              </div>
+              <div className="glass rounded-xl p-4 sm:p-5 flex flex-col items-center gap-1">
+                <span className="text-2xl sm:text-3xl font-light text-gradient">30%</span>
+                <span className="text-xs text-graphite uppercase tracking-wider">Repeat Query Reduction</span>
+              </div>
+              <div className="glass rounded-xl p-4 sm:p-5 flex flex-col items-center gap-1">
+                <span className="text-2xl sm:text-3xl font-light text-gradient">25%</span>
+                <span className="text-xs text-graphite uppercase tracking-wider">CSAT Improvement</span>
+              </div>
+            </motion.div>
 
             <motion.div
               variants={motionItem}
@@ -158,13 +182,13 @@ export function Hero() {
 
             <motion.div
               variants={motionItem}
-              className="hidden lg:flex items-center gap-6 mt-16 text-graphite text-xs tracking-widest uppercase"
+              className="hidden lg:flex items-center gap-6 mt-16 text-silver/70 text-xs tracking-widest uppercase"
             >
-              <span className="text-graphite">Trusted by</span>
+              <span className="text-silver/60">Trusted by</span>
               {["Hello Mentor", "NoBrokers", "Dalztek"].map((company) => (
                 <span
                   key={company}
-                  className="text-graphite font-medium hover:text-silver/80 transition-colors"
+                  className="text-silver/70 font-medium hover:text-white transition-colors"
                 >
                   {company}
                 </span>

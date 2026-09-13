@@ -2,23 +2,41 @@ import type { Experience } from "@/types";
 
 export const experiences: Experience[] = [
   {
-    id: "hello-mentor",
-    title: "Customer Experience Specialist",
+    id: "hello-mentor-atl",
+    title: "Assistant Team Lead, Customer Experience",
     company: "Hello Mentor",
     location: "Bengaluru, Karnataka",
-    period: "Sep 2024 — Present",
+    period: "Mar 2026 — Present",
     description:
-      "Leading customer onboarding and success initiatives for 500+ learners across the EdTech platform.",
+      "Leading a 10-member Customer Experience team, driving onboarding excellence, process optimization, and measurable improvements in CSAT and team productivity.",
     achievements: [
-      "Managed end-to-end customer onboarding for 500+ learners, ensuring a seamless transition from enrollment to program commencement while delivering a positive customer experience.",
-      "Served as the primary point of contact for students and parents, providing timely support, resolving queries, and ensuring high customer satisfaction throughout the customer lifecycle.",
-      "Created and standardized onboarding checklists, communication templates, and customer support processes, reducing onboarding confusion and improving operational efficiency.",
-      "Collaborated with Admissions, Product, Operations, and Marketing teams to resolve customer concerns, streamline processes, and enhance the overall learner journey.",
-      "Conducted regular follow-ups with customers to improve engagement, encourage program participation, and build long-term customer relationships that supported retention.",
-      "Maintained accurate customer records using CRM tools, analyzed customer feedback, and identified process improvement opportunities to enhance onboarding quality and service delivery.",
+      "Lead a 10-member CX team spanning onboarding, support, and escalation management; own KPI dashboards, 1:1 coaching, and performance improvement plans.",
+      "Onboarded 500+ learners with structured workflows, checklists, and templates that reduced onboarding time by 20% and cut onboarding confusion by 40%.",
+      "Designed and implemented a proactive communication cadence and knowledge base that reduced repeat customer queries by 30%, saving 15+ support hours per week.",
+      "Improved CSAT by 25% through escalation discipline (zero breaches over 12 months), SLA adherence, and cross-functional collaboration with Product, Sales, and Marketing.",
+      "Partnered with Product, Sales, and Marketing to resolve 3 major UX pain points, directly improving the end-to-end learner journey.",
+      "Increased team productivity by 20% via standardized processes, CRM hygiene, and data-driven coaching informed by CSAT, NPS, and operational metrics.",
     ],
     type: "work",
     order: 1,
+  },
+  {
+    id: "hello-mentor-ces",
+    title: "Customer Experience Specialist",
+    company: "Hello Mentor",
+    location: "Bengaluru, Karnataka",
+    period: "Sep 2024 — Mar 2026",
+    description:
+      "Managed end-to-end customer onboarding and success for 200+ students and parents per quarter across the EdTech platform.",
+    achievements: [
+      "Handled 200+ students and parents per quarter as primary point of contact, ensuring high satisfaction throughout the customer lifecycle.",
+      "Created onboarding checklists and communication templates that reduced onboarding confusion by 40% and standardized the enrollment-to-commencement flow.",
+      "Collaborated with Admissions, Product, Operations, and Marketing to resolve customer concerns and streamline cross-functional handoffs.",
+      "Conducted proactive follow-ups to drive engagement, encourage program participation, and build long-term customer relationships supporting retention.",
+      "Maintained accurate CRM records, analyzed feedback, and surfaced process improvement opportunities that informed team-wide workflow changes.",
+    ],
+    type: "work",
+    order: 2,
   },
   {
     id: "nobrokers",
@@ -36,7 +54,7 @@ export const experiences: Experience[] = [
       "Negotiated between multiple stakeholders to resolve conflicts, accelerate deal closures, and improve customer satisfaction.",
     ],
     type: "work",
-    order: 2,
+    order: 3,
   },
   {
     id: "dalztek",
@@ -54,7 +72,7 @@ export const experiences: Experience[] = [
       "Consistently achieved monthly performance targets by identifying customer needs, recommending suitable financial solutions, and delivering a customer-centric service experience.",
     ],
     type: "work",
-    order: 3,
+    order: 4,
   },
   {
     id: "ssmrv-college",
@@ -65,6 +83,6 @@ export const experiences: Experience[] = [
     description: "Completed Bachelor of Commerce with focus on accounting, finance, and business management.",
     achievements: [],
     type: "education",
-    order: 4,
+    order: 5,
   },
 ];
