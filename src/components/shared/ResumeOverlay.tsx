@@ -61,13 +61,32 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
     if (!pdfDoc || !canvasRef.current) return;
     try {
       const page = await pdfDoc.getPage(pageNum);
-      const viewport = page.getViewport({ scale });
+      
+      // High-DPI rendering: account for devicePixelRatio
+      const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+      const outputScale = Math.min(dpr, 2); // Cap at 2x for performance
+      
+      const pageScale = scale * outputScale;
+      const viewport = page.getViewport({ scale: pageScale });
+      
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
       if (!context) return;
-      canvas.height = viewport.height;
+      
+      // Set actual canvas backing resolution (high-DPI)
       canvas.width = viewport.width;
-      await page.render({ canvasContext: context, viewport }).promise;
+      canvas.height = viewport.height;
+      
+      // Set CSS size to logical viewport size (viewport at base scale)
+      const baseViewport = page.getViewport({ scale });
+      canvas.style.width = `${baseViewport.width}px`;
+      canvas.style.height = `${baseViewport.height}px`;
+      
+      const renderContext = {
+        canvasContext: canvas.getContext("2d")!,
+        viewport,
+      };
+      await page.render(renderContext).promise;
     } catch (err) {
       console.error("Failed to render page:", err);
     }
@@ -78,22 +97,6 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       renderPage(currentPage);
     }
   }, [pdfDoc, currentPage, renderPage]);
-
-  const goToNextPage = useCallback(() => {
-    setCurrentPage((prev) => Math.min(prev + 1, numPages));
-  }, []);
-
-  const goToPrevPage = useCallback(() => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  }, [currentPage, numPages]);
-
-  const zoomIn = useCallback(() => {
-    setScale((prev) => Math.min(prev + 0.25, 3));
-  }, []);
-
-  const zoomOut = useCallback(() => {
-    setScale((prev) => Math.max(prev - 0.25, 0.5));
-  }, []);
 
   const content = (
     <motion.div
@@ -117,7 +120,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
           <span className="text-sm font-medium text-silver">Resume</span>
           <div className="flex items-center gap-2">
             <button
-              onClick={goToPrevPage}
+              onClick={() => { if (currentPage > 1) setCurrentPage(currentPage - 1); }}
               disabled={currentPage <= 1}
               className="p-2 text-graphite hover:text-white hover:bg-white/10 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-all"
               aria-label="Previous page"
@@ -128,7 +131,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               Page {currentPage} of {numPages}
             </span>
             <button
-              onClick={goToNextPage}
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, numPages))}
               disabled={currentPage >= numPages}
               className="p-2 text-graphite hover:text-white hover:bg-white/10 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-all"
               aria-label="Next page"
@@ -137,7 +140,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
             </button>
             <div className="flex items-center gap-2 ml-2">
               <button
-                onClick={zoomOut}
+                onClick={() => setScale((prev) => Math.max(prev - 0.25, 0.5))}
                 disabled={scale <= 0.5}
                 className="p-1.5 text-graphite hover:text-white hover:bg-white/10 rounded disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                 aria-label="Zoom out"
@@ -146,7 +149,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               </button>
               <span className="text-xs text-graphite w-12 text-center">{Math.round(scale * 100)}%</span>
               <button
-                onClick={zoomIn}
+                onClick={() => setScale((prev) => Math.min(prev + 0.25, 3))}
                 disabled={scale >= 3}
                 className="p-1.5 text-graphite hover:text-white hover:bg-white/10 rounded disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                 aria-label="Zoom in"
@@ -161,7 +164,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                 className="inline-flex items-center gap-1.5 text-xs text-graphite hover:text-accent-bright hover:text-white transition-colors active:scale-95"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-bright/80"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span className="hidden sm:inline">Download PDF</span>
+                <span className="hidden sm:inline">Download Resume</span>
                 <span className="sm:hidden">PDF</span>
               </a>
               <button
@@ -187,7 +190,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               <div className="relative bg-black border border-white/10 rounded-xl shadow-2xl overflow-hidden">
                 <canvas
                   ref={canvasRef}
-                  className="block"
+                  className="block mx-auto"
                   style={{ background: "transparent" }}
                 />
               </div>
