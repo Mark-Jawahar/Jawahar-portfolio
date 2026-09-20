@@ -67,7 +67,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       if (!context) return;
       canvas.height = viewport.height;
       canvas.width = viewport.width;
-      await page.render({ canvas, viewport }).promise;
+      await page.render({ canvasContext: context, viewport }).promise;
     } catch (err) {
       console.error("Failed to render page:", err);
     }
