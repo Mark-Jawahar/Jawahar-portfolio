@@ -34,8 +34,13 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       if (!container) return;
 
       const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
+
       const baseViewport = page.getViewport({ scale: 1 });
-      const scale = containerWidth / baseViewport.width;
+      const scaleX = containerWidth / baseViewport.width;
+      const scaleY = (containerHeight * 0.95) / baseViewport.height;
+      const scale = Math.min(scaleX, scaleY) * 0.98;
+
       const viewport = page.getViewport({ scale: scale * Math.min(window.devicePixelRatio || 1, 2) });
 
       const canvas = canvasRef.current;
@@ -73,8 +78,12 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       aria-modal="true"
       aria-label="Resume viewer"
     >
-      <div
+      <motion.div
         ref={panelRef}
+        initial={{ opacity: 0, scale: 0.96, y: 8 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.97, y: 6 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
         className="relative flex flex-col w-full h-full sm:h-auto sm:max-h-[90vh] sm:rounded-2xl overflow-hidden glass-panel bg-black"
         style={{ maxWidth: "min(90vw, 1000px)" }}
         onClick={(e) => e.stopPropagation()}
@@ -129,7 +138,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
             Close
           </button>
         </div>
-      </div>
+    </motion.div>
     </motion.div>
   );
 
