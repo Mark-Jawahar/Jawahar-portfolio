@@ -41,6 +41,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       const scaleY = (containerHeight * 0.95) / baseViewport.height;
       const scale = Math.min(scaleX, scaleY) * 0.98;
 
+      const outputScale = Math.min(window.devicePixelRatio || 1, 2);
       const viewport = page.getViewport({ scale: scale * Math.min(window.devicePixelRatio || 1, 2) });
 
       const canvas = canvasRef.current;
@@ -54,6 +55,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       canvas.style.width = `${viewport.width / (window.devicePixelRatio || 1)}px`;
       canvas.style.height = `${viewport.height / (window.devicePixelRatio || 1)}px`;
 
+      const context2d = canvas.getContext("2d")!;
       await page.render({ canvasContext: context, viewport: page.getViewport({ scale: scale * Math.min(window.devicePixelRatio || 1, 2) }) }).promise;
     } catch (err) {
       console.error("Failed to render page:", err);
@@ -118,11 +120,10 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
                 className="block mx-auto"
                 style={{ background: "transparent" }}
               />
+</div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="shrink-0 flex items-center justify-between px-4 py-3 border-t border-white/5 bg-black/90 sm:hidden safe-bottom">
+            <div className="shrink-0 flex items-center justify-between px-4 py-3 border-t border-white/5 bg-black/90 sm:hidden safe-bottom">
           <a
             href="/resumes/Jawahar_A_Bcom_BCA.pdf"
             download
@@ -137,7 +138,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
           >
             Close
           </button>
-        </div>
+</div>
     </motion.div>
     </motion.div>
   );
