@@ -95,6 +95,7 @@ export interface SiteSettings {
   location: string;
   role: string;
   resumeUrl: string;
+  resumeDownloadUrl: string;
   avatarUrl: string;
   ogImage: string;
   keywords: string[];

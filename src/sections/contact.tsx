@@ -97,7 +97,7 @@ export function Contact() {
             className="text-center"
           >
             <a
-              href={siteConfig.resumeUrl}
+              href={siteConfig.resumeDownloadUrl}
               download
               className="btn btn-ghost group px-8 py-4"
             >
@@ -105,10 +105,7 @@ export function Contact() {
                 size={16}
                 className="group-hover:scale-110 transition-transform"
               />
-              Download Resume
-              <span className="text-graphite group-hover:text-silver transition-colors">
-                PDF
-              </span>
+              Download PDF
             </a>
           </motion.div>
         </motion.div>

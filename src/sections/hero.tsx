@@ -171,12 +171,12 @@ export function Hero() {
                 Get in touch
               </a>
               <a
-                href={siteConfig.resumeUrl}
+                href={siteConfig.resumeDownloadUrl}
                 download
                 className="btn btn-primary px-6 py-3"
               >
                 <Download size={16} />
-                Download Resume
+                Download PDF
               </a>
             </motion.div>
 
@@ -196,10 +196,10 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Portrait — large, elegant, confined to the hero */}
+{/* Portrait — large, elegant, confined to the hero */}
           <motion.div
             variants={motionPortrait}
-            className="relative mx-auto lg:ml-auto w-[min(72vw,280px)] sm:w-[min(56vw,320px)] lg:w-[min(36vw,430px)] order-1 lg:order-2 mt-8 lg:mt-0"
+            className="relative mx-auto lg:ml-auto w-[min(72vw,260px)] sm:w-[min(56vw,300px)] lg:w-[min(36vw,430px)] order-1 lg:order-2 mt-6 lg:mt-0"
           >
             <motion.div
               className="relative aspect-square"
@@ -224,7 +224,7 @@ export function Hero() {
                   5+ Yrs
                 </span>
               </div>
-            </motion.div>
+</motion.div>
           </motion.div>
         </motion.div>
       </div>

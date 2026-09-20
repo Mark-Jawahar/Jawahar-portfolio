@@ -16,7 +16,8 @@ export const siteConfig: SiteSettings = {
   phone: "+91 9620151434",
   location: "Bengaluru, Karnataka",
   role: "Assistant Team Lead · Customer Experience",
-  resumeUrl: "/resume/Jawahar_A_Resume.pdf",
+  resumeUrl: "/resumes/Jawahar_A_Bcom_BCA_GlassMorphism.pdf",
+  resumeDownloadUrl: "/resumes/Jawahar_A_Bcom_BCA.pdf",
   avatarUrl: "/images/profile.jpg",
   ogImage: "/og-image.png",
   keywords: [

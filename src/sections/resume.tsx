@@ -130,12 +130,12 @@ export function Resume() {
                     linkedin.com/in/jawahar-a-47037a240
                   </a>
                   <a
-                    href={siteConfig.resumeUrl}
+                    href={siteConfig.resumeDownloadUrl}
                     download
                     className="inline-flex items-center gap-1.5 hover:text-silver transition-colors"
                   >
                     <Download size={11} className="text-accent-bright/70" />
-                    Resume PDF
+                    Download PDF
                   </a>
                 </div>
               </div>

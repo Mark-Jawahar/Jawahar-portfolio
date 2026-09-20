@@ -1,13 +1,8 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, Download } from "lucide-react";
-import { siteConfig } from "@/config/site";
-import { experiences } from "@/data/experience";
-import { skills } from "@/data/skills";
-import { useModalLock } from "@/hooks/use-modal-lock";
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -16,19 +11,9 @@ interface ResumeOverlayProps {
 }
 
 export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
-  const [expandedId, setExpandedId] = useState<string | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useModalLock(onClose, panelRef, scrollRef);
-
-  const toggleExpand = useCallback((id: string) => {
-    setExpandedId((prev) => (prev === id ? null : id));
-  }, []);
-
-  const workExperiences = experiences.filter((e) => e.type === "work");
-  const education = experiences.find((e) => e.type === "education");
-  const categories = Array.from(new Set(skills.map((s) => s.category)));
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent) => {
@@ -36,6 +21,14 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
     },
     [onClose]
   );
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [onClose]);
 
   const content = (
     <motion.div
@@ -54,23 +47,38 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
         initial={{ opacity: 0, scale: 0.96, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 16 }}
-        transition={{ duration: 0.4, ease, delay: 0.05 }}
+        transition={{ duration: 0.4, ease: ease, delay: 0.05 }}
         className="relative flex flex-col w-full h-full
                    sm:h-auto sm:max-h-[90vh] sm:rounded-2xl
                    overflow-hidden glass-panel bg-black"
-        style={{ maxWidth: "min(85vw, 960px)" }}
+        style={{ maxWidth: "min(90vw, 1000px)" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Sticky Header — stays visible while content scrolls */}
-        <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5 border-b border-white/10 bg-black/50 backdrop-blur-xl">
+        <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5 border-b border-white/10 bg-black/50 backdrop-blur-xl safe-top">
           <span className="text-sm font-medium text-silver">Resume</span>
           <div className="flex items-center gap-3">
             <a
-              href={siteConfig.resumeUrl}
+              href="/resumes/Jawahar_A_Bcom_BCA.pdf"
               download
               className="inline-flex items-center gap-1.5 text-xs text-graphite hover:text-accent-bright hover:text-white transition-colors active:scale-95"
             >
-              <Download size={13} />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-accent-bright/80"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
               <span className="hidden sm:inline">Download PDF</span>
               <span className="sm:hidden">PDF</span>
             </a>
@@ -79,182 +87,73 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
               className="w-8 h-8 rounded-lg flex items-center justify-center text-graphite hover:text-white hover:bg-white/10 active:scale-90 transition-all"
               aria-label="Close resume viewer"
             >
-              <X size={16} />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
           </div>
         </div>
 
-        {/* Scrollable Document Content */}
-        <div
-          ref={scrollRef}
-          data-lenis-prevent
-          tabIndex={0}
-          className="flex-1 overflow-y-auto modal-scroll outline-none"
-        >
-          <div className="px-4 sm:px-10 lg:px-12 py-6 sm:py-10 lg:py-14 pb-24 sm:pb-10 lg:pb-14">
-            <div className="mx-auto w-full" style={{ maxWidth: "720px" }}>
-              {/* Resume Header */}
-              <div className="mb-10 sm:mb-12 pb-8 border-b border-white/5">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight leading-[1.05]">
-                  {siteConfig.name}
-                </h1>
-                <p className="text-xl sm:text-2xl lg:text-[26px] text-silver/80 mt-2 font-light">
-                  Assistant Team Lead — Customer Experience
-                </p>
-                <p className="text-sm sm:text-base text-graphite mt-3 leading-relaxed">
-                  {siteConfig.location} &middot; {siteConfig.email}
-                </p>
+        {/* PDF Content Area */}
+        <div className="flex-1 overflow-hidden relative min-h-0">
+          <iframe
+            ref={iframeRef}
+            src="/resumes/Jawahar_A_Bcom_BCA_GlassMorphism.pdf"
+            title="Jawahar A — GlassMorphism Resume"
+            className="w-full h-full border-0 bg-transparent"
+            style={{
+              border: "none",
+              background: "transparent",
+            }}
+            onLoad={() => setIsLoaded(true)}
+            sandbox="allow-same-origin allow-scripts allow-forms"
+          />
+          {!isLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+              <div className="text-center">
+                <div
+                  className="w-10 h-10 border-2 border-accent-bright/50 border-t-transparent rounded-full animate-spin mx-auto mb-4"
+                />
+                <p className="text-silver/70 text-sm">Loading GlassMorphism resume…</p>
               </div>
-
-              {/* Professional Summary */}
-              <section className="mb-10">
-                <SectionTitle>Professional Summary</SectionTitle>
-                <p className="text-base sm:text-lg text-silver/85 leading-[1.75]">
-                  Assistant Team Lead — Customer Experience with 5+ years across
-                  Customer Success, Onboarding, and CX Operations in EdTech,
-                  Real Estate, and Financial Services. Leads a 10-member team,
-                  onboarded 500+ learners, cut repeat queries 30%, lifted CSAT
-                  25%, improved productivity 20% through process optimization
-                  and cross-functional collaboration. Earlier: managed 80+
-                  concurrent property transactions (48-hour SLA) and qualified
-                  150+ leads monthly.
-                </p>
-              </section>
-
-              {/* Skills */}
-              <section className="mb-10">
-                <SectionTitle>Skills</SectionTitle>
-                <div className="space-y-4">
-                  {categories.map((category) => (
-                    <div key={category}>
-                      <p className="text-sm sm:text-base text-graphite mb-2">
-                        {category}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {skills
-                          .filter((s) => s.category === category)
-                          .map((skill) => (
-                            <span
-                              key={skill.id}
-                              className="px-3 py-1 rounded-lg text-xs sm:text-sm bg-white/5 border border-white/10 text-silver/80"
-                            >
-                              {skill.name}
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* Professional Experience */}
-              <section className="mb-10">
-                <SectionTitle>Professional Experience</SectionTitle>
-                <div className="space-y-5">
-                  {workExperiences.map((exp) => (
-                    <div
-                      key={exp.id}
-                      className="rounded-xl bg-white/[0.03] border border-white/5 overflow-hidden"
-                    >
-                      <div className="p-4 sm:p-6">
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 mb-3">
-                          <div>
-                            <h3 className="text-base sm:text-lg font-medium text-white/90">
-                              {exp.company}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-silver/70 mt-0.5">
-                              {exp.title}
-                            </p>
-                          </div>
-                          <div className="text-xs sm:text-sm text-graphite font-mono shrink-0 text-left sm:text-right">
-                            <p>{exp.period}</p>
-                            <p>{exp.location}</p>
-                          </div>
-                        </div>
-
-                        <ul className="space-y-2">
-                          {exp.achievements.slice(0, 2).map((a, i) => (
-                            <li
-                              key={i}
-                              className="text-base sm:text-lg text-silver/80 leading-[1.7] pl-3.5 relative"
-                            >
-                              <span className="absolute left-0 top-[0.5em] w-1 h-1 rounded-full bg-accent/50" />
-                              {a}
-                            </li>
-                          ))}
-                        </ul>
-
-                        {exp.achievements.length > 2 && (
-                          <>
-                            <button
-                              onClick={() => toggleExpand(exp.id)}
-                              className="group inline-flex items-center gap-1.5 mt-2 text-xs sm:text-sm text-accent-bright/80 hover:text-accent-bright transition-colors"
-                            >
-                              {expandedId === exp.id
-                                ? "Hide Responsibilities"
-                                : `View Responsibilities (${exp.achievements.length - 2})`}
-                              <ChevronDown
-                                size={11}
-                                className={`transition-transform duration-200 ${
-                                  expandedId === exp.id ? "rotate-180" : ""
-                                }`}
-                              />
-                            </button>
-                            <motion.div
-                              initial={false}
-                              animate={{
-                                height: expandedId === exp.id ? "auto" : 0,
-                                opacity: expandedId === exp.id ? 1 : 0,
-                              }}
-                              transition={{ duration: 0.3, ease }}
-                              className="overflow-hidden"
-                            >
-                              <ul className="space-y-2 mt-3 pt-3 border-t border-white/5">
-                                {exp.achievements.slice(2).map((a, i) => (
-                                  <li
-                                    key={i}
-                                    className="text-base sm:text-lg text-silver/80 leading-[1.7] pl-3.5 relative"
-                                  >
-                                    <span className="absolute left-0 top-[0.5em] w-1 h-1 rounded-full bg-accent/60" />
-                                    {a}
-                                  </li>
-                                ))}
-                              </ul>
-                            </motion.div>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* Education */}
-              <section>
-                <SectionTitle>Education</SectionTitle>
-                {education && (
-                  <div className="rounded-xl bg-white/[0.03] border border-white/5 p-4 sm:p-6">
-                    <h3 className="text-base sm:text-lg font-medium text-white/90">
-                      {education.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-silver/70 mt-1">
-                      {education.company} &middot; {education.period}
-                    </p>
-                  </div>
-                )}
-              </section>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Sticky Footer (mobile only) */}
         <div className="shrink-0 flex items-center justify-between px-4 py-3 border-t border-white/5 bg-black/90 sm:hidden safe-bottom">
           <a
-            href={siteConfig.resumeUrl}
+            href="/resumes/Jawahar_A_Bcom_BCA.pdf"
             download
-            className="btn btn-primary px-4 py-2"
+            className="btn btn-primary px-4 py-2 text-sm"
           >
-            <Download size={14} />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mr-2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
             Download Resume
           </a>
           <button
@@ -270,12 +169,4 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
 
   if (typeof window === "undefined") return null;
   return createPortal(content, document.body);
-}
-
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="text-[13px] sm:text-[15px] font-semibold text-graphite uppercase tracking-[0.12em] mb-4">
-      {children}
-    </h2>
-  );
 }
