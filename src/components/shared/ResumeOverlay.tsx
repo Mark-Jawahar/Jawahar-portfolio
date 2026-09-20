@@ -29,37 +29,31 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
     try {
       const pdf = await pdfjsLib.getDocument("/resumes/Jawahar_A_Bcom_BCA_GlassMorphism.pdf").promise;
       const page = await pdf.getPage(1);
-      
+
       const container = canvasRef.current?.parentElement;
       if (!container) return;
-      
+
       const containerWidth = container.clientWidth;
       const baseViewport = page.getViewport({ scale: 1 });
       const scale = containerWidth / baseViewport.width;
       const viewport = page.getViewport({ scale: scale * Math.min(window.devicePixelRatio || 1, 2) });
-      
+
       const canvas = canvasRef.current;
       if (!canvas) return;
-      
+
       const context = canvas.getContext("2d");
       if (!context) return;
-      
+
       canvas.width = viewport.width;
       canvas.height = viewport.height;
       canvas.style.width = `${viewport.width / (window.devicePixelRatio || 1)}px`;
       canvas.style.height = `${viewport.height / (window.devicePixelRatio || 1)}px`;
-      
+
       await page.render({ canvasContext: context, viewport: page.getViewport({ scale: scale * Math.min(window.devicePixelRatio || 1, 2) }) }).promise;
     } catch (err) {
       console.error("Failed to render page:", err);
     }
   }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      renderPage();
-    }
-  }, [renderPage]);
 
   const content = (
     <motion.div
@@ -101,7 +95,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
           </div>
         </div>
 
-        <div className="flex-1 overflow-auto relative min-h-0" style={{ overscrollBehavior: "contain" }}>
+        <div className="flex-1 overflow-hidden relative min-h-0" style={{ overscrollBehavior: "contain" }}>
           <div className="flex items-center justify-center min-h-full p-4 sm:p-8">
             <div className="relative bg-black border border-white/10 rounded-xl shadow-2xl overflow-hidden w-full max-w-[900px] mx-auto">
               <canvas
