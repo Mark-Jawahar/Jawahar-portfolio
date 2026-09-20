@@ -55,6 +55,12 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
     }
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      renderPage();
+    }
+  }, [renderPage]);
+
   const content = (
     <motion.div
       initial={{ opacity: 0 }}
