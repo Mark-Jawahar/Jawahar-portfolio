@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { Header } from "@/components/header";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -50,6 +51,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
