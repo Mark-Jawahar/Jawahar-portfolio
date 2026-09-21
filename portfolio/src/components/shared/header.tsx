@@ -1,0 +1,130 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { useScroll } from "@/hooks/use-scroll";
+import { NAV_ITEMS } from "@/config/site";
+import { scrollToSection } from "@/lib/scroll";
+import { cn } from "@/lib/utils";
+
+export function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { scrolled, activeSection, isVisible } = useScroll();
+
+  const handleClick = (id: string) => {
+    setIsOpen(false);
+    scrollToSection(id);
+  };
+
+  return (
+    <>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: isVisible ? 0 : -100 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          scrolled
+            ? "bg-black/55 backdrop-blur-xl border-b border-white/5 shadow-[0_1px_0_rgba(0,0,0,0.4)]"
+            : "bg-gradient-to-b from-black/40 to-transparent"
+        )}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            <button
+              onClick={() => handleClick("home")}
+              className="group flex items-center gap-1 text-sm font-medium tracking-wider text-silver hover:text-white transition-colors"
+              aria-label="Go to home"
+            >
+              <span>JA</span>
+              <span className="text-accent-bright/90">
+                .
+              </span>
+            </button>
+
+            <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
+              {NAV_ITEMS.map((item) => {
+                const id = item.href.split("#")[1] ?? item.href;
+                const active = activeSection === id;
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleClick(id);
+                    }}
+                    aria-current={active ? "true" : undefined}
+                    className={cn(
+                      "relative px-4 py-2 text-sm tracking-wide transition-colors duration-300",
+                      active ? "text-white" : "text-graphite hover:text-silver"
+                    )}
+                  >
+                    {active && (
+                      <motion.span
+                        layoutId="activeNav"
+                        className="absolute inset-0 rounded-full bg-accent/10 border border-accent/25"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">{item.label}</span>
+                  </a>
+                );
+              })}
+            </nav>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center text-graphite hover:text-white transition-colors"
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            id="mobile-menu"
+            role="dialog"
+            aria-label="Navigation menu"
+            className="fixed inset-0 z-40 bg-black/90 backdrop-blur-2xl md:hidden flex flex-col items-center justify-center gap-8"
+          >
+            {NAV_ITEMS.map((item, i) => {
+              const id = item.href.split("#")[1] ?? item.href;
+              return (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleClick(id);
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  aria-current={activeSection === id ? "true" : undefined}
+                  className={cn(
+                    "text-2xl tracking-wide transition-colors",
+                    activeSection === id ? "text-white" : "text-graphite hover:text-silver"
+                  )}
+                >
+                  {item.label}
+                </motion.a>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
