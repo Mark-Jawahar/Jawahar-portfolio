@@ -1,0 +1,80 @@
+import type { SiteSettings, SocialLink } from "@/types";
+
+const configuredUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() ?? "";
+export const siteUrl = (
+  configuredUrl && !/^https?:\/\/localhost/.test(configuredUrl)
+    ? configuredUrl
+    : "https://jawaharp.vercel.app"
+).replace(/\/$/, "");
+
+export const siteConfig: SiteSettings = {
+  name: "Jawahar A",
+  title: "Jawahar A | Assistant Team Lead — Customer Experience",
+  description:
+    "Assistant Team Lead — Customer Experience with 5+ years across Customer Success, Onboarding, and CX Operations. Led 10-member team, onboarded 500+ learners, cut repeat queries 30%, lifted CSAT 25%. EdTech, Real Estate, Financial Services.",
+  email: "markjawahar17@gmail.com",
+  phone: "+91 9620151434",
+  location: "Bengaluru, Karnataka",
+  role: "Assistant Team Lead · Customer Experience",
+  resumeUrl: "/resumes/Jawahar_A_Bcom_BCA_GlassMorphism.pdf",
+  resumeDownloadUrl: "/resumes/Jawahar_A_Bcom_BCA.pdf",
+  avatarUrl: "/images/profile.jpg",
+  ogImage: "/og-image.png",
+  keywords: [
+    "Customer Experience",
+    "Customer Success",
+    "CRM",
+    "Zoho",
+    "Customer Onboarding",
+    "Process Improvement",
+    "Escalation Management",
+    "Team Leadership",
+    "Jawahar A",
+    "Bengaluru",
+    "Portfolio",
+  ],
+};
+
+export const socialLinks: SocialLink[] = [
+  {
+    id: "linkedin",
+    platform: "LinkedIn",
+    url: "https://linkedin.com/in/jawahar-a-47037a240",
+    icon: "linkedin",
+    label: "Connect on LinkedIn",
+    active: true,
+  },
+  {
+    id: "instagram",
+    platform: "Instagram",
+    url: "https://www.instagram.com/monsieur_heart_10",
+    icon: "instagram",
+    label: "Follow on Instagram",
+    active: true,
+  },
+  {
+    id: "whatsapp",
+    platform: "WhatsApp",
+    url: "https://wa.me/919620151434",
+    icon: "whatsapp",
+    label: "Chat on WhatsApp",
+    active: true,
+  },
+  {
+    id: "email",
+    platform: "Email",
+    url: "mailto:markjawahar17@gmail.com",
+    icon: "mail",
+    label: "Send an Email",
+    active: true,
+  },
+];
+
+export const NAV_ITEMS = [
+  { label: "Home", href: "/#home" },
+  { label: "About", href: "/#about" },
+  { label: "Impact", href: "/#impact" },
+  { label: "Journey", href: "/#journey" },
+  { label: "Resume", href: "/#resume" },
+  { label: "Contact", href: "/#contact" },
+] as const;

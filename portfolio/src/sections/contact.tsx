@@ -1,0 +1,115 @@
+"use client";
+
+import { motion, type Variants } from "framer-motion";
+import { SectionBadge } from "@/components/ui/section-badge";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
+import { Mail, ExternalLink, MessageCircle, Download, ArrowUpRight } from "lucide-react";
+import { siteConfig, socialLinks } from "@/config/site";
+import { EASE } from "@/lib/motion";
+
+const iconMap: Record<string, typeof Mail> = {
+  mail: Mail,
+  linkedin: ExternalLink,
+  instagram: ExternalLink,
+  whatsapp: MessageCircle,
+};
+
+const cardContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+};
+
+const cardItem: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
+};
+
+export function Contact() {
+  return (
+    <section id="contact" className="relative py-24 sm:py-36 lg:py-44">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_oklch(0.4_0.03_240_/_0.04),_transparent_60%)]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="text-center mb-16 sm:mb-24"
+        >
+          <SectionBadge label="Contact" />
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-6 mb-6 leading-[1.08]">
+            Let&apos;s build better{" "}
+            <span className="text-gradient font-semibold">customer experiences.</span>
+          </h2>
+          <p className="text-silver/75 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+            Open to Customer Success, Customer Experience, and CX Operations roles.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={cardContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-10">
+            {socialLinks
+              .filter((l) => l.active)
+              .map((link) => {
+                const Icon = iconMap[link.icon] || ExternalLink;
+                return (
+                  <LiquidGlassCard
+                    key={link.id}
+                    as="a"
+                    variants={cardItem}
+                    href={link.url}
+                    target={link.id !== "email" ? "_blank" : undefined}
+                    rel={link.id !== "email" ? "noopener noreferrer" : undefined}
+                    className="group rounded-2xl p-5 sm:p-6 flex items-center gap-4"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/25 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-accent/15 group-hover:border-accent/35">
+                      <Icon
+                        size={18}
+                        className="text-accent-bright/80 group-hover:text-accent-bright transition-colors"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs text-graphite tracking-wider uppercase mb-0.5 group-hover:text-silver transition-colors">
+                        {link.label}
+                      </p>
+                      <p className="text-sm text-silver/90 truncate">
+                        {link.platform}
+                      </p>
+                    </div>
+                    <ArrowUpRight
+                      size={16}
+                      className="text-graphite group-hover:text-silver transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"
+                    />
+                  </LiquidGlassCard>
+                );
+              })}
+          </div>
+
+          <motion.div
+            variants={cardItem}
+            className="text-center"
+          >
+            <a
+              href={siteConfig.resumeDownloadUrl}
+              download
+              className="btn btn-ghost group px-8 py-4"
+            >
+              <Download
+                size={16}
+                className="group-hover:scale-110 transition-transform"
+              />
+              Download PDF
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

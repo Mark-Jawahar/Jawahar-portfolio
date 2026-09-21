@@ -30,7 +30,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center"
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
@@ -41,8 +41,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.97, y: 6 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-        className="glass-panel portrait-card"
-        style={{ maxWidth: "min(90vw, 1000px)" }}
+        className="glass-panel portrait-card resume-modal"
         onClick={(e) => e.stopPropagation()}
       >
         <div
