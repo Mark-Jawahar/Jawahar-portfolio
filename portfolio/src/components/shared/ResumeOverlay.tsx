@@ -48,7 +48,7 @@ export function ResumeOverlay({ onClose }: ResumeOverlayProps) {
           className="relative flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5 border-b border-white/10 bg-black/50 backdrop-blur-xl"
         >
           <span className="text-sm font-medium text-silver">Resume</span>
-          <div className="flex items-center gap-3 ml-auto">
+          <div className="flex items-center gap-3 ml-auto hidden sm:flex">
             <a
               href="/resumes/Jawahar_A_Bcom_BCA.pdf"
               download

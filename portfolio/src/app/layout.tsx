@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { SmoothScroll } from "@/components/smooth-scroll";
-import { Header } from "@/components/header";
+import { Providers } from "@/providers";
+import { siteConfig, siteUrl } from "@/config/site";
+import { jsonLd } from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -17,24 +18,33 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jawahar A | Customer Experience Specialist",
-  description:
-    "Customer Experience Specialist with 5+ years of experience in Customer Onboarding, Customer Success, and Client Relationship Management across EdTech, Real Estate, and Financial Services.",
-  keywords: [
-    "Customer Experience",
-    "Customer Success",
-    "Customer Onboarding",
-    "Client Relationship Management",
-    "Jawahar A",
-    "Bengaluru",
-  ],
-  authors: [{ name: "Jawahar A" }],
+  title: siteConfig.title,
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name }],
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Jawahar A | Customer Experience Specialist",
-    description:
-      "Customer Experience Specialist with 5+ years of experience delivering seamless customer experiences across EdTech, Real Estate, and Financial Services.",
-    type: "website",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: "/",
+    siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
     locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 
@@ -45,11 +55,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} dark`}>
-      <body className="min-h-screen flex flex-col">
-        <SmoothScroll>
-          <Header />
-          <main className="flex-1">{children}</main>
-        </SmoothScroll>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if('scrollRestoration' in history){history.scrollRestoration='manual'}window.scrollTo(0,0)}catch(e){}",
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
+        />
+      </head>
+      <body className="min-h-screen flex flex-col antialiased">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

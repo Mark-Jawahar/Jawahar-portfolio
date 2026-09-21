@@ -468,8 +468,8 @@ section[id] {
 @media (min-width: 640px) {
   .resume-modal {
     /* Desktop: height-constrained approach */
-    /* Max height = viewport - header (~72px) - margins (top/bottom 48px) - padding (2rem) */
-    max-height: calc(100vh - 72px - 96px - 2rem);
+    /* Max height = viewport - header (~72px) - margins (top/bottom 40px) - padding (1.5rem) */
+    max-height: calc(100vh - 72px - 40px - 1.5rem);
     max-width: none;
     width: auto;
     /* Ensure modal is centered vertically */
@@ -489,8 +489,8 @@ section[id] {
 @media (min-width: 640px) {
   .resume-modal img {
     /* Desktop: height-constrained, width from aspect ratio */
-    /* Max height = viewport - header (72px) - margins (96px) - padding (2rem) */
-    max-height: calc(100vh - 72px - 96px - 2rem);
+    /* Max height = viewport - header (72px) - margins (40px) - padding (1.5rem) */
+    max-height: calc(100vh - 72px - 40px - 1.5rem);
     max-width: none;
     height: auto;
     width: auto;
@@ -515,7 +515,7 @@ section[id] {
 
 @media (min-width: 640px) {
   .resume-modal .flex-1 {
-    max-height: calc(100vh - 72px - 96px - 2rem); /* header + margins + padding */
+    max-height: calc(100vh - 72px - 40px - 1.5rem); /* header + margins + padding */
   }
 }
 
