@@ -180,6 +180,7 @@ See [Deployment Documentation](docs/DEPLOYMENT.md) for:
 - Build pipeline (Turbopack/webpack)
 - Environment variables
 - Deployment flow
+- **Root Directory**: auto-detected (`.`); the repository root is the Next.js project root
 
 ## Quality Assurance
 
